@@ -441,9 +441,17 @@ nav a:hover { color: var(--white); }
   flex: 0 0 460px;
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: 20px; overflow: hidden;
-  transition: border-color 0.3s, transform 0.35s;
+  transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+  cursor: pointer;
 }
-.portfolio-card:hover { border-color: var(--border-lt); transform: translateY(-6px); }
+.portfolio-card:hover {
+  border-color: rgba(124,58,237,0.5);
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px -20px rgba(124,58,237,0.3);
+}
+.portfolio-card[data-demo] .portfolio-link {
+  pointer-events: none;
+}
 .portfolio-browser { background: #0E0E0E; border-bottom: 1px solid var(--border); padding: 14px 16px 0; }
 .browser-dots { display: flex; gap: 6px; margin-bottom: 12px; }
 .browser-dots span { width: 10px; height: 10px; border-radius: 50%; }

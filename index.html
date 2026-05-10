@@ -146,7 +146,7 @@
     <div class="portfolio-track">
 
       <!-- ZRL Coaching -->
-      <div class="portfolio-card">
+      <div class="portfolio-card" data-demo="zrl" data-name="ZRL Coaching">
         <div class="portfolio-browser">
           <div class="browser-dots"><span></span><span></span><span></span></div>
           <div class="portfolio-mock portfolio-mock--logo" style="background:#0D1B3E;">
@@ -167,7 +167,7 @@
       </div>
 
       <!-- Nails by Ally -->
-      <div class="portfolio-card">
+      <div class="portfolio-card" data-demo="nails" data-name="Nails by Ally">
         <div class="portfolio-browser">
           <div class="browser-dots"><span></span><span></span><span></span></div>
           <div class="portfolio-mock portfolio-mock--logo" style="background:#F2EAE2;">
@@ -188,7 +188,7 @@
       </div>
 
       <!-- Joe Kallon -->
-      <div class="portfolio-card">
+      <div class="portfolio-card" data-demo="joe" data-name="Joe Kallon">
         <div class="portfolio-browser">
           <div class="browser-dots"><span></span><span></span><span></span></div>
           <div class="portfolio-mock portfolio-mock--logo" style="background:#0E0E0E;">
@@ -422,11 +422,10 @@ if (savedY !== null) {
   });
 }
 
-document.querySelectorAll('.portfolio-link[data-demo]').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const slug = link.dataset.demo;
-    const name = link.dataset.name || 'Proyecto';
+document.querySelectorAll('.portfolio-card[data-demo]').forEach(card => {
+  card.addEventListener('click', () => {
+    const slug = card.dataset.demo;
+    const name = card.dataset.name || 'Proyecto';
     demoFrame.src = `demo/${slug}/index.html`;
     demoNameEl.textContent = name;
     demoModal.showModal();
