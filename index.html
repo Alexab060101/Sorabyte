@@ -442,11 +442,20 @@ switchEffect(randomEffect);
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Hero reveal
-gsap.from('.reveal-hero', {
-  y: 40, opacity: 0, duration: 1.1,
-  stagger: 0.14, ease: 'power3.out', delay: 0.4
-});
+// Hero reveal — fromTo explicito porque CSS tiene opacity:0 baseline
+gsap.fromTo('.reveal-hero',
+  { y: 40, opacity: 0 },
+  { y: 0, opacity: 1, duration: 1.1, stagger: 0.14, ease: 'power3.out', delay: 0.3, clearProps: 'transform' }
+);
+// Safety net: si algo falla, forzar visible
+setTimeout(() => {
+  document.querySelectorAll('.reveal-hero').forEach(el => {
+    if (parseFloat(getComputedStyle(el).opacity) < 0.5) {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    }
+  });
+}, 2500);
 
 // Custom cursor (desktop only)
 if (window.matchMedia('(pointer: fine)').matches) {
