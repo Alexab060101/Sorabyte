@@ -14,6 +14,10 @@
 </head>
 <body>
 
+<!-- CURSOR -->
+<div id="cursor-ring" class="cursor-ring"></div>
+<div id="cursor-dot" class="cursor-dot"></div>
+
 <!-- NAV -->
 <header id="header">
   <a href="/" class="logo">
@@ -282,6 +286,48 @@ gsap.from('.reveal-hero', {
   y: 40, opacity: 0, duration: 1.1,
   stagger: 0.14, ease: 'power3.out', delay: 0.4
 });
+
+// Custom cursor (desktop only)
+if (window.matchMedia('(pointer: fine)').matches) {
+  const ring = document.getElementById('cursor-ring');
+  const dot  = document.getElementById('cursor-dot');
+  let mx = window.innerWidth/2, my = window.innerHeight/2;
+  let rx = mx, ry = my;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.transform = `translate(${mx}px, ${my}px)`;
+  });
+
+  (function animRing() {
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    ring.style.transform = `translate(${rx}px, ${ry}px)`;
+    requestAnimationFrame(animRing);
+  })();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('ring--hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('ring--hover'));
+  });
+}
+
+// Magnetic buttons
+if (window.matchMedia('(pointer: fine)').matches) {
+  document.querySelectorAll('.btn-primary, .btn-ghost, .btn-wa, .nav-cta').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width  / 2) * 0.28;
+      const y = (e.clientY - r.top  - r.height / 2) * 0.28;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transition = 'transform 0.4s cubic-bezier(0.16,1,0.3,1)';
+      btn.style.transform = '';
+      setTimeout(() => btn.style.transition = '', 400);
+    });
+  });
+}
 
 // Scroll reveals
 const io = new IntersectionObserver(entries => {
