@@ -619,6 +619,220 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   .reveal, .reveal-hero { transition: none !important; opacity: 1 !important; transform: none !important; }
 }
 
+/* ═══════════════ FOTO · 4 OPCIONES ═══════════════ */
+.photo-options { background: var(--bg); }
+.photo-options-intro {
+  font-size: 0.95rem; color: var(--muted);
+  margin: 16px 0 50px; max-width: 600px;
+  line-height: 1.7;
+}
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+}
+.photo-option {
+  display: flex; flex-direction: column;
+  gap: 18px;
+}
+.po-label {
+  display: inline-block;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  background: linear-gradient(135deg, var(--purple), var(--purple-lt));
+  color: var(--white);
+  padding: 7px 16px; border-radius: 100px;
+  align-self: flex-start;
+}
+.po-desc {
+  font-size: 0.88rem; color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ── OPCIÓN 1: MAGAZINE COVER ── */
+.po-1-stage {
+  position: relative;
+  height: 480px;
+  background: #0A0A0A;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.po-1-text {
+  position: absolute;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11rem;
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  pointer-events: none;
+  user-select: none;
+}
+.po-1-text-top {
+  top: 30px; left: -10px;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(124,58,237,0.5);
+  z-index: 1;
+}
+.po-1-text-bot {
+  bottom: -10px; right: -20px;
+  font-size: 6.5rem;
+  background: linear-gradient(135deg, var(--gold), #8B6B2E);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  z-index: 3;
+}
+.po-1-img {
+  position: relative; z-index: 2;
+  height: 100%; width: auto;
+  object-fit: contain;
+  filter: contrast(1.05) saturate(0.85);
+}
+.po-1-meta {
+  position: absolute;
+  top: 18px; right: 22px;
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted);
+  z-index: 4;
+}
+
+/* ── OPCIÓN 2: DUOTONE SPOTLIGHT ── */
+.po-2-stage {
+  position: relative;
+  height: 480px;
+  background: #0A0A0A;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  --mx: 50%; --my: 50%;
+  cursor: crosshair;
+}
+.po-2-color, .po-2-mono {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+}
+.po-2-color {
+  z-index: 1;
+}
+.po-2-mono {
+  z-index: 2;
+  filter: grayscale(1) contrast(1.15) brightness(0.85);
+  mix-blend-mode: lighten;
+  -webkit-mask-image: radial-gradient(circle 140px at var(--mx) var(--my), transparent 30%, black 80%);
+  mask-image: radial-gradient(circle 140px at var(--mx) var(--my), transparent 30%, black 80%);
+  transition: -webkit-mask-image 0.05s, mask-image 0.05s;
+}
+.po-2-stage::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(124,58,237,0.55) 0%, rgba(201,162,84,0.45) 100%);
+  mix-blend-mode: color;
+  z-index: 3;
+  -webkit-mask-image: radial-gradient(circle 140px at var(--mx) var(--my), transparent 30%, black 80%);
+  mask-image: radial-gradient(circle 140px at var(--mx) var(--my), transparent 30%, black 80%);
+  pointer-events: none;
+}
+.po-2-grain {
+  position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── OPCIÓN 3: 3D TILT + GLOW BORDER ── */
+.po-3-stage {
+  position: relative;
+  height: 480px;
+  display: flex; align-items: center; justify-content: center;
+  perspective: 1000px;
+  background: radial-gradient(ellipse at center, rgba(124,58,237,0.12), transparent 60%);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.po-3-stage .po-label {
+  position: absolute; top: 20px; left: 24px;
+  z-index: 10;
+}
+.po-3-card {
+  position: relative;
+  width: 280px; height: 360px;
+  border-radius: 18px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 30px 70px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+  --shine-x: 50%; --shine-y: 50%;
+}
+.po-3-card::before {
+  content: '';
+  position: absolute; inset: -3px;
+  border-radius: 20px;
+  background: conic-gradient(from var(--border-angle, 0deg),
+    #C9A254, #F4D88F, #C9A254, #8B6B2E, #C9A254);
+  animation: rotateBorder 5s linear infinite;
+  z-index: -1;
+}
+@keyframes rotateBorder {
+  to { --border-angle: 360deg; }
+}
+.po-3-card img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+}
+.po-3-shine {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at var(--shine-x) var(--shine-y),
+    rgba(255,255,255,0.25) 0%, transparent 40%);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ── OPCIÓN 4: ROTATING TEXT STICKER ── */
+.po-4-stage {
+  position: relative;
+  height: 480px;
+  background: #0A0A0A;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.po-4-glow {
+  position: absolute;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,58,237,0.35), transparent 60%);
+  filter: blur(40px);
+}
+.po-4-text {
+  position: absolute;
+  width: 360px; height: 360px;
+  animation: po4Spin 14s linear infinite;
+}
+@keyframes po4Spin { to { transform: rotate(360deg); } }
+.po-4-img {
+  position: relative; z-index: 2;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  object-fit: cover; object-position: center top;
+  border: 3px solid #080808;
+  box-shadow: 0 0 0 1px var(--gold), 0 20px 50px -15px rgba(201,162,84,0.5);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .photo-grid { grid-template-columns: 1fr; gap: 28px; }
+  .po-1-stage, .po-2-stage, .po-3-stage, .po-4-stage { height: 380px; }
+  .po-1-text { font-size: 7rem; }
+  .po-1-text-bot { font-size: 4.2rem; }
+  .po-3-card { width: 220px; height: 290px; }
+  .po-4-text { width: 300px; height: 300px; }
+  .po-4-glow { width: 280px; height: 280px; }
+  .po-4-img { width: 180px; height: 180px; }
+}
+
 /* ═══════════════ TABS SERVICIOS ═══════════════ */
 :root {
   --meta:    #1877F2;
