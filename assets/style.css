@@ -663,9 +663,19 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   transition: color 0.3s, border-color 0.4s, background 0.3s;
   position: relative;
 }
-.tabs-services .tab span { font-size: 1.3rem; transition: transform 0.3s; }
+.tabs-services .tab span { font-size: 1.3rem; transition: transform 0.3s, text-shadow 0.3s; }
 .tabs-services .tab:hover { color: var(--white); }
 .tabs-services .tab:hover span { transform: scale(1.15); }
+
+/* Iconos SIEMPRE con su color (activo o no) */
+.tabs-services .tab[data-tab="web"] span {
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(201,162,84,0.35);
+}
+.tabs-services .tab[data-tab="ads"] span {
+  color: var(--meta-lt);
+  text-shadow: 0 0 10px rgba(24,119,242,0.4);
+}
 
 /* Tab Web activo = dorado */
 .tabs-services .tab[data-tab="web"].active {
@@ -674,7 +684,7 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   background: linear-gradient(180deg, rgba(201,162,84,0.08), transparent);
 }
 .tabs-services .tab[data-tab="web"].active span {
-  color: var(--gold); text-shadow: 0 0 14px rgba(201,162,84,0.5);
+  text-shadow: 0 0 18px rgba(201,162,84,0.7);
 }
 
 /* Tab Meta activo = azul Meta */
@@ -684,7 +694,7 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   background: linear-gradient(180deg, rgba(24,119,242,0.1), transparent);
 }
 .tabs-services .tab[data-tab="ads"].active span {
-  color: var(--meta-lt); text-shadow: 0 0 14px rgba(24,119,242,0.55);
+  text-shadow: 0 0 18px rgba(24,119,242,0.75);
 }
 
 .tab-panel {
