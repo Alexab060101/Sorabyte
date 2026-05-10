@@ -55,19 +55,9 @@
     return origFetch.apply(this, arguments);
   };
 
-  // Avisar al hacer submit de cualquier form
+  // Bloquear submit de formularios silenciosamente
   document.addEventListener('submit', function(e){
     e.preventDefault();
-    alert('🛈 Modo demo: este formulario no envía datos reales.\n\nEs una vista interactiva del proyecto.');
     return false;
   }, true);
-
-  // Banner discreto arriba
-  document.addEventListener('DOMContentLoaded', function(){
-    var bar = document.createElement('div');
-    bar.innerHTML = '<strong>● DEMO</strong> &nbsp;Vista interactiva del proyecto · sin tracking · sin envío de datos';
-    bar.style.cssText = 'position:fixed;top:0;left:0;right:0;background:rgba(124,58,237,0.95);color:#fff;font:600 12px/1 -apple-system,sans-serif;letter-spacing:0.04em;padding:8px 16px;text-align:center;z-index:2147483647;backdrop-filter:blur(8px);';
-    document.body.appendChild(bar);
-    document.body.style.paddingTop = (parseFloat(getComputedStyle(document.body).paddingTop || '0') + 30) + 'px';
-  });
 })();
