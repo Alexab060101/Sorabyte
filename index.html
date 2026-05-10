@@ -167,7 +167,7 @@
             <span class="quote-pending">Testimonio próximamente</span>
             <cite>— Lusi, ZRL Coaching</cite>
           </blockquote>
-          <a href="#" class="portfolio-link">Ver proyecto →</a>
+          <a href="#" class="portfolio-link" data-demo="zrl" data-name="ZRL Coaching">Ver demo →</a>
         </div>
       </div>
 
@@ -193,7 +193,7 @@
             <span class="quote-pending">Testimonio próximamente</span>
             <cite>— Ally, Nails by Ally</cite>
           </blockquote>
-          <a href="#" class="portfolio-link">Ver proyecto →</a>
+          <a href="#" class="portfolio-link" data-demo="nails" data-name="Nails by Ally">Ver demo →</a>
         </div>
       </div>
 
@@ -219,13 +219,26 @@
             Me encanta lo visual que se ve.
             <cite>— Joe Kallon, Personal Trainer Köln</cite>
           </blockquote>
-          <a href="#" class="portfolio-link">Ver proyecto →</a>
+          <a href="#" class="portfolio-link" data-demo="joe" data-name="Joe Kallon">Ver demo →</a>
         </div>
       </div>
 
     </div>
   </div>
 </section>
+
+<!-- DEMO MODAL -->
+<dialog class="demo-modal" id="demoModal">
+  <div class="demo-modal-bar">
+    <div class="demo-modal-title">
+      <span class="demo-modal-dot"></span>
+      <span id="demoModalName">Demo</span>
+      <span class="demo-modal-badge">Vista interactiva · sin tracking</span>
+    </div>
+    <button class="demo-modal-close" id="demoModalClose" aria-label="Cerrar">✕</button>
+  </div>
+  <iframe class="demo-modal-frame" id="demoModalFrame" src="" loading="lazy"></iframe>
+</dialog>
 
 <!-- PROCESO -->
 <section class="section proceso-s" id="proceso">
@@ -405,6 +418,36 @@ const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
+
+// Demo modal (portfolio cards)
+const demoModal     = document.getElementById('demoModal');
+const demoFrame     = document.getElementById('demoModalFrame');
+const demoNameEl    = document.getElementById('demoModalName');
+const demoCloseBtn  = document.getElementById('demoModalClose');
+document.querySelectorAll('.portfolio-link[data-demo]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const slug = link.dataset.demo;
+    const name = link.dataset.name || 'Demo';
+    demoFrame.src = `demo/${slug}/index.html`;
+    demoNameEl.textContent = name;
+    demoModal.showModal();
+    document.body.style.overflow = 'hidden';
+  });
+});
+function closeDemo() {
+  demoModal.close();
+  demoFrame.src = 'about:blank';
+  document.body.style.overflow = '';
+}
+demoCloseBtn.addEventListener('click', closeDemo);
+demoModal.addEventListener('click', e => {
+  if (e.target === demoModal) closeDemo();
+});
+demoModal.addEventListener('cancel', e => {
+  e.preventDefault();
+  closeDemo();
+});
 
 // Hero foto -> video al primer scroll (mismo patron que lacados)
 const heroImg = document.getElementById('heroImg');

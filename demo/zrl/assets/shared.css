@@ -1,0 +1,139 @@
+/* ============================================================
+   LZR Coaching — shared.css
+   Estilos comunes a index, servicios, nosotros, contacto
+   - Variables (design tokens)
+   - Reset + base
+   - Header + nav + mobile menu
+   - Section / typography utilities
+   - Footer
+   - Reveal animations (compat con IntersectionObserver actual)
+   - View Transitions
+   - Base responsive ≤960px
+   ============================================================ */
+
+/* === RESET === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* === DESIGN TOKENS === */
+:root {
+  --beige:       #EFE4C8;
+  --beige-light: #F7F0DC;
+  --beige-dark:  #E3D0A8;
+  --gold:        #C9A254;
+  --gold-light:  #E4BF7A;
+  --gold-deep:   #A87D35;
+  --navy:        #1A2C50;
+  --navy-mid:    #263C6B;
+  --navy-soft:   #3A5080;
+  --text:        #1A2C50;
+  --text-mid:    #4A5A78;
+  --text-soft:   #8895A7;
+  --white:       #FAF5E8;
+}
+
+/* === BASE === */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--beige-light);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* === HEADER === */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 52px;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+  transition: padding 0.4s, background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+}
+header.scrolled {
+  padding: 14px 52px;
+  background: rgba(247,240,220,0.92);
+  backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(201,162,84,0.2);
+}
+.logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-wrap img { width: auto; object-fit: contain; filter: brightness(0) invert(1); transition: filter 0.4s, height 0.4s; }
+header.scrolled .logo-wrap img { filter: none; }
+.logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: #fff; line-height: 1.1; transition: color 0.4s; }
+header.scrolled .logo-text { color: var(--navy); }
+.logo-text span { display: block; font-size: 0.68rem; font-weight: 400; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; transition: color 0.4s; }
+header.scrolled .logo-text span { color: var(--gold-deep); }
+nav { display: flex; align-items: center; gap: 36px; }
+nav a { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.85); text-decoration: none; transition: color 0.25s; }
+header.scrolled nav a { color: var(--text-mid); }
+nav a:hover, nav a.active { color: var(--gold-light); }
+header.scrolled nav a:hover, header.scrolled nav a.active { color: var(--gold-deep); }
+.nav-cta { background: rgba(255,255,255,0.15) !important; color: #fff !important; padding: 11px 26px; border-radius: 100px; border: 1.5px solid rgba(255,255,255,0.4) !important; transition: background 0.3s, color 0.3s, border-color 0.3s !important; }
+header.scrolled .nav-cta { background: var(--navy) !important; color: var(--gold-light) !important; border-color: transparent !important; }
+.nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; border-color: var(--gold) !important; }
+
+/* === HAMBURGER + MOBILE MENU === */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--gold-light); border-radius: 2px; transition: background 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.35); }
+header.scrolled .hamburger span { background: var(--gold-deep); box-shadow: none; }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--beige-light); z-index: 190; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-size: 1.4rem; font-family: 'Cormorant Garamond', serif; color: var(--navy); text-decoration: none; font-weight: 600; }
+.mobile-close { position: absolute; top: 24px; right: 32px; font-size: 2rem; cursor: pointer; color: var(--navy); background: none; border: none; }
+
+/* === SECTION / TYPOGRAPHY UTILITIES === */
+.section { padding: 100px 48px; }
+.section-inner { max-width: 1160px; margin: 0 auto; }
+.eyebrow { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 14px; }
+.section-h { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.15; color: var(--navy); font-weight: 700; }
+.section-h em { font-style: italic; color: var(--gold-deep); }
+
+/* === BUTTONS === */
+.btn-amber { background: var(--gold); color: var(--navy); padding: 18px 48px; border-radius: 100px; font-size: 0.92rem; font-weight: 700; text-decoration: none; display: inline-block; box-shadow: 0 10px 36px rgba(201,162,84,0.45); transition: background 0.3s, transform 0.3s, box-shadow 0.3s; }
+.btn-amber:hover { background: var(--gold-light); transform: translateY(-4px); box-shadow: 0 18px 48px rgba(201,162,84,0.55); }
+
+/* === FOOTER === */
+footer {
+  background: var(--navy); padding: 40px 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 24px;
+}
+.footer-logo { display: flex; align-items: center; gap: 12px; }
+.footer-logo img { height: 38px; width: auto; filter: brightness(0) invert(1); opacity: 0.8; }
+.footer-logo-name { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(255,255,255,0.8); }
+.footer-logo-name span { color: var(--gold-light); }
+.footer-links { display: flex; gap: 30px; flex-wrap: wrap; }
+.footer-links a { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.25s; cursor: pointer; }
+.footer-links a:hover { color: var(--gold-light); }
+.footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.2); }
+
+/* === REVEAL (IntersectionObserver compat) === */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.up { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* === VIEW TRANSITIONS === */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === BASE RESPONSIVE ≤960px === */
+@media (max-width: 960px) {
+  header { padding: 14px 24px; }
+  header.scrolled { padding: 12px 24px; }
+  nav { display: none; }
+  .hamburger { display: flex; }
+  .section { padding: 72px 24px; }
+  footer { padding: 28px 24px; flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+
+/* === MOTION SAFETY === */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

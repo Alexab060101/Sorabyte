@@ -1,0 +1,74 @@
+const BASE_ID    = 'appaTUc7K43I0Gcg1';
+const TABLE_NAME = 'Clientas';
+
+async function notificarWhatsApp(texto) {
+  const phone  = process.env.CALLMEBOT_PHONE;
+  const apikey = process.env.CALLMEBOT_APIKEY;
+  if (!phone || !apikey) return;
+  try {
+    const url = 'https://api.callmebot.com/whatsapp.php'
+      + '?phone='  + encodeURIComponent(phone)
+      + '&text='   + encodeURIComponent(texto)
+      + '&apikey=' + encodeURIComponent(apikey);
+    await fetch(url);
+  } catch(e) {
+    console.error('[callmebot]', e.message);
+  }
+}
+
+module.exports = async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Honeypot anti-spam: bots rellenan todos los inputs, este es invisible
+  if (req.body && req.body.website) {
+    console.log('[guardar-lead] honeypot triggered, silently dropping');
+    return res.status(200).json({ ok: true });
+  }
+
+  const { nombre, telefono, servicio, comentario } = req.body;
+  const token = process.env.AIRTABLE_TOKEN;
+
+  if (!token) {
+    return res.status(500).json({ error: 'AIRTABLE_TOKEN no configurado' });
+  }
+
+  try {
+    const airtableRes = await fetch(
+      'https://api.airtable.com/v0/' + BASE_ID + '/' + encodeURIComponent(TABLE_NAME),
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          fields: {
+            'Nombre':           nombre    || 'Desconocida',
+            'Teléfono':         telefono  || '',
+            'Tipo':             'Nueva',
+            'Fuente':           'Web',
+            'Notas de clienta': 'Servicio: ' + (servicio || '') + ' | Comentario: ' + (comentario || '')
+          }
+        })
+      }
+    );
+
+    if (!airtableRes.ok) {
+      const err = await airtableRes.text();
+      return res.status(airtableRes.status).json({ error: err });
+    }
+
+    const msgWa = '✨ NUEVO CONTACTO WEB\n'
+      + 'Nombre: ' + (nombre || 'Desconocida') + '\n'
+      + 'Teléfono: ' + (telefono || '-') + '\n'
+      + 'Servicio: ' + (servicio || '-') + '\n'
+      + (comentario ? 'Comentario: ' + comentario : '');
+    await notificarWhatsApp(msgWa);
+
+    return res.status(200).json({ ok: true });
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+};

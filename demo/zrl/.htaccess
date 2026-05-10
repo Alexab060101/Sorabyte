@@ -1,0 +1,76 @@
+# ═══════════════════════════════════════════════════════════════════
+# LZR COACHING — SECURITY HEADERS
+# ═══════════════════════════════════════════════════════════════════
+
+<IfModule mod_headers.c>
+  # Previene XSS e inyecciones (permite Google Fonts, inline styles/scripts necesarios)
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-src https://calendly.com; object-src 'none'"
+
+  # Evita que el navegador interprete archivos como MIME diferente
+  Header set X-Content-Type-Options "nosniff"
+
+  # Previene clickjacking
+  Header set X-Frame-Options "SAMEORIGIN"
+
+  # Controla información de referrer
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Restringe permisos de navegador innecesarios
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+
+  # Compatibilidad IE
+  Header set X-UA-Compatible "IE=edge"
+
+  # HSTS — Fuerza HTTPS en producción (activa cuando tengas SSL)
+  # Header set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+</IfModule>
+
+# ═══════════════════════════════════════════════════════════════════
+# PROTECCIÓN CONTRA ATAQUES
+# ═══════════════════════════════════════════════════════════════════
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Bloquear acceso a archivos sensibles
+  RewriteRule "(^|/)\." - [F]
+  RewriteRule "\.env$|\.git|wp-config\.php|web\.config|\.bak$|\.tmp$" - [F,L]
+
+  # Redirigir HTTP → HTTPS (descomenta cuando tengas SSL)
+  # RewriteCond %{HTTPS} off
+  # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ═══════════════════════════════════════════════════════════════════
+# COMPRESIÓN GZIP
+# ═══════════════════════════════════════════════════════════════════
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json
+</IfModule>
+
+# ═══════════════════════════════════════════════════════════════════
+# CACHE DE ASSETS
+# ═══════════════════════════════════════════════════════════════════
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html              "access plus 1 day"
+  ExpiresByType text/css               "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/jpeg             "access plus 1 month"
+  ExpiresByType image/png              "access plus 1 month"
+  ExpiresByType image/webp             "access plus 1 month"
+  ExpiresByType video/mp4              "access plus 1 month"
+  ExpiresByType font/woff2             "access plus 1 year"
+</IfModule>
+
+# ═══════════════════════════════════════════════════════════════════
+# BLOQUEAR ARCHIVOS SENSIBLES
+# ═══════════════════════════════════════════════════════════════════
+
+<FilesMatch "(^#.*#|\.(bak|conf|dist|fla|inc|ini|log|psd|sh|sql|sw[op])|~)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+</FilesMatch>

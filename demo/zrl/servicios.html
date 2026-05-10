@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<script src="../demo-mode.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="view-transition" content="same-origin" />
+<link rel="stylesheet" href="assets/shared.css" />
+<link rel="stylesheet" href="assets/cookie-banner.css" />
+<title>Leistungen für Coaches – Positionierung, Content &amp; Kunden | LZR Coaching</title>
+<meta name="description" content="Positionierung schärfen, Content der konvertiert, Kunden-Prozess aufbauen. Drei Leistungen für Coaches im DACH-Markt – klar, messbar, ohne Kaltakquise." />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Luis Zabala Rodriguez" />
+<link rel="canonical" href="https://www.zrl-coaching.com/servicios.html" />
+<meta property="og:title" content="Leistungen für Coaches – Positionierung, Content &amp; Kunden | LZR Coaching" />
+<meta property="og:description" content="Positionierung schärfen, Content der konvertiert, Kunden-Prozess aufbauen. Coaching-Leistungen für den DACH-Markt von Luis Zabala Rodriguez." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.zrl-coaching.com/servicios.html" />
+<meta property="og:image" content="https://www.zrl-coaching.com/assets/hero-poster.jpg" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="LZR Coaching" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Leistungen für Coaches – LZR Coaching" />
+<meta name="twitter:description" content="Positionierung, Content-Strategie und Kunden-Aufbau für Coaches im DACH-Markt. Drei klare Leistungen, ein Ziel." />
+<meta name="twitter:image" content="https://www.zrl-coaching.com/assets/hero-poster.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Start", "item": "index.html"},
+    {"@type": "ListItem", "position": 2, "name": "Leistungen", "item": "servicios.html"}
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+.logo-wrap img { height: 48px; }
+
+/* PAGE HERO */
+.page-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  padding: 160px 48px 100px; text-align: center; position: relative; overflow: hidden;
+}
+.page-hero::before { content:''; position:absolute; top:-100px; right:-100px; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(201,162,84,0.2),transparent); pointer-events:none; }
+.page-hero::after { content:''; position:absolute; bottom:-80px; left:-80px; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle,rgba(201,162,84,0.1),transparent); pointer-events:none; }
+.page-hero .eyebrow { color:var(--gold-light); position:relative; }
+.page-hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,6vw,5.5rem); font-weight:700; color:#fff; line-height:1.05; margin-top:14px; position:relative; }
+.page-hero h1 em { font-style:italic; color:var(--gold-light); }
+.page-hero p { color:rgba(255,255,255,0.6); font-size:1.05rem; line-height:1.75; max-width:540px; margin:20px auto 0; position:relative; }
+
+/* SERVICES CARDS */
+.services-intro { text-align:center; max-width:680px; margin:0 auto 72px; }
+.services-intro .section-h { margin-top:12px; }
+.services-intro p { color:var(--text-mid); font-size:0.97rem; line-height:1.8; margin-top:16px; }
+
+.service-block {
+  display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; margin-bottom:100px;
+}
+.service-block.reverse { direction:rtl; }
+.service-block.reverse > * { direction:ltr; }
+
+.service-visual {
+  background:linear-gradient(135deg, rgba(201,162,84,0.1) 0%, rgba(26,44,80,0.06) 100%);
+  border:1px solid rgba(201,162,84,0.22); border-radius:28px; padding:52px 44px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-height:340px; position:relative; overflow:hidden;
+}
+.service-visual::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at top left, rgba(201,162,84,0.12), transparent 60%); }
+.service-num { font-family:'Cormorant Garamond',serif; font-size:8rem; font-style:italic; color:rgba(201,162,84,0.12); line-height:1; position:absolute; bottom:-10px; right:16px; pointer-events:none; }
+.service-icon { font-size:3.5rem; margin-bottom:20px; position:relative; }
+.service-tag { display:inline-block; background:rgba(201,162,84,0.15); color:var(--gold-deep); border-radius:100px; padding:8px 20px; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; position:relative; }
+
+.service-content {}
+.service-content .eyebrow { margin-bottom:8px; }
+.service-content h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,3vw,2.6rem); font-weight:700; color:var(--navy); line-height:1.15; margin-bottom:18px; }
+.service-content h2 em { font-style:italic; color:var(--gold-deep); }
+.service-content p { color:var(--text-mid); font-size:0.95rem; line-height:1.8; margin-bottom:12px; }
+.includes { margin-top:28px; }
+.includes h4 { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-soft); margin-bottom:14px; }
+.include-item { display:flex; align-items:flex-start; gap:12px; padding:10px 0; border-bottom:1px solid rgba(201,162,84,0.12); font-size:0.88rem; color:var(--text-mid); line-height:1.5; }
+.include-item:last-child { border-bottom:none; }
+.include-dot { width:20px; height:20px; border-radius:50%; background:rgba(201,162,84,0.15); color:var(--gold-deep); display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:700; flex-shrink:0; margin-top:1px; }
+
+/* PROCESS STRIP */
+.process-strip { background:var(--navy); padding:80px 48px; }
+.process-strip-inner { max-width:1160px; margin:0 auto; text-align:center; }
+.process-strip h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,3vw,2.6rem); font-style:italic; color:#fff; margin:12px 0 52px; }
+.steps-row { display:flex; gap:0; align-items:stretch; }
+.strip-step { flex:1; text-align:center; padding:32px 24px; position:relative; }
+.strip-step:not(:last-child)::after { content:'→'; position:absolute; right:-12px; top:50%; transform:translateY(-50%); color:rgba(201,162,84,0.4); font-size:1.4rem; }
+.strip-num { font-family:'Cormorant Garamond',serif; font-size:3rem; font-style:italic; color:var(--gold); line-height:1; }
+.strip-label { font-size:0.82rem; font-weight:600; color:rgba(255,255,255,0.65); margin-top:8px; }
+
+/* FAQ */
+.faq-section { background:var(--white); }
+.faq-inner { max-width:760px; margin:0 auto; }
+.faq-item { border-bottom:1px solid rgba(201,162,84,0.18); padding:28px 0; }
+.faq-q { font-size:1rem; font-weight:700; color:var(--navy); cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:16px; }
+.faq-q::after { content:'+'; font-size:1.4rem; font-weight:300; color:var(--gold); flex-shrink:0; transition:transform 0.3s; }
+.faq-item.open .faq-q::after { transform:rotate(45deg); }
+.faq-a { font-size:0.88rem; color:var(--text-mid); line-height:1.8; margin-top:16px; display:none; }
+.faq-item.open .faq-a { display:block; }
+
+/* CTA */
+.cta-section { background:var(--beige-light); padding:120px 48px; }
+.cta-inner { max-width:800px; margin:0 auto; }
+.cta-box { background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%); border-radius:36px; padding:80px 60px; text-align:center; position:relative; overflow:hidden; box-shadow:0 40px 90px rgba(26,44,80,0.3); border:1px solid rgba(201,162,84,0.2); }
+.cta-box::before { content:''; position:absolute; top:-80px; right:-80px; width:320px; height:320px; border-radius:50%; background:radial-gradient(circle,rgba(201,162,84,0.2),transparent); }
+.cta-eyebrow { font-size:0.65rem; font-weight:800; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-light); margin-bottom:18px; position:relative; }
+.cta-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3.2rem); font-style:italic; line-height:1.18; color:#fff; margin-bottom:18px; position:relative; }
+.cta-sub { font-size:0.95rem; color:rgba(255,255,255,0.55); line-height:1.8; max-width:440px; margin:0 auto 40px; position:relative; }
+.cta-note { margin-top:20px; font-size:0.68rem; color:rgba(255,255,255,0.28); letter-spacing:0.08em; position:relative; }
+
+/* RESPONSIVE específico de servicios */
+@media (max-width:960px) {
+  .service-block, .service-block.reverse { grid-template-columns:1fr; direction:ltr; }
+  .page-hero { padding:120px 24px 72px; }
+  .steps-row { flex-direction:column; gap:24px; }
+  .strip-step:not(:last-child)::after { display:none; }
+  .cta-box { padding:52px 28px; }
+}
+</style>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','2202561457146873');fbq('track','PageView');</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2202561457146873&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo-wrap">
+    <img src="assets/logo.png" alt="LZR Coaching – Luis Zabala Rodriguez, Coach für Coaches">
+    <div class="logo-text">Luis Zabala Rodriguez <span>Coach für Coaches</span></div>
+  </a>
+  <nav>
+    <a href="index.html">Start</a>
+    <a href="servicios.html" class="active">Leistungen</a>
+    <a href="nosotros.html">Über mich</a>
+    <a href="contacto.html" class="nav-cta">Gespräch buchen</a>
+  </nav>
+  <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<div class="mobile-menu">
+  <button class="mobile-close" onclick="document.querySelector('.mobile-menu').classList.remove('open')">&times;</button>
+  <a href="index.html">Start</a>
+  <a href="servicios.html">Leistungen</a>
+  <a href="nosotros.html">Über mich</a>
+  <a href="contacto.html">Gespräch buchen</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <span class="eyebrow">Leistungen</span>
+  <h1>Dein Weg von <em>unsichtbar</em><br>zu gebucht</h1>
+  <p>Kein Geheimnis. Ein klarer, wiederholbarer 3-Schritte-Prozess. der funktioniert, weil er auf deinen Stärken aufbaut.</p>
+</div>
+
+<!-- SERVICES -->
+<section class="section" style="background:var(--white);">
+  <div class="section-inner">
+    <div class="services-intro reveal">
+      <span class="eyebrow">Das System</span>
+      <h2 class="section-h">Drei Schritte. <em>Ein klares Ziel.</em></h2>
+      <p>Jeder Schritt baut auf dem vorherigen auf. Zusammen ergeben sie ein System, das Coaches von der Unsichtbarkeit zu konstant buchbaren Angeboten führt. ohne Kaltakquise.</p>
+    </div>
+
+    <!-- SERVICE 1 -->
+    <div class="service-block reveal">
+      <div class="service-visual">
+        <div class="service-icon">🎯</div>
+        <span class="service-tag">Schritt 1 · Fundament</span>
+        <div class="service-num">01</div>
+      </div>
+      <div class="service-content">
+        <span class="eyebrow">Fundament</span>
+        <h2>Positionierung <em>schärfen</em></h2>
+        <p>Die meisten Coaches sind für alle. also für niemanden. Wir ändern das. Ich helfe dir, eine kristallklare Positionierung zu entwickeln, die dich unverwechselbar macht und genau die richtigen Kunden anzieht.</p>
+        <p>Nach diesem Schritt weißt du präzise: für wen du bist, welches konkrete Problem du löst und warum ausgerechnet du die Lösung bist.</p>
+        <div class="includes">
+          <h4>Was wir erarbeiten</h4>
+          <div class="include-item"><div class="include-dot">✓</div>Deine Zielgruppe auf den Punkt gebracht</div>
+          <div class="include-item"><div class="include-dot">✓</div>Deine einzigartige Botschaft (Unique Coaching Proposition)</div>
+          <div class="include-item"><div class="include-dot">✓</div>Dein Angebot klar kommuniziert und positioniert</div>
+          <div class="include-item"><div class="include-dot">✓</div>Dein Profil optimiert. für LinkedIn, Instagram & Co.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICE 2 -->
+    <div class="service-block reverse reveal">
+      <div class="service-visual">
+        <div class="service-icon">📈</div>
+        <span class="service-tag">Schritt 2 · Sichtbarkeit</span>
+        <div class="service-num">02</div>
+      </div>
+      <div class="service-content">
+        <span class="eyebrow">Sichtbarkeit</span>
+        <h2>Content der <em>konvertiert</em></h2>
+        <p>Likes sind schön. Kunden sind besser. Ich zeige dir, wie du Inhalte erstellst, die nicht nur Aufmerksamkeit erzeugen, sondern echte Gespräche und Anfragen. Schritt für Schritt, reproduzierbar.</p>
+        <p>Du lernst, welcher Content wann funktioniert, wie du eine Community aufbaust, die kauft, und wie du Vertrauen aufbaust, bevor du überhaupt etwas anbietest.</p>
+        <div class="includes">
+          <h4>Was du bekommst</h4>
+          <div class="include-item"><div class="include-dot">✓</div>Content-Strategie, maßgeschneidert für deinen Markt</div>
+          <div class="include-item"><div class="include-dot">✓</div>30-Tage Content-Plan mit konkreten Themen</div>
+          <div class="include-item"><div class="include-dot">✓</div>Copywriting-Framework: Texte, die Menschen bewegen</div>
+          <div class="include-item"><div class="include-dot">✓</div>Analytics verstehen und nutzen für mehr Reichweite</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICE 3 -->
+    <div class="service-block reveal">
+      <div class="service-visual">
+        <div class="service-icon">🔄</div>
+        <span class="service-tag">Schritt 3 · Umsatz</span>
+        <div class="service-num">03</div>
+      </div>
+      <div class="service-content">
+        <span class="eyebrow">Umsatz</span>
+        <h2>Kunden-Prozess <em>aufbauen</em></h2>
+        <p>Ein Interessent meldet sich. und dann? Ohne klaren Prozess verlierst du Kunden, die eigentlich kaufbereit waren. Ich helfe dir, einen einfachen, natürlichen Weg vom ersten Kontakt bis zur Buchung aufzubauen.</p>
+        <p>Kein aggressives Verkaufen, keine unangenehmen Gespräche. Ein System, das sich richtig anfühlt. für dich und deine Kunden.</p>
+        <div class="includes">
+          <h4>Was du aufbaust</h4>
+          <div class="include-item"><div class="include-dot">✓</div>Discovery Call. Struktur und Gesprächsleitfaden</div>
+          <div class="include-item"><div class="include-dot">✓</div>Follow-up-System für Interessenten</div>
+          <div class="include-item"><div class="include-dot">✓</div>Angebotspräsentation, die überzeugt ohne zu drängen</div>
+          <div class="include-item"><div class="include-dot">✓</div>Onboarding-Prozess für neue Kunden</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS STRIP -->
+<div class="process-strip">
+  <div class="process-strip-inner">
+    <span class="eyebrow" style="color:var(--gold-light);">Der Weg</span>
+    <h2>Von der ersten Session bis zum ersten Kunden</h2>
+    <div class="steps-row">
+      <div class="strip-step">
+        <div class="strip-num">01</div>
+        <div class="strip-label">Kostenloses Erstgespräch</div>
+      </div>
+      <div class="strip-step">
+        <div class="strip-num">02</div>
+        <div class="strip-label">Positionierung entwickeln</div>
+      </div>
+      <div class="strip-step">
+        <div class="strip-num">03</div>
+        <div class="strip-label">Content-System aufbauen</div>
+      </div>
+      <div class="strip-step">
+        <div class="strip-num">04</div>
+        <div class="strip-label">Erster Kunden-Prozess</div>
+      </div>
+      <div class="strip-step">
+        <div class="strip-num">05</div>
+        <div class="strip-label">Konstant gebucht</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section section">
+  <div class="section-inner">
+    <div class="faq-inner">
+      <div style="text-align:center; margin-bottom:56px;" class="reveal">
+        <span class="eyebrow">Häufige Fragen</span>
+        <h2 class="section-h">Was du wissen <em>möchtest</em></h2>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Für wen ist dieses Programm geeignet?</div>
+        <div class="faq-a">Das Programm ist für Coaches, die bereits arbeiten (oder kurz davor stehen), aber noch keine konstanten Kundenanfragen haben. Egal ob Business Coach, Life Coach, Health Coach. das System ist universell anwendbar, wird aber individuell auf deinen Markt angepasst.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Wie lange dauert das Programm?</div>
+        <div class="faq-a">Das hängt von deiner Ausgangssituation ab. Im Erstgespräch schauen wir gemeinsam, was du brauchst und wie lange es realistisch dauert, deine Ziele zu erreichen. Typischerweise sehen Coaches nach 2–4 Wochen erste konkrete Ergebnisse in ihrer Positionierung und ihrem Content.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Arbeiten wir online oder in Person?</div>
+        <div class="faq-a">100% online und remote. Ich arbeite mit Coaches im gesamten DACH-Raum. Deutschland, Österreich und die Schweiz. Alle Sessions finden per Video-Call statt, vollständig flexibel nach deinem Zeitplan.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Was kostet das Erstgespräch?</div>
+        <div class="faq-a">Das Erstgespräch ist komplett kostenlos und unverbindlich. In 30 Minuten schauen wir gemeinsam, wo du stehst, was du brauchst und ob ich der Richtige für dich bin. Kein Sales-Pitch, keine versteckten Kosten.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Brauche ich schon viele Follower oder Erfahrung?</div>
+        <div class="faq-a">Nein. Das Programm funktioniert auch mit kleiner Community. Wir bauen alles von Grund auf. oder optimieren, was du bereits hast. Entscheidend ist nicht deine Reichweite von heute, sondern dein System von morgen.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-box reveal">
+      <div class="cta-eyebrow">Bereit zu starten?</div>
+      <h2 class="cta-title">Lass uns 30 Minuten reden.</h2>
+      <p class="cta-sub">Kein Sales-Pitch, keine Verpflichtung. Nur ein ehrliches Gespräch darüber, was dein Business wirklich braucht.</p>
+      <a href="contacto.html" class="btn-amber">Kostenloses Erstgespräch →</a>
+      <p class="cta-note">Nur für ernsthafte Coaches · Begrenzte Plätze pro Monat</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="assets/logo.png" alt="LZR Coaching – Luis Zabala Rodriguez, Coach für Coaches">
+    <div class="footer-logo-name">Luis <span>Zabala</span> Rodriguez</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Start</a>
+    <a href="servicios.html">Leistungen</a>
+    <a href="nosotros.html">Über mich</a>
+    <a href="contacto.html">Kontakt</a>
+    <a href="https://instagram.com/luis.zabala.rodriguez" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="agb.html">AGB</a>
+    <a href="#" onclick="event.preventDefault(); lzrOpenCookieSettings();">Cookies</a>
+  </div>
+  <div class="footer-copy">© 2026 Luis Zabala Rodriguez · Coach für Coaches</div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('up'); io.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+</script>
+<script src="assets/cookie-banner.js" defer></script>
+<script src="assets/tracking.js" defer></script>
+</body>
+</html>

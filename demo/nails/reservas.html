@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script src="../demo-mode.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reservar Cita de Uñas en Palma de Mallorca | Nails By Ally</title>
+<meta name="description" content="Reserva tu cita en Nails By Ally, Palma de Mallorca. Elige servicio, fecha y hora en menos de 2 minutos. Sin esperas, sin llamadas.">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="refresh" content="0; url=index.html#servicios">
+<meta name="author" content="Nails By Ally">
+<link rel="canonical" href="reservas.html">
+<meta property="og:title" content="Reservar Cita de Uñas en Palma | Nails By Ally">
+<meta property="og:description" content="Reserva tu cita en nuestro studio de uñas en Palma de Mallorca. Rápido, fácil y sin llamadas.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="reservas.html">
+<meta property="og:image" content="assets/ally.jpg">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Nails By Ally">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reservar Cita de Uñas en Palma | Nails By Ally">
+<meta name="twitter:description" content="Reserva tu cita en nuestro studio de uñas en Palma de Mallorca. Rápido y sin llamadas.">
+<meta name="twitter:image" content="assets/ally.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "index.html"},
+    {"@type": "ListItem", "position": 2, "name": "Reservar cita", "item": "reservas.html"}
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --pink-bg:    #FEF0F5;
+  --pink-light: #FFE0EC;
+  --pink-main:  #F4A7BE;
+  --pink-deep:  #E8849A;
+  --pink-accent:#D4607A;
+  --green-bg:   #EDF7F2;
+  --green-light:#C8E6D5;
+  --green-main: #8FCFAE;
+  --green-deep: #5FB88A;
+  --white:      #FFFFFF;
+  --gray-50:    #FAFAFA;
+  --gray-100:   #F5F5F5;
+  --gray-200:   #EBEBEB;
+  --gray-300:   #D4D4D4;
+  --gray-500:   #9E9E9E;
+  --gray-700:   #5D5D5D;
+  --text:       #2C2C2C;
+  --text-mid:   #5D5D5D;
+  --text-soft:  #9E9E9E;
+  --r-sm:12px;--r-md:20px;--r-lg:28px;--r-xl:40px;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--gray-50);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;min-height:100vh;}
+
+/* CURSOR */
+@media(pointer:fine){*,*::before,*::after{cursor:none!important;}}
+.c-dot{position:fixed;pointer-events:none;z-index:9999;width:8px;height:8px;border-radius:50%;background:var(--pink-deep);transform:translate(-50%,-50%);will-change:left,top;}
+.c-ring{position:fixed;pointer-events:none;z-index:9998;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--pink-main);transform:translate(-50%,-50%);transition:width 0.25s,height 0.25s,border-color 0.25s;will-change:left,top;}
+.c-ring.hovered{width:40px;height:40px;border-color:var(--green-main);}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 52px;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(20px);
+  box-shadow:0 1px 0 rgba(244,167,190,0.2);
+}
+.logo-wrap{text-decoration:none;display:flex;align-items:center;gap:10px;}
+.header-back{display:flex;align-items:center;gap:8px;font-size:0.78rem;font-weight:500;color:var(--text-mid);text-decoration:none;padding:8px 16px;border-radius:100px;border:1.5px solid var(--gray-200);transition:border-color 0.25s,color 0.25s;}
+.header-back:hover{border-color:var(--pink-main);color:var(--pink-deep);}
+
+/* LAYOUT */
+.booking-page{max-width:1040px;margin:0 auto;padding:40px 24px 120px;}
+.booking-title{text-align:center;margin-bottom:36px;}
+.booking-title h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;color:var(--text);margin-bottom:6px;}
+.booking-title h1 em{font-style:italic;color:var(--pink-deep);}
+.booking-title p{font-size:0.85rem;color:var(--text-soft);}
+
+/* PROGRESS BAR — 2 pasos */
+.progress-wrap{margin-bottom:40px;}
+.progress-steps{display:flex;align-items:center;justify-content:center;gap:0;position:relative;max-width:380px;margin:0 auto;}
+.progress-step{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;flex:1;max-width:160px;}
+.step-circle{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.78rem;font-weight:600;z-index:2;position:relative;
+  background:var(--white);border:2px solid var(--gray-300);color:var(--gray-500);
+  transition:background 0.4s,border-color 0.4s,color 0.4s,box-shadow 0.4s;
+}
+.progress-step.active .step-circle{background:var(--pink-deep);border-color:var(--pink-deep);color:#fff;box-shadow:0 4px 16px rgba(232,132,154,0.4);}
+.progress-step.done .step-circle{background:var(--green-main);border-color:var(--green-main);color:#fff;}
+.step-label{font-size:0.68rem;font-weight:500;color:var(--text-soft);text-align:center;white-space:nowrap;transition:color 0.3s;letter-spacing:0.04em;text-transform:uppercase;}
+.progress-step.active .step-label{color:var(--pink-deep);font-weight:600;}
+.progress-step.done .step-label{color:var(--green-deep);}
+.step-line{flex:1;height:2px;background:var(--gray-200);margin:0 -1px;margin-top:-28px;transition:background 0.4s;max-width:120px;}
+.step-line.done{background:var(--green-main);}
+
+/* STEPS */
+.booking-step{display:none;animation:stepIn 0.4s ease both;}
+.booking-step.active{display:block;}
+@keyframes stepIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* BOOKING SECTION (dentro de step-1) */
+.booking-section{margin-bottom:44px;}
+.booking-section:last-child{margin-bottom:24px;}
+.section-title{
+  font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.4vw,1.6rem);
+  font-weight:600;color:var(--text);margin-bottom:8px;text-align:center;
+}
+.section-title em{font-style:italic;color:var(--pink-deep);}
+.section-intro{font-size:0.85rem;color:var(--text-soft);text-align:center;margin-bottom:24px;}
+
+/* SERVICIOS */
+.niveles-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.nivel-card{
+  background:var(--white);border-radius:var(--r-lg);overflow:hidden;
+  border:2px solid var(--gray-200);cursor:pointer;
+  transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;
+  position:relative;
+}
+.nivel-card:hover{transform:translateY(-4px);border-color:var(--pink-main);box-shadow:0 12px 40px rgba(244,167,190,0.2);}
+.nivel-card.selected{border-color:var(--pink-deep);box-shadow:0 8px 32px rgba(232,132,154,0.3);}
+.nivel-photo{height:104px;display:flex;align-items:center;justify-content:center;font-size:1.9rem;position:relative;}
+.nivel-tag{position:absolute;top:8px;left:8px;background:rgba(255,255,255,0.92);backdrop-filter:blur(8px);border-radius:100px;padding:3px 9px;font-size:0.58rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-mid);}
+.nivel-body{padding:12px 14px 14px;}
+.nivel-name{font-family:'Playfair Display',serif;font-size:0.94rem;font-weight:600;color:var(--text);margin-bottom:5px;line-height:1.2;}
+.nivel-desc{font-size:0.72rem;color:var(--text-mid);line-height:1.45;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.nivel-meta{display:flex;gap:5px;flex-wrap:wrap;}
+.nbadge{padding:3px 9px;border-radius:100px;font-size:0.66rem;font-weight:500;}
+.nbadge.time{background:var(--green-bg);color:var(--green-deep);}
+.nbadge.price{background:var(--pink-bg);color:var(--pink-accent);}
+.check-mark{position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;background:var(--pink-deep);color:#fff;display:none;align-items:center;justify-content:center;font-size:0.7rem;}
+.nivel-card.selected .check-mark{display:flex;}
+
+/* NAIL ART BOOKING */
+.nail-art-booking{display:none;animation:stepIn 0.35s ease both;}
+.nail-art-booking-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:720px;margin:0 auto 16px;}
+.nail-art-bc{
+  border:2px solid var(--gray-200);border-radius:var(--r-md);padding:14px 10px;
+  cursor:pointer;background:var(--white);text-align:center;width:100%;
+  transition:border-color 0.2s,background 0.2s,transform 0.2s;
+}
+.nail-art-bc:hover{border-color:var(--pink-main);background:var(--pink-bg);transform:translateY(-2px);}
+.nail-art-bc.selected{border-color:var(--pink-deep);background:var(--pink-bg);box-shadow:0 4px 14px rgba(232,132,154,0.2);}
+.nail-art-bc-name{font-size:0.85rem;font-weight:600;color:var(--text);display:block;margin-bottom:4px;}
+.nail-art-bc-desc{font-size:0.72rem;color:var(--text-soft);display:block;margin-bottom:6px;}
+.nail-art-bc-meta{font-size:0.72rem;color:var(--pink-accent);font-weight:500;display:block;}
+
+/* CUÁNDO (calendar + slots) */
+.when-wrap{max-width:460px;margin:0 auto;display:flex;flex-direction:column;gap:28px;}
+.calendar-wrap{}
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:0 4px;}
+.cal-header h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:var(--text);text-transform:capitalize;}
+.cal-nav{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--gray-200);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:var(--text-mid);transition:border-color 0.25s,color 0.25s;}
+.cal-nav:hover{border-color:var(--pink-main);color:var(--pink-deep);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-day-header{text-align:center;font-size:0.65rem;font-weight:600;color:var(--text-soft);padding:6px 0;letter-spacing:0.05em;text-transform:uppercase;}
+.cal-day{
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;font-size:0.82rem;font-weight:500;cursor:pointer;
+  transition:background 0.2s,color 0.2s;color:var(--text-mid);
+}
+.cal-day:hover:not(.disabled):not(.empty){background:var(--pink-light);color:var(--pink-deep);}
+.cal-day.today{color:var(--pink-deep);font-weight:700;}
+.cal-day.selected{background:var(--pink-deep);color:#fff;box-shadow:0 4px 12px rgba(232,132,154,0.4);}
+.cal-day.disabled{color:var(--gray-300);cursor:not-allowed;}
+.cal-day.empty{cursor:default;}
+
+.slots-wrap{}
+.slots-label{font-size:0.82rem;color:var(--text-mid);text-align:center;margin-bottom:14px;}
+.slots-label strong{color:var(--pink-deep);font-weight:600;}
+.slots-hint{
+  font-size:0.82rem;color:var(--text-soft);
+  padding:18px;background:var(--pink-bg);border-radius:var(--r-md);
+  border:1px dashed rgba(244,167,190,0.4);text-align:center;
+}
+.slots-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.slot{
+  padding:11px 6px;text-align:center;border-radius:var(--r-md);
+  border:1.5px solid var(--gray-200);background:var(--white);
+  font-size:0.82rem;font-weight:500;cursor:pointer;color:var(--text-mid);
+  transition:border-color 0.25s,background 0.25s,color 0.25s,transform 0.2s;
+}
+.slot:hover{border-color:var(--pink-main);background:var(--pink-bg);color:var(--pink-deep);transform:translateY(-2px);}
+.slot.selected{background:var(--pink-deep);border-color:var(--pink-deep);color:#fff;box-shadow:0 4px 14px rgba(232,132,154,0.4);}
+
+/* STICKY FOOTER (paso 1) */
+.booking-sticky{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);
+  border-top:1px solid rgba(244,167,190,0.2);
+  box-shadow:0 -6px 24px rgba(0,0,0,0.06);
+  padding:12px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  transform:translateY(110%);
+  transition:transform 0.35s ease;
+}
+.booking-sticky.visible{transform:translateY(0);}
+.sticky-info{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;}
+.sticky-total{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:700;
+  color:var(--pink-accent);line-height:1.1;
+  transition:transform 0.2s;
+}
+.sticky-total.bump{animation:totalBump 0.35s ease;}
+@keyframes totalBump{0%{transform:scale(1);}40%{transform:scale(1.06);}100%{transform:scale(1);}}
+.sticky-detail{
+  font-size:0.72rem;color:var(--text-soft);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.sticky-cta{
+  padding:13px 24px;border:none;border-radius:100px;
+  background:var(--pink-deep);color:#fff;
+  font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:600;
+  cursor:pointer;white-space:nowrap;flex-shrink:0;
+  transition:background 0.25s,transform 0.2s,box-shadow 0.25s;
+  box-shadow:0 4px 14px rgba(232,132,154,0.35);
+}
+.sticky-cta:hover:not(:disabled){background:var(--pink-accent);transform:translateY(-1px);box-shadow:0 8px 20px rgba(232,132,154,0.45);}
+.sticky-cta:disabled{background:var(--gray-300);cursor:not-allowed;box-shadow:none;}
+
+/* STEP 2 — DATOS */
+.form-wrap{max-width:480px;margin:0 auto;}
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;font-size:0.72rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;}
+.form-group input,.form-group textarea{
+  width:100%;padding:13px 18px;border-radius:var(--r-md);
+  border:1.5px solid var(--gray-200);background:var(--white);
+  font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text);
+  transition:border-color 0.25s,box-shadow 0.25s;outline:none;
+}
+.form-group input:focus,.form-group textarea:focus{
+  border-color:var(--pink-main);box-shadow:0 0 0 3px rgba(244,167,190,0.15);
+}
+.form-group textarea{height:90px;resize:vertical;}
+.field-error{display:block;font-size:0.72rem;color:var(--pink-accent);margin-top:5px;min-height:14px;}
+.resumen-card{
+  background:linear-gradient(135deg,var(--pink-bg),#FFF8FB);
+  border:1.5px solid rgba(244,167,190,0.3);
+  border-radius:var(--r-lg);padding:20px 22px;margin-bottom:26px;
+}
+.resumen-card h4{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:12px;}
+.resumen-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(244,167,190,0.2);font-size:0.82rem;gap:12px;}
+.resumen-row:last-child{border-bottom:none;padding-top:10px;}
+.resumen-row span:first-child{color:var(--text-soft);flex-shrink:0;}
+.resumen-row span:last-child{font-weight:600;color:var(--text);text-align:right;}
+.resumen-row.precio span:last-child{color:var(--pink-deep);font-family:'Playfair Display',serif;font-size:1rem;}
+.privacy-check{display:flex;align-items:flex-start;gap:10px;margin-bottom:18px;}
+.privacy-check input{width:auto;margin-top:3px;accent-color:var(--pink-deep);}
+.privacy-check label{font-size:0.78rem;color:var(--text-mid);line-height:1.5;text-transform:none;letter-spacing:normal;font-weight:400;}
+.privacy-check label a{color:var(--pink-deep);}
+
+.btn-whatsapp{
+  width:100%;padding:16px;border-radius:100px;border:none;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:#fff;font-family:'DM Sans',sans-serif;font-size:0.92rem;font-weight:600;
+  cursor:pointer;transition:opacity 0.3s,transform 0.25s,box-shadow 0.3s;
+  box-shadow:0 8px 24px rgba(37,211,102,0.35);letter-spacing:0.04em;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-whatsapp:hover:not(:disabled){opacity:0.95;transform:translateY(-2px);box-shadow:0 14px 32px rgba(37,211,102,0.45);}
+.btn-whatsapp:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.btn-whatsapp svg{width:20px;height:20px;flex-shrink:0;}
+.btn-square{
+  display:block;width:100%;text-align:center;padding:13px;
+  border-radius:100px;border:1.5px solid var(--gray-300);
+  background:transparent;color:var(--text-mid);
+  font-family:'DM Sans',sans-serif;font-size:0.82rem;font-weight:500;
+  text-decoration:none;margin-top:12px;
+  transition:border-color 0.25s,color 0.25s,background 0.25s;
+}
+.btn-square:hover{border-color:var(--pink-main);color:var(--pink-deep);background:var(--pink-bg);}
+.form-note{font-size:0.7rem;color:var(--text-soft);text-align:center;margin-top:14px;line-height:1.6;}
+
+.step-nav{display:flex;justify-content:flex-start;align-items:center;margin-top:24px;}
+.btn-prev{
+  padding:12px 24px;border-radius:100px;
+  background:transparent;color:var(--text-mid);
+  font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;
+  cursor:pointer;border:1.5px solid var(--gray-300);
+  transition:border-color 0.25s,color 0.25s;
+}
+.btn-prev:hover{border-color:var(--pink-main);color:var(--pink-deep);}
+
+/* STEP 3 — CONFIRMACIÓN */
+.confirm-wrap{text-align:center;max-width:480px;margin:0 auto;padding:30px 0;}
+.confirm-icon{font-size:4rem;margin-bottom:20px;animation:bounceIn 0.6s ease both;}
+@keyframes bounceIn{0%{transform:scale(0);}60%{transform:scale(1.2);}100%{transform:scale(1);}}
+.confirm-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--text);margin-bottom:10px;}
+.confirm-title em{font-style:italic;color:var(--pink-deep);}
+.confirm-sub{font-size:0.9rem;color:var(--text-mid);line-height:1.7;margin-bottom:28px;}
+.confirm-card{
+  background:var(--white);border:1.5px solid var(--gray-200);border-radius:var(--r-lg);
+  padding:22px;text-align:left;margin-bottom:28px;
+}
+.confirm-card h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:var(--text);margin-bottom:14px;}
+.confirm-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--gray-100);font-size:0.85rem;gap:10px;}
+.confirm-row:last-child{border-bottom:none;}
+.confirm-row span:first-child{color:var(--text-soft);flex-shrink:0;}
+.confirm-row span:last-child{font-weight:600;color:var(--text);text-align:right;}
+.confirm-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+.booking-footer{
+  background:var(--text);padding:28px 52px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.booking-footer-links{display:flex;gap:24px;}
+.booking-footer-links a{font-size:0.72rem;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.25s;}
+.booking-footer-links a:hover{color:var(--pink-main);}
+
+/* MODAL OVERLAY (nail art + calendario) */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(44,44,44,0.55);z-index:500;
+  align-items:flex-end;justify-content:center;
+  padding:0;animation:fadeIn 0.25s ease;
+}
+.modal-overlay.open{display:flex;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.modal-content{
+  background:var(--white);border-radius:24px 24px 0 0;
+  width:100%;max-width:540px;max-height:92vh;overflow-y:auto;
+  padding:28px 22px 28px;position:relative;
+  animation:modalSlideUp 0.35s ease;
+}
+.modal-content-wide{max-width:560px;}
+@keyframes modalSlideUp{from{transform:translateY(40%);}to{transform:translateY(0);}}
+.modal-close{
+  position:absolute;top:14px;right:16px;
+  width:34px;height:34px;border-radius:50%;
+  background:var(--gray-100);border:none;
+  font-size:1.4rem;line-height:1;cursor:pointer;color:var(--text-mid);
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.2s;z-index:2;
+}
+.modal-close:hover{background:var(--gray-200);}
+.modal-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.4rem;font-weight:600;
+  color:var(--text);text-align:center;
+  margin-bottom:6px;padding-right:36px;padding-left:36px;
+}
+.modal-title em{font-style:italic;color:var(--pink-deep);}
+.modal-intro{font-size:0.82rem;color:var(--text-soft);text-align:center;margin-bottom:22px;}
+.btn-modal-continue{
+  width:100%;padding:14px;border-radius:100px;border:none;
+  background:var(--pink-deep);color:#fff;
+  font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:600;
+  cursor:pointer;margin-top:18px;
+  box-shadow:0 6px 20px rgba(232,132,154,0.35);
+  transition:background 0.25s,transform 0.2s,box-shadow 0.25s;
+}
+.btn-modal-continue:hover:not(:disabled){background:var(--pink-accent);transform:translateY(-1px);box-shadow:0 10px 26px rgba(232,132,154,0.45);}
+.btn-modal-continue:disabled{background:var(--gray-300);cursor:not-allowed;box-shadow:none;}
+@media(min-width:600px){
+  .modal-overlay{align-items:center;padding:20px;}
+  .modal-content{border-radius:24px;}
+}
+
+/* SELECTION SUMMARY */
+.selection-card{
+  background:var(--white);border:1.5px solid var(--gray-200);
+  border-radius:var(--r-lg);padding:6px 22px;
+  max-width:540px;margin:0 auto;
+  box-shadow:0 2px 12px rgba(244,167,190,0.08);
+}
+.selection-row{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 0;border-bottom:1px solid var(--gray-100);
+}
+.selection-row:last-child{border-bottom:none;}
+.selection-label{
+  font-size:0.66rem;font-weight:600;color:var(--text-soft);
+  letter-spacing:0.08em;text-transform:uppercase;
+  min-width:78px;flex-shrink:0;
+}
+.selection-value{flex:1;font-size:0.88rem;color:var(--text);font-weight:500;line-height:1.35;}
+.selection-edit{
+  background:var(--pink-bg);border:none;
+  color:var(--pink-deep);font-weight:600;
+  font-size:0.74rem;padding:7px 16px;
+  border-radius:100px;cursor:pointer;flex-shrink:0;
+  font-family:'DM Sans',sans-serif;
+  transition:background 0.2s,color 0.2s;
+}
+.selection-edit:hover{background:var(--pink-light);color:var(--pink-accent);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  header{padding:14px 20px;}
+  .booking-page{padding:28px 16px 120px;}
+  .booking-title{margin-bottom:28px;}
+  .progress-wrap{margin-bottom:28px;}
+  .niveles-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .nivel-photo{height:78px;font-size:1.55rem;}
+  .nivel-body{padding:10px 12px 12px;}
+  .nivel-name{font-size:0.85rem;margin-bottom:4px;}
+  .nivel-desc{font-size:0.68rem;line-height:1.4;margin-bottom:8px;-webkit-line-clamp:1;}
+  .nbadge{padding:2px 7px;font-size:0.6rem;}
+  .nail-art-booking-cards{grid-template-columns:1fr 1fr;}
+  .selection-card{padding:4px 16px;}
+  .selection-row{flex-wrap:wrap;gap:8px;padding:12px 0;}
+  .selection-label{min-width:62px;font-size:0.62rem;}
+  .selection-value{font-size:0.82rem;}
+  .selection-edit{font-size:0.7rem;padding:6px 12px;}
+  .modal-content{padding:24px 18px 24px;}
+  .modal-title{font-size:1.2rem;padding-left:32px;padding-right:32px;}
+  .slots-grid{grid-template-columns:repeat(3,1fr);}
+  .booking-section{margin-bottom:36px;}
+  .sticky-total{font-size:1.05rem;}
+  .sticky-cta{padding:11px 18px;font-size:0.82rem;}
+  .step-label{font-size:0.6rem;}
+}
+@media(max-width:480px){
+  .booking-footer{padding:24px 16px;}
+  .booking-footer-links{gap:16px;flex-wrap:wrap;}
+}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1234944605106026');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1234944605106026&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="index.html" class="logo-wrap">
+    <img src="assets/logo.png" alt="Nails By Ally" style="height:64px;width:auto;display:block;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.15));mix-blend-mode:multiply;" decoding="async">
+  </a>
+  <a href="index.html" class="header-back">← Volver al inicio</a>
+</header>
+
+<!-- BOOKING PAGE -->
+<div class="booking-page">
+
+  <div class="booking-title">
+    <h1>Tu cita en <em>2 minutos</em></h1>
+    <p>Configura · Confirma · Te escribimos por WhatsApp</p>
+  </div>
+
+  <!-- PROGRESS BAR — 2 pasos -->
+  <div class="progress-wrap">
+    <div class="progress-steps" id="progressSteps">
+      <div class="progress-step active" data-step="1">
+        <div class="step-circle">1</div>
+        <span class="step-label">Configura</span>
+      </div>
+      <div class="step-line" id="line-1-2"></div>
+      <div class="progress-step" data-step="2">
+        <div class="step-circle">2</div>
+        <span class="step-label">Confirma</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STEP 1: SERVICIO + DISEÑO + FECHA + HORA ── -->
+  <div class="booking-step active" id="step-1">
+
+    <!-- SERVICIO -->
+    <section class="booking-section">
+      <h2 class="section-title">Elige tu <em>servicio</em></h2>
+      <p class="section-intro">Del cuidado básico a la extensión con diseño.</p>
+      <div class="niveles-grid" id="nivelGrid">
+
+        <div class="nivel-card" data-nivel="1" data-nombre="Retiro Profesional" data-duracion="30 min" data-precio="20€">
+          <div class="nivel-photo" style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9);">
+            <span>🌿</span>
+            <span class="nivel-tag">30 min</span>
+            <span class="check-mark">✓</span>
+          </div>
+          <div class="nivel-body">
+            <div class="nivel-name">Retiro Profesional</div>
+            <div class="nivel-desc">Retirada segura del producto para proteger la uña natural.</div>
+            <div class="nivel-meta"><span class="nbadge time">⏱ 30 min</span><span class="nbadge price">20€</span></div>
+          </div>
+        </div>
+
+        <div class="nivel-card" data-nivel="2" data-nombre="Manicura Express" data-duracion="30 min" data-precio="25€">
+          <div class="nivel-photo" style="background:linear-gradient(135deg,#FFF3E0,#FFE0B2);">
+            <span>⚡</span>
+            <span class="nivel-tag">30 min</span>
+            <span class="check-mark">✓</span>
+          </div>
+          <div class="nivel-body">
+            <div class="nivel-name">Manicura Express</div>
+            <div class="nivel-desc">Preparación básica y color. Sin cutícula ni nivelación.</div>
+            <div class="nivel-meta"><span class="nbadge time">⏱ 30 min</span><span class="nbadge price">25€</span></div>
+          </div>
+        </div>
+
+        <div class="nivel-card" data-nivel="3" data-nombre="Manicura de Precisión con Color" data-duracion="1h 30" data-precio="35€">
+          <div class="nivel-photo" style="background:linear-gradient(135deg,#FFD6E8,#FFC0D4);">
+            <span>💅</span>
+            <span class="nivel-tag">1h 30</span>
+            <span class="check-mark">✓</span>
+          </div>
+          <div class="nivel-body">
+            <div class="nivel-name">Manicura de Precisión</div>
+            <div class="nivel-desc">Preparación profunda, cutícula, nivelación y color semipermanente.</div>
+            <div class="nivel-meta"><span class="nbadge time">⏱ 1h 30</span><span class="nbadge price">35€</span></div>
+          </div>
+        </div>
+
+        <div class="nivel-card" data-nivel="4" data-nombre="Pedicura Semipermanente" data-duracion="1h" data-precio="40€">
+          <div class="nivel-photo" style="background:linear-gradient(135deg,#FCE4EC,#F8BBD9);">
+            <span>🌸</span>
+            <span class="nivel-tag">1h</span>
+            <span class="check-mark">✓</span>
+          </div>
+          <div class="nivel-body">
+            <div class="nivel-name">Pedicura Semipermanente</div>
+            <div class="nivel-desc">Cuidado básico de pie y color semipermanente duradero.</div>
+            <div class="nivel-meta"><span class="nbadge time">⏱ 1h</span><span class="nbadge price">40€</span></div>
+          </div>
+        </div>
+
+        <div class="nivel-card" data-nivel="5" data-nombre="Relleno 3 semanas" data-duracion="1h 30" data-precio="30€">
+          <div class="nivel-photo" style="background:linear-gradient(135deg,#F3E5F5,#E1BEE7);">
+            <span>🔄</span>
+            <span class="nivel-tag">1h 30</span>
+            <span class="check-mark">✓</span>
+          </div>
+          <div class="nivel-body">
+            <div class="nivel-name">Relleno 3 semanas</div>
+            <div class="nivel-desc">Mantenimiento de extensiones cada 3 semanas.</div>
+            <div class="nivel-meta"><span class="nbadge time">⏱ 1h 30</span><span class="nbadge price">30€</span></div>
+          </div>
+        </div>
+
+        <div class="nivel-card" data-nivel="6" data-nombre="Extensión S" data-duracion="2h" data-precio="Desde 30€">
+          <div class="nivel-photo" style="background:linear-gradient(135deg,#F4B8CE,#E8A0BC);">
+            <span>✨</span>
+            <span class="nivel-tag">2h</span>
+            <span class="check-mark">✓</span>
+          </div>
+          <div class="nivel-body">
+            <div class="nivel-name">Extensión S</div>
+            <div class="nivel-desc">Extensión corta en acrílico o gel. Preparación completa.</div>
+            <div class="nivel-meta"><span class="nbadge time">⏱ 2h</span><span class="nbadge price">Desde 30€</span></div>
+          </div>
+        </div>
+
+        <div class="nivel-card" data-nivel="7" data-nombre="Extensión M" data-duracion="2h" data-precio="Desde 40€">
+          <div class="nivel-photo" style="background:linear-gradient(135deg,#D4E8DC,#B8D8C4);">
+            <span>✨</span>
+            <span class="nivel-tag">2h</span>
+            <span class="check-mark">✓</span>
+          </div>
+          <div class="nivel-body">
+            <div class="nivel-name">Extensión M</div>
+            <div class="nivel-desc">Extensión media en acrílico o gel. Preparación completa.</div>
+            <div class="nivel-meta"><span class="nbadge time">⏱ 2h</span><span class="nbadge price">Desde 40€</span></div>
+          </div>
+        </div>
+
+        <div class="nivel-card" data-nivel="8" data-nombre="Extensión L" data-duracion="2h" data-precio="Desde 45€">
+          <div class="nivel-photo" style="background:linear-gradient(135deg,#EDE7F6,#D1C4E9);">
+            <span>👑</span>
+            <span class="nivel-tag">2h</span>
+            <span class="check-mark">✓</span>
+          </div>
+          <div class="nivel-body">
+            <div class="nivel-name">Extensión L</div>
+            <div class="nivel-desc">Extensión larga en acrílico o gel. Preparación completa.</div>
+            <div class="nivel-meta"><span class="nbadge time">⏱ 2h</span><span class="nbadge price">Desde 45€</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TARJETA DE SELECCIÓN -->
+    <section class="booking-section selection-summary" id="selectionSummary" style="display:none;">
+      <h2 class="section-title">Tu <em>selección</em></h2>
+      <div class="selection-card">
+        <div class="selection-row">
+          <span class="selection-label">Servicio</span>
+          <span class="selection-value" id="selServicio">—</span>
+        </div>
+        <div class="selection-row" id="rowDesign" style="display:none;">
+          <span class="selection-label">Diseño</span>
+          <span class="selection-value" id="selDesign">—</span>
+          <button type="button" class="selection-edit" data-modal="nailArtModal">Cambiar</button>
+        </div>
+        <div class="selection-row">
+          <span class="selection-label">Cuándo</span>
+          <span class="selection-value" id="selCuando">Sin elegir</span>
+          <button type="button" class="selection-edit" data-modal="calendarModal" id="selCuandoBtn">Elegir</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ── STEP 2: DATOS ── -->
+  <div class="booking-step" id="step-2">
+    <h2 class="section-title" style="margin-bottom:6px;">Cuéntanos <em>quién eres</em></h2>
+    <p class="section-intro">Ally te escribirá por WhatsApp para confirmar.</p>
+
+    <div class="form-wrap">
+      <div class="resumen-card">
+        <h4>Tu reserva</h4>
+        <div class="resumen-row"><span>Servicio</span><span id="res-nivel">—</span></div>
+        <div class="resumen-row"><span>Fecha</span><span id="res-fecha">—</span></div>
+        <div class="resumen-row"><span>Hora</span><span id="res-hora">—</span></div>
+        <div class="resumen-row"><span>Duración</span><span id="res-duracion">—</span></div>
+        <div class="resumen-row precio"><span>Precio</span><span id="res-precio">—</span></div>
+      </div>
+
+      <form id="bookingForm" novalidate>
+        <div class="form-group">
+          <label>Tu nombre *</label>
+          <input type="text" id="f-nombre" name="nombre" placeholder="Tu nombre" required minlength="2">
+          <span class="field-error" id="err-nombre"></span>
+        </div>
+
+        <div class="form-group">
+          <label>WhatsApp o email *</label>
+          <input type="text" id="f-contact" name="contact" placeholder="+34 600 000 000 o tu@email.com" required>
+          <span class="field-error" id="err-contact"></span>
+        </div>
+
+        <div class="form-group">
+          <label>¿Algo que deba saber? (opcional)</label>
+          <textarea id="f-notas" name="notas" placeholder="Referencia de diseño, alergias, ocasión especial..."></textarea>
+        </div>
+
+        <div class="privacy-check">
+          <input type="checkbox" id="f-privacy" required>
+          <label for="f-privacy">Acepto la <a href="#">política de privacidad</a> y el contacto por WhatsApp/email para confirmar mi reserva. *</label>
+        </div>
+        <span class="field-error" id="err-privacy" style="margin-bottom:12px;"></span>
+
+        <button type="submit" class="btn-whatsapp" id="submitBtn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enviar por WhatsApp
+        </button>
+        <a href="https://squareup.com/appointments" target="_blank" rel="noopener noreferrer" class="btn-square">O reservar directo en Square</a>
+
+        <p class="form-note">Sin tarjeta · Cancelación gratuita hasta 24h antes · Ally responde en menos de 1h.</p>
+      </form>
+
+      <div class="step-nav">
+        <button type="button" class="btn-prev" id="prev-2">← Volver a configurar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STEP 3: CONFIRMADO ── -->
+  <div class="booking-step" id="step-3">
+    <div class="confirm-wrap">
+      <div class="confirm-icon">🎉</div>
+      <h2 class="confirm-title">¡Reserva <em>enviada!</em></h2>
+      <p class="confirm-sub">Te hemos abierto WhatsApp con todos los detalles. Envía el mensaje y Ally te confirmará en menos de 1h.</p>
+
+      <div class="confirm-card">
+        <h4>Resumen de tu cita</h4>
+        <div class="confirm-row"><span>Servicio</span><span id="conf-nivel">—</span></div>
+        <div class="confirm-row"><span>Fecha</span><span id="conf-fecha">—</span></div>
+        <div class="confirm-row"><span>Hora</span><span id="conf-hora">—</span></div>
+        <div class="confirm-row"><span>Duración</span><span id="conf-duracion">—</span></div>
+        <div class="confirm-row"><span>Precio estimado</span><span id="conf-precio">—</span></div>
+      </div>
+
+      <div class="confirm-actions">
+        <a href="index.html" class="btn-prev" style="text-decoration:none;display:inline-flex;align-items:center;">← Volver al inicio</a>
+        <a href="reservas.html" class="btn-whatsapp" style="text-decoration:none;display:inline-flex;padding:12px 24px;">Nueva reserva</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL NAIL ART -->
+<div class="modal-overlay" id="nailArtModal" role="dialog" aria-modal="true" aria-labelledby="nailArtModalTitle" aria-hidden="true">
+  <div class="modal-content">
+    <button class="modal-close" id="nailArtClose" aria-label="Cerrar">&times;</button>
+    <h2 class="modal-title" id="nailArtModalTitle">Elige tu <em>diseño</em></h2>
+    <p class="modal-intro">El diseño suma tiempo y se confirma con Ally.</p>
+    <div class="nail-art-booking-cards" id="nailArtBookingCards"></div>
+    <button type="button" class="btn-modal-continue" id="nailArtContinue">Continuar →</button>
+  </div>
+</div>
+
+<!-- MODAL CALENDARIO -->
+<div class="modal-overlay" id="calendarModal" role="dialog" aria-modal="true" aria-labelledby="calendarModalTitle" aria-hidden="true">
+  <div class="modal-content modal-content-wide">
+    <button class="modal-close" id="calendarClose" aria-label="Cerrar">&times;</button>
+    <h2 class="modal-title" id="calendarModalTitle">¿Cuándo te <em>viene bien?</em></h2>
+    <p class="modal-intro">Abrimos de lunes a sábado · Domingos cerramos.</p>
+    <div class="when-wrap">
+      <div class="calendar-wrap">
+        <div class="cal-header">
+          <button class="cal-nav" id="cal-prev" aria-label="Mes anterior">‹</button>
+          <h3 id="cal-month-label"></h3>
+          <button class="cal-nav" id="cal-next" aria-label="Mes siguiente">›</button>
+        </div>
+        <div class="cal-grid" id="cal-grid">
+          <div class="cal-day-header">L</div>
+          <div class="cal-day-header">M</div>
+          <div class="cal-day-header">X</div>
+          <div class="cal-day-header">J</div>
+          <div class="cal-day-header">V</div>
+          <div class="cal-day-header">S</div>
+          <div class="cal-day-header">D</div>
+        </div>
+      </div>
+      <div class="slots-wrap">
+        <p class="slots-label" id="slotsLabel">Horarios</p>
+        <div id="slotsContainer">
+          <p class="slots-hint">Selecciona un día primero</p>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn-modal-continue" id="calendarContinue" disabled>Confirmar fecha y hora</button>
+  </div>
+</div>
+
+<!-- STICKY FOOTER (paso 1) -->
+<div class="booking-sticky" id="bookingSticky" role="region" aria-label="Resumen de selección">
+  <div class="sticky-info">
+    <span class="sticky-total" id="stickyTotal">—</span>
+    <span class="sticky-detail" id="stickyDetail">Elige un servicio</span>
+  </div>
+  <button class="sticky-cta" id="stickyCta" disabled>Continuar →</button>
+</div>
+
+<!-- FOOTER -->
+<footer class="booking-footer">
+  <a href="index.html" class="logo-wrap">
+    <img src="assets/logo.png" alt="Nails By Ally" style="height:40px;width:auto;display:block;filter:brightness(0) invert(1);" decoding="async" loading="lazy">
+  </a>
+  <div class="booking-footer-links">
+    <a href="index.html">Inicio</a>
+    <a href="index.html#servicios">Servicios</a>
+    <a href="#">Privacidad</a>
+    <a href="#">Contacto</a>
+  </div>
+</footer>
+
+<script>
+// ══ CURSOR ══
+(function(){
+  if(window.matchMedia('(pointer:coarse)').matches)return;
+  var dot=document.createElement('div');dot.className='c-dot';
+  var ring=document.createElement('div');ring.className='c-ring';
+  document.body.appendChild(dot);document.body.appendChild(ring);
+  var mx=-200,my=-200,rx=-200,ry=-200;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+  (function loop(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button,.nivel-card,.slot,.cal-day,.nail-art-bc').forEach(function(el){
+    el.addEventListener('mouseenter',function(){ring.classList.add('hovered');});
+    el.addEventListener('mouseleave',function(){ring.classList.remove('hovered');});
+  });
+})();
+
+// ══ ESTADO ══
+var booking = {
+  nivel: null, nivelNombre: '', nivelDuracion: '', nivelPrecio: '',
+  baseNombre: '', basePrecioNum: 0, baseDurMin: 0,
+  nailArtId: 'natural', nailArtNombre: '',
+  fecha: null, fechaLabel: '', hora: null,
+  nombre: '', contact: '', notas: ''
+};
+
+// ══ NAIL ART CONFIG ══
+var NAIL_ART = [
+  { id:'natural', nombre:'Natural nude',  desc:'incluido',         tiempo:'+0 min',  precioExtra:0, minExtra:0  },
+  { id:'art1',    nombre:'Nail Art 1',    desc:'diseño sutil',     tiempo:'+15 min', precioExtra:7, minExtra:15 },
+  { id:'art2',    nombre:'Nail Art 2',    desc:'diseño medio',     tiempo:'+30 min', precioExtra:7, minExtra:30 },
+  { id:'art3',    nombre:'Nail Art 3',    desc:'diseño elaborado', tiempo:'+1h',     precioExtra:7, minExtra:60 },
+];
+var EXTENSIONES = ['Extensión S', 'Extensión M', 'Extensión L'];
+
+// ══ HELPERS ══
+function parseDurMin(dur) {
+  var h = 0, m = 0;
+  var mh = dur.match(/(\d+)h/); if(mh) h = parseInt(mh[1]);
+  var mm = dur.match(/(\d+)\s*min/); if(mm) m = parseInt(mm[1]);
+  return h * 60 + m;
+}
+function formatDur(total) {
+  var h = Math.floor(total / 60), m = total % 60;
+  if(!h) return m + ' min';
+  if(!m) return h + 'h';
+  return h + 'h ' + m + 'min';
+}
+function isExtension(nombre) { return EXTENSIONES.indexOf(nombre) !== -1; }
+
+// ══ MODALES ══
+function openModal(id){
+  var m = document.getElementById(id);
+  if(!m) return;
+  m.classList.add('open');
+  m.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id){
+  var m = document.getElementById(id);
+  if(!m) return;
+  m.classList.remove('open');
+  m.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+
+// ══ SELECTION SUMMARY ══
+function updateSummary(){
+  var sum   = document.getElementById('selectionSummary');
+  var rowD  = document.getElementById('rowDesign');
+  var serv  = document.getElementById('selServicio');
+  var des   = document.getElementById('selDesign');
+  var cua   = document.getElementById('selCuando');
+  var cuaBt = document.getElementById('selCuandoBtn');
+
+  if(!booking.nivel){ sum.style.display = 'none'; return; }
+  sum.style.display = 'block';
+  serv.textContent = booking.baseNombre + ' · ' + booking.nivelPrecio + ' · ' + booking.nivelDuracion;
+
+  if(isExtension(booking.baseNombre)){
+    rowD.style.display = 'flex';
+    if(booking.nailArtId === 'natural'){ des.textContent = 'Natural nude (incluido)'; }
+    else { des.textContent = booking.nailArtNombre + ' (desde +7€)'; }
+  } else { rowD.style.display = 'none'; }
+
+  if(booking.fecha && booking.hora){
+    cua.textContent = booking.fechaLabel + ' · ' + booking.hora;
+    cuaBt.textContent = 'Cambiar';
+  } else {
+    cua.textContent = 'Sin elegir';
+    cuaBt.textContent = 'Elegir';
+  }
+}
+
+function updateCalendarContinue(){
+  var btn = document.getElementById('calendarContinue');
+  if(btn) btn.disabled = !(booking.fecha && booking.hora);
+}
+
+// ══ STEP NAVIGATION ══
+function goToStep(n) {
+  document.querySelectorAll('.booking-step').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('step-' + n).classList.add('active');
+
+  document.querySelectorAll('.progress-step').forEach(function(s){
+    var sn = parseInt(s.dataset.step);
+    s.classList.remove('active','done');
+    if(sn === n) s.classList.add('active');
+    else if(sn < n) s.classList.add('done');
+  });
+  var line = document.getElementById('line-1-2');
+  if(line) line.classList.toggle('done', n > 1);
+
+  // Sticky solo visible en paso 1
+  var sticky = document.getElementById('bookingSticky');
+  if(n === 1 && isConfigComplete()) sticky.classList.add('visible');
+  else sticky.classList.remove('visible');
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ══ STICKY FOOTER ══
+function isConfigComplete() {
+  if(!booking.nivel) return false;
+  if(!booking.fecha || !booking.hora) return false;
+  return true;
+}
+function updateSticky() {
+  var sticky = document.getElementById('bookingSticky');
+  var total  = document.getElementById('stickyTotal');
+  var detail = document.getElementById('stickyDetail');
+  var cta    = document.getElementById('stickyCta');
+
+  if(!booking.nivel){
+    total.textContent = '—';
+    detail.textContent = 'Elige un servicio';
+    cta.disabled = true;
+    sticky.classList.remove('visible');
+    return;
+  }
+
+  var nuevoTotal = booking.nivelPrecio + ' · ' + booking.nivelDuracion;
+  if(total.textContent !== nuevoTotal){
+    total.textContent = nuevoTotal;
+    total.classList.remove('bump');
+    void total.offsetWidth;
+    total.classList.add('bump');
+  }
+  var pieces = [booking.baseNombre];
+  if(booking.nailArtId !== 'natural'){
+    var art = NAIL_ART.filter(function(a){return a.id === booking.nailArtId;})[0];
+    if(art) pieces[0] += ' + ' + art.nombre;
+  }
+  if(booking.fechaLabel) pieces.push(booking.fechaLabel.split(' ').slice(0,3).join(' '));
+  if(booking.hora) pieces.push(booking.hora);
+  detail.textContent = pieces.join(' · ');
+
+  cta.disabled = !isConfigComplete();
+  sticky.classList.add('visible');
+}
+
+// ══ SERVICIO + NAIL ART ══
+(function(){
+  function renderNailArt() {
+    var container = document.getElementById('nailArtBookingCards');
+    container.innerHTML = '';
+    NAIL_ART.forEach(function(art) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'nail-art-bc' + (art.id === booking.nailArtId ? ' selected' : '');
+      var etiqueta = art.precioExtra > 0 ? 'desde ' + art.precioExtra + '€' : 'sin coste extra';
+      btn.innerHTML =
+        '<span class="nail-art-bc-name">' + art.nombre + '</span>' +
+        '<span class="nail-art-bc-desc">' + art.desc + '</span>' +
+        '<span class="nail-art-bc-meta">' + art.tiempo + ' · ' + etiqueta + '</span>';
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('.nail-art-bc').forEach(function(c){ c.classList.remove('selected'); });
+        btn.classList.add('selected');
+        booking.nailArtId = art.id;
+        booking.nailArtNombre = art.nombre;
+        applyNailArtToBooking();
+        updateSummary();
+        updateSticky();
+      });
+      container.appendChild(btn);
+    });
+  }
+  window.renderNailArt = renderNailArt;
+  function applyNailArtToBooking(){
+    var art = NAIL_ART.filter(function(a){ return a.id === booking.nailArtId; })[0];
+    if(!art) return;
+    var precio = booking.basePrecioNum + art.precioExtra;
+    var dur    = booking.baseDurMin + art.minExtra;
+    var pStr   = art.precioExtra > 0 ? 'Desde ' + precio + '€' : precio + '€';
+    booking.nivelNombre   = art.id !== 'natural' ? booking.baseNombre + ' + ' + art.nombre : booking.baseNombre;
+    booking.nivelDuracion = formatDur(dur);
+    booking.nivelPrecio   = pStr;
+  }
+
+  var cards = document.querySelectorAll('#nivelGrid .nivel-card');
+  cards.forEach(function(card){
+    card.addEventListener('click', function(){
+      cards.forEach(function(c){ c.classList.remove('selected'); });
+      card.classList.add('selected');
+
+      booking.nivel         = card.dataset.nivel;
+      booking.baseNombre    = card.dataset.nombre;
+      booking.basePrecioNum = parseInt((card.dataset.precio || '').replace(/[^\d]/g,'')) || 0;
+      booking.baseDurMin    = parseDurMin(card.dataset.duracion);
+      booking.nivelNombre   = card.dataset.nombre;
+      booking.nivelDuracion = card.dataset.duracion;
+      booking.nivelPrecio   = card.dataset.precio;
+      booking.nailArtId     = 'natural';
+      booking.nailArtNombre = 'Natural nude';
+
+      var esExt = isExtension(card.dataset.nombre);
+      if(esExt){
+        renderNailArt();
+        applyNailArtToBooking();
+        openModal('nailArtModal');
+      }
+      updateSummary();
+      updateSticky();
+    });
+  });
+
+  // Preselect por URL ?nivel=N (1..8)
+  var urlNivel = new URLSearchParams(window.location.search).get('nivel');
+  if(urlNivel){
+    var target = document.querySelector('[data-nivel="'+urlNivel+'"]');
+    if(target) target.click();
+  }
+})();
+
+// ══ CALENDARIO ══
+(function(){
+  var today = new Date();
+  var viewYear = today.getFullYear();
+  var viewMonth = today.getMonth();
+  var selectedDate = null;
+  var MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+  function renderCalendar(){
+    document.getElementById('cal-month-label').textContent = MESES[viewMonth] + ' ' + viewYear;
+
+    var grid = document.getElementById('cal-grid');
+    var headers = grid.querySelectorAll('.cal-day-header');
+    grid.innerHTML = '';
+    headers.forEach(function(h){ grid.appendChild(h.cloneNode(true)); });
+
+    var firstDay = new Date(viewYear, viewMonth, 1);
+    var lastDay  = new Date(viewYear, viewMonth+1, 0);
+    var startDow = (firstDay.getDay() + 6) % 7;
+
+    for(var i=0; i<startDow; i++){
+      var empty = document.createElement('div');
+      empty.className='cal-day empty';
+      grid.appendChild(empty);
+    }
+
+    for(var d=1; d<=lastDay.getDate(); d++){
+      var dayEl = document.createElement('div');
+      dayEl.className = 'cal-day';
+      dayEl.textContent = d;
+
+      var thisDate = new Date(viewYear, viewMonth, d);
+      var isPast = thisDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      var isSun  = thisDate.getDay() === 0;
+      var isToday = (d===today.getDate() && viewMonth===today.getMonth() && viewYear===today.getFullYear());
+
+      if(isPast || isSun){
+        dayEl.classList.add('disabled');
+      } else {
+        if(isToday) dayEl.classList.add('today');
+        if(selectedDate && selectedDate.getDate()===d && selectedDate.getMonth()===viewMonth && selectedDate.getFullYear()===viewYear){
+          dayEl.classList.add('selected');
+        }
+        (function(dd,yy,mm){
+          dayEl.addEventListener('click',function(){
+            selectedDate = new Date(yy,mm,dd);
+            booking.fecha = selectedDate;
+            var days=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+            booking.fechaLabel = days[selectedDate.getDay()] + ' ' + dd + ' de ' + MESES[mm].toLowerCase() + ' ' + yy;
+            booking.hora = null;
+            renderCalendar();
+            renderSlots();
+            updateSummary();
+            updateSticky();
+            updateCalendarContinue();
+          });
+        })(d, viewYear, viewMonth);
+      }
+      grid.appendChild(dayEl);
+    }
+  }
+
+  function renderSlots(){
+    var cont = document.getElementById('slotsContainer');
+    var label = document.getElementById('slotsLabel');
+
+    if(!booking.fecha){
+      cont.innerHTML = '<p class="slots-hint">Selecciona un día primero</p>';
+      label.textContent = 'Horarios';
+      return;
+    }
+
+    var parts = booking.fechaLabel.split(' ');
+    label.innerHTML = 'Horarios para <strong>' + parts[0] + ' ' + parts[1] + ' de ' + parts[3] + '</strong>';
+
+    var allSlots = ['10:00','10:30','11:00','11:30','12:00','12:30','13:00','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30'];
+    var isSat = booking.fecha.getDay() === 6;
+    var slotsToShow = isSat ? allSlots.filter(function(s){ return s <= '14:30'; }) : allSlots;
+
+    var grid = document.createElement('div');
+    grid.className = 'slots-grid';
+    slotsToShow.forEach(function(time){
+      var slot = document.createElement('div');
+      slot.className = 'slot' + (booking.hora === time ? ' selected' : '');
+      slot.textContent = time;
+      slot.addEventListener('click',function(){
+        document.querySelectorAll('.slot').forEach(function(s){ s.classList.remove('selected'); });
+        slot.classList.add('selected');
+        booking.hora = time;
+        updateSummary();
+        updateSticky();
+        updateCalendarContinue();
+      });
+      grid.appendChild(slot);
+    });
+    cont.innerHTML = '';
+    cont.appendChild(grid);
+  }
+
+  document.getElementById('cal-prev').addEventListener('click',function(){
+    viewMonth--;
+    if(viewMonth<0){viewMonth=11;viewYear--;}
+    renderCalendar();
+  });
+  document.getElementById('cal-next').addEventListener('click',function(){
+    viewMonth++;
+    if(viewMonth>11){viewMonth=0;viewYear++;}
+    renderCalendar();
+  });
+
+  renderCalendar();
+  renderSlots();
+})();
+
+// ══ MODAL WIRING ══
+['nailArtModal','calendarModal'].forEach(function(id){
+  var m = document.getElementById(id);
+  if(!m) return;
+  m.addEventListener('click', function(e){ if(e.target === m) closeModal(id); });
+});
+document.getElementById('nailArtClose').addEventListener('click', function(){ closeModal('nailArtModal'); });
+document.getElementById('calendarClose').addEventListener('click', function(){ closeModal('calendarModal'); });
+
+document.getElementById('nailArtContinue').addEventListener('click', function(){
+  closeModal('nailArtModal');
+  setTimeout(function(){ openModal('calendarModal'); }, 280);
+});
+document.getElementById('calendarContinue').addEventListener('click', function(){
+  if(booking.fecha && booking.hora) closeModal('calendarModal');
+});
+
+// Botones "Cambiar / Elegir" del summary
+document.querySelectorAll('.selection-edit').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var modalId = btn.dataset.modal;
+    if(modalId === 'nailArtModal' && isExtension(booking.baseNombre) && window.renderNailArt) window.renderNailArt();
+    openModal(modalId);
+  });
+});
+
+// ESC cierra modal abierto
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Escape') return;
+  ['nailArtModal','calendarModal'].forEach(function(id){
+    var m = document.getElementById(id);
+    if(m && m.classList.contains('open')) closeModal(id);
+  });
+});
+
+// ══ STICKY CTA → STEP 2 ══
+document.getElementById('stickyCta').addEventListener('click', function(){
+  if(!isConfigComplete()) return;
+  document.getElementById('res-nivel').textContent    = booking.nivelNombre;
+  document.getElementById('res-fecha').textContent    = booking.fechaLabel;
+  document.getElementById('res-hora').textContent     = booking.hora;
+  document.getElementById('res-duracion').textContent = booking.nivelDuracion;
+  document.getElementById('res-precio').textContent   = booking.nivelPrecio;
+  goToStep(2);
+});
+
+// ══ STEP 2 — SUBMIT WHATSAPP ══
+(function(){
+  document.getElementById('prev-2').addEventListener('click', function(){
+    goToStep(1);
+    setTimeout(updateSticky, 50);
+  });
+
+  function showErr(id, msg){ var el = document.getElementById(id); if(el) el.textContent = msg; }
+  function clearErrs(){ document.querySelectorAll('.field-error').forEach(function(e){ e.textContent=''; }); }
+
+  function validateContact(v){
+    if(!v) return false;
+    var isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    var digits  = v.replace(/\D/g,'');
+    var isPhone = digits.length >= 9;
+    return isEmail || isPhone;
+  }
+
+  document.getElementById('bookingForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    clearErrs();
+
+    var nombre   = document.getElementById('f-nombre').value.trim();
+    var contact  = document.getElementById('f-contact').value.trim();
+    var notas    = document.getElementById('f-notas').value.trim();
+    var privacy  = document.getElementById('f-privacy').checked;
+    var valid = true;
+
+    if(!nombre || nombre.length < 2){ showErr('err-nombre','Introduce tu nombre'); valid=false; }
+    if(!validateContact(contact)){ showErr('err-contact','Introduce un WhatsApp o email válido'); valid=false; }
+    if(!privacy){ showErr('err-privacy','Debes aceptar la política de privacidad'); valid=false; }
+    if(!valid) return;
+
+    booking.nombre  = nombre;
+    booking.contact = contact;
+    booking.notas   = notas;
+
+    // Mensaje WhatsApp
+    var msg = 'Hola Ally! Quiero reservar:\n';
+    msg += '• Servicio: ' + booking.nivelNombre + '\n';
+    msg += '• Fecha: ' + booking.fechaLabel + '\n';
+    msg += '• Hora: ' + booking.hora + '\n';
+    msg += '• Duración: ' + booking.nivelDuracion + '\n';
+    msg += '• Precio estimado: ' + booking.nivelPrecio + '\n';
+    msg += '• Nombre: ' + booking.nombre + '\n';
+    msg += '• Contacto: ' + booking.contact;
+    if(booking.notas) msg += '\n• Nota: ' + booking.notas;
+
+    // Guardar lead en Airtable
+    guardarEnAirtable(booking.nombre, booking.contact, booking.nivelNombre, booking.notas);
+
+    // Abrir WhatsApp
+    var waUrl = 'https://wa.me/34611962056?text=' + encodeURIComponent(msg);
+    window.open(waUrl, '_blank');
+
+    // Ir a confirmación
+    document.getElementById('conf-nivel').textContent    = booking.nivelNombre;
+    document.getElementById('conf-fecha').textContent    = booking.fechaLabel;
+    document.getElementById('conf-hora').textContent     = booking.hora;
+    document.getElementById('conf-duracion').textContent = booking.nivelDuracion;
+    document.getElementById('conf-precio').textContent   = booking.nivelPrecio;
+    document.querySelector('.progress-wrap').style.display = 'none';
+    goToStep(3);
+  });
+})();
+
+async function guardarEnAirtable(nombre, contacto, servicio, comentario) {
+  try {
+    await fetch('/api/guardar-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: nombre || 'Desconocida', telefono: contacto || '', servicio: servicio || '', comentario: comentario || '' })
+    });
+  } catch(e) {
+    console.log('Lead error:', e);
+  }
+}
+</script>
+</body>
+</html>

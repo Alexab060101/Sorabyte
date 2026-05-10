@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<script src="../demo-mode.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joe Kallon · Personal Trainer Köln + Online · Mit 30+ in deine beste Form</title>
+<meta name="description" content="Personal Training in Köln und online für ambitionierte Profis ab 30. Ohne Diäten. Ohne Ausreden. Ergebnisse, die bleiben." />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Joe Kallon" />
+<meta property="og:title" content="Joe Kallon · Personal Trainer Köln + Online" />
+<meta property="og:description" content="Mit 30+ in deine beste Form. Personal Training Köln + Online für Profis." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/joe-1.jpg" />
+<meta property="og:locale" content="de_DE" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Joe Kallon · Personal Trainer",
+  "description": "Personal Training in Köln und online für Menschen ab 30.",
+  "areaServed": ["Köln", "DACH"],
+  "knowsLanguage": ["de"],
+  "image": "assets/joe-1.jpg"
+}
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0d12;
+  --bg-mid: #0f131a;
+  --bg-soft: #161b25;
+  --text: #ffffff;
+  --text-mid: rgba(255,255,255,0.72);
+  --text-soft: rgba(255,255,255,0.5);
+  --accent: #ff5a36;
+  --accent-light: #ff7a5c;
+  --accent-deep: #d63c1a;
+  --accent-soft: rgba(255,90,54,0.15);
+  --gold: #d4b87c;
+  --soft: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.1);
+  --border-strong: rgba(255,255,255,0.18);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* ── HEADER ── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 5vw;
+  background: transparent;
+  transition: background 0.4s, padding 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+  border-bottom: 1px solid transparent;
+}
+header.scrolled {
+  background: rgba(10,13,18,0.85);
+  backdrop-filter: blur(20px) saturate(160%);
+  padding: 14px 5vw;
+  border-bottom-color: var(--border);
+}
+.logo { font-family: 'Anton', sans-serif; font-size: 1.5rem; letter-spacing: 0.04em; color: #fff; }
+.logo span { color: var(--accent); }
+nav { display: flex; align-items: center; gap: 32px; }
+nav a { font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.8); transition: color 0.25s; }
+nav a:hover { color: var(--accent); }
+.nav-cta {
+  background: var(--accent); color: #fff !important;
+  padding: 11px 22px; border-radius: 6px;
+  font-weight: 700; font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  transition: background 0.25s, transform 0.25s;
+}
+.nav-cta:hover { background: var(--accent-light); transform: translateY(-2px); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--accent); border-radius: 2px; }
+.mobile-menu {
+  display: none; position: fixed; inset: 0;
+  background: var(--bg);
+  z-index: 190;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 32px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-size: 1.4rem; font-family: 'Anton', sans-serif; color: #fff; }
+.mobile-close { position: absolute; top: 24px; right: 32px; font-size: 2rem; cursor: pointer; color: var(--accent); background: none; border: none; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  padding: 0 5vw;
+  gap: 5vw;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute;
+  width: 800px; height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,90,54,0.18), transparent 65%);
+  top: -200px; right: -200px;
+  pointer-events: none;
+  animation: heroGlow 10s ease-in-out infinite alternate;
+}
+@keyframes heroGlow { from { transform: translate(0,0); } to { transform: translate(-50px, 30px); } }
+.hero-copy { position: relative; z-index: 2; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--soft);
+  border: 1px solid var(--border-strong);
+  padding: 8px 16px; border-radius: 100px;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+.hero-eyebrow .dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.5); } }
+.hero h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(2.8rem, 6.5vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.hero h1 .accent { color: var(--accent); display: block; }
+.hero h1 .strike { text-decoration: line-through; opacity: 0.4; font-size: 0.7em; margin-right: 14px; }
+.hero-sub {
+  margin-top: 28px;
+  font-size: 1.1rem;
+  color: var(--text-mid);
+  max-width: 520px;
+  font-weight: 300;
+  line-height: 1.65;
+}
+.hero-actions {
+  margin-top: 40px;
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+  padding: 18px 36px; border-radius: 6px;
+  font-weight: 800; font-size: 0.9rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 14px 40px rgba(255,90,54,0.4);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  cursor: pointer; border: none;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(255,90,54,0.55); background: var(--accent-light); }
+/* Magnetic state: scale sutil + glow extendido */
+.btn-magnetic { transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s, background 0.3s; }
+.btn-magnetic.is-magnetic-active { box-shadow: 0 24px 60px rgba(255,90,54,0.6), 0 0 0 1px rgba(255,90,54,0.3); }
+.btn-ghost {
+  background: var(--soft); color: #fff;
+  padding: 18px 30px; border-radius: 6px;
+  font-weight: 600; font-size: 0.88rem;
+  border: 1px solid var(--border-strong);
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: background 0.3s, border-color 0.3s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: var(--accent); }
+.hero-stats {
+  margin-top: 48px;
+  display: flex; gap: 48px;
+}
+.h-stat-num {
+  font-family: 'Anton', sans-serif;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--accent);
+}
+.h-stat-label { font-size: 0.7rem; color: var(--text-soft); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
+
+/* HERO VISUAL — Joe foto */
+.hero-visual {
+  position: relative;
+  height: 78vh;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1f28, #0a0d12);
+  border: 1px solid var(--border);
+}
+.hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.hero-visual::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(10,13,18,0.95) 100%);
+  pointer-events: none;
+}
+.float-badge {
+  position: absolute;
+  background: rgba(10,13,18,0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  padding: 14px 18px;
+  z-index: 3;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.5);
+  animation: floatBob 3s ease-in-out infinite alternate;
+}
+@keyframes floatBob { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+.float-badge.fb-top { top: 28px; right: -18px; animation-delay: -1.5s; }
+.float-badge.fb-mid { top: 38%; left: -22px; }
+.float-badge-icon {
+  width: 44px; height: 44px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(255,90,54,0.4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+}
+.float-badge-text { font-size: 0.78rem; font-weight: 600; line-height: 1.2; color: var(--text-mid); }
+.float-badge-text strong {
+  display: block; color: var(--accent);
+  font-size: 1.1rem;
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 0.03em;
+}
+.hero-card {
+  position: absolute;
+  bottom: 30px; left: 30px; right: 30px;
+  z-index: 3;
+}
+.hero-card-tag {
+  font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); font-weight: 800;
+  margin-bottom: 8px;
+}
+.hero-card h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* ── SECTION GENERAL ── */
+section { padding: 130px 5vw; position: relative; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  font-weight: 700; color: var(--accent);
+  margin-bottom: 14px;
+}
+/* sin línea decorativa horizontal — patrón IA innecesario */
+.section-h {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+}
+.section-h .accent { color: var(--accent); }
+.section-h .strike { text-decoration: line-through; opacity: 0.35; }
+.section-sub {
+  font-size: 1.05rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  font-weight: 300;
+  max-width: 640px;
+}
+
+/* ── MIRROR (problem) ── */
+.mirror-section { text-align: center; padding: 120px 5vw; position: relative; overflow: hidden; }
+.mirror-section::before {
+  content: '?';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(20rem, 50vw, 38rem);
+  line-height: 0.8;
+  -webkit-text-stroke: 2px rgba(255,90,54,0.07);
+  color: transparent;
+  pointer-events: none;
+  z-index: 0;
+}
+.mirror-section > * { position: relative; z-index: 1; }
+.mirror-q {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(2.4rem, 5.5vw, 5rem);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  max-width: 1100px;
+  margin: 0 auto 28px;
+}
+.mirror-q .word { display: inline-block; opacity: 0; transform: translateY(20px); transition: opacity 0.7s, transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.mirror-q .word.in { opacity: 1; transform: translateY(0); }
+.mirror-q strong {
+  font-style: normal;
+  color: var(--accent);
+  position: relative;
+}
+.mirror-sub { font-size: 1rem; max-width: 540px; margin: 0 auto; color: var(--text-mid); line-height: 1.75; font-weight: 300; }
+
+/* ── METHOD ── */
+.method-section { background: var(--bg-mid); }
+.method-head { text-align: center; margin-bottom: 70px; }
+.method-head .section-sub { margin: 0 auto; }
+/* ===== BENTO GRID ASIMÉTRICO ===== */
+.method-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  grid-template-rows: 260px 260px auto;
+  gap: 14px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.method-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px 34px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1),
+              border-color 0.4s, background 0.4s, opacity 0.4s, scale 0.5s;
+  cursor: default;
+}
+/* Bento layout: card 1 grande izq (span 2 rows), card 2 + 3 derecha apiladas, card 4 ancho completo abajo */
+.method-card:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  background: linear-gradient(155deg, var(--bg-soft) 0%, rgba(255,90,54,0.06) 100%);
+  padding: 56px 48px;
+}
+.method-card:nth-child(1) .method-num { font-size: 7rem; }
+.method-card:nth-child(1) h3 { font-size: 2rem; }
+.method-card:nth-child(1) p { font-size: 1.05rem; max-width: 480px; }
+.method-card:nth-child(2) { grid-column: 2; grid-row: 1; }
+.method-card:nth-child(3) { grid-column: 2; grid-row: 2; }
+.method-card:nth-child(4) {
+  grid-column: 1 / 3; grid-row: 3;
+  min-height: 200px;
+  flex-direction: row;
+  align-items: center;
+  gap: 48px;
+  padding: 44px 48px;
+}
+.method-card:nth-child(4) .method-num { font-size: 6rem; margin-bottom: 0; flex-shrink: 0; }
+.method-card:nth-child(4) > div:last-of-type { flex: 1; }
+
+/* Hover spotlight: parent state con :has() */
+.method-grid:has(.method-card:hover) .method-card:not(:hover) {
+  opacity: 0.45;
+  scale: 0.985;
+}
+.method-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,90,54,0.15), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.method-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  background: rgba(255,90,54,0.06);
+}
+.method-card:hover::before { opacity: 1; }
+.method-num {
+  font-family: 'Anton', sans-serif;
+  font-size: 4.5rem;
+  line-height: 0.85;
+  color: var(--accent);
+  margin-bottom: 22px;
+  display: block;
+  letter-spacing: -0.04em;
+}
+.method-card h3 { font-family: 'Anton', sans-serif; font-size: 1.35rem; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.01em; }
+.method-card p { font-size: 0.94rem; color: var(--text-mid); line-height: 1.65; font-weight: 300; }
+
+/* ===== MARQUEE CREDENCIALES (kinetic typography) ===== */
+.creds-marquee {
+  background: var(--bg);
+  padding: 28px 0;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+.creds-track {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  width: max-content;
+  animation: credsScroll 38s linear infinite;
+  will-change: transform;
+}
+.creds-track:hover { animation-play-state: paused; }
+.creds-track span {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+.creds-track span.dot {
+  color: var(--accent);
+  font-size: 1.6rem;
+}
+.creds-track span:not(.dot):hover { color: #fff; }
+@keyframes credsScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .creds-track { animation: none; }
+}
+
+/* ── ABOUT ── */
+.about-section { padding: 130px 5vw; background: var(--bg); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.about-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  /* Clip-path sweep reveal cuando entra en viewport (animation-timeline view()) */
+  animation: aboutPhotoReveal linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 28%;
+}
+.about-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  transition: transform 1.2s cubic-bezier(0.16,1,0.3,1);
+  transform: scale(1.08);
+}
+.about-photo:hover img { transform: scale(1); }
+@keyframes aboutPhotoReveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@supports not (animation-timeline: view()) {
+  .about-photo { animation: none; clip-path: none; }
+}
+.about-photo::after {
+  content: '';
+  position: absolute; inset: auto 0 0 0; height: 40%;
+  background: linear-gradient(180deg, transparent, rgba(10,13,18,0.5));
+}
+.about-photo .photo-badge {
+  position: absolute;
+  bottom: 24px; left: 24px;
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.about-text p {
+  font-size: 1rem;
+  color: var(--text-mid);
+  line-height: 1.85;
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+.about-text p strong { color: #fff; font-weight: 600; }
+.about-creds {
+  margin-top: 32px;
+  padding: 24px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.about-creds h4 {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+.about-creds ul { list-style: none; }
+.about-creds li { padding: 8px 0; font-size: 0.92rem; color: var(--text-mid); display: flex; align-items: center; gap: 12px; }
+.about-creds li::before { content: '✓'; color: var(--accent); font-weight: 800; }
+
+/* ── TESTIMONIALS ── */
+.testi-section { background: var(--bg-mid); }
+.testi-head { text-align: center; margin-bottom: 70px; }
+.testi-head .section-sub { margin: 0 auto; }
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.testi-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  overflow: hidden;
+  transition: transform 0.4s, border-color 0.4s;
+}
+.testi-card:hover { transform: translateY(-8px); border-color: var(--accent); }
+.testi-photo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.testi-photo img { width: 100%; height: 100%; object-fit: cover; }
+.testi-photo::after {
+  content: 'VORHER · NACHHER';
+  position: absolute;
+  bottom: 14px; left: 14px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+.testi-content { padding: 28px 28px 32px; }
+.testi-stars { color: var(--accent); font-size: 0.85rem; letter-spacing: 3px; margin-bottom: 14px; }
+.testi-quote {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-mid);
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: 22px;
+}
+.testi-result {
+  background: var(--accent-soft);
+  padding: 12px 14px;
+  margin-bottom: 22px;
+  font-size: 0.85rem;
+  color: #fff;
+  border-radius: 8px;
+}
+.testi-result strong { color: var(--accent); }
+.testi-author { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.testi-author strong { font-size: 0.9rem; color: #fff; display: block; }
+.testi-author span { font-size: 0.78rem; color: var(--text-soft); }
+
+/* ── COURSE (Kallon Methode 90) ── */
+.course-section {
+  padding: 130px 5vw;
+  background: linear-gradient(135deg, #1a0f0a 0%, #0a0d12 60%);
+  position: relative;
+  overflow: hidden;
+}
+.course-section::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,90,54,0.25), transparent 60%);
+  top: -200px; right: -100px;
+  pointer-events: none;
+}
+.course-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.course-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+.course-h {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 22px;
+}
+.course-h em { font-style: normal; color: var(--accent); display: block; }
+.course-sub {
+  font-size: 1.05rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+.course-features { margin-bottom: 32px; }
+.course-feature { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; }
+.course-feature-icon {
+  width: 28px; height: 28px; flex-shrink: 0;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent); font-weight: 800; font-size: 0.85rem;
+}
+.course-feature-text strong { display: block; font-size: 0.95rem; margin-bottom: 2px; color: #fff; }
+.course-feature-text span { font-size: 0.85rem; color: var(--text-soft); }
+.course-price-box {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  padding: 36px 32px;
+  position: relative;
+}
+.course-price-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+.course-price {
+  font-family: 'Anton', sans-serif;
+  font-size: 5rem;
+  line-height: 0.9;
+  margin-bottom: 6px;
+}
+.course-price-old { color: var(--text-soft); font-size: 1.4rem; text-decoration: line-through; margin-right: 12px; font-weight: 400; }
+.course-price-now { color: var(--accent); }
+.course-price-period { font-size: 0.85rem; color: var(--text-soft); margin-bottom: 24px; }
+.course-list { list-style: none; margin-bottom: 28px; }
+.course-list li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; display: flex; gap: 12px; }
+.course-list li::before { content: '✓'; color: var(--accent); font-weight: 800; }
+.course-list li:last-child { border-bottom: none; }
+.course-cta { width: 100%; }
+.course-note { margin-top: 14px; font-size: 0.75rem; color: var(--text-soft); text-align: center; }
+
+/* ── PRICES (1:1) ── */
+.prices-section { padding: 130px 5vw; background: var(--bg); }
+.prices-head { text-align: center; max-width: 720px; margin: 0 auto 70px; }
+.prices-head .section-sub { margin: 0 auto; }
+.prices-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px; margin: 0 auto;
+}
+.price-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 44px 32px 36px;
+  display: flex; flex-direction: column;
+  transition: transform 0.4s, border-color 0.4s;
+  position: relative;
+}
+.price-card:hover { transform: translateY(-8px); border-color: var(--accent); }
+.price-card.featured {
+  background: linear-gradient(180deg, rgba(255,90,54,0.08), rgba(255,90,54,0.02));
+  border-color: var(--accent);
+  transform: scale(1.03);
+}
+.price-card.featured:hover { transform: scale(1.03) translateY(-8px); }
+.price-badge {
+  position: absolute;
+  top: -12px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.price-tier { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 800; margin-bottom: 10px; }
+.price-name { font-family: 'Anton', sans-serif; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 18px; }
+.price-amount {
+  font-family: 'Anton', sans-serif;
+  font-size: 3.4rem;
+  line-height: 0.9;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.price-amount-period { font-size: 0.85rem; color: var(--text-soft); margin-bottom: 24px; }
+.price-list { list-style: none; margin-bottom: 28px; flex: 1; }
+.price-list li { padding: 9px 0; font-size: 0.88rem; color: var(--text-mid); display: flex; gap: 10px; }
+.price-list li::before { content: '✓'; color: var(--accent); font-weight: 800; flex-shrink: 0; }
+.price-cta { width: 100%; }
+.price-cta.ghost { background: transparent; border: 1px solid var(--border-strong); }
+.price-cta.ghost:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* ── FAQ ── */
+.faq-section { padding: 130px 5vw; background: var(--bg-mid); }
+.faq-inner { max-width: 800px; margin: 0 auto; }
+.faq-head { text-align: center; margin-bottom: 50px; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 22px 0;
+}
+.faq-q {
+  font-size: 1.05rem; font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px;
+  transition: color 0.25s;
+}
+.faq-q:hover { color: var(--accent); }
+.faq-q::after {
+  content: '+';
+  font-size: 1.6rem;
+  color: var(--accent);
+  font-weight: 300;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  margin-top: 14px;
+  font-size: 0.92rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+  display: none;
+  font-weight: 300;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ── CTA FINAL ── */
+.cta-final {
+  padding: 140px 5vw 130px;
+  background: linear-gradient(135deg, #2a1108 0%, #0a0d12 70%);
+  position: relative;
+  overflow: hidden;
+}
+.cta-final::before {
+  content: '';
+  position: absolute;
+  width: 800px; height: 800px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,90,54,0.25), transparent 65%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: ctaGlowPulse 5s ease-in-out infinite;
+}
+@keyframes ctaGlowPulse { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+.cta-inner { max-width: 900px; margin: 0 auto; text-align: center; position: relative; }
+.cta-final h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 22px;
+}
+.cta-final h2 .accent { color: var(--accent); display: block; }
+.cta-final p {
+  font-size: 1.1rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+  max-width: 600px;
+  margin: 0 auto 50px;
+  font-weight: 300;
+}
+.cta-final .btn-primary {
+  font-size: 1rem;
+  padding: 22px 48px;
+  animation: ctaPulse 2.6s ease-in-out infinite;
+}
+@keyframes ctaPulse {
+  0%   { box-shadow: 0 14px 40px rgba(255,90,54,0.45), 0 0 0 0 rgba(255,90,54,0.6); }
+  70%  { box-shadow: 0 14px 40px rgba(255,90,54,0.45), 0 0 0 24px rgba(255,90,54,0); }
+  100% { box-shadow: 0 14px 40px rgba(255,90,54,0.45), 0 0 0 0 rgba(255,90,54,0); }
+}
+.cta-note { margin-top: 24px; font-size: 0.8rem; color: var(--text-soft); letter-spacing: 0.06em; }
+
+/* ── FOOTER ── */
+footer {
+  background: #060810;
+  padding: 60px 5vw 30px;
+  border-top: 1px solid var(--border);
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 50px;
+  margin-bottom: 50px;
+}
+.footer-logo { font-family: 'Anton', sans-serif; font-size: 1.6rem; letter-spacing: 0.04em; margin-bottom: 14px; }
+.footer-logo span { color: var(--accent); }
+.footer-tagline { font-size: 0.88rem; color: var(--text-soft); line-height: 1.6; max-width: 320px; }
+.footer-col h4 {
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  font-weight: 800; color: var(--accent);
+  margin-bottom: 20px;
+}
+.footer-col a { display: block; padding: 6px 0; font-size: 0.88rem; color: var(--text-soft); transition: color 0.25s; }
+.footer-col a:hover { color: var(--accent); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+}
+.footer-copy { font-size: 0.78rem; color: var(--text-soft); }
+.footer-social { display: flex; gap: 14px; }
+.footer-social a {
+  width: 36px; height: 36px;
+  background: var(--soft);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  transition: background 0.25s, border-color 0.25s;
+}
+.footer-social a:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+
+/* ── MOBILE ── */
+@media (max-width: 968px) {
+  nav { display: none; }
+  .hamburger { display: flex; }
+  header { padding: 16px 22px; }
+  .hero { grid-template-columns: 1fr; padding: 110px 22px 70px; min-height: auto; gap: 40px; }
+  .hero-visual { height: 60vh; order: -1; }
+  .hero h1 { font-size: 2.6rem; }
+  .float-badge.fb-top { top: 16px; right: 8px; }
+  .float-badge.fb-mid { left: 8px; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+  .h-stat-num { font-size: 1.8rem; }
+  section { padding: 80px 22px; }
+  .method-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; gap: 12px; }
+  .method-card { padding: 28px 22px; }
+  .method-card:nth-child(1) { grid-column: 1 / 3; grid-row: 1; padding: 36px 28px; }
+  .method-card:nth-child(1) .method-num { font-size: 5rem; }
+  .method-card:nth-child(1) h3 { font-size: 1.6rem; }
+  .method-card:nth-child(2) { grid-column: 1; grid-row: 2; }
+  .method-card:nth-child(3) { grid-column: 2; grid-row: 2; }
+  .method-card:nth-child(4) { grid-column: 1 / 3; grid-row: 3; flex-direction: column; align-items: flex-start; gap: 0; padding: 32px 28px; min-height: auto; }
+  .method-card:nth-child(4) .method-num { font-size: 4.5rem; margin-bottom: 16px; }
+  .method-num { font-size: 3.4rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-photo { max-width: 380px; margin: 0 auto; }
+  .testi-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .course-grid { grid-template-columns: 1fr; gap: 40px; }
+  .prices-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+  .price-card.featured { transform: none; }
+  .price-card.featured:hover { transform: translateY(-8px); }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 30px; }
+  .mirror-q { font-size: 2.2rem; }
+}
+
+@media (max-width: 480px) {
+  .method-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .method-card,
+  .method-card:nth-child(1),
+  .method-card:nth-child(2),
+  .method-card:nth-child(3),
+  .method-card:nth-child(4) { grid-column: 1; grid-row: auto; }
+  .method-card:nth-child(4) { flex-direction: column; align-items: flex-start; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ════════════════════════════════════════════════
+   SCROLL-VIDEO HERO (estilo Apple · Luis-style)
+   ════════════════════════════════════════════════ */
+.scroll-video-hero {
+  height: 220vh;
+  position: relative;
+  background: var(--bg);
+}
+.scroll-video-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: #050810;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.hero-video-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: blur(36px) brightness(0.35) saturate(0.6);
+  transform: scale(1.12);
+}
+.hero-video-main {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  z-index: 1;
+  animation: heroVideoZoom 28s ease-in-out infinite alternate;
+}
+@keyframes heroVideoZoom { from { transform: scale(1); } to { transform: scale(1.04); } }
+.sv-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background:
+    radial-gradient(ellipse 32% 60% at 50% 50%,
+      rgba(5,8,16,0) 0%,
+      rgba(5,8,16,0) 55%,
+      rgba(5,8,16,0.6) 100%
+    ),
+    linear-gradient(180deg,
+      rgba(5,8,16,0.55) 0%,
+      rgba(5,8,16,0.0) 14%,
+      rgba(5,8,16,0.0) 78%,
+      rgba(5,8,16,0.65) 100%
+    );
+}
+.sv-content {
+  position: relative; z-index: 3;
+  text-align: left;
+  max-width: 620px;
+  padding: 0 5vw;
+  margin-right: auto;
+  width: 100%;
+}
+/* === LAYOUT FLANQUEADO: Joe en el centro, texto a los lados === */
+.sv-content.sv-flanked {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+}
+.sv-content.sv-flanked > * { pointer-events: auto; }
+.sv-content.sv-flanked .sv-eyebrow {
+  position: absolute;
+  top: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  white-space: nowrap;
+}
+.sv-content.sv-flanked .sv-title {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+.sv-content.sv-flanked .t-flank {
+  position: absolute;
+  display: block;
+  font-family: 'Archivo Black', 'Anton', sans-serif;
+  font-weight: 900;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  color: #fff;
+  /* Triple shadow: definición cercana + sombra dura + glow ambiental */
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.95),
+    0 4px 18px rgba(0,0,0,0.85),
+    0 0 48px rgba(0,0,0,0.6);
+  /* Stroke fino para reforzar bordes sobre cualquier fondo */
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.6);
+}
+.sv-content.sv-flanked .t-left {
+  top: 50%;
+  left: 4vw;
+  transform: translateY(-50%);
+  text-align: right;
+  max-width: 26vw;
+  font-size: clamp(2rem, 4vw, 4rem);
+}
+.sv-content.sv-flanked .t-right {
+  top: 50%;
+  right: 4vw;
+  transform: translateY(-50%);
+  text-align: left;
+  max-width: 36vw;
+  font-size: clamp(2rem, 4vw, 4rem);
+  /* Accent (naranja) con glow extra para destacar */
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.85),
+    0 4px 18px rgba(0,0,0,0.7),
+    0 0 36px rgba(255,90,54,0.45);
+}
+/* Forzar 2 líneas exactas: cada .ln es atómica (no se rompe) */
+.sv-content.sv-flanked .t-right .ln {
+  display: block;
+  white-space: nowrap;
+}
+.sv-content.sv-flanked .t-bottom {
+  top: auto;
+  bottom: 31vh;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  /* Tipografía limpia (Inter 800), no Archivo Black — mejor legibilidad a tamaño pequeño */
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 1;
+  color: #fff;
+  /* Stroke se elimina aquí para que las letras pequeñas no se "ensucien" */
+  -webkit-text-stroke: 0;
+  /* Pill con borde naranja luminoso — fondo oscuro sólido para máximo contraste */
+  padding: 11px 26px;
+  background: rgba(8, 12, 22, 0.78);
+  backdrop-filter: blur(12px) saturate(140%);
+  border-radius: 100px;
+  border: 1.5px solid rgba(255, 90, 54, 0.7);
+  box-shadow:
+    0 6px 28px rgba(255, 90, 54, 0.25),
+    0 0 0 4px rgba(255, 90, 54, 0.06);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.9);
+}
+.sv-content.sv-flanked .t-bottom .strike {
+  color: rgba(255,255,255,0.5);
+  text-decoration-color: rgba(255, 90, 54, 0.9);
+  text-decoration-thickness: 2px;
+  margin-right: 6px;
+}
+.sv-content.sv-flanked .sv-sub {
+  position: absolute;
+  bottom: 19vh;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  max-width: 560px;
+  margin: 0;
+}
+.sv-content.sv-flanked .sv-actions {
+  position: absolute;
+  bottom: 20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  flex-wrap: nowrap;
+  justify-content: center;
+  z-index: 5;
+}
+.sv-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,90,54,0.12);
+  border: 1px solid rgba(255,90,54,0.4);
+  padding: 8px 18px; border-radius: 100px;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+  backdrop-filter: blur(12px);
+}
+.sv-eyebrow .dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+.sv-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(3rem, 7.5vw, 7rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.6), 0 0 32px rgba(0,0,0,0.45);
+}
+.sv-title .accent { color: var(--accent); display: block; }
+.sv-title .strike { text-decoration: line-through; opacity: 0.45; font-size: 0.7em; margin-right: 14px; }
+.sv-sub {
+  margin-top: 26px;
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.78);
+  max-width: 520px;
+  font-weight: 300;
+  line-height: 1.65;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+.sv-actions {
+  margin-top: 36px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+/* === HERO PULSE BAR (corazón latido + stats, sin tapar a Joe) === */
+.sv-pulse-bar {
+  position: absolute;
+  top: 14vh;
+  left: 4vw;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 22px 14px 18px;
+  background: rgba(8, 12, 22, 0.55);
+  backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255,90,54,0.25);
+  border-radius: 100px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  opacity: 0;
+  transform: translateY(-12px);
+  animation: pulseBarIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
+}
+@keyframes pulseBarIn { to { opacity: 1; transform: translateY(0); } }
+
+/* Corazón con efecto latido cardíaco doble (sístole + diástole) */
+.sv-heart {
+  position: relative;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.sv-heart-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(255,90,54,0.6));
+  animation: heartbeat 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  display: inline-block;
+}
+.sv-heart::before,
+.sv-heart::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  opacity: 0;
+  pointer-events: none;
+}
+.sv-heart::before { animation: heartRing 1.4s cubic-bezier(0, 0.6, 0.4, 1) infinite; }
+.sv-heart::after  { animation: heartRing 1.4s cubic-bezier(0, 0.6, 0.4, 1) 0.7s infinite; }
+@keyframes heartbeat {
+  0%, 70%, 100% { transform: scale(1); }
+  14% { transform: scale(1.32); }
+  28% { transform: scale(1.05); }
+  42% { transform: scale(1.22); }
+  56% { transform: scale(1); }
+}
+@keyframes heartRing {
+  0% { opacity: 0.6; transform: scale(0.9); }
+  100% { opacity: 0; transform: scale(2.4); }
+}
+
+.sv-pulse-stats {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.sv-pulse-stat {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.sv-pulse-num {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.4rem;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.sv-pulse-num .accent { color: var(--accent); }
+.sv-pulse-lbl {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+}
+.sv-pulse-divider { display: none; }
+
+/* === ENTRY ANIMATIONS (stagger immediate on load) ===
+   Usa la propiedad `translate` (no transform) para no pisar
+   el `transform: translateX(-50%)` / `translateY(-50%)` que centra los flancos. */
+.sv-content.sv-flanked .sv-eyebrow,
+.sv-content.sv-flanked .t-flank,
+.sv-content.sv-flanked .sv-sub,
+.sv-content.sv-flanked .sv-actions {
+  opacity: 0;
+  translate: 0 14px;
+  animation: heroFadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.sv-content.sv-flanked .sv-eyebrow      { animation-delay: 0.15s; }
+.sv-content.sv-flanked .t-flank.t-left  { animation-delay: 0.45s; }
+.sv-content.sv-flanked .t-flank.t-right { animation-delay: 0.6s; }
+.sv-content.sv-flanked .t-flank.t-bottom{ animation-delay: 0.75s; }
+.sv-content.sv-flanked .sv-sub          { animation-delay: 0.9s; }
+.sv-content.sv-flanked .sv-actions      { animation-delay: 1.0s; }
+@keyframes heroFadeUp { to { opacity: 1; translate: 0 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .sv-pulse-bar,
+  .sv-content.sv-flanked .sv-eyebrow,
+  .sv-content.sv-flanked .t-flank,
+  .sv-content.sv-flanked .sv-sub,
+  .sv-content.sv-flanked .sv-actions {
+    animation: none; opacity: 1; translate: 0 0;
+  }
+  .sv-heart-icon, .sv-heart::before, .sv-heart::after { animation: none; }
+}
+.scroll-progress-bar {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: rgba(255,255,255,0.08);
+  z-index: 4;
+}
+.scroll-progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--accent-light));
+  transition: width 0.05s linear;
+  box-shadow: 0 0 12px rgba(255,90,54,0.6);
+  position: relative;
+}
+.scroll-progress-fill::after {
+  content: '';
+  position: absolute;
+  right: -6px; top: 50%;
+  transform: translateY(-50%);
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px rgba(255,90,54,0.9), 0 0 28px rgba(255,90,54,0.5);
+  animation: progressDotPulse 1.6s ease-in-out infinite;
+}
+@keyframes progressDotPulse {
+  0%, 100% { transform: translateY(-50%) scale(1); }
+  50% { transform: translateY(-50%) scale(1.3); }
+}
+
+/* MOBILE — badge arriba, título+CTA abajo, libera centro (cara Joe) */
+@media (max-width: 768px) {
+  .scroll-video-hero { height: 180vh; }
+  .scroll-video-sticky { align-items: stretch; }
+  .hero-video-main { object-fit: contain; object-position: center bottom; }
+  /* En móvil cancelamos el flanqueado: stack vertical clásico */
+  .sv-content.sv-flanked {
+    position: relative;
+    inset: auto;
+    padding: 12vh 18px 28vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .sv-content.sv-flanked .sv-eyebrow,
+  .sv-content.sv-flanked .sv-title,
+  .sv-content.sv-flanked .t-flank,
+  .sv-content.sv-flanked .sv-sub,
+  .sv-content.sv-flanked .sv-actions {
+    position: static;
+    transform: none;
+    inset: auto;
+    max-width: 100%;
+    text-align: center;
+    white-space: normal;
+  }
+  .sv-content.sv-flanked .sv-title {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+  .sv-content.sv-flanked .t-flank {
+    font-size: 1.7rem;
+  }
+  /* En móvil deshacemos el split de "in deine / beste Form." para que fluya natural */
+  .sv-content.sv-flanked .t-right .ln {
+    display: inline;
+    white-space: normal;
+  }
+  .sv-content.sv-flanked .t-right .ln + .ln::before {
+    content: ' ';
+  }
+  /* t-bottom pill en móvil: inline-block, no estirar a 100%, permitir 2 líneas */
+  .sv-content.sv-flanked .t-bottom {
+    display: inline-block;
+    width: auto;
+    max-width: calc(100% - 16px);
+    align-self: center;
+    font-size: 0.78rem;
+    padding: 8px 18px;
+    white-space: normal;
+    line-height: 1.35;
+    letter-spacing: 0.05em;
+  }
+  .sv-content.sv-flanked .sv-sub { display: none; }
+  .sv-content.sv-flanked .sv-actions {
+    margin-top: 18px;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    gap: 10px;
+    align-self: center;
+  }
+  /* Pulse bar móvil: compacta, top center bajo el header */
+  .sv-pulse-bar {
+    top: 12vh;
+    left: 50%;
+    transform: translateX(-50%) translateY(-12px);
+    padding: 9px 14px 9px 12px;
+    gap: 10px;
+  }
+  @keyframes pulseBarIn {
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  .sv-pulse-stats { gap: 8px; }
+  .sv-pulse-divider:nth-of-type(2) { display: none; }
+  .sv-pulse-stats .sv-pulse-stat:nth-of-type(3) { display: none; }
+  .sv-pulse-num { font-size: 0.95rem; }
+  .sv-pulse-lbl { font-size: 0.52rem; letter-spacing: 0.1em; margin-top: 2px; }
+  .sv-heart { width: 20px; height: 20px; }
+  .sv-heart-icon { font-size: 1rem; }
+  .sv-overlay {
+    background: linear-gradient(180deg,
+      rgba(5,8,16,0.55) 0%,
+      rgba(5,8,16,0.0) 28%,
+      rgba(5,8,16,0.0) 60%,
+      rgba(5,8,16,0.92) 100%
+    );
+  }
+  .sv-content {
+    padding: 12vh 18px 28vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .sv-eyebrow { margin-bottom: 0; font-size: 0.6rem; padding: 6px 14px; }
+  .sv-title { margin-top: auto; font-size: 2rem; line-height: 1.0; }
+  .sv-sub { display: none; }
+  .sv-actions { margin-top: 18px; flex-direction: column; width: 100%; max-width: 320px; gap: 10px; }
+  .sv-actions .btn-primary, .sv-actions .btn-ghost { width: 100%; padding: 16px 24px; font-size: 0.85rem; }
+  .sv-stats { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-video-hero { height: 100vh; }
+  .scroll-video-sticky { position: relative; }
+  .hero-video-main { animation: none; }
+}
+
+/* OCULTAR el hero estático antiguo (lo dejamos en CSS para limpieza futura) */
+section.hero { display: none !important; }
+
+/* ════════════════════════════════════════════════
+   ELEMENTOS DISRUPTIVOS EXCLUSIVOS DE JOE
+   (LZR NO los tiene · diferenciador en portfolio)
+   ════════════════════════════════════════════════ */
+
+/* --- KALLON NUMBERS (cifras masivas con counter) --- */
+.numbers-section {
+  padding: 130px 5vw;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.numbers-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,90,54,0.08), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,90,54,0.06), transparent 40%);
+  pointer-events: none;
+}
+.numbers-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 80px;
+  position: relative;
+}
+.numbers-head .section-sub { margin: 0 auto; }
+.numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.nb-card {
+  text-align: left;
+  padding: 40px 32px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.4s;
+}
+.nb-card:nth-child(odd) { transform: translateY(20px); }
+.nb-card:hover { transform: translateY(-6px) !important; border-color: var(--accent); }
+.nb-card::after {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,90,54,0.25), transparent 60%);
+  filter: blur(20px);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.nb-card:hover::after { opacity: 1; }
+.nb-prefix {
+  display: inline-block;
+  font-family: 'Anton', sans-serif;
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-right: 4px;
+  vertical-align: top;
+  margin-top: 16px;
+}
+.nb-num {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  background: linear-gradient(180deg, #fff 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+.nb-suffix {
+  display: inline-block;
+  font-family: 'Anton', sans-serif;
+  font-size: 2rem;
+  color: var(--accent);
+  margin-left: 6px;
+  vertical-align: top;
+  margin-top: 18px;
+}
+.nb-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  font-weight: 700;
+  margin-top: 14px;
+  line-height: 1.4;
+}
+.nb-detail {
+  margin-top: 12px;
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+/* --- TRANSFORMATION SLIDER (antes/después interactivo) --- */
+.ba-section {
+  padding: 130px 5vw;
+  background: linear-gradient(180deg, var(--bg-mid) 0%, var(--bg) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.ba-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 60px;
+}
+.ba-head .section-sub { margin: 0 auto; }
+.ba-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.ba-slider {
+  position: relative;
+  /* aspect ratio igual al de UNA mitad de la imagen original (≈0.89:1) */
+  aspect-ratio: 500 / 563;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  cursor: ew-resize;
+  user-select: none;
+  background: #000;
+}
+.ba-img {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 200%;       /* doble del slider: cada mitad de la imagen original ocupa 100% del slider */
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+  transition: clip-path 0s linear;
+}
+/* Capa "después": alineada al borde DERECHO del slider → se ve la mitad derecha de la foto */
+.ba-after {
+  right: 0;
+  z-index: 1;
+}
+/* Capa "antes": alineada al borde IZQUIERDO del slider → se ve la mitad izquierda de la foto.
+   El clip-path inset right controla cuánto se revela (JS lo actualiza al arrastrar). */
+.ba-before {
+  left: 0;
+  z-index: 2;
+  clip-path: inset(0 50% 0 0);
+}
+.ba-divider {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  background: var(--accent);
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: 0 0 20px rgba(255,90,54,0.7);
+}
+.ba-handle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: var(--accent);
+  z-index: 4;
+  display: flex; align-items: center; justify-content: center;
+  cursor: ew-resize;
+  box-shadow: 0 8px 30px rgba(255,90,54,0.5);
+  transition: transform 0.25s, background 0.25s;
+}
+.ba-handle::before, .ba-handle::after {
+  content: '';
+  width: 8px; height: 8px;
+  border-top: 2.5px solid #fff;
+  border-right: 2.5px solid #fff;
+}
+.ba-handle::before { transform: rotate(-135deg); margin-right: 4px; }
+.ba-handle::after { transform: rotate(45deg); margin-left: 4px; }
+.ba-handle:hover { transform: translate(-50%, -50%) scale(1.12); }
+.ba-handle:active { background: var(--accent-light); }
+.ba-tag {
+  position: absolute;
+  top: 18px;
+  z-index: 3;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.ba-tag-before {
+  left: 18px;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.ba-tag-after {
+  right: 18px;
+  background: var(--accent);
+  color: #fff;
+}
+.ba-meta {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+.ba-meta-card {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+  text-align: center;
+}
+.ba-meta-num {
+  font-family: 'Anton', sans-serif;
+  font-size: 2rem;
+  color: var(--accent);
+  line-height: 1;
+}
+.ba-meta-label {
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  font-weight: 700;
+}
+.ba-instructions {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  letter-spacing: 0.04em;
+}
+.ba-instructions span {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* MOBILE OVERRIDES nuevas secciones */
+@media (max-width: 968px) {
+  .numbers-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .nb-card:nth-child(odd) { transform: translateY(0); }
+  .nb-num { font-size: 4.4rem; }
+  /* Slider antes/después móvil */
+  .ba-section { padding: 90px 5vw; }
+  .ba-head { margin-bottom: 40px; }
+  .ba-slider {
+    max-width: 100%;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.55);
+  }
+  .ba-handle {
+    width: 54px; height: 54px;
+    box-shadow: 0 6px 22px rgba(255,90,54,0.6), 0 0 0 6px rgba(255,90,54,0.15);
+  }
+  .ba-handle::before, .ba-handle::after { width: 7px; height: 7px; }
+  .ba-divider { width: 2px; box-shadow: 0 0 14px rgba(255,90,54,0.7); }
+  .ba-tag {
+    top: 12px;
+    font-size: 0.62rem;
+    padding: 5px 10px;
+    letter-spacing: 0.1em;
+  }
+  .ba-tag-before { left: 12px; }
+  .ba-tag-after { right: 12px; }
+  .ba-instructions {
+    margin-top: 16px;
+    font-size: 0.78rem;
+  }
+  .ba-meta { grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px; }
+  .ba-meta-card { padding: 16px 10px; }
+  .ba-meta-num { font-size: 1.5rem; }
+  .ba-meta-label { font-size: 0.65rem; }
+}
+@media (max-width: 480px) {
+  .numbers-grid { grid-template-columns: 1fr; }
+  /* En móviles muy pequeños la tag móvil puede tapar la cara: la subimos un pelo */
+  .ba-tag { top: 10px; font-size: 0.58rem; padding: 4px 9px; }
+  .ba-handle { width: 48px; height: 48px; }
+  .ba-meta { grid-template-columns: 1fr 1fr; }
+  .ba-meta-card:nth-child(3) { grid-column: 1 / 3; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header id="hd">
+  <a href="#" class="logo">KALLON<span>.</span></a>
+  <nav>
+    <a href="#methode">Methode</a>
+    <a href="#ueber">Über mich</a>
+    <a href="#stimmen">Stimmen</a>
+    <a href="#kurs">Kurs</a>
+    <a href="#preise">Preise</a>
+    <a href="#kontakt" class="nav-cta">Termin buchen →</a>
+  </nav>
+  <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+<div class="mobile-menu">
+  <button class="mobile-close" onclick="document.querySelector('.mobile-menu').classList.remove('open')">&times;</button>
+  <a href="#methode" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Methode</a>
+  <a href="#ueber" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Über mich</a>
+  <a href="#stimmen" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Stimmen</a>
+  <a href="#kurs" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Kurs</a>
+  <a href="#preise" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Preise</a>
+  <a href="#kontakt" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Termin buchen</a>
+</div>
+
+<!-- ── SCROLL-VIDEO HERO (Joe entrenando · estilo Apple) ── -->
+<section class="scroll-video-hero" id="scroll-hero">
+  <div class="scroll-video-sticky">
+    <video id="heroVideoBg" class="hero-video-bg" src="assets/hero.mp4" playsinline muted preload="auto" aria-hidden="true"></video>
+    <video id="heroVideo" class="hero-video-main" src="assets/hero.mp4" poster="assets/joe-1.jpg" playsinline muted preload="auto"></video>
+    <div class="sv-overlay"></div>
+    <div class="sv-content sv-flanked">
+      <div class="sv-eyebrow"><span class="dot"></span>Personal Training Köln · Online DACH</div>
+      <h1 class="sv-title">
+        <span class="t-flank t-left">Mit 30+</span>
+        <span class="t-flank t-right accent"><span class="ln">in deine</span><span class="ln">beste Form.</span></span>
+        <span class="t-flank t-bottom"><span class="strike">Stundenlang im Studio.</span> Effizient trainieren.</span>
+      </h1>
+      <div class="sv-actions">
+        <a href="#kontakt" class="btn-primary btn-magnetic">30 Min kostenlos buchen →</a>
+        <a href="#kurs" class="btn-ghost">📦 Online-Kurs entdecken</a>
+      </div>
+    </div>
+    <!-- HERO PULSE BAR — corazón latiendo + stats clave, en zona libre top-left -->
+    <div class="sv-pulse-bar" aria-label="Trainer-Statistik">
+      <div class="sv-heart" aria-hidden="true">
+        <span class="sv-heart-icon">❤</span>
+      </div>
+      <div class="sv-pulse-stats">
+        <div class="sv-pulse-stat">
+          <span class="sv-pulse-num"><span class="accent counter-up" data-target="200" data-suffix="+">0</span></span>
+          <span class="sv-pulse-lbl">Klienten</span>
+        </div>
+        <div class="sv-pulse-divider"></div>
+        <div class="sv-pulse-stat">
+          <span class="sv-pulse-num"><span class="accent counter-up" data-target="7" data-suffix="+">0</span></span>
+          <span class="sv-pulse-lbl">Jahre</span>
+        </div>
+        <div class="sv-pulse-divider"></div>
+        <div class="sv-pulse-stat">
+          <span class="sv-pulse-num"><span class="counter-up" data-target="5.0" data-decimal="1">0.0</span><span class="accent">★</span></span>
+          <span class="sv-pulse-lbl">Bewertung</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-progress-bar"><div class="scroll-progress-fill" id="progressFill"></div></div>
+  </div>
+</section>
+
+<!-- ── MIRROR (problem) ── -->
+<section class="mirror-section">
+  <span class="eyebrow">Sei ehrlich</span>
+  <h2 class="mirror-q" id="mirrorQ">
+    Du willst <strong>fitter werden</strong>, aber dein Kalender lacht dich aus.
+  </h2>
+  <p class="mirror-sub">Zwischen Terminen, Verantwortung und To-Dos hast du dich aus den Augen verloren. Diäten haben nicht funktioniert. Mehr Sport allein bringt dich nicht ans Ziel. Was fehlt: ein System, das in DEIN Leben passt.</p>
+</section>
+
+<!-- ── METHOD (Kallon System) ── -->
+<section class="method-section" id="methode">
+  <div class="section-inner">
+    <div class="method-head reveal">
+      <span class="eyebrow">Das Kallon System</span>
+      <h2 class="section-h">Vier Säulen. <span class="accent">Ein System.</span></h2>
+      <p class="section-sub">Kein Alleskönner-Ansatz. Vier konkrete Bausteine, die zusammen den Unterschied machen und sich in dein reales Leben integrieren lassen.</p>
+    </div>
+    <div class="method-grid">
+      <div class="method-card reveal">
+        <span class="method-num">01</span>
+        <h3>Mindset</h3>
+        <p>Bevor wir trainieren, klären wir das Wichtigste: warum es bisher nicht klappte. Ohne diesen Schritt scheitert jedes Programm.</p>
+      </div>
+      <div class="method-card reveal reveal-d1">
+        <span class="method-num">02</span>
+        <h3>Training</h3>
+        <p>Strukturiert. Effizient. Maximale 3-4 Einheiten pro Woche, abgestimmt auf deinen Alltag. Keine Stunden im Studio.</p>
+      </div>
+      <div class="method-card reveal reveal-d2">
+        <span class="method-num">03</span>
+        <h3>Nährstoffe</h3>
+        <p>Keine Diät. Klare Ernährungsstrategie, die in dein Leben passt. Auch im Restaurant, auf Reisen, im Stress.</p>
+      </div>
+      <div class="method-card reveal reveal-d3">
+        <span class="method-num">04</span>
+        <div>
+          <h3>Routine</h3>
+          <p>Der Unterschied zwischen 4 Wochen Erfolg und 4 Jahren. Wir bauen Gewohnheiten, die ohne Willenskraft funktionieren und selbst überleben, wenn das Leben kompliziert wird.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── KALLON NUMBERS (cifras masivas únicas Joe) ── -->
+<section class="numbers-section">
+  <div class="numbers-head reveal">
+    <span class="eyebrow">Kallon Numbers</span>
+    <h2 class="section-h">Was <span class="accent">7 Jahre</span> Erfahrung bedeuten</h2>
+    <p class="section-sub">Keine Versprechen. Echte Zahlen aus echter Arbeit. Was passiert, wenn Methode und Disziplin sich treffen.</p>
+  </div>
+  <div class="numbers-grid">
+    <div class="nb-card reveal">
+      <div>
+        <span class="nb-num" data-count="200" data-suffix="">0</span><span class="nb-suffix">+</span>
+      </div>
+      <div class="nb-label">Klienten transformiert</div>
+      <p class="nb-detail">Mütter, Geschäftsführer, Programmierer, Schichtarbeiter. Keine zwei gleich.</p>
+    </div>
+    <div class="nb-card reveal reveal-d1">
+      <div>
+        <span class="nb-prefix">−</span><span class="nb-num" data-count="8" data-suffix="">0</span><span class="nb-suffix"> kg</span>
+      </div>
+      <div class="nb-label">Ø Verlust in 90 Tagen</div>
+      <p class="nb-detail">Nicht extrem. Nicht dramatisch. Nachhaltig. Daten aus 200+ Programmen.</p>
+    </div>
+    <div class="nb-card reveal reveal-d2">
+      <div>
+        <span class="nb-num" data-count="89" data-suffix="">0</span><span class="nb-suffix">%</span>
+      </div>
+      <div class="nb-label">behalten ihr Gewicht</div>
+      <p class="nb-detail">12 Monate nach Programm-Ende. Branchendurchschnitt: 5%. Das ist der Unterschied.</p>
+    </div>
+    <div class="nb-card reveal reveal-d3">
+      <div>
+        <span class="nb-num" data-count="5" data-decimal="true" data-suffix="">0</span>
+      </div>
+      <div class="nb-label">Bewertung Ø Klienten</div>
+      <p class="nb-detail">Über 60 Bewertungen. Keine perfekt. Die meisten ehrlich exzellent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRANSFORMATION SLIDER (antes/después interactivo · prueba visual de los Numbers) ── -->
+<section class="ba-section" id="transformations">
+  <div class="ba-head reveal">
+    <span class="eyebrow">Transformation</span>
+    <h2 class="section-h">Real. <span class="accent">Sichtbar.</span> Nachhaltig.</h2>
+    <p class="section-sub">Ziehe den Slider und sieh selbst. Eine echte Transformation einer Klientin nach 5 Monaten Programm. Keine Photoshop. Keine Filter.</p>
+  </div>
+  <div class="ba-wrapper reveal">
+    <div class="ba-slider" id="baSlider">
+      <!-- Ambas imágenes apuntan al mismo collage. Cada una se posiciona a 200% width
+           para que cada mitad de la foto rellene el slider completo. El clip-path en
+           "before" revela progresivamente la "after" detrás. -->
+      <img class="ba-img ba-after" src="assets/testimonial-anna.jpg" alt="Nachher Anna" id="baImgAfter">
+      <img class="ba-img ba-before" src="assets/testimonial-anna.jpg" alt="Vorher Anna" id="baImgBefore">
+      <div class="ba-divider" id="baDivider"></div>
+      <div class="ba-handle" id="baHandle" role="slider" aria-label="Vorher/Nachher Vergleich" tabindex="0"></div>
+      <span class="ba-tag ba-tag-before">Vorher</span>
+      <span class="ba-tag ba-tag-after">5 Monate später</span>
+    </div>
+    <p class="ba-instructions">← <span>Ziehen, um zu vergleichen</span> →</p>
+    <div class="ba-meta">
+      <div class="ba-meta-card">
+        <div class="ba-meta-num">−12 kg</div>
+        <div class="ba-meta-label">Gewichtsverlust</div>
+      </div>
+      <div class="ba-meta-card">
+        <div class="ba-meta-num">5</div>
+        <div class="ba-meta-label">Monate Programm</div>
+      </div>
+      <div class="ba-meta-card">
+        <div class="ba-meta-num">0</div>
+        <div class="ba-meta-label">Diäten unterwegs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CREDENCIALES MARQUEE (kinetic infinite scroll) ── -->
+<section class="creds-marquee" aria-label="Qualifikationen">
+  <div class="creds-track">
+    <span>IHK-zertifiziert</span>
+    <span class="dot">●</span>
+    <span>Trainer A-Lizenz DSSV</span>
+    <span class="dot">●</span>
+    <span>Trainer B-Lizenz</span>
+    <span class="dot">●</span>
+    <span>Ernährungsberatung</span>
+    <span class="dot">●</span>
+    <span>7 Jahre Erfahrung</span>
+    <span class="dot">●</span>
+    <span>200+ Klienten transformiert</span>
+    <span class="dot">●</span>
+    <span>Personal Training Köln</span>
+    <span class="dot">●</span>
+    <span>Online DACH</span>
+    <span class="dot">●</span>
+    <!-- Duplicado para loop continuo sin saltos -->
+    <span aria-hidden="true">IHK-zertifiziert</span>
+    <span class="dot" aria-hidden="true">●</span>
+    <span aria-hidden="true">Trainer A-Lizenz DSSV</span>
+    <span class="dot" aria-hidden="true">●</span>
+    <span aria-hidden="true">Trainer B-Lizenz</span>
+    <span class="dot" aria-hidden="true">●</span>
+    <span aria-hidden="true">Ernährungsberatung</span>
+    <span class="dot" aria-hidden="true">●</span>
+    <span aria-hidden="true">7 Jahre Erfahrung</span>
+    <span class="dot" aria-hidden="true">●</span>
+    <span aria-hidden="true">200+ Klienten transformiert</span>
+    <span class="dot" aria-hidden="true">●</span>
+    <span aria-hidden="true">Personal Training Köln</span>
+    <span class="dot" aria-hidden="true">●</span>
+    <span aria-hidden="true">Online DACH</span>
+    <span class="dot" aria-hidden="true">●</span>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about-section" id="ueber">
+  <div class="about-grid">
+    <div class="about-photo reveal">
+      <img src="assets/joe-2.jpg" alt="Joe Kallon">
+      <span class="photo-badge">Joe Kallon</span>
+    </div>
+    <div class="about-text reveal reveal-d1">
+      <span class="eyebrow">Über mich</span>
+      <h2 class="section-h">Ich war <span class="accent">selbst dort,</span> wo du jetzt stehst.</h2>
+      <p>Ich habe <strong>7 kg in 4 Monaten verloren</strong>. Und genauso wichtig: ich habe sie nicht wieder zugenommen. Nicht weil ich Disziplin habe, sondern weil ich ein System gebaut habe.</p>
+      <p>Dieses System gebe ich heute weiter. <strong>Über 200 Klienten haben es bereits angewendet</strong>: Mütter mit zwei Jobs, Geschäftsführer mit 12-Stunden-Tagen, Programmierer mit Schreibtisch-Burnout. Es funktioniert, weil es kein Diät-Programm ist. Es ist ein Lebenssystem.</p>
+      <div class="about-creds">
+        <h4>Meine Qualifikationen</h4>
+        <ul>
+          <li>Sport- &amp; Fitnesskaufmann (IHK-zertifiziert)</li>
+          <li>Trainer A-Lizenz (DSSV)</li>
+          <li>Trainer B-Lizenz (DSSV)</li>
+          <li>Ernährungsberatung-Zertifizierung</li>
+          <li>7+ Jahre Personal Training in Köln</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testi-section" id="stimmen">
+  <div class="section-inner">
+    <div class="testi-head reveal">
+      <span class="eyebrow">Echte Stimmen</span>
+      <h2 class="section-h">Was Klienten <span class="accent">erreicht haben</span></h2>
+      <p class="section-sub">Drei Geschichten von Menschen, die mit Joe gearbeitet haben. Keine Marketing-Sätze. Echte Ergebnisse.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-photo"><img src="assets/testimonial-anna.jpg" alt="Ann-Kathrin"></div>
+        <div class="testi-content">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Ich habe drei Diäten ausprobiert und immer alles wieder zugenommen. Mit Joe habe ich endlich verstanden, warum. Heute esse ich normal und sehe besser aus als mit 25."</p>
+          <div class="testi-result"><strong>Ergebnis:</strong> 12 kg in 5 Monaten · Stabil seit 18 Monaten</div>
+          <div class="testi-author">
+            <div>
+              <strong>Ann-Kathrin B.</strong>
+              <span>Marketing-Managerin, Köln</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-d1">
+        <div class="testi-photo"><img src="assets/testimonial-philip.jpg" alt="Philip"></div>
+        <div class="testi-content">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Ich wollte Muskeln aufbauen, ohne im Studio zu wohnen. Joe hat mir gezeigt, dass 3 effiziente Einheiten pro Woche reichen. Mein Bluttest hat es bewiesen."</p>
+          <div class="testi-result"><strong>Ergebnis:</strong> +6 kg Muskelmasse · Energie wie mit 22</div>
+          <div class="testi-author">
+            <div>
+              <strong>Philip A.</strong>
+              <span>Geschäftsführer, Düsseldorf</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-d2">
+        <div class="testi-photo"><img src="assets/testimonial-patrizia.jpg" alt="Patrizia"></div>
+        <div class="testi-content">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"Stress hatte mich kaputt gemacht. Joe hat nicht nur das Training angepasst, sondern mein ganzes System. Ich schlafe besser, esse besser, lebe besser."</p>
+          <div class="testi-result"><strong>Ergebnis:</strong> Burnout-Symptome weg · Sport ist wieder Freude</div>
+          <div class="testi-author">
+            <div>
+              <strong>Patrizia M.</strong>
+              <span>Ärztin, Köln</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COURSE Kallon Methode 90 ── -->
+<section class="course-section" id="kurs">
+  <div class="course-grid">
+    <div class="reveal">
+      <span class="course-tag">NEU · Online-Programm</span>
+      <h2 class="course-h">Kallon Methode <em>90</em></h2>
+      <p class="course-sub">In 90 Tagen zum Körper, der zu deinem Leben passt. Vollständig online. Mit allem, was über 200 Klienten bereits verändert hat, strukturiert in 12 Wochen.</p>
+      <div class="course-features">
+        <div class="course-feature">
+          <div class="course-feature-icon">📦</div>
+          <div class="course-feature-text">
+            <strong>12 Wochen-Module</strong>
+            <span>Schritt für Schritt: Mindset, Training, Nährstoffe, Routine</span>
+          </div>
+        </div>
+        <div class="course-feature">
+          <div class="course-feature-icon">🎥</div>
+          <div class="course-feature-text">
+            <strong>50+ Video-Lektionen</strong>
+            <span>Theorie + ausführliche Übungs-Demos</span>
+          </div>
+        </div>
+        <div class="course-feature">
+          <div class="course-feature-icon">📋</div>
+          <div class="course-feature-text">
+            <strong>Vollständige PDF-Pläne</strong>
+            <span>Trainings- und Ernährungspläne zum Download</span>
+          </div>
+        </div>
+        <div class="course-feature">
+          <div class="course-feature-icon">💬</div>
+          <div class="course-feature-text">
+            <strong>Community + monatliche Q&amp;A</strong>
+            <span>Direkte Fragen an Joe in Live-Sessions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="course-price-box reveal reveal-d1">
+      <div class="course-price-eyebrow">Early Bird</div>
+      <div class="course-price">
+        <span class="course-price-old">397€</span>
+        <span class="course-price-now">297€</span>
+      </div>
+      <div class="course-price-period">Einmalzahlung · Lebenslanger Zugang</div>
+      <ul class="course-list">
+        <li>12 Wochen vollständiger Inhalt</li>
+        <li>50+ Video-Lektionen HD</li>
+        <li>PDF-Pläne herunterladbar</li>
+        <li>Community-Zugang lebenslang</li>
+        <li>Monatliche Q&amp;A live mit Joe</li>
+        <li>14-Tage-Geld-zurück-Garantie</li>
+      </ul>
+      <a href="#kontakt" class="btn-primary course-cta">Jetzt sichern →</a>
+      <p class="course-note">Begrenzte Plätze pro Kohorte · Nur 50 pro Quartal</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICES (1:1) ── -->
+<section class="prices-section" id="preise">
+  <div class="prices-head reveal">
+    <span class="eyebrow">Preise</span>
+    <h2 class="section-h">Drei Wege. <span class="accent">Ein Ziel.</span></h2>
+    <p class="section-sub">Wähle den Weg, der zu deinem Leben passt. Alle drei führen zum gleichen Ergebnis. Der Unterschied liegt im Tempo und in der Begleitung.</p>
+  </div>
+  <div class="prices-grid">
+    <div class="price-card reveal">
+      <div class="price-tier">Online-Kurs</div>
+      <div class="price-name">Kallon Methode 90</div>
+      <div class="price-amount">297<span style="font-size:1.4rem;">€</span></div>
+      <div class="price-amount-period">Einmalig · 12 Wochen</div>
+      <ul class="price-list">
+        <li>Vollständiger Online-Kurs</li>
+        <li>50+ Video-Lektionen</li>
+        <li>PDF-Pläne</li>
+        <li>Community-Zugang</li>
+        <li>Monatliche Q&amp;A</li>
+      </ul>
+      <a href="#kontakt" class="btn-primary price-cta">Sichern →</a>
+    </div>
+    <div class="price-card featured reveal reveal-d1">
+      <div class="price-badge">Beliebteste</div>
+      <div class="price-tier">Hybrid</div>
+      <div class="price-name">Coaching Plus</div>
+      <div class="price-amount">397<span style="font-size:1.4rem;">€</span></div>
+      <div class="price-amount-period">/ Monat · Mind. 3 Monate</div>
+      <ul class="price-list">
+        <li>Online-Kurs inklusive</li>
+        <li>2× Online 1:1 / Monat</li>
+        <li>Persönlicher Plan</li>
+        <li>WhatsApp-Support</li>
+        <li>Wöchentliches Check-in</li>
+        <li>Monatliche Anpassung</li>
+      </ul>
+      <a href="#kontakt" class="btn-primary price-cta">Erstgespräch buchen →</a>
+    </div>
+    <div class="price-card reveal reveal-d2">
+      <div class="price-tier">Premium 1:1</div>
+      <div class="price-name">Personal Training Köln</div>
+      <div class="price-amount">897<span style="font-size:1.4rem;">€</span></div>
+      <div class="price-amount-period">/ Monat · 8 Sessions</div>
+      <ul class="price-list">
+        <li>8× 1:1 im Studio Köln</li>
+        <li>Persönlicher Trainingsplan</li>
+        <li>Ernährungs-Coaching</li>
+        <li>Bluttest-Analyse</li>
+        <li>WhatsApp 24/7</li>
+        <li>Online-Kurs gratis</li>
+      </ul>
+      <a href="#kontakt" class="btn-primary price-cta ghost">Termin sichern →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="section-h">Häufige <span class="accent">Fragen</span></h2>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Bin ich fit genug für ein Programm?</div>
+      <div class="faq-a">Egal ob Couch-Potato oder Hobby-Sportler: das System passt sich dir an, nicht andersrum. Im kostenlosen Erstgespräch klären wir genau deine Ausgangslage.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Ich habe Verletzungen / chronische Probleme. Geht das?</div>
+      <div class="faq-a">In den meisten Fällen ja. Wir stimmen Trainingsplan auf deine Realität ab. Bei medizinischen Fragen empfehle ich vorab eine ärztliche Abklärung. Danach starten wir abgestimmt.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Online oder vor Ort in Köln: was ist besser?</div>
+      <div class="faq-a">Beides funktioniert. Online ist flexibler und günstiger. Vor Ort intensiver mit direktem Feedback. Im Erstgespräch finden wir gemeinsam die beste Lösung für dich.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Wann sehe ich Ergebnisse?</div>
+      <div class="faq-a">Erste sichtbare Veränderungen: 3-4 Wochen. Spürbare Verbesserung Energie/Schlaf: 2 Wochen. Echte Transformation: 90 Tage. Und das Wichtigste: nachhaltig, nicht für 4 Wochen.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Was passiert im kostenlosen Erstgespräch?</div>
+      <div class="faq-a">30 Minuten. Du erzählst mir wo du stehst. Ich stelle ehrliche Fragen. Am Ende weißt du, ob mein System für dich passt. Und wenn nicht, welche andere Lösung sinnvoller wäre. Keine Verpflichtung, kein Sales-Pitch.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q">Geld-zurück-Garantie?</div>
+      <div class="faq-a">Online-Kurs: 14 Tage Geld zurück, kommentarlos. Coaching-Programme: nach 30 Tagen, wenn du dich nicht verstanden fühlst, beenden wir. Du hast kein Risiko.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA FINAL ── -->
+<section class="cta-final" id="kontakt">
+  <div class="cta-inner">
+    <span class="eyebrow" style="justify-content: center;">Bereit?</span>
+    <h2>Dein <span class="accent">nächster Schritt.</span></h2>
+    <p>30 Minuten. Kein Sales-Pitch. Keine Verpflichtung. Nur ein ehrliches Gespräch darüber, was dein Körper wirklich braucht und ob mein System der richtige Weg für dich ist.</p>
+    <a href="#" class="btn-primary btn-magnetic" id="ctaBtn">Kostenloses Erstgespräch buchen →</a>
+    <p class="cta-note">Antwort innerhalb 24h · Begrenzte Plätze pro Monat</p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">KALLON<span>.</span></div>
+      <p class="footer-tagline">Personal Training in Köln und online. Für Profis ab 30, die sich nicht mit Mittelmaß zufrieden geben.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Programm</h4>
+      <a href="#methode">Methode</a>
+      <a href="#kurs">Online-Kurs</a>
+      <a href="#preise">Preise</a>
+      <a href="#stimmen">Stimmen</a>
+    </div>
+    <div class="footer-col">
+      <h4>Kontakt</h4>
+      <a href="#kontakt">Erstgespräch</a>
+      <a href="https://instagram.com/kallon_joe" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="#">Köln Studio</a>
+      <a href="#">Online DACH</a>
+    </div>
+    <div class="footer-col">
+      <h4>Rechtliches</h4>
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">AGB</a>
+      <a href="#">Widerruf</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Joe Kallon · Personal Trainer Köln</div>
+    <div class="footer-social">
+      <a href="https://instagram.com/kallon_joe" target="_blank" rel="noopener noreferrer" title="Instagram">📷</a>
+      <a href="#" title="YouTube">▶</a>
+      <a href="#" title="TikTok">🎵</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Header scrolled
+const hd = document.getElementById('hd');
+window.addEventListener('scroll', () => {
+  hd.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// Reveal on scroll
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// Mirror split-text reveal
+(function() {
+  const q = document.getElementById('mirrorQ');
+  if (!q) return;
+  q.innerHTML = q.innerHTML.replace(/(<[^>]*>)|([^<]+)/g, (_, tag, text) => {
+    if (tag) return tag;
+    return text.replace(/\S+/g, w => `<span class="word">${w}</span>`);
+  });
+  const words = q.querySelectorAll('.word');
+  words.forEach((w, i) => w.style.transitionDelay = (i * 0.06) + 's');
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      obs.disconnect();
+      words.forEach(w => w.classList.add('in'));
+    }
+  }, { threshold: 0.4 });
+  obs.observe(q);
+})();
+
+// Hero stats counter
+(function() {
+  const nums = document.querySelectorAll('.h-stat-num');
+  if (!nums.length) return;
+  function animate(el) {
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const isDecimal = el.dataset.decimal === 'true';
+    const dur = 1800; let start = null;
+    (function step(ts) {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      const v = target * ease;
+      el.textContent = isDecimal ? v.toFixed(1) + suffix : Math.round(v) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { obs.disconnect(); nums.forEach(animate); }
+  }, { threshold: 0.5 });
+  if (nums[0]) obs.observe(nums[0].closest('.hero-stats'));
+})();
+
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+
+// Magnetic CTA — lerp suave con rAF, solo en CTAs principales (.btn-magnetic)
+(function() {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  document.querySelectorAll('.btn-magnetic').forEach(btn => {
+    let tx = 0, ty = 0, x = 0, y = 0, raf = null, hovering = false;
+    const STRENGTH = 0.32;
+    const LERP = 0.16;
+
+    function update() {
+      x += (tx - x) * LERP;
+      y += (ty - y) * LERP;
+      btn.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
+      if (Math.abs(tx - x) > 0.05 || Math.abs(ty - y) > 0.05 || hovering) {
+        raf = requestAnimationFrame(update);
+      } else {
+        btn.style.transform = '';
+        raf = null;
+      }
+    }
+
+    btn.addEventListener('mouseenter', () => {
+      hovering = true;
+      btn.classList.add('is-magnetic-active');
+    });
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      tx = (e.clientX - r.left - r.width / 2) * STRENGTH;
+      ty = (e.clientY - r.top - r.height / 2) * STRENGTH;
+      if (!raf) raf = requestAnimationFrame(update);
+    });
+    btn.addEventListener('mouseleave', () => {
+      hovering = false;
+      tx = 0; ty = 0;
+      btn.classList.remove('is-magnetic-active');
+      if (!raf) raf = requestAnimationFrame(update);
+    });
+  });
+})();
+
+// ══ SCROLL-VIDEO HERO (Apple-style + mobile pause-then-play) ══
+(function() {
+  const video   = document.getElementById('heroVideo');
+  const videoBg = document.getElementById('heroVideoBg');
+  const hero    = document.getElementById('scroll-hero');
+  const fill    = document.getElementById('progressFill');
+  if (!video || !hero) return;
+
+  function playBoth()  { video.play().catch(() => {}); if (videoBg) videoBg.play().catch(() => {}); }
+  function pauseBoth() { video.pause(); if (videoBg) videoBg.pause(); }
+
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const reduce   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // MÓVIL — pausa hasta primer scroll/touch, luego loop
+  if (isMobile || reduce) {
+    video.loop = true;
+    if (videoBg) videoBg.loop = true;
+    pauseBoth();
+    video.currentTime = 0;
+    if (videoBg) videoBg.currentTime = 0;
+    let started = false;
+    function start() {
+      if (started) return;
+      started = true;
+      playBoth();
+      window.removeEventListener('scroll', onScroll);
+      hero.removeEventListener('touchstart', start);
+    }
+    function onScroll() { if (window.scrollY > 8) start(); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    hero.addEventListener('touchstart', start, { passive: true });
+    new IntersectionObserver(es => {
+      if (!started) return;
+      if (es[0].isIntersecting) playBoth(); else pauseBoth();
+    }, { threshold: 0 }).observe(hero);
+    return;
+  }
+
+  // DESKTOP — scroll-driven (frame por scroll)
+  video.pause();
+  video.currentTime = 0;
+  if (videoBg) { videoBg.currentTime = 0; videoBg.loop = true; videoBg.play().catch(() => {}); }
+
+  let isReady = false;
+  video.addEventListener('loadedmetadata', () => { isReady = true; });
+  video.load();
+
+  function update() {
+    if (!isReady || !video.duration) return;
+    const rect = hero.getBoundingClientRect();
+    const scrolled = -rect.top;
+    const scrollable = hero.offsetHeight - window.innerHeight;
+    if (scrolled <= 0) {
+      video.currentTime = 0;
+      if (fill) fill.style.width = '0%';
+      return;
+    }
+    if (scrolled >= scrollable) {
+      video.currentTime = video.duration;
+      if (fill) fill.style.width = '100%';
+      return;
+    }
+    const progress = scrolled / scrollable;
+    video.currentTime = progress * video.duration;
+    if (fill) fill.style.width = (progress * 100) + '%';
+  }
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => { update(); ticking = false; });
+      ticking = true;
+    }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+// Counter para hero pulse-bar (sube poco a poco al cargar, llamada de atención)
+(function() {
+  const nums = document.querySelectorAll('.sv-pulse-bar .counter-up');
+  if (!nums.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Sin animación: poner valor final directo
+    nums.forEach(el => {
+      const target = parseFloat(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const dec = parseInt(el.dataset.decimal || '0');
+      el.textContent = (dec ? target.toFixed(dec) : Math.round(target)) + suffix;
+    });
+    return;
+  }
+  function animate(el) {
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const dec = parseInt(el.dataset.decimal || '0');
+    const dur = 2200; let start = null;
+    (function step(ts) {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);  // ease-out cubic
+      const v = target * ease;
+      el.textContent = (dec ? v.toFixed(dec) : Math.round(v)) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+  // Trigger después de que la pulse-bar aparezca (delay 0.4s + animación ~0.9s)
+  setTimeout(() => nums.forEach(animate), 1300);
+})();
+
+// KALLON NUMBERS — counter sincronizado al entrar en viewport
+(function() {
+  const nums = document.querySelectorAll('.nb-num');
+  if (!nums.length) return;
+  function animate(el) {
+    const target = parseFloat(el.dataset.count);
+    const isDecimal = el.dataset.decimal === 'true';
+    const dur = 2200; let start = null;
+    (function step(ts) {
+      if (!start) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      const v = target * ease;
+      el.textContent = isDecimal ? v.toFixed(1) : Math.round(v);
+      if (p < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+  const obs = new IntersectionObserver(es => {
+    if (!es[0].isIntersecting) return;
+    obs.disconnect();
+    nums.forEach(animate);
+  }, { threshold: 0.4 });
+  obs.observe(nums[0].closest('.numbers-grid'));
+})();
+
+// TRANSFORMATION SLIDER — drag interactivo antes/después
+// La imagen testimonial-anna.jpg es un collage horizontal (mitad izq = Vorher, mitad der = Nachher).
+// Cada <img> está a 200% width del slider. Una alineada left muestra la mitad izquierda completa,
+// la otra alineada right muestra la mitad derecha completa. clip-path en "before" revela "after".
+(function() {
+  const slider = document.getElementById('baSlider');
+  const beforeImg = document.getElementById('baImgBefore');
+  const handle = document.getElementById('baHandle');
+  const divider = document.getElementById('baDivider');
+  if (!slider || !beforeImg || !handle) return;
+
+  let dragging = false;
+  function setPosition(percent) {
+    percent = Math.max(0, Math.min(100, percent));
+    // clip-path inset(top right bottom left): el right define cuánto se recorta del lado derecho
+    // Si percent=50%, recortamos 50% derecho → se ve solo la mitad izquierda (hasta el handle)
+    // Si percent=100%, recortamos 0% → se ve la imagen "before" completa
+    // Si percent=0%, recortamos 100% → no se ve "before", solo "after"
+    beforeImg.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+    divider.style.left = percent + '%';
+    handle.style.left = percent + '%';
+  }
+  function moveTo(clientX) {
+    const r = slider.getBoundingClientRect();
+    const percent = ((clientX - r.left) / r.width) * 100;
+    setPosition(percent);
+  }
+  // Mouse
+  handle.addEventListener('mousedown', () => { dragging = true; document.body.style.userSelect = 'none'; });
+  slider.addEventListener('mousedown', (e) => {
+    dragging = true;
+    moveTo(e.clientX);
+    document.body.style.userSelect = 'none';
+  });
+  window.addEventListener('mousemove', (e) => { if (dragging) moveTo(e.clientX); });
+  window.addEventListener('mouseup', () => { dragging = false; document.body.style.userSelect = ''; });
+  // Touch
+  slider.addEventListener('touchstart', (e) => {
+    dragging = true;
+    moveTo(e.touches[0].clientX);
+  }, { passive: true });
+  window.addEventListener('touchmove', (e) => { if (dragging) moveTo(e.touches[0].clientX); }, { passive: true });
+  window.addEventListener('touchend', () => { dragging = false; });
+  // Keyboard
+  handle.addEventListener('keydown', (e) => {
+    const cur = parseFloat(handle.style.left || '50');
+    if (e.key === 'ArrowLeft')  setPosition(cur - 4);
+    if (e.key === 'ArrowRight') setPosition(cur + 4);
+  });
+
+  // Estado inicial 50/50
+  setPosition(50);
+
+  // Animación de invitación al entrar en viewport: oscila brevemente
+  const obs = new IntersectionObserver(es => {
+    if (!es[0].isIntersecting) return;
+    obs.disconnect();
+    let pos = 50;
+    const seq = [50, 35, 65, 50];
+    let i = 0;
+    function tick() {
+      if (i >= seq.length) return;
+      const target = seq[i];
+      const start = pos;
+      const dur = 700;
+      let s = null;
+      (function step(ts) {
+        if (!s) s = ts;
+        const p = Math.min((ts - s) / dur, 1);
+        const ease = 0.5 - Math.cos(p * Math.PI) / 2;
+        pos = start + (target - start) * ease;
+        setPosition(pos);
+        if (p < 1) requestAnimationFrame(step);
+        else { i++; setTimeout(tick, 100); }
+      })(performance.now());
+    }
+    setTimeout(tick, 300);
+  }, { threshold: 0.5 });
+  obs.observe(slider);
+})();
+</script>
+</body>
+</html>

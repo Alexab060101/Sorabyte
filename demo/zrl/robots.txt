@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /*.bak$
+Disallow: /*?utm_*
+
+Crawl-delay: 1
+
+# Googlebot — sin delay, máxima indexación
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Bloquear scrapers agresivos de SEO
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+Sitemap: https://lzr-coaching.com/sitemap.xml

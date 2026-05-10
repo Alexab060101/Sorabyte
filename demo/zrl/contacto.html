@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<script src="../demo-mode.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="view-transition" content="same-origin" />
+<link rel="stylesheet" href="assets/shared.css" />
+<link rel="stylesheet" href="assets/cookie-banner.css" />
+<title>Kostenloses Erstgespräch buchen – Coach für Coaches | LZR Coaching</title>
+<meta name="description" content="Buch dein kostenloses Erstgespräch mit Luis Zabala Rodriguez. Antwort innerhalb 24h. Kein Druck, kein Pitching – nur Klarheit über deinen nächsten Schritt." />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Luis Zabala Rodriguez" />
+<link rel="canonical" href="https://www.zrl-coaching.com/contacto.html" />
+<meta property="og:title" content="Kostenloses Erstgespräch buchen | LZR Coaching" />
+<meta property="og:description" content="30 Minuten. Kein Druck. Buch dein kostenloses Erstgespräch mit Luis Zabala Rodriguez – Coach für Coaches im DACH-Markt." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.zrl-coaching.com/contacto.html" />
+<meta property="og:image" content="https://www.zrl-coaching.com/assets/hero-poster.jpg" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="LZR Coaching" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Kostenloses Erstgespräch – LZR Coaching" />
+<meta name="twitter:description" content="30 Minuten. Kein Druck. Kostenloses Gespräch mit Luis Zabala Rodriguez buchen." />
+<meta name="twitter:image" content="https://www.zrl-coaching.com/assets/hero-poster.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Start", "item": "index.html"},
+    {"@type": "ListItem", "position": 2, "name": "Gespräch buchen", "item": "contacto.html"}
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+.logo-wrap img { height: 48px; }
+
+/* PAGE HERO */
+.page-hero {
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);
+  padding:160px 48px 100px; text-align:center; position:relative; overflow:hidden;
+}
+.page-hero::before { content:''; position:absolute; top:-100px; right:-100px; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(201,162,84,0.18),transparent); pointer-events:none; }
+.page-hero::after { content:''; position:absolute; bottom:-80px; left:-80px; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle,rgba(201,162,84,0.1),transparent); pointer-events:none; }
+.page-hero .eyebrow { color:var(--gold-light); position:relative; }
+.page-hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,6vw,5.5rem); font-weight:700; color:#fff; line-height:1.05; margin-top:14px; position:relative; }
+.page-hero h1 em { font-style:italic; color:var(--gold-light); }
+.page-hero p { color:rgba(255,255,255,0.6); font-size:1.05rem; line-height:1.75; max-width:540px; margin:20px auto 0; position:relative; }
+
+/* MAIN SECTION */
+.contact-section { padding:100px 48px; background:var(--white); }
+.contact-inner { max-width:1160px; margin:0 auto; display:grid; grid-template-columns:1fr 1.4fr; gap:80px; align-items:start; }
+
+/* LEFT INFO */
+.contact-info {}
+/* override section-h tamaño en contacto */
+.contact-info .section-h { font-size:clamp(1.8rem,3vw,2.6rem); }
+.info-sub { color:var(--text-mid); font-size:0.97rem; line-height:1.8; margin-top:16px; font-weight:300; }
+
+.info-cards { margin-top:40px; display:flex; flex-direction:column; gap:16px; }
+.info-card {
+  background:var(--beige-light); border:1px solid rgba(201,162,84,0.2);
+  border-radius:18px; padding:24px 26px; display:flex; gap:18px; align-items:flex-start;
+  transition:border-color 0.3s, transform 0.3s;
+  text-decoration:none; color:inherit;
+}
+.info-card:hover { border-color:var(--gold); transform:translateX(8px); }
+.info-card-icon { width:44px; height:44px; border-radius:12px; background:rgba(201,162,84,0.15); display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+.info-card-label { font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-soft); margin-bottom:4px; }
+.info-card-value { font-size:0.95rem; font-weight:600; color:var(--navy); }
+
+.social-row { margin-top:36px; }
+.social-row h4 { font-size:0.68rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-soft); margin-bottom:14px; }
+.social-links { display:flex; gap:12px; }
+.social-link {
+  display:flex; align-items:center; gap:8px;
+  background:var(--beige-light); border:1px solid rgba(201,162,84,0.2);
+  border-radius:100px; padding:10px 20px;
+  font-size:0.8rem; font-weight:600; color:var(--navy);
+  text-decoration:none; transition:background 0.3s, border-color 0.3s, transform 0.2s;
+}
+.social-link:hover { background:var(--navy); color:var(--gold-light); border-color:var(--navy); transform:translateY(-2px); }
+
+.trust-note {
+  margin-top:40px; padding:24px; background:rgba(201,162,84,0.08);
+  border:1px solid rgba(201,162,84,0.2); border-radius:16px;
+}
+.trust-note p { font-size:0.83rem; color:var(--text-mid); line-height:1.7; }
+.trust-note strong { color:var(--navy); }
+
+/* FORM */
+.contact-form-wrap {}
+.form-card {
+  background:#fff; border:1px solid rgba(201,162,84,0.2);
+  border-radius:28px; padding:52px 48px;
+  box-shadow:0 8px 40px rgba(26,44,80,0.07);
+}
+.form-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:700; color:var(--navy); margin-bottom:6px; }
+.form-card .sub { font-size:0.85rem; color:var(--text-mid); margin-bottom:36px; line-height:1.6; }
+.form-group { margin-bottom:22px; }
+.form-group label { display:block; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-soft); margin-bottom:8px; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width:100%; padding:16px 20px; border:1.5px solid rgba(201,162,84,0.25);
+  border-radius:12px; font-family:'DM Sans',sans-serif; font-size:0.93rem;
+  color:var(--navy); background:#FDFAF2;
+  transition:border-color 0.25s, box-shadow 0.25s; outline:none;
+  -webkit-appearance:none; appearance:none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,162,84,0.12);
+}
+.form-group textarea { resize:vertical; min-height:130px; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.btn-submit {
+  width:100%; padding:18px; background:var(--navy); color:var(--gold-light);
+  border:none; border-radius:100px; font-size:0.93rem; font-weight:700;
+  font-family:'DM Sans',sans-serif; cursor:pointer; letter-spacing:0.04em;
+  transition:background 0.3s, transform 0.25s, box-shadow 0.3s;
+  box-shadow:0 8px 28px rgba(26,44,80,0.22); margin-top:8px;
+}
+.btn-submit:hover { background:var(--gold); color:var(--navy); transform:translateY(-2px); box-shadow:0 14px 36px rgba(201,162,84,0.35); }
+.form-note { text-align:center; font-size:0.7rem; color:var(--text-soft); margin-top:14px; }
+.success-msg { display:none; text-align:center; padding:32px; }
+.success-msg .icon { font-size:3rem; margin-bottom:12px; }
+.success-msg h4 { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--navy); margin-bottom:8px; }
+.success-msg p { font-size:0.88rem; color:var(--text-mid); line-height:1.7; }
+
+/* FORM VALIDATION STYLES */
+.field-error { display:block; font-size:0.72rem; color:#c0392b; margin-top:5px; font-weight:500; min-height:14px; }
+.char-count { display:block; font-size:0.68rem; color:var(--text-soft); text-align:right; margin-top:4px; }
+#submitBtn:disabled { opacity:0.6; cursor:not-allowed; transform:none !important; }
+input.invalid, select.invalid, textarea.invalid { border-color:#c0392b !important; }
+
+/* WHAT TO EXPECT */
+.expect-section { padding:100px 48px; background:var(--beige-light); }
+.expect-inner { max-width:1160px; margin:0 auto; }
+.expect-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:52px; }
+.expect-card { background:rgba(255,255,255,0.7); border:1px solid rgba(201,162,84,0.18); border-radius:22px; padding:40px 32px; text-align:center; }
+.expect-num { font-family:'Cormorant Garamond',serif; font-size:3rem; font-style:italic; color:var(--gold); line-height:1; margin-bottom:14px; }
+.expect-card h3 { font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:10px; }
+.expect-card p { font-size:0.83rem; color:var(--text-mid); line-height:1.7; }
+
+/* RESPONSIVE específico de contacto */
+@media (max-width:960px) {
+  .contact-inner { grid-template-columns:1fr; gap:40px; }
+  .form-row { grid-template-columns:1fr; }
+  .expect-grid { grid-template-columns:1fr; }
+  .contact-section, .expect-section { padding:72px 24px; }
+  .page-hero { padding:120px 24px 72px; }
+  .form-card { padding:36px 24px; }
+  .social-links { flex-wrap:wrap; }
+}
+</style>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','2202561457146873');fbq('track','PageView');</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2202561457146873&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo-wrap">
+    <img src="assets/logo.png" alt="LZR Coaching – Luis Zabala Rodriguez, Coach für Coaches">
+    <div class="logo-text">Luis Zabala Rodriguez <span>Coach für Coaches</span></div>
+  </a>
+  <nav>
+    <a href="index.html">Start</a>
+    <a href="servicios.html">Leistungen</a>
+    <a href="nosotros.html">Über mich</a>
+    <a href="contacto.html" class="nav-cta active">Gespräch buchen</a>
+  </nav>
+  <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<div class="mobile-menu">
+  <button class="mobile-close" onclick="document.querySelector('.mobile-menu').classList.remove('open')">&times;</button>
+  <a href="index.html">Start</a>
+  <a href="servicios.html">Leistungen</a>
+  <a href="nosotros.html">Über mich</a>
+  <a href="contacto.html">Gespräch buchen</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <span class="eyebrow">Kontakt</span>
+  <h1>Lass uns <em>reden.</em></h1>
+  <p>Kein Sales-Pitch. Keine Verpflichtung. Nur 30 Minuten, um herauszufinden, was dein Business wirklich braucht.</p>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="contact-inner">
+
+    <!-- LEFT -->
+    <div class="contact-info reveal">
+      <span class="eyebrow">Schreib mir</span>
+      <h2 class="section-h">Der erste Schritt kostet <em>nichts.</em></h2>
+      <p class="info-sub">Füll das Formular aus oder kontaktiere mich direkt. Ich antworte innerhalb von 24 Stunden. und das Erstgespräch ist komplett kostenlos und unverbindlich.</p>
+
+      <div class="info-cards">
+        <a href="https://www.zrl-coaching.com" target="_blank" rel="noopener noreferrer" class="info-card">
+          <div class="info-card-icon">🌐</div>
+          <div>
+            <div class="info-card-label">Website</div>
+            <div class="info-card-value">zrl-coaching.com</div>
+          </div>
+        </a>
+        <a href="https://instagram.com/luis.zabala.rodriguez" target="_blank" rel="noopener noreferrer" class="info-card">
+          <div class="info-card-icon">📷</div>
+          <div>
+            <div class="info-card-label">Instagram</div>
+            <div class="info-card-value">@luis.zabala.rodriguez</div>
+          </div>
+        </a>
+        <div class="info-card">
+          <div class="info-card-icon">🌍</div>
+          <div>
+            <div class="info-card-label">Markt</div>
+            <div class="info-card-value">DACH · Deutschland, Österreich, Schweiz</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">💻</div>
+          <div>
+            <div class="info-card-label">Format</div>
+            <div class="info-card-value">100% Online · Remote · Flexibel</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="social-row" style="margin-top:32px;">
+        <h4>Folg mir</h4>
+        <div class="social-links">
+          <a href="https://instagram.com/luis.zabala.rodriguez" target="_blank" rel="noopener noreferrer" class="social-link">📷 Instagram</a>
+          <a href="https://www.zrl-coaching.com" target="_blank" rel="noopener noreferrer" class="social-link">🌐 Website</a>
+        </div>
+      </div>
+
+      <div class="trust-note" style="margin-top:32px;">
+        <p><strong>Kein Risiko.</strong> Das Erstgespräch ist kostenlos und unverbindlich. Wenn wir merken, dass wir nicht zusammenpassen. kein Problem. Wenn doch, sprechen wir über nächste Schritte.</p>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="contact-form-wrap reveal">
+      <div class="form-card">
+        <h3>Erstgespräch anfragen</h3>
+        <p class="sub">Füll das Formular aus. ich melde mich innerhalb von 24 Stunden bei dir.</p>
+
+        <!-- FORMSPREE: Crea cuenta gratis en formspree.io y reemplaza YOUR_FORM_ID -->
+        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+          <!-- Honeypot anti-spam -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="_subject" value="Neue Erstgespräch-Anfrage – LZR Coaching">
+          <input type="hidden" name="_language" value="de">
+
+          <div class="form-group">
+            <label for="name">Vorname *</label>
+            <input type="text" id="name" name="name" placeholder="Dein Vorname" required minlength="2" maxlength="50">
+            <span class="field-error" id="err-name"></span>
+          </div>
+          <div class="form-group">
+            <label for="email">E-Mail-Adresse *</label>
+            <input type="email" id="email" name="email" placeholder="deine@email.de" required maxlength="100">
+            <span class="field-error" id="err-email"></span>
+          </div>
+          <div class="form-group">
+            <label for="coaching">Was für ein Coaching bietest du an? *</label>
+            <select id="coaching" name="coaching" required>
+              <option value="" disabled selected>Bitte wählen...</option>
+              <option>Business Coaching</option>
+              <option>Life Coaching</option>
+              <option>Health &amp; Wellness Coaching</option>
+              <option>Career Coaching</option>
+              <option>Relationship Coaching</option>
+              <option>Leadership Coaching</option>
+              <option>Anderes</option>
+            </select>
+            <span class="field-error" id="err-coaching"></span>
+          </div>
+          <div class="form-group">
+            <label for="situation">Was ist deine aktuelle Situation? *</label>
+            <select id="situation" name="situation" required>
+              <option value="" disabled selected>Bitte wählen...</option>
+              <option>Ich starte gerade. noch keine Kunden</option>
+              <option>Ich habe erste Kunden, brauche aber mehr</option>
+              <option>Ich habe Kunden, will aber skalen</option>
+              <option>Ich habe Reichweite, aber keine Konversionen</option>
+            </select>
+            <span class="field-error" id="err-situation"></span>
+          </div>
+          <div class="form-group">
+            <label for="message">Was ist dein größtes Problem gerade?</label>
+            <textarea id="message" name="message" placeholder="Beschreib kurz, wo du stehst und was dich aufhält..." maxlength="500"></textarea>
+            <span class="char-count"><span id="char-used">0</span>/500</span>
+          </div>
+          <button type="submit" class="btn-submit" id="submitBtn">Mein Erstgespräch buchen →</button>
+          <p class="form-note">Nur für ernsthafte Coaches · Begrenzte Plätze pro Monat</p>
+        </form>
+
+        <div class="success-msg" id="successMsg">
+          <div class="icon">🎯</div>
+          <h4>Nachricht erhalten!</h4>
+          <p>Danke für deine Anfrage. Ich melde mich innerhalb von 24 Stunden bei dir. freue mich auf das Gespräch.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="expect-section">
+  <div class="expect-inner">
+    <div style="text-align:center; max-width:640px; margin:0 auto;" class="reveal">
+      <span class="eyebrow">Was dich erwartet</span>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;color:var(--navy);line-height:1.15;margin-top:12px;">30 Minuten. <em style="font-style:italic;color:var(--gold-deep);">Kein Druck.</em></h2>
+    </div>
+    <div class="expect-grid">
+      <div class="expect-card reveal reveal-delay-1">
+        <div class="expect-num">01</div>
+        <h3>Du erzählst mir von dir</h3>
+        <p>Wo stehst du gerade? Was funktioniert nicht? Was hast du schon versucht? Ich höre zu. ohne zu urteilen.</p>
+      </div>
+      <div class="expect-card reveal reveal-delay-2">
+        <div class="expect-num">02</div>
+        <h3>Wir analysieren gemeinsam</h3>
+        <p>Ich gebe dir ehrliches Feedback zu deiner aktuellen Situation und zeige dir, wo das Problem wirklich liegt.</p>
+      </div>
+      <div class="expect-card reveal reveal-delay-3">
+        <div class="expect-num">03</div>
+        <h3>Klarer nächster Schritt</h3>
+        <p>Du gehst mit konkreten Klarheiten raus. egal ob wir zusammenarbeiten oder nicht. Das Gespräch hat Wert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="assets/logo.png" alt="LZR Coaching – Luis Zabala Rodriguez, Coach für Coaches">
+    <div class="footer-logo-name">Luis <span>Zabala</span> Rodriguez</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Start</a>
+    <a href="servicios.html">Leistungen</a>
+    <a href="nosotros.html">Über mich</a>
+    <a href="contacto.html">Kontakt</a>
+    <a href="https://instagram.com/luis.zabala.rodriguez" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="agb.html">AGB</a>
+    <a href="#" onclick="event.preventDefault(); lzrOpenCookieSettings();">Cookies</a>
+  </div>
+  <div class="footer-copy">© 2026 Luis Zabala Rodriguez · Coach für Coaches</div>
+</footer>
+
+<script>
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('up'); io.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ── FORMULARIO: VALIDACIÓN + ENVÍO ASÍNCRONO ──
+(function() {
+  const form     = document.getElementById('contactForm');
+  const success  = document.getElementById('successMsg');
+  const submitBtn = document.getElementById('submitBtn');
+  if (!form) return;
+
+  // Contador de caracteres
+  const msgField = document.getElementById('message');
+  const charUsed = document.getElementById('char-used');
+  if (msgField && charUsed) {
+    msgField.addEventListener('input', function() { charUsed.textContent = this.value.length; });
+  }
+
+  function showError(id, msg) {
+    var el = document.getElementById(id);
+    if (el) { el.textContent = msg; }
+  }
+  function clearErrors() {
+    document.querySelectorAll('.field-error').forEach(function(el) { el.textContent = ''; });
+  }
+  function validateEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    clearErrors();
+
+    var name     = document.getElementById('name').value.trim();
+    var email    = document.getElementById('email').value.trim();
+    var coaching = document.getElementById('coaching').value;
+    var situation= document.getElementById('situation').value;
+    var valid    = true;
+
+    if (!name || name.length < 2) { showError('err-name', 'Bitte deinen Vornamen eingeben (mind. 2 Zeichen)'); valid = false; }
+    if (!validateEmail(email))    { showError('err-email', 'Bitte eine gültige E-Mail-Adresse eingeben'); valid = false; }
+    if (!coaching)                { showError('err-coaching', 'Bitte eine Option wählen'); valid = false; }
+    if (!situation)               { showError('err-situation', 'Bitte eine Option wählen'); valid = false; }
+    if (!valid) return;
+
+    submitBtn.textContent = 'Wird gesendet…';
+    submitBtn.disabled = true;
+
+    // Si Formspree no está configurado (YOUR_FORM_ID), muestra success directamente
+    var action = form.getAttribute('action');
+    if (action && action.indexOf('YOUR_FORM_ID') === -1) {
+      try {
+        var resp = await fetch(action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (resp.ok) {
+          // CAPI server-side — fire & forget, no bloquea UX
+          fetch('/api/capi-lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              event_name: 'Lead',
+              event_id: 'lead-' + Date.now(),
+              consent: true,
+              event_source_url: window.location.href,
+              client_user_agent: navigator.userAgent,
+              user_data: { email: email, name: name }
+            })
+          }).catch(function(){});
+          form.style.display = 'none';
+          success.style.display = 'block';
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          submitBtn.textContent = 'Mein Erstgespräch buchen →';
+          submitBtn.disabled = false;
+          showError('err-email', 'Fehler beim Senden. Bitte versuche es später nochmal.');
+        }
+      } catch(err) {
+        submitBtn.textContent = 'Mein Erstgespräch buchen →';
+        submitBtn.disabled = false;
+        showError('err-email', 'Verbindungsfehler. Bitte prüfe deine Internetverbindung.');
+      }
+    } else {
+      // Sin Formspree configurado: mostrar success de todas formas (demo)
+      form.style.display = 'none';
+      success.style.display = 'block';
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+})();
+</script>
+<script src="assets/cookie-banner.js" defer></script>
+<script src="assets/tracking.js" defer></script>
+</body>
+</html>
