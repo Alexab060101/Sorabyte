@@ -84,7 +84,11 @@ nav a:hover { color: var(--white); }
   overflow: hidden;
 }
 .hero-bg { position: absolute; inset: 0; }
-/* Aurora layer */
+/* Vanta container */
+.vanta-hero { position: absolute; inset: 0; z-index: 0; }
+.hero-overlay-beams { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+
+/* Aurora layer (removed — replaced by Vanta) */
 .aurora-layer {
   position: absolute; inset: -50%; width: 200%; height: 200%;
   background:
