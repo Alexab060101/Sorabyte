@@ -214,6 +214,14 @@ nav a:hover { color: var(--white); }
 .service-list { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 36px; }
 .service-list li { font-size: 0.84rem; color: rgba(248,248,248,0.68); display: flex; align-items: center; gap: 10px; }
 .service-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--purple-lt); flex-shrink: 0; }
+.service-guarantee {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.25);
+  border-radius: 12px; padding: 14px 16px; margin-bottom: 24px;
+}
+.guarantee-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.service-guarantee strong { font-size: 0.82rem; font-weight: 700; color: var(--white); display: block; margin-bottom: 4px; }
+.service-guarantee p { font-size: 0.76rem; color: var(--muted); line-height: 1.55; margin: 0; }
 .service-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 24px; }
 .service-price { font-size: 0.82rem; color: var(--muted); }
 .service-price strong { font-size: 1.15rem; font-weight: 700; color: var(--white); }
