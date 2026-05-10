@@ -403,27 +403,42 @@ window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
-// Demo modal (portfolio cards)
+// Demo modal (portfolio cards) — al cerrar recarga la pagina y vuelve al scroll guardado
 const demoModal     = document.getElementById('demoModal');
 const demoFrame     = document.getElementById('demoModalFrame');
 const demoNameEl    = document.getElementById('demoModalName');
 const demoCloseBtn  = document.getElementById('demoModalClose');
+
+// Restaurar scroll si volvemos de una demo
+window.history.scrollRestoration = 'manual';
+const savedY = sessionStorage.getItem('sorabyte:scrollY');
+if (savedY !== null) {
+  sessionStorage.removeItem('sorabyte:scrollY');
+  window.addEventListener('load', () => {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: parseInt(savedY, 10), behavior: 'instant' });
+    });
+  });
+}
+
 document.querySelectorAll('.portfolio-link[data-demo]').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
     const slug = link.dataset.demo;
-    const name = link.dataset.name || 'Demo';
+    const name = link.dataset.name || 'Proyecto';
     demoFrame.src = `demo/${slug}/index.html`;
     demoNameEl.textContent = name;
     demoModal.showModal();
     document.body.style.overflow = 'hidden';
   });
 });
+
 function closeDemo() {
-  demoModal.close();
-  demoFrame.src = 'about:blank';
-  document.body.style.overflow = '';
+  // Guardar posicion y recargar para refresh limpio
+  sessionStorage.setItem('sorabyte:scrollY', String(window.scrollY));
+  window.location.reload();
 }
+
 demoCloseBtn.addEventListener('click', closeDemo);
 demoModal.addEventListener('click', e => {
   if (e.target === demoModal) closeDemo();
