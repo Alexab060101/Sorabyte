@@ -16,6 +16,9 @@
 </head>
 <body>
 
+<!-- VANTA BACKGROUND GLOBAL -->
+<div id="vanta-bg" class="vanta-bg"></div>
+
 <!-- CURSOR -->
 <div id="cursor-ring" class="cursor-ring"></div>
 <div id="cursor-dot" class="cursor-dot"></div>
@@ -37,7 +40,6 @@
 <!-- HERO STICKY WRAPPER -->
 <div class="hero-sticky-wrapper">
 <section class="hero" id="hero">
-  <div id="vanta-hero" class="vanta-hero"></div>
   <div class="hero-grid-overlay"></div>
   <div class="noise"></div>
   <div class="hero-inner">
@@ -285,9 +287,9 @@
 </footer>
 
 <script>
-// Hero Vanta Globe
+// Vanta Globe global (fondo de toda la pagina)
 VANTA.GLOBE({
-  el: '#vanta-hero', mouseControls: true, touchControls: true,
+  el: '#vanta-bg', mouseControls: true, touchControls: true,
   backgroundColor: 0x080808, color: 0x7C3AED,
   color2: 0x3b0080, size: 1.1, speed: 1.2
 });
