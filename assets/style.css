@@ -16,9 +16,8 @@
 }
 
 /* === BASE === */
-html { scroll-behavior: smooth; background: var(--bg); }
-body { background: transparent; color: var(--white); font-family: 'Inter', sans-serif; }
-header, .hero-sticky-wrapper, .stats-bar, .section, .portfolio-h, .cta-s, footer { position: relative; z-index: 1; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; }
 @media (pointer: fine) { body { cursor: none; } a, button { cursor: none; } }
 
 /* === CUSTOM CURSOR === */
@@ -91,11 +90,6 @@ nav a:hover { color: var(--white); }
 }
 .hero-bg { position: absolute; inset: 0; }
 .vanta-hero { position: absolute; inset: 0; z-index: 0; }
-.vanta-bg {
-  position: fixed; inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
 .hero-grid-overlay {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
@@ -332,7 +326,7 @@ nav a:hover { color: var(--white); }
   display: flex; align-items: center; justify-content: center; gap: 64px;
   padding: 44px 6vw;
   border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-  background: transparent;
+  background: rgba(255,255,255,0.015);
 }
 .stat { text-align: center; }
 .stat-val { display: flex; align-items: baseline; justify-content: center; gap: 2px; }
@@ -362,7 +356,7 @@ nav a:hover { color: var(--white); }
 .reveal-hero { opacity: 0; }
 
 /* === SERVICIOS === */
-.servicios-s { background: transparent; }
+.servicios-s { background: var(--bg); }
 .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .service-card {
   position: relative; overflow: hidden;
@@ -409,7 +403,7 @@ nav a:hover { color: var(--white); }
 /* === PORTFOLIO HORIZONTAL === */
 .portfolio-h {
   position: relative;
-  background: transparent;
+  background: rgba(255,255,255,0.012);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: 100px 0 80px;
@@ -664,7 +658,7 @@ nav a:hover { color: var(--white); }
 }
 
 /* === PROCESO === */
-.proceso-s { background: transparent; }
+.proceso-s { background: var(--bg); }
 .proceso-steps { display: flex; align-items: stretch; gap: 0; }
 .paso {
   flex: 1; background: var(--bg-card); border: 1px solid var(--border);
