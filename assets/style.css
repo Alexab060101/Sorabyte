@@ -61,20 +61,60 @@ nav a:hover { color: var(--white); }
   overflow: hidden;
 }
 .hero-bg { position: absolute; inset: 0; }
-.orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
-.orb-1 { width: 750px; height: 750px; background: rgba(124,58,237,0.65); top: -280px; left: -180px; animation: orbFloat 12s ease-in-out infinite; }
-.orb-2 { width: 550px; height: 550px; background: rgba(59,130,246,0.35); bottom: -150px; right: 100px; animation: orbFloat 15s ease-in-out infinite reverse; }
-.orb-3 { width: 400px; height: 400px; background: rgba(201,162,84,0.28); top: 30%; right: 10%; animation: orbFloat 9s ease-in-out infinite; animation-delay: -5s; }
-.orb-4 { width: 300px; height: 300px; background: rgba(236,72,153,0.22); top: 60%; left: 30%; animation: orbFloat 11s ease-in-out infinite reverse; animation-delay: -3s; }
+/* Aurora layer */
+.aurora-layer {
+  position: absolute; inset: -50%; width: 200%; height: 200%;
+  background:
+    radial-gradient(ellipse 55% 55% at 20% 45%, rgba(124,58,237,0.75) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 65% at 78% 25%, rgba(236,72,153,0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 55% 85%, rgba(201,162,84,0.45) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 8% 75%,  rgba(59,130,246,0.45) 0%, transparent 60%);
+  filter: blur(55px);
+  animation: auroraDrift 8s ease-in-out infinite alternate;
+}
+@keyframes auroraDrift {
+  0%   { transform: translate(0,0) rotate(0deg) scale(1); }
+  100% { transform: translate(-8%,4%) rotate(4deg) scale(1.06); }
+}
+
+/* Morphing blob near photo */
+.morph-blob {
+  position: absolute; width: 560px; height: 560px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.55), rgba(236,72,153,0.35));
+  filter: blur(90px); pointer-events: none;
+  right: -80px; top: 50%; transform: translateY(-50%);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: blobMorph 9s ease-in-out infinite alternate;
+}
+@keyframes blobMorph {
+  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%  { border-radius: 50% 60% 30% 60% / 30% 40% 60% 50%; }
+  75%  { border-radius: 60% 40% 60% 40% / 40% 50% 60% 30%; }
+  100% { border-radius: 40% 60% 40% 60% / 60% 40% 50% 60%; }
+}
+
+/* Sweeping light beams */
+.light-beam {
+  position: absolute; top: -10%; width: 3px; height: 120%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(159,103,255,0.6) 40%, rgba(201,162,84,0.4) 60%, transparent 100%);
+  filter: blur(6px); pointer-events: none;
+  animation: beamSweep 8s ease-in-out infinite;
+}
+.beam-2 { animation: beamSweep 8s ease-in-out infinite; animation-delay: -4s; opacity: 0.6; }
+@keyframes beamSweep {
+  0%   { left: -5%; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { left: 105%; opacity: 0; }
+}
+
+/* Dot grid */
 .hero-grid {
   position: absolute; inset: 0; pointer-events: none;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
   background-size: 40px 40px;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
-}
-@keyframes orbFloat {
-  0%, 100% { transform: translate(0,0) scale(1); }
-  50%       { transform: translate(24px,-24px) scale(1.06); }
+  mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
 }
 .noise {
   position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.04;
@@ -136,10 +176,50 @@ nav a:hover { color: var(--white); }
   50%       { opacity: 0.4; }
 }
 .hero-h1 {
+  position: relative;
   font-size: clamp(3.2rem, 7.5vw, 7rem);
   font-weight: 800; line-height: 1.04;
   letter-spacing: -0.03em; color: var(--white);
   margin-bottom: 24px;
+  animation: glitchFire 6s infinite;
+}
+.hero-h1::before, .hero-h1::after {
+  content: attr(data-text);
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  font-size: inherit; font-weight: inherit; line-height: inherit;
+  letter-spacing: inherit; white-space: pre-wrap;
+  pointer-events: none;
+}
+.hero-h1::before {
+  color: var(--purple-lt); opacity: 0;
+  animation: glitchTop 6s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 38%, 0 38%);
+}
+.hero-h1::after {
+  color: var(--gold); opacity: 0;
+  animation: glitchBot 6s infinite 0.08s;
+  clip-path: polygon(0 62%, 100% 62%, 100% 100%, 0 100%);
+}
+@keyframes glitchFire {
+  0%,88%,100% { transform: none; }
+  89% { transform: translate(-3px,0); }
+  90% { transform: translate(3px,0); }
+  91% { transform: translate(0); }
+  93% { transform: translate(2px,1px); }
+  94% { transform: none; }
+}
+@keyframes glitchTop {
+  0%,88%,100% { opacity:0; transform:none; }
+  89% { opacity:0.8; transform:translate(-4px,-2px); }
+  90% { opacity:0.8; transform:translate(4px,0); }
+  91% { opacity:0; }
+}
+@keyframes glitchBot {
+  0%,88%,100% { opacity:0; transform:none; }
+  89% { opacity:0.7; transform:translate(4px,2px); }
+  90% { opacity:0.7; transform:translate(-4px,0); }
+  91% { opacity:0; }
 }
 .hero-h1 em {
   font-style: normal;
