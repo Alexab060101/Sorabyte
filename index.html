@@ -57,8 +57,9 @@
     </div>
     <div class="hero-photo-wrap reveal-hero">
       <div class="hero-photo-inner">
-        <span class="photo-placeholder-icon">👤</span>
-        <span class="photo-placeholder-text">Tu foto aquí</span>
+        <img src="assets/alex.png" alt="Alex" class="hero-photo-layer hero-photo-img active" id="heroImg">
+        <video class="hero-photo-layer hero-photo-vid" id="heroVid"
+               src="assets/alex-video.mp4" muted playsinline preload="auto" loop></video>
       </div>
       <div class="photo-accent photo-accent-1"></div>
       <div class="photo-accent photo-accent-2"></div>
@@ -69,71 +70,6 @@
     <span>scroll</span>
   </div>
 
-</section>
-
-<!-- ════════════ FOTO · 4 OPCIONES DISRUPTIVAS ════════════ -->
-<section class="section photo-options" id="photo-options">
-  <div class="section-inner">
-    <span class="eyebrow">Elige tu hero</span>
-    <h2 class="section-h">4 formas de<br><em>verme en grande.</em></h2>
-    <p class="photo-options-intro">Pasa el ratón por cada una. Dime qué número quieres y la dejo solo esa en el hero.</p>
-
-    <div class="photo-grid">
-
-      <!-- OPCIÓN 1: FLOATING BREATHING -->
-      <div class="photo-option po-1">
-        <span class="po-label">Opción 1 · Floating + breathing</span>
-        <div class="po-1-stage">
-          <div class="po-1-glow"></div>
-          <img src="assets/alex.png" alt="Alex" class="po-1-img">
-        </div>
-        <p class="po-desc">Tu foto flota suavemente arriba/abajo y rota un par de grados. Un halo púrpura "respira" detrás. Continuo, sin parar. Estilo Apple keynote.</p>
-      </div>
-
-      <!-- OPCIÓN 2: MARQUEE FILM STRIP -->
-      <div class="photo-option po-2">
-        <span class="po-label">Opción 2 · Marquee infinito</span>
-        <div class="po-2-stage">
-          <div class="po-2-track">
-            <img src="assets/alex.png" alt="Alex">
-            <img src="assets/alex.png" alt="Alex">
-            <img src="assets/alex.png" alt="Alex">
-            <img src="assets/alex.png" alt="Alex">
-            <img src="assets/alex.png" alt="Alex">
-            <img src="assets/alex.png" alt="Alex">
-            <img src="assets/alex.png" alt="Alex">
-            <img src="assets/alex.png" alt="Alex">
-          </div>
-        </div>
-        <p class="po-desc">Múltiples copias tuyas desfilando horizontalmente sin parar, como una tira de película. Bold, agencia, muy disruptivo.</p>
-      </div>
-
-      <!-- OPCIÓN 3: MAGNETIC LAZY-FOLLOW -->
-      <div class="photo-option po-3" id="po3">
-        <div class="po-3-stage" id="po3-stage">
-          <span class="po-label">Opción 3 · Magnético lazy</span>
-          <div class="po-3-card" id="po3-card">
-            <img src="assets/alex.png" alt="Alex">
-          </div>
-        </div>
-        <p class="po-desc">Tu foto sigue al cursor con retardo elástico, como si tuviera peso. Cuando no mueves el ratón, hace un bob suave. Premium e interactivo.</p>
-      </div>
-
-      <!-- OPCIÓN 4: WALK-IN LOOP -->
-      <div class="photo-option po-4">
-        <span class="po-label">Opción 4 · Walk-in loop</span>
-        <div class="po-4-stage">
-          <span class="po-4-bg-text">SORABYTE</span>
-          <img src="assets/alex.png" alt="Alex" class="po-4-img">
-          <div class="po-4-trail po-4-trail-1"></div>
-          <div class="po-4-trail po-4-trail-2"></div>
-          <div class="po-4-trail po-4-trail-3"></div>
-        </div>
-        <p class="po-desc">Tu foto entra desde la izquierda con 3 ghost trails detrás, llega al centro, se queda 2s, sale por la derecha. Loop infinito. Cinemático.</p>
-      </div>
-
-    </div>
-  </div>
 </section>
 
 <!-- STATS -->
@@ -450,25 +386,23 @@ window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
-// Opcion 3: magnético lazy-follow (foto sigue cursor con retardo)
-const po3Stage = document.getElementById('po3-stage');
-const po3Card  = document.getElementById('po3-card');
-if (po3Stage && po3Card && window.matchMedia('(pointer: fine)').matches) {
-  let mx = 0, my = 0, x = 0, y = 0;
-  const r = () => po3Stage.getBoundingClientRect();
-  po3Stage.addEventListener('mousemove', e => {
-    const box = r();
-    mx = (e.clientX - box.left - box.width  / 2) * 0.45;
-    my = (e.clientY - box.top  - box.height / 2) * 0.45;
-  });
-  po3Stage.addEventListener('mouseleave', () => { mx = 0; my = 0; });
-  (function loop() {
-    x += (mx - x) * 0.08;
-    y += (my - y) * 0.08;
-    const rot = x * 0.06;
-    po3Card.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
-    requestAnimationFrame(loop);
-  })();
+// Hero foto -> video al primer scroll (mismo patron que lacados)
+const heroImg = document.getElementById('heroImg');
+const heroVid = document.getElementById('heroVid');
+if (heroImg && heroVid) {
+  let triggered = false;
+  function fireVideo() {
+    if (triggered) return;
+    triggered = true;
+    heroVid.classList.add('active');
+    heroImg.classList.remove('active');
+    heroVid.play().catch(() => {});
+    window.removeEventListener('scroll', onScroll);
+  }
+  function onScroll() {
+    if (window.scrollY > 60) fireVideo();
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
 }
 
 // Tabs servicios
