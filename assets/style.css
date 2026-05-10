@@ -475,16 +475,16 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   nav a { font-size: 1.3rem; color: var(--white) !important; }
   .hamburger { display: flex; z-index: 100; }
 
-  /* Hero respira en movil — sin foto, todo centrado, mucho aire */
+  /* Hero respira en movil — foto avatar arriba, todo centrado */
   .hero {
     height: auto; min-height: 100svh;
-    padding: 130px 0 130px;
+    padding: 110px 0 120px;
     align-items: center;
   }
   .hero-inner {
-    flex-direction: column;
-    gap: 0;
-    padding: 0 26px;
+    flex-direction: column-reverse;
+    gap: 28px;
+    padding: 0 24px;
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -496,35 +496,61 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
     align-items: center;
   }
   .hero-tag {
-    font-size: 0.7rem;
-    padding: 7px 16px;
-    margin-bottom: 32px;
+    font-size: 0.68rem;
+    padding: 6px 14px;
+    margin-bottom: 22px;
   }
   .hero-h1 {
-    font-size: clamp(2.6rem, 11vw, 3.8rem);
+    font-size: clamp(2.4rem, 10vw, 3.4rem);
     line-height: 1.08;
-    margin-bottom: 28px;
+    margin-bottom: 22px;
     letter-spacing: -0.02em;
   }
   .hero-sub {
-    font-size: 1rem;
-    line-height: 1.65;
-    margin-bottom: 40px;
-    max-width: 90%;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 88%;
   }
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
-    gap: 0;
+    gap: 10px;
     width: 100%;
   }
-  .hero-actions .btn-primary {
+  .hero-actions .btn-primary,
+  .hero-actions .btn-ghost {
     width: 100%; text-align: center;
-    padding: 17px 22px;
-    font-size: 0.95rem;
+    padding: 15px 22px;
+    font-size: 0.92rem;
   }
-  .hero-actions .btn-ghost { display: none; }
-  .hero-photo-wrap { display: none; }
+
+  /* Foto = avatar circular arriba */
+  .hero-photo-wrap {
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    margin-bottom: 4px;
+  }
+  .hero-photo-wrap::before {
+    inset: -2px; border-radius: 50%;
+  }
+  .hero-photo-inner {
+    border-radius: 50%;
+    flex-direction: row;
+    gap: 0;
+  }
+  .photo-placeholder-icon { font-size: 2.4rem; opacity: 0.35; }
+  .photo-placeholder-text { display: none; }
+  .photo-accent-1 {
+    width: 90px; height: 90px;
+    top: -20px; right: -20px;
+    filter: blur(28px);
+  }
+  .photo-accent-2 {
+    width: 70px; height: 70px;
+    bottom: -15px; left: -15px;
+    filter: blur(24px);
+  }
 
   .section { padding: 72px 20px; }
   .services-grid { grid-template-columns: 1fr; }
