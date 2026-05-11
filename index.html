@@ -34,7 +34,8 @@
   <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
 </header>
 
-<!-- HERO -->
+<!-- HERO STICKY WRAPPER -->
+<div class="hero-sticky-wrapper" id="heroWrapper">
 <section class="hero" id="hero">
   <div id="vanta-hero" class="vanta-hero"></div>
   <div class="hero-grid-overlay"></div>
@@ -71,6 +72,7 @@
   </div>
 
 </section>
+</div>
 
 <!-- STATS -->
 <div class="stats-bar">
@@ -354,33 +356,6 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('up'); io.unobserve(e.target); }});
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-// Hero pin (solo desktop) - GSAP ScrollTrigger pinea hero 1500px
-if (window.matchMedia('(min-width: 769px)').matches) {
-  const heroEl   = document.querySelector('.hero');
-  const heroText = document.querySelector('.hero-text');
-  const heroPic  = document.querySelector('.hero-photo-wrap');
-  if (heroEl) {
-    ScrollTrigger.create({
-      trigger: heroEl,
-      start: 'top top',
-      end: '+=1500',
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-      onUpdate: self => {
-        const p = self.progress;
-        if (heroText) {
-          heroText.style.opacity   = (1 - p * 0.6).toFixed(2);
-          heroText.style.transform = `translateY(${-p * 60}px)`;
-        }
-        if (heroPic) {
-          heroPic.style.transform = `scale(${1 + p * 0.18})`;
-        }
-      }
-    });
-  }
-}
 
 // Portfolio horizontal pin scroll (solo desktop)
 if (window.matchMedia('(min-width: 769px)').matches) {
