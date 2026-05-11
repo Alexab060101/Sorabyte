@@ -584,12 +584,47 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     </div>
   </div>
 </div>
-<a href="https://wa.me/34640973182?text=Hola%20Alex%2C%20vi%20tu%20web%20y%20me%20interesa"
-   target="_blank" rel="noopener"
+<button type="button"
    class="alex-mascot-pill" id="alexMascotPill"
-   aria-label="Hablar con Alex por WhatsApp">
+   aria-label="Abrir chat con Alex"
+   aria-expanded="false">
   <span class="alex-mascot-pill__logo">S</span>
-</a>
+  <span class="alex-mascot-pill__x" aria-hidden="true">×</span>
+</button>
+
+<div class="alex-chat" id="alexChat" role="dialog" aria-modal="false" aria-labelledby="alexChatTitle" aria-hidden="true">
+  <div class="alex-chat__header">
+    <div class="alex-chat__avatar">
+      <img src="assets/Gemini_Generated_Image___1_-removebg-preview.png" alt="" loading="lazy">
+    </div>
+    <div class="alex-chat__info">
+      <span class="alex-chat__name" id="alexChatTitle">Alex · Sorabyte</span>
+      <span class="alex-chat__status">
+        <span class="alex-chat__status-dot"></span> en línea
+      </span>
+    </div>
+    <button type="button" class="alex-chat__close" id="alexChatClose" aria-label="Cerrar chat">×</button>
+  </div>
+  <div class="alex-chat__body" id="alexChatBody">
+    <div class="alex-chat__msg alex-chat__msg--in">
+      ¡Hola! 👋 Soy Alex, fundador de Sorabyte.
+      <span class="alex-chat__time">ahora</span>
+    </div>
+    <div class="alex-chat__msg alex-chat__msg--in">
+      Cuéntame qué necesitas (web, Meta Ads, automatización) y te respondo en menos de 1h por WhatsApp.
+      <span class="alex-chat__time">ahora</span>
+    </div>
+  </div>
+  <form class="alex-chat__form" id="alexChatForm">
+    <input type="text" class="alex-chat__input" id="alexChatInput"
+      placeholder="Escribe tu mensaje…" autocomplete="off" maxlength="500">
+    <button type="submit" class="alex-chat__send" aria-label="Enviar por WhatsApp">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" aria-hidden="true">
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+      </svg>
+    </button>
+  </form>
+</div>
 <script>
 (function(){
   const mascot   = document.getElementById('alexMascot');
@@ -670,6 +705,35 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     e.stopPropagation();
     fadeBubble();
     setTimeout(leaveMascot, 500);
+  });
+
+  // ───────────── CHAT WHATSAPP-STYLE ─────────────
+  const chatEl    = document.getElementById('alexChat');
+  const chatClose = document.getElementById('alexChatClose');
+  const chatForm  = document.getElementById('alexChatForm');
+  const chatInput = document.getElementById('alexChatInput');
+
+  function toggleChat(forceOpen) {
+    const open = (typeof forceOpen === 'boolean') ? forceOpen : !chatEl.classList.contains('is-open');
+    chatEl.classList.toggle('is-open', open);
+    pill.classList.toggle('is-active', open);
+    pill.setAttribute('aria-expanded', open ? 'true' : 'false');
+    chatEl.setAttribute('aria-hidden', open ? 'false' : 'true');
+    if (open) setTimeout(() => chatInput.focus(), 220);
+  }
+
+  pill.addEventListener('click', () => toggleChat());
+  chatClose.addEventListener('click', () => toggleChat(false));
+
+  chatForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const text = chatInput.value.trim();
+    const msg = text || 'Hola Alex, vi tu web y me interesa';
+    window.open('https://wa.me/34640973182?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && chatEl.classList.contains('is-open')) toggleChat(false);
   });
 })();
 </script>

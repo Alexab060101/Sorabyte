@@ -1395,3 +1395,196 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   .alex-mascot-pill__logo{ font-size:28px; }
 }
 
+/* X aparece cuando el chat está abierto */
+.alex-mascot-pill{ border:none; cursor:pointer; padding:0; }
+.alex-mascot-pill__x{
+  display:none;
+  font-size:34px;
+  font-weight:300;
+  line-height:1;
+  color:#fff;
+  pointer-events:none;
+}
+.alex-mascot-pill.is-active .alex-mascot-pill__logo{ display:none; }
+.alex-mascot-pill.is-active .alex-mascot-pill__x{ display:block; }
+.alex-mascot-pill.is-active{ animation:none; }
+
+/* ============================================
+   CHAT WHATSAPP-STYLE
+   ============================================ */
+.alex-chat{
+  position:fixed;
+  right:22px;
+  bottom:96px;
+  width:360px;
+  max-width:calc(100vw - 28px);
+  height:540px;
+  max-height:calc(100vh - 130px);
+  background:#ECE5DD;
+  border-radius:14px;
+  z-index:9999;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  box-shadow:0 24px 70px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06);
+  opacity:0;
+  transform:translateY(16px) scale(.95);
+  transform-origin:bottom right;
+  pointer-events:none;
+  transition:opacity .3s ease, transform .35s cubic-bezier(.34,1.45,.64,1);
+}
+.alex-chat.is-open{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  pointer-events:auto;
+}
+
+.alex-chat__header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px 14px;
+  background:#075E54;
+  color:#fff;
+  flex-shrink:0;
+}
+.alex-chat__avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#128C7E;
+  overflow:hidden;
+  flex-shrink:0;
+}
+.alex-chat__avatar img{
+  width:140%;
+  height:140%;
+  object-fit:cover;
+  object-position:50% 8%;
+  margin-left:-20%;
+  margin-top:-5%;
+  display:block;
+}
+.alex-chat__info{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-width:0;
+  line-height:1.2;
+}
+.alex-chat__name{
+  font-family:'Inter', sans-serif;
+  font-weight:600;
+  font-size:.95rem;
+  color:#fff;
+}
+.alex-chat__status{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  font-size:.72rem;
+  color:rgba(255,255,255,.85);
+  margin-top:2px;
+}
+.alex-chat__status-dot{
+  width:7px; height:7px; border-radius:50%;
+  background:#4FCE5D;
+  box-shadow:0 0 0 2px rgba(79,206,93,.25);
+}
+.alex-chat__close{
+  background:rgba(255,255,255,.12);
+  border:none;
+  color:#fff;
+  width:30px; height:30px;
+  border-radius:50%;
+  font-size:18px;
+  line-height:1;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .2s ease;
+  padding:0;
+  flex-shrink:0;
+}
+.alex-chat__close:hover{ background:rgba(255,255,255,.24); }
+
+.alex-chat__body{
+  flex:1;
+  padding:16px 12px;
+  overflow-y:auto;
+  background:
+    linear-gradient(rgba(229,221,213,.94), rgba(229,221,213,.94)),
+    repeating-linear-gradient(45deg, transparent 0 10px, rgba(0,0,0,.025) 10px 20px);
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.alex-chat__msg{
+  max-width:82%;
+  padding:8px 12px 22px;
+  border-radius:8px;
+  font-family:'Inter', sans-serif;
+  font-size:.86rem;
+  line-height:1.42;
+  color:#303030;
+  position:relative;
+  word-wrap:break-word;
+  box-shadow:0 1px 1px rgba(0,0,0,.08);
+}
+.alex-chat__msg--in{
+  align-self:flex-start;
+  background:#fff;
+  border-top-left-radius:0;
+}
+.alex-chat__time{
+  position:absolute;
+  bottom:4px;
+  right:8px;
+  font-size:.62rem;
+  color:rgba(0,0,0,.4);
+  font-weight:500;
+}
+
+.alex-chat__form{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px;
+  background:#F0F0F0;
+  flex-shrink:0;
+}
+.alex-chat__input{
+  flex:1;
+  border:none;
+  background:#fff;
+  border-radius:20px;
+  padding:10px 14px;
+  font-family:'Inter', sans-serif;
+  font-size:.9rem;
+  color:#303030;
+  outline:none;
+  min-width:0;
+}
+.alex-chat__input::placeholder{ color:rgba(0,0,0,.4); }
+.alex-chat__send{
+  background:#25D366;
+  border:none;
+  width:42px; height:42px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  transition:background .2s ease, transform .2s ease;
+  flex-shrink:0;
+  padding:0;
+}
+.alex-chat__send:hover{ background:#1faa53; transform:scale(1.06); }
+
+@media (max-width: 768px){
+  .alex-chat{
+    width:calc(100vw - 20px);
+    right:10px;
+    bottom:78px;
+    height:auto;
+    max-height:calc(100vh - 110px);
+  }
+}
+
