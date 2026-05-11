@@ -1220,15 +1220,11 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   bottom:0;
   width:200px;
   height:240px;
-  transform:translateX(110%) rotate(-32deg);
-  transform-origin:88% 100%;
+  transform:translateX(110%);
   filter:drop-shadow(10px 14px 24px rgba(0,0,0,.45));
 }
 .alex-mascot.is-visible .alex-mascot__char{
   animation:mascotEnter 1.15s cubic-bezier(.34,1.4,.64,1) forwards;
-}
-.alex-mascot.is-waving .alex-mascot__char{
-  animation:mascotWave .5s ease-in-out infinite alternate;
 }
 .alex-mascot__img{
   width:100%;
@@ -1238,17 +1234,13 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   display:block;
   pointer-events:none;
   user-select:none;
+  mix-blend-mode:screen;
 }
 
 @keyframes mascotEnter{
-  0%   { transform:translateX(110%) rotate(-32deg) translateY(0); }
-  55%  { transform:translateX(-8px) rotate(-4deg)  translateY(-4px); }
-  78%  { transform:translateX(4px)  rotate(-12deg) translateY(0); }
-  100% { transform:translateX(0)    rotate(-7deg)  translateY(0); }
-}
-@keyframes mascotWave{
-  from { transform:translateX(0) rotate(-5deg)  translateY(0); }
-  to   { transform:translateX(0) rotate(-13deg) translateY(-3px); }
+  0%   { transform:translateX(110%); }
+  60%  { transform:translateX(-6px); }
+  100% { transform:translateX(0); }
 }
 
 .alex-mascot__bubble{
