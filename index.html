@@ -34,8 +34,7 @@
   <button class="hamburger" aria-label="Menú"><span></span><span></span><span></span></button>
 </header>
 
-<!-- HERO STICKY WRAPPER -->
-<div class="hero-sticky-wrapper">
+<!-- HERO -->
 <section class="hero" id="hero">
   <div id="vanta-hero" class="vanta-hero"></div>
   <div class="hero-grid-overlay"></div>
@@ -72,7 +71,6 @@
   </div>
 
 </section>
-</div>
 
 <!-- STATS -->
 <div class="stats-bar">
@@ -356,6 +354,39 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('up'); io.unobserve(e.target); }});
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Hero pin scroll (solo desktop) — pinea hero 100vh con parallax interno
+if (window.matchMedia('(min-width: 769px)').matches) {
+  const heroEl = document.querySelector('.hero');
+  if (heroEl) {
+    ScrollTrigger.create({
+      trigger: heroEl,
+      start: 'top top',
+      end: '+=100%',
+      pin: true,
+      pinSpacing: true
+    });
+    // Parallax interno: foto crece, texto se desvanece y sube
+    gsap.to('.hero-text', {
+      y: -80, opacity: 0.3, ease: 'none',
+      scrollTrigger: {
+        trigger: heroEl,
+        start: 'top top',
+        end: '+=100%',
+        scrub: 0.5
+      }
+    });
+    gsap.to('.hero-photo-wrap', {
+      scale: 1.15, ease: 'none',
+      scrollTrigger: {
+        trigger: heroEl,
+        start: 'top top',
+        end: '+=100%',
+        scrub: 0.5
+      }
+    });
+  }
+}
 
 // Portfolio horizontal pin scroll (solo desktop)
 if (window.matchMedia('(min-width: 769px)').matches) {
