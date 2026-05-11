@@ -1195,6 +1195,12 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
 }
 .alex-mascot.is-visible{ opacity:1; pointer-events:auto; }
 .alex-mascot.is-dismissed{ opacity:0; pointer-events:none; transform:translateX(30px); transition:opacity .35s, transform .35s; }
+.alex-mascot.is-leaving{
+  opacity:0;
+  transform:translateX(80px);
+  pointer-events:none;
+  transition:opacity .55s ease, transform .7s cubic-bezier(.5,.05,.7,0);
+}
 
 .alex-mascot__inner{
   display:flex;
@@ -1333,5 +1339,49 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   }
   .alex-mascot__bubble-cta{ font-size:.7rem; }
   .alex-mascot__close{ width:24px; height:24px; font-size:14px; }
+}
+
+/* ============================================
+   PILL persistente (post-saludo)
+   ============================================ */
+.alex-mascot-pill{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  background:linear-gradient(135deg, #7C3AED 0%, #A78BFA 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9998;
+  box-shadow:0 14px 32px rgba(124,58,237,.5), 0 0 0 1px rgba(255,255,255,.12);
+  text-decoration:none;
+  opacity:0;
+  transform:scale(.4);
+  pointer-events:none;
+  transition:opacity .5s ease, transform .55s cubic-bezier(.34,1.45,.64,1);
+}
+.alex-mascot-pill.is-visible{
+  opacity:1;
+  transform:scale(1);
+  pointer-events:auto;
+  animation:mascotPillPulse 2.4s ease-in-out 1.6s infinite;
+}
+.alex-mascot-pill:hover{ transform:scale(1.08); }
+.alex-mascot-pill__logo{
+  width:30px;
+  height:30px;
+  filter:brightness(0) invert(1);
+  pointer-events:none;
+}
+@keyframes mascotPillPulse{
+  0%, 100% { box-shadow:0 14px 32px rgba(124,58,237,.5), 0 0 0 0 rgba(167,139,250,.55); }
+  60%      { box-shadow:0 14px 32px rgba(124,58,237,.55), 0 0 0 16px rgba(167,139,250,0); }
+}
+@media (max-width: 768px){
+  .alex-mascot-pill{ width:54px; height:54px; right:14px; bottom:14px; }
+  .alex-mascot-pill__logo{ width:26px; height:26px; }
 }
 

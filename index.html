@@ -571,7 +571,7 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   <div class="alex-mascot__inner" id="alexMascotInner" role="button" tabindex="0" aria-label="Hablar con Alex por WhatsApp">
     <div class="alex-mascot__peek">
       <div class="alex-mascot__char">
-        <video class="alex-mascot__img" autoplay loop muted playsinline preload="auto" aria-label="Alex saludando">
+        <video class="alex-mascot__img" id="alexMascotVideo" muted playsinline preload="auto" aria-label="Alex saludando">
           <source src="assets/alex-mascot.webm" type="video/webm">
           <source src="assets/alex-mascot.mp4" type="video/mp4">
         </video>
@@ -584,36 +584,82 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     </div>
   </div>
 </div>
+<a href="https://wa.me/34640973182?text=Hola%20Alex%2C%20vi%20tu%20web%20y%20me%20interesa"
+   target="_blank" rel="noopener"
+   class="alex-mascot-pill" id="alexMascotPill"
+   aria-label="Hablar con Alex por WhatsApp">
+  <img src="assets/favicon.svg" alt="" class="alex-mascot-pill__logo">
+</a>
 <script>
 (function(){
-  if (sessionStorage.getItem('alex_mascot_dismissed')) return;
-  const mascot = document.getElementById('alexMascot');
-  const inner = document.getElementById('alexMascotInner');
+  const mascot   = document.getElementById('alexMascot');
+  const inner    = document.getElementById('alexMascotInner');
   const bubbleText = document.getElementById('alexBubbleText');
   const closeBtn = document.getElementById('alexMascotClose');
-  const text = '¡Hola! ¿Necesitas ayuda? Aquí estoy 👋';
-  const waUrl = 'https://wa.me/34640973182?text=Hola%20Alex%2C%20vi%20tu%20web%20y%20me%20interesa';
+  const video    = document.getElementById('alexMascotVideo');
+  const pill     = document.getElementById('alexMascotPill');
+  const text     = '¡Hola! ¿Necesitas ayuda? Aquí estoy 👋';
+  const waUrl    = 'https://wa.me/34640973182?text=Hola%20Alex%2C%20vi%20tu%20web%20y%20me%20interesa';
 
-  setTimeout(() => {
+  let triggered = false;
+  let leaving   = false;
+
+  function trigger() {
+    if (triggered) return;
+    triggered = true;
     mascot.classList.add('is-visible');
+    if (video) video.play().catch(() => {});
     setTimeout(() => {
-      mascot.classList.add('is-waving');
       let i = 0;
       const typer = setInterval(() => {
         bubbleText.textContent = text.slice(0, ++i);
         if (i >= text.length) clearInterval(typer);
       }, 45);
-    }, 1150);
-  }, 2500);
+    }, 1100);
+  }
 
+  function leaveToPill() {
+    if (leaving) return;
+    leaving = true;
+    mascot.classList.add('is-leaving');
+    setTimeout(() => {
+      mascot.style.display = 'none';
+      pill.classList.add('is-visible');
+    }, 750);
+  }
+
+  // Trigger cuando el usuario pasa el hero sticky y entra stats-bar
+  const trigEl = document.querySelector('.stats-bar') || document.querySelector('#servicios');
+  if (trigEl && 'IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) { trigger(); obs.disconnect(); }
+    }, { threshold: 0.12 });
+    obs.observe(trigEl);
+  } else {
+    // fallback: tras 1 viewport scrolleado
+    const onScroll = () => {
+      if (window.scrollY > window.innerHeight * 0.7) {
+        trigger();
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // Video termina → leave hacia pill
+  if (video) {
+    video.addEventListener('ended', () => setTimeout(leaveToPill, 1500));
+  }
+
+  // Click muñeco/bubble → WhatsApp
   const openWa = () => window.open(waUrl, '_blank', 'noopener');
   inner.addEventListener('click', openWa);
   inner.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openWa(); } });
 
+  // Close → leave hacia pill (NO sessionStorage, refresh = vuelve a salir)
   closeBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    mascot.classList.add('is-dismissed');
-    sessionStorage.setItem('alex_mascot_dismissed', '1');
+    leaveToPill();
   });
 })();
 </script>
