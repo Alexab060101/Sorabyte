@@ -1233,7 +1233,6 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   display:block;
   pointer-events:none;
   user-select:none;
-  mix-blend-mode:screen;
 }
 
 @keyframes mascotEnter{
