@@ -710,11 +710,10 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   .hamburger { display: flex; z-index: 100; }
 
   /* Hero respira en movil — foto avatar arriba, todo centrado */
-  .hero-sticky-wrapper { height: auto; }
+  .hero-sticky-wrapper { height: 200vh; }
   .hero {
-    position: relative;
-    height: auto; min-height: 100svh;
-    padding: 110px 0 120px;
+    height: 100vh; min-height: 100svh;
+    padding: 110px 0 80px;
     align-items: center;
   }
   .hero-inner {
