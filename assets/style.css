@@ -751,14 +751,15 @@ nav a:hover { color: var(--white); }
   border: 1px solid var(--border-lt);
   border-radius: 18px;
   overflow: hidden;
-  display: flex; flex-direction: column;
+  flex-direction: column;
   box-shadow: 0 50px 100px -20px rgba(0,0,0,0.85);
 }
+.demo-modal:not([open]) { display: none !important; }
+.demo-modal[open] { display: flex; }
 .demo-modal::backdrop {
   background: rgba(0,0,0,0.85);
   backdrop-filter: blur(8px);
 }
-.demo-modal[open] { display: flex; }
 .demo-modal-bar {
   display: flex; align-items: center; justify-content: space-between;
   background: linear-gradient(180deg, #161616, #0E0E0E);
@@ -983,10 +984,20 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
     scroll-snap-align: center;
   }
   .portfolio-mock { height: 180px; }
-  .proceso-steps { flex-direction: column; gap: 0; }
-  .paso { border-radius: 0; border-bottom: none; }
-  .paso:first-child { border-radius: 16px 16px 0 0; }
-  .paso:last-child  { border-radius: 0 0 16px 16px; border-bottom: 1px solid var(--border); }
+  .proceso-steps { flex-direction: column; gap: 12px; }
+  .paso {
+    opacity: 1 !important;
+    transform: none !important;
+    background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 28px 22px;
+  }
+  .paso:first-child,
+  .paso:last-child { border-radius: 16px; }
+  .paso-num { color: rgba(159,103,255,0.55); font-size: 2.2rem; margin-bottom: 12px; }
+  .paso h4 { color: #F8F8F8; }
+  .paso p { color: rgba(248,248,248,0.7); }
   .paso-arrow { display: none; }
   .stats-bar { gap: 32px; flex-wrap: wrap; padding: 36px 20px; }
   .stat-sep { display: none; }
@@ -1164,5 +1175,173 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   .tabs-footer { flex-direction: column; align-items: stretch; gap: 18px; }
   .tabs-footer .service-price { text-align: center; }
   .tabs-footer .btn-primary { width: 100%; text-align: center; }
+}
+
+/* ============================================
+   ALEX MASCOT POPUP — asomado por el lateral DERECHO
+   ============================================ */
+.alex-mascot{
+  position:fixed;
+  right:0;
+  left:auto;
+  bottom:14%;
+  z-index:9998;
+  display:flex;
+  align-items:flex-start;
+  gap:.4rem;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .4s ease;
+}
+.alex-mascot.is-visible{ opacity:1; pointer-events:auto; }
+.alex-mascot.is-dismissed{ opacity:0; pointer-events:none; transform:translateX(30px); transition:opacity .35s, transform .35s; }
+
+.alex-mascot__inner{
+  display:flex;
+  flex-direction:row-reverse;
+  align-items:flex-start;
+  gap:.4rem;
+  cursor:pointer;
+  outline:none;
+}
+.alex-mascot__inner:focus-visible .alex-mascot__bubble{ outline:2px solid #25D366; outline-offset:4px; }
+
+.alex-mascot__peek{
+  position:relative;
+  width:118px;
+  height:210px;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.alex-mascot__char{
+  position:absolute;
+  right:0;
+  bottom:0;
+  width:200px;
+  height:240px;
+  transform:translateX(110%) rotate(32deg);
+  transform-origin:12% 100%;
+  filter:drop-shadow(-10px 14px 24px rgba(0,0,0,.45));
+}
+.alex-mascot.is-visible .alex-mascot__char{
+  animation:mascotEnter 1.15s cubic-bezier(.34,1.4,.64,1) forwards;
+}
+.alex-mascot.is-waving .alex-mascot__char{
+  animation:mascotWave .5s ease-in-out infinite alternate;
+}
+.alex-mascot__img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:right bottom;
+  display:block;
+  pointer-events:none;
+  user-select:none;
+  transform:scaleX(-1);
+}
+
+@keyframes mascotEnter{
+  0%   { transform:translateX(110%) rotate(32deg) translateY(0); }
+  55%  { transform:translateX(-8px) rotate(4deg)  translateY(-4px); }
+  78%  { transform:translateX(4px)  rotate(12deg) translateY(0); }
+  100% { transform:translateX(0)    rotate(7deg)  translateY(0); }
+}
+@keyframes mascotWave{
+  from { transform:translateX(0) rotate(5deg)  translateY(0); }
+  to   { transform:translateX(0) rotate(13deg) translateY(-3px); }
+}
+
+.alex-mascot__bubble{
+  position:relative;
+  align-self:flex-start;
+  margin-top:18px;
+  background:#fff;
+  color:#0a0a0a;
+  padding:.95rem 1.15rem;
+  border-radius:18px 18px 4px 18px;
+  font-family:'Manrope', sans-serif;
+  font-size:.95rem;
+  line-height:1.45;
+  max-width:260px;
+  min-width:200px;
+  box-shadow:0 18px 50px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.08);
+  opacity:0;
+  transform:translateX(8px) scale(.9);
+  transform-origin:right center;
+  transition:opacity .4s ease 1.1s, transform .5s cubic-bezier(.34,1.45,.64,1) 1.1s;
+}
+.alex-mascot.is-visible .alex-mascot__bubble{
+  opacity:1;
+  transform:translateX(0) scale(1);
+}
+.alex-mascot__bubble::before{
+  content:'';
+  position:absolute;
+  top:18px;
+  right:-7px;
+  width:14px;
+  height:14px;
+  background:#fff;
+  transform:rotate(45deg);
+}
+.alex-mascot__bubble-text{
+  display:block;
+  font-weight:500;
+  min-height:1.45em;
+}
+.alex-mascot__bubble-cta{
+  display:block;
+  margin-top:.55rem;
+  padding-top:.55rem;
+  border-top:1px solid rgba(0,0,0,.08);
+  font-size:.78rem;
+  font-weight:700;
+  color:#1aa653;
+  letter-spacing:.02em;
+}
+
+.alex-mascot__close{
+  position:absolute;
+  top:-10px;
+  left:-10px;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  border:none;
+  background:#0a0a0a;
+  color:#fff;
+  font-size:15px;
+  font-weight:600;
+  line-height:1;
+  cursor:pointer;
+  z-index:3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transform:scale(.6);
+  transition:opacity .3s ease 1.3s, transform .3s ease 1.3s, background .2s ease;
+  padding:0;
+}
+.alex-mascot.is-visible .alex-mascot__close{
+  opacity:.85;
+  transform:scale(1);
+}
+.alex-mascot__close:hover{ opacity:1; background:#25D366; }
+
+@media (max-width: 768px){
+  .alex-mascot{ bottom:18%; }
+  .alex-mascot__peek{ width:88px; height:160px; }
+  .alex-mascot__char{ width:150px; height:185px; }
+  .alex-mascot__bubble{
+    max-width:200px;
+    min-width:160px;
+    font-size:.82rem;
+    padding:.7rem .85rem;
+    margin-top:12px;
+  }
+  .alex-mascot__bubble-cta{ font-size:.7rem; }
+  .alex-mascot__close{ width:24px; height:24px; font-size:14px; }
 }
 

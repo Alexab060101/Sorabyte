@@ -234,19 +234,19 @@
     <span class="eyebrow">Cómo trabajo</span>
     <h2 class="section-h">3 pasos.<br><em>Cero fricción.</em></h2>
     <div class="proceso-steps">
-      <div class="paso reveal">
+      <div class="paso">
         <span class="paso-num">01</span>
         <h4>Hablamos 5 min</h4>
         <p>WhatsApp, llamada o email. Me cuentas qué necesitas y te digo si encaja. Sin compromiso.</p>
       </div>
       <div class="paso-arrow">→</div>
-      <div class="paso reveal">
+      <div class="paso">
         <span class="paso-num">02</span>
         <h4>Lo lanzo</h4>
         <p>Web online en 3–5 días. Campaña de Meta Ads activa en 48 horas. Sin esperas.</p>
       </div>
       <div class="paso-arrow">→</div>
-      <div class="paso reveal">
+      <div class="paso">
         <span class="paso-num">03</span>
         <h4>Crecemos juntos</h4>
         <p>Medimos, ajustamos y escalamos lo que funciona. No desaparezco, sigo a tu lado.</p>
@@ -564,6 +564,55 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   nav.classList.remove('open');
   hamburger.classList.remove('active');
 }));
+</script>
+
+<!-- ALEX MASCOT POPUP -->
+<div class="alex-mascot" id="alexMascot">
+  <div class="alex-mascot__inner" id="alexMascotInner" role="button" tabindex="0" aria-label="Hablar con Alex por WhatsApp">
+    <div class="alex-mascot__peek">
+      <div class="alex-mascot__char">
+        <img src="assets/Gemini_Generated_Image___1_-removebg-preview.png" alt="Alex" class="alex-mascot__img">
+      </div>
+    </div>
+    <div class="alex-mascot__bubble">
+      <button class="alex-mascot__close" id="alexMascotClose" aria-label="Cerrar">×</button>
+      <span class="alex-mascot__bubble-text" id="alexBubbleText"></span>
+      <span class="alex-mascot__bubble-cta">Háblame por WhatsApp →</span>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  if (sessionStorage.getItem('alex_mascot_dismissed')) return;
+  const mascot = document.getElementById('alexMascot');
+  const inner = document.getElementById('alexMascotInner');
+  const bubbleText = document.getElementById('alexBubbleText');
+  const closeBtn = document.getElementById('alexMascotClose');
+  const text = '¡Hola! ¿Necesitas ayuda? Aquí estoy 👋';
+  const waUrl = 'https://wa.me/34640973182?text=Hola%20Alex%2C%20vi%20tu%20web%20y%20me%20interesa';
+
+  setTimeout(() => {
+    mascot.classList.add('is-visible');
+    setTimeout(() => {
+      mascot.classList.add('is-waving');
+      let i = 0;
+      const typer = setInterval(() => {
+        bubbleText.textContent = text.slice(0, ++i);
+        if (i >= text.length) clearInterval(typer);
+      }, 45);
+    }, 1150);
+  }, 2500);
+
+  const openWa = () => window.open(waUrl, '_blank', 'noopener');
+  inner.addEventListener('click', openWa);
+  inner.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openWa(); } });
+
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mascot.classList.add('is-dismissed');
+    sessionStorage.setItem('alex_mascot_dismissed', '1');
+  });
+})();
 </script>
 </body>
 </html>
