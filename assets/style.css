@@ -1221,7 +1221,6 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   width:200px;
   height:240px;
   transform:translateX(110%);
-  filter:drop-shadow(10px 14px 24px rgba(0,0,0,.45));
 }
 .alex-mascot.is-visible .alex-mascot__char{
   animation:mascotEnter 1.15s cubic-bezier(.34,1.4,.64,1) forwards;
