@@ -319,7 +319,46 @@ nav a:hover { color: var(--white); }
 .hero-scroll span { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
 
 /* === ABOUT === */
-.about-s { background: var(--bg); padding: 90px 6vw; }
+.about-s, .about-page { background: var(--bg); padding: 90px 6vw; }
+.about-page { padding-top: 130px; min-height: 100vh; }
+.back-link {
+  display: inline-flex; align-items: center;
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--purple-lt);
+  margin-bottom: 50px;
+  transition: color 0.2s, transform 0.2s;
+}
+.back-link:hover { color: var(--white); transform: translateX(-4px); }
+.nav-active { color: var(--purple-lt) !important; }
+.about-cta {
+  margin-top: 90px;
+  padding: 60px 40px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(159,103,255,0.04));
+  border: 1px solid rgba(124,58,237,0.2);
+  border-radius: 24px;
+  text-align: center;
+  max-width: 700px; margin-left: auto; margin-right: auto;
+}
+.about-cta h3 {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+.about-cta p {
+  font-size: 1rem; color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 26px;
+}
+.about-cta-actions {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+}
+@media (max-width: 768px) {
+  .about-page { padding: 100px 20px 60px; }
+  .about-cta { padding: 40px 24px; margin-top: 60px; }
+  .about-cta-actions .btn-primary, .about-cta-actions .btn-ghost { width: 100%; text-align: center; }
+}
 .about-grid {
   display: grid;
   grid-template-columns: 0.45fr 1fr;
