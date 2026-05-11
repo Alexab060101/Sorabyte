@@ -1208,8 +1208,8 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
 
 .alex-mascot__peek{
   position:relative;
-  width:118px;
-  height:210px;
+  width:155px;
+  height:230px;
   overflow:hidden;
   flex-shrink:0;
 }
@@ -1321,8 +1321,8 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
 
 @media (max-width: 768px){
   .alex-mascot{ bottom:18%; }
-  .alex-mascot__peek{ width:88px; height:160px; }
-  .alex-mascot__char{ width:150px; height:185px; }
+  .alex-mascot__peek{ width:115px; height:175px; }
+  .alex-mascot__char{ width:165px; height:200px; }
   .alex-mascot__bubble{
     max-width:200px;
     min-width:160px;
