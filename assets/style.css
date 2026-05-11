@@ -1196,6 +1196,18 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   font-style: normal;
   color: rgba(248,248,248,0.65);
 }
+.built-banner__link {
+  color: var(--purple-lt);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(159,103,255,0.35);
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.built-banner__link:hover {
+  color: var(--white);
+  border-color: var(--white);
+}
 @media (max-width: 768px) {
   .built-banner { padding: 24px 20px; }
   .built-banner__inner { flex-direction: column; text-align: center; gap: 14px; }

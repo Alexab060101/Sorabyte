@@ -1,0 +1,38 @@
+# Variables de entorno (claves, tokens, secretos)
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# Dependencias (por si en el futuro)
+node_modules/
+
+# Builds y caches
+dist/
+build/
+.cache/
+.vercel/
+.next/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Archivos temporales de pruebas
+frame-test.png
+frame-test.jpg
+*-temp.*
+*-test.mp4
