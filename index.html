@@ -655,7 +655,7 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   // Cuando el video termina, el muneco hace su exit slide
   if (video) {
     video.addEventListener('timeupdate', () => {
-      if (video.currentTime >= 4) fadeBubble();
+      if (video.currentTime >= 3) fadeBubble();
     });
     video.addEventListener('ended', () => setTimeout(leaveMascot, 100));
   }
