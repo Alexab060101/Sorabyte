@@ -1140,6 +1140,22 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
 [data-panel="web"]  .service-price strong { color: var(--gold); }
 [data-panel="ads"]  .service-price strong { color: var(--meta-lt); }
 
+.service-price-wrap { display: flex; flex-direction: column; gap: 4px; }
+.service-price-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,162,84,0.12);
+  border: 1px solid rgba(201,162,84,0.3);
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
 /* Botones colored */
 .btn-gold {
   background: linear-gradient(135deg, var(--gold) 0%, #E5C170 100%) !important;
@@ -1174,6 +1190,7 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   .tab-panel > p { font-size: 0.95rem; }
   .tabs-footer { flex-direction: column; align-items: stretch; gap: 18px; }
   .tabs-footer .service-price { text-align: center; }
+  .tabs-footer .service-price-wrap { align-items: center; }
   .tabs-footer .btn-primary { width: 100%; text-align: center; }
 }
 
