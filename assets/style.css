@@ -1201,6 +1201,12 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   pointer-events:none;
   transition:opacity .55s ease, transform .7s cubic-bezier(.5,.05,.7,0);
 }
+.alex-mascot.is-bubble-leaving .alex-mascot__bubble{
+  opacity:0;
+  transform:translateX(18px) scale(.9);
+  transition:opacity .8s ease, transform .9s cubic-bezier(.5,.05,.7,0);
+  pointer-events:none;
+}
 
 .alex-mascot__inner{
   display:flex;

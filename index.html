@@ -621,11 +621,16 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   function leaveToPill() {
     if (leaving) return;
     leaving = true;
-    mascot.classList.add('is-leaving');
+    // El bocadillo se empieza a ir primero
+    mascot.classList.add('is-bubble-leaving');
+    // 1s después, el muñeco se va
     setTimeout(() => {
-      mascot.style.display = 'none';
-      pill.classList.add('is-visible');
-    }, 750);
+      mascot.classList.add('is-leaving');
+      setTimeout(() => {
+        mascot.style.display = 'none';
+        pill.classList.add('is-visible');
+      }, 700);
+    }, 1000);
   }
 
   // Trigger cuando el usuario pasa el hero sticky y entra stats-bar
@@ -648,7 +653,7 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 
   // Video termina → leave hacia pill
   if (video) {
-    video.addEventListener('ended', () => setTimeout(leaveToPill, 1500));
+    video.addEventListener('ended', () => setTimeout(leaveToPill, 700));
   }
 
   // Click muñeco/bubble → WhatsApp
