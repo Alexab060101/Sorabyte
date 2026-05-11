@@ -618,19 +618,19 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     }, 1100);
   }
 
-  function leaveToPill() {
+  function fadeBubble() {
+    mascot.classList.add('is-bubble-leaving');
+  }
+
+  function leaveMascot() {
     if (leaving) return;
     leaving = true;
-    // El bocadillo se empieza a ir primero
-    mascot.classList.add('is-bubble-leaving');
-    // 1s después, el muñeco se va
+    fadeBubble();
+    mascot.classList.add('is-leaving');
     setTimeout(() => {
-      mascot.classList.add('is-leaving');
-      setTimeout(() => {
-        mascot.style.display = 'none';
-        pill.classList.add('is-visible');
-      }, 700);
-    }, 1000);
+      mascot.style.display = 'none';
+      pill.classList.add('is-visible');
+    }, 700);
   }
 
   // Trigger cuando el usuario pasa el hero sticky y entra stats-bar
@@ -651,9 +651,13 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  // Video termina → leave hacia pill
+  // En segundo 4 del video, el bocadillo empieza a fundirse (el muneco ya se esta yendo en el video)
+  // Cuando el video termina, el muneco hace su exit slide
   if (video) {
-    video.addEventListener('ended', () => setTimeout(leaveToPill, 700));
+    video.addEventListener('timeupdate', () => {
+      if (video.currentTime >= 4) fadeBubble();
+    });
+    video.addEventListener('ended', () => setTimeout(leaveMascot, 100));
   }
 
   // Click muñeco/bubble → WhatsApp
@@ -661,10 +665,11 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   inner.addEventListener('click', openWa);
   inner.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openWa(); } });
 
-  // Close → leave hacia pill (NO sessionStorage, refresh = vuelve a salir)
+  // Close → bubble fade primero, luego muneco
   closeBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    leaveToPill();
+    fadeBubble();
+    setTimeout(leaveMascot, 500);
   });
 })();
 </script>
