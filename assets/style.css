@@ -276,7 +276,8 @@ nav a:hover { color: var(--white); }
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.hero-sub { font-size: clamp(0.95rem, 1.6vw, 1.1rem); color: var(--muted); line-height: 1.75; margin-bottom: 36px; text-wrap: balance; max-width: 38ch; }
+.hero-sub { font-size: clamp(0.95rem, 1.6vw, 1.1rem); color: var(--muted); line-height: 1.6; margin-bottom: 36px; }
+.hero-sub .sub-line { display: block; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* === BUTTONS === */
