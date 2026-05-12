@@ -1680,3 +1680,22 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   }
 }
 
+
+/* ============================================
+   LANG SWITCHER (ES / DE)
+   ============================================ */
+nav .lang-switch {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--purple-lt);
+  border: 1px solid rgba(159,103,255,0.35);
+  padding: 5px 10px;
+  border-radius: 999px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+nav .lang-switch:hover {
+  background: rgba(159,103,255,0.12);
+  color: var(--white);
+  border-color: var(--purple-lt);
+}

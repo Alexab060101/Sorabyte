@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Über mich · Sorabyte</title>
+<meta name="description" content="Hallo, ich bin Alex. Ich designe Premium-Webseiten und manage Meta Ads für Unternehmen, die online wachsen wollen.">
+<link rel="alternate" hreflang="es" href="https://sorabyte.com/sobre-mi.html">
+<link rel="alternate" hreflang="de" href="https://sorabyte.com/de/sobre-mi.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Anton&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor-ring" class="cursor-ring"></div>
+<div id="cursor-dot" class="cursor-dot"></div>
+
+<!-- NAV -->
+<header id="header" class="scrolled">
+  <a href="index.html" class="logo">
+    <span class="logo-s">S</span><span class="logo-rest">ora</span><span class="logo-s">B</span><span class="logo-rest">yte</span>
+  </a>
+  <nav>
+    <a href="index.html#servicios">Leistungen</a>
+    <a href="index.html#portfolio">Referenzen</a>
+    <a href="sobre-mi.html" class="nav-active">Über mich</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="/sobre-mi.html" class="lang-switch" aria-label="Idioma español">ES</a>
+    <a href="index.html#contacto" class="nav-cta">Starten →</a>
+  </nav>
+  <button class="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+</header>
+
+<!-- ABOUT PAGE -->
+<section class="section about-page">
+  <div class="section-inner">
+    <a href="index.html" class="back-link">← Zurück zur Startseite</a>
+    <div class="about-grid">
+      <div class="about-photo">
+        <img src="../assets/alex.png" alt="Alex Abad, Sorabyte" loading="lazy">
+        <div class="about-photo-glow"></div>
+      </div>
+      <div class="about-text">
+        <span class="eyebrow">Über mich</span>
+        <h1 class="section-h">Hallo, ich bin <em>Alex.</em></h1>
+        <p class="about-lead">25 Jahre alt. Seit 3 Jahren baue ich Webseiten und verkaufe online: ich habe mit Shopify-Dropshipping angefangen, dann zu Wordpress und individueller Entwicklung gewechselt. Ich habe gelernt, was wirklich verkauft und was nur heiße Luft ist.</p>
+        <p>Heute kombiniere ich all das, um Selbstständigen das zu liefern, was am meisten bewegt: <strong>eine Premium-Webseite, die konvertiert, und Meta Ads, die echte Kunden bringen</strong>.</p>
+        <p>Ich komme nicht aus dem klassischen Design. Ich komme daher, dass ich verstehen wollte, warum Menschen kaufen. Deshalb verbinde ich drei Welten, die fast niemand verbindet: <strong>Design mit KI</strong> (Animationen und Videos, generiert mit den modernsten Tools), <strong>Neurowissenschaft des Verkaufs</strong> (Bücher, Weiterbildung, viel Lesen) und <strong>Automatisierung</strong> (Systeme, die für dich rund um die Uhr Kunden gewinnen, organisieren und benachrichtigen). Deshalb obsessiere ich mich nicht damit, dass deine Webseite schön aussieht: ich obsessiere mich damit, dass sie dir <strong>Geld bringt</strong>.</p>
+        <p>Ich bin Perfektionist. Ich fühle mich nicht wohl, bis der Kunde seine Investition × 10 zurückbekommen hat. <strong>Wenn dein Geschäft wächst, wachse ich</strong>. Das ist die ganze Formel.</p>
+        <p class="about-name-origin"><strong>Woher kommt "Sorabyte"?</strong><br><em>Sora</em> = Himmel auf Japanisch und Teil meines Nachnamens (<em>Basora</em>). <em>Byte</em>, weil gut eingesetzte Technologie Unternehmen multipliziert. <strong>Himmel + Technologie.</strong></p>
+        <div class="about-tags">
+          <span class="about-tag">Webdesign</span>
+          <span class="about-tag">Meta Ads</span>
+          <span class="about-tag">KI + KI-Video</span>
+          <span class="about-tag">Automatisierung 24/7</span>
+          <span class="about-tag">Neurowissenschaft des Verkaufs</span>
+          <span class="about-tag">Spanien + DACH</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-cta">
+      <h3>Sprechen wir über dein Projekt?</h3>
+      <p>Erzähl mir, was du brauchst. Ich antworte in weniger als 24h mit klarem Angebot und Preis.</p>
+      <div class="about-cta-actions">
+        <a href="index.html#contacto" class="btn-primary">Jetzt starten →</a>
+        <a href="index.html#portfolio" class="btn-ghost">Meine Projekte ansehen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-s">S</span><span class="logo-rest">ora</span><span class="logo-s">B</span><span class="logo-rest">yte</span>
+    </a>
+    <p class="footer-copy">© 2026 Sorabyte · Webdesign & Meta Ads</p>
+    <div class="footer-links">
+      <a href="index.html#servicios">Leistungen</a>
+      <a href="index.html#portfolio">Referenzen</a>
+      <a href="index.html#contacto">Kontakt</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Custom cursor (desktop only)
+if (window.matchMedia('(pointer: fine)').matches) {
+  const ring = document.getElementById('cursor-ring');
+  const dot  = document.getElementById('cursor-dot');
+  let mx = window.innerWidth/2, my = window.innerHeight/2;
+  let rx = mx, ry = my;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.transform = `translate(${mx}px, ${my}px)`;
+  });
+  (function animRing() {
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    ring.style.transform = `translate(${rx}px, ${ry}px)`;
+    requestAnimationFrame(animRing);
+  })();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('ring--hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('ring--hover'));
+  });
+}
+// Magnetic buttons
+if (window.matchMedia('(pointer: fine)').matches) {
+  document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width  / 2) * 0.28;
+      const y = (e.clientY - r.top  - r.height / 2) * 0.28;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transition = 'transform 0.4s cubic-bezier(0.16,1,0.3,1)';
+      btn.style.transform = '';
+      setTimeout(() => btn.style.transition = '', 400);
+    });
+  });
+}
+// Mobile menu
+const hamburger = document.querySelector('.hamburger');
+const nav = document.querySelector('nav');
+hamburger.addEventListener('click', () => {
+  nav.classList.toggle('open');
+  hamburger.classList.toggle('active');
+});
+nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  nav.classList.remove('open');
+  hamburger.classList.remove('active');
+}));
+</script>
+</body>
+</html>
