@@ -277,7 +277,7 @@ nav a:hover { color: var(--white); }
   background-clip: text;
 }
 .hero-sub { font-size: clamp(0.95rem, 1.6vw, 1.1rem); color: var(--muted); line-height: 1.6; margin-bottom: 36px; }
-.hero-sub .sub-line { display: block; }
+.hero-sub .sub-line { display: block; white-space: nowrap; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* === BUTTONS === */
