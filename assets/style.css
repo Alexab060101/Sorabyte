@@ -1712,6 +1712,10 @@ html[lang="de"] .hero-h1 {
   font-size: clamp(1.9rem, 3.7vw, 3rem);
   line-height: 1.1;
 }
+html[lang="de"] .hero-h1 .hero-line {
+  white-space: normal;
+  text-wrap: balance;
+}
 html[lang="de"] .hero-h1 em {
   white-space: nowrap;
 }
