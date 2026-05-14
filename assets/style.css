@@ -885,12 +885,12 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   nav a { font-size: 1.3rem; color: var(--white) !important; }
   .hamburger { display: flex; z-index: 100; }
 
-  /* Hero respira en movil — foto avatar arriba, todo centrado */
+  /* Hero respira en movil — sticky activado (patron LZR/Ally) */
   .hero-scroll-zone {
-    height: auto;
+    height: 180vh;
   }
   .hero {
-    position: relative;
+    position: sticky; top: 0;
     height: 100vh; min-height: 100svh;
     padding: 110px 0 80px;
     align-items: center;
