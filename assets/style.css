@@ -952,16 +952,8 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   }
   .photo-placeholder-icon { font-size: 3.2rem; opacity: 0.35; }
   .photo-placeholder-text { display: none; }
-  .photo-accent-1 {
-    width: 150px; height: 150px;
-    top: -30px; right: -30px;
-    filter: blur(36px);
-  }
-  .photo-accent-2 {
-    width: 120px; height: 120px;
-    bottom: -25px; left: -25px;
-    filter: blur(32px);
-  }
+  .photo-accent-1,
+  .photo-accent-2 { display: none; }
 
   .section { padding: 60px 20px; }
 
