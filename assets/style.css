@@ -941,14 +941,16 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
     width: 170px; height: 170px;
     border-radius: 50%;
     margin-bottom: 8px;
+    animation: none;
   }
   .hero-photo-wrap::before {
-    inset: -3px; border-radius: 50%;
+    display: none;
   }
   .hero-photo-inner {
     border-radius: 50%;
     flex-direction: row;
     gap: 0;
+    border: 1px solid rgba(255,255,255,0.12);
   }
   .photo-placeholder-icon { font-size: 3.2rem; opacity: 0.35; }
   .photo-placeholder-text { display: none; }
