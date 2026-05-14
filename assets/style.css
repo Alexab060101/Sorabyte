@@ -82,7 +82,7 @@ nav a:hover { color: var(--white); }
   position: relative;
   height: 100vh; min-height: 640px;
   display: flex; align-items: center;
-  overflow: hidden;
+  overflow: clip;
 }
 .hero-bg { position: absolute; inset: 0; }
 .vanta-hero { position: absolute; inset: 0; z-index: 0; }
