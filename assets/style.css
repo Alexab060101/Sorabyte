@@ -887,7 +887,7 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
 
   /* Hero respira en movil — sticky activado (patron LZR/Ally) */
   .hero-scroll-zone {
-    height: 180vh;
+    height: 162vh;
   }
   .hero {
     position: sticky; top: 0;
