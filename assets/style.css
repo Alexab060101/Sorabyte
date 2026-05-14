@@ -935,6 +935,9 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
 
   /* Foto = avatar circular arriba */
   .hero-photo-wrap {
+    position: static;
+    top: auto;
+    align-self: auto;
     width: 170px; height: 170px;
     border-radius: 50%;
     margin-bottom: 8px;
