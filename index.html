@@ -567,7 +567,7 @@ demoModal.addEventListener('cancel', e => {
   closeDemo();
 });
 
-// Hero foto -> video SOLO con input real del usuario (no scroll automatico de URL bar)
+// Hero foto -> video SOLO con input real (NO swap hasta que el video pueda reproducir)
 const heroImg = document.getElementById('heroImg');
 const heroVid = document.getElementById('heroVid');
 if (heroImg && heroVid) {
@@ -575,16 +575,19 @@ if (heroImg && heroVid) {
   function fireVideo() {
     if (triggered) return;
     triggered = true;
-    heroVid.classList.add('active');
-    heroImg.classList.remove('active');
     heroVid.currentTime = 0;
-    heroVid.play().catch(() => {});
-    cleanup();
-  }
-  function cleanup() {
-    window.removeEventListener('wheel', fireVideo);
-    window.removeEventListener('touchmove', fireVideo);
-    window.removeEventListener('keydown', fireVideo);
+    const playPromise = heroVid.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        heroVid.classList.add('active');
+        heroImg.classList.remove('active');
+      }).catch(() => {
+        triggered = false;
+      });
+    } else {
+      heroVid.classList.add('active');
+      heroImg.classList.remove('active');
+    }
   }
   window.addEventListener('wheel', fireVideo, { passive: true, once: true });
   window.addEventListener('touchmove', fireVideo, { passive: true, once: true });
