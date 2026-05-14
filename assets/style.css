@@ -932,29 +932,29 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
 
   /* Foto = avatar circular arriba */
   .hero-photo-wrap {
-    width: 96px; height: 96px;
+    width: 170px; height: 170px;
     border-radius: 50%;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
   }
   .hero-photo-wrap::before {
-    inset: -2px; border-radius: 50%;
+    inset: -3px; border-radius: 50%;
   }
   .hero-photo-inner {
     border-radius: 50%;
     flex-direction: row;
     gap: 0;
   }
-  .photo-placeholder-icon { font-size: 2.4rem; opacity: 0.35; }
+  .photo-placeholder-icon { font-size: 3.2rem; opacity: 0.35; }
   .photo-placeholder-text { display: none; }
   .photo-accent-1 {
-    width: 90px; height: 90px;
-    top: -20px; right: -20px;
-    filter: blur(28px);
+    width: 150px; height: 150px;
+    top: -30px; right: -30px;
+    filter: blur(36px);
   }
   .photo-accent-2 {
-    width: 70px; height: 70px;
-    bottom: -15px; left: -15px;
-    filter: blur(24px);
+    width: 120px; height: 120px;
+    bottom: -25px; left: -25px;
+    filter: blur(32px);
   }
 
   .section { padding: 60px 20px; }
