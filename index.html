@@ -69,7 +69,7 @@
       <div class="hero-photo-inner">
         <img src="assets/alex.png" alt="Alex" class="hero-photo-layer hero-photo-img active" id="heroImg">
         <video class="hero-photo-layer hero-photo-vid" id="heroVid"
-               src="assets/alex-video.mp4" muted playsinline preload="none" loop></video>
+               src="assets/alex-video.mp4" muted playsinline preload="none"></video>
       </div>
       <div class="photo-accent photo-accent-1"></div>
       <div class="photo-accent photo-accent-2"></div>
@@ -565,7 +565,7 @@ demoModal.addEventListener('cancel', e => {
   closeDemo();
 });
 
-// Hero foto -> video al primer scroll (mismo patron que lacados)
+// Hero foto -> video al primer scroll, vuelve a imagen al acabar (no loop)
 const heroImg = document.getElementById('heroImg');
 const heroVid = document.getElementById('heroVid');
 if (heroImg && heroVid) {
@@ -575,6 +575,7 @@ if (heroImg && heroVid) {
     triggered = true;
     heroVid.classList.add('active');
     heroImg.classList.remove('active');
+    heroVid.currentTime = 0;
     heroVid.play().catch(() => {});
     window.removeEventListener('scroll', onScroll);
   }
@@ -582,6 +583,10 @@ if (heroImg && heroVid) {
     if (window.scrollY > 60) fireVideo();
   }
   window.addEventListener('scroll', onScroll, { passive: true });
+  heroVid.addEventListener('ended', () => {
+    heroVid.classList.remove('active');
+    heroImg.classList.add('active');
+  });
 }
 
 // Tabs servicios

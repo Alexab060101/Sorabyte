@@ -167,7 +167,10 @@ nav a:hover { color: var(--white); }
   inherits: false;
 }
 .hero-photo-wrap {
-  position: relative; flex-shrink: 0;
+  position: sticky;
+  top: 110px;
+  align-self: center;
+  flex-shrink: 0;
   width: 340px; height: 440px;
   --border-angle: 0deg;
   animation: rotateBorder 4s linear infinite;
