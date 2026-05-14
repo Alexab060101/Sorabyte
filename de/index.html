@@ -564,7 +564,7 @@ demoModal.addEventListener('cancel', e => {
   closeDemo();
 });
 
-// Hero foto -> video al primer scroll, vuelve a imagen al acabar (no loop)
+// Hero foto -> video SOLO con input real del usuario (no scroll automatico de URL bar)
 const heroImg = document.getElementById('heroImg');
 const heroVid = document.getElementById('heroVid');
 if (heroImg && heroVid) {
@@ -576,12 +576,16 @@ if (heroImg && heroVid) {
     heroImg.classList.remove('active');
     heroVid.currentTime = 0;
     heroVid.play().catch(() => {});
-    window.removeEventListener('scroll', onScroll);
+    cleanup();
   }
-  function onScroll() {
-    if (window.scrollY > 60) fireVideo();
+  function cleanup() {
+    window.removeEventListener('wheel', fireVideo);
+    window.removeEventListener('touchmove', fireVideo);
+    window.removeEventListener('keydown', fireVideo);
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('wheel', fireVideo, { passive: true, once: true });
+  window.addEventListener('touchmove', fireVideo, { passive: true, once: true });
+  window.addEventListener('keydown', fireVideo, { once: true });
   heroVid.addEventListener('ended', () => {
     heroVid.classList.remove('active');
     heroImg.classList.add('active');
