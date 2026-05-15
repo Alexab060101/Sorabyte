@@ -1444,6 +1444,8 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
     font-size:.82rem;
     padding:.7rem .85rem;
     margin-top:12px;
+    position:relative;
+    top:40px;
   }
   .alex-mascot__bubble-cta{ font-size:.7rem; }
   .alex-mascot__close{ width:24px; height:24px; font-size:14px; }
