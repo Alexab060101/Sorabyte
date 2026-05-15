@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Anton&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="assets/style.css?v=32">
+<link rel="stylesheet" href="assets/style.css?v=33">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
@@ -695,7 +695,7 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   let mRaf;
   if (video && typeof CanvasRenderingContext2D !== 'undefined') {
     const mCanvas = document.createElement('canvas');
-    mCanvas.width = 720; mCanvas.height = 936;
+    mCanvas.width = 720; mCanvas.height = 916;
     mCanvas.style.cssText = 'position:absolute;left:0;pointer-events:none;display:block;';
     video.style.cssText += ';position:absolute;opacity:0;pointer-events:none;';
     video.parentNode.appendChild(mCanvas);
@@ -703,7 +703,7 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       const ch = mCanvas.parentElement;
       if (!ch) return;
       const cW = ch.offsetWidth || 270, cH = ch.offsetHeight || 320;
-      const r = 720 / 936;
+      const r = 720 / 916;
       if (window.innerWidth <= 768) {
         mCanvas.style.top = '0'; mCanvas.style.bottom = 'auto';
         mCanvas.style.width = cW + 'px'; mCanvas.style.height = Math.round(cW / r) + 'px';
@@ -717,15 +717,15 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     window.addEventListener('resize', sizeMCanvas);
     const mCtx = mCanvas.getContext('2d', { willReadFrequently: true });
     function drawMascot() {
-      mCtx.clearRect(0, 0, 720, 936);
-      // recorta 30px del borde inferior del video (linea oscura)
-      mCtx.drawImage(video, 0, 0, 720, 936, 0, 0, 720, 936);
-      const img = mCtx.getImageData(0, 0, 720, 936);
+      mCtx.clearRect(0, 0, 720, 916);
+      // recorta 20px arriba + 30px abajo del video (lineas oscuras)
+      mCtx.drawImage(video, 0, 20, 720, 916, 0, 0, 720, 916);
+      const img = mCtx.getImageData(0, 0, 720, 916);
       const d = img.data;
-      // Chroma key verde: pixel es verde si G domina sobre R y B
+      // Chroma key verde un punto mas fuerte
       for (let i = 0; i < d.length; i += 4) {
         const r = d[i], g = d[i+1], b = d[i+2];
-        if (g > 80 && g > r * 1.25 && g > b * 1.25) d[i+3] = 0;
+        if (g > 70 && g > r * 1.18 && g > b * 1.18) d[i+3] = 0;
       }
       mCtx.putImageData(img, 0, 0);
       if (!video.paused && !video.ended) mRaf = requestAnimationFrame(drawMascot);
