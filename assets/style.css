@@ -1433,8 +1433,8 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
 .alex-mascot__close:hover{ opacity:1; background:#25D366; }
 
 @media (max-width: 768px){
-  .alex-mascot{ bottom:8%; right:0; }
-  .alex-mascot__inner{ margin-right:0; }
+  .alex-mascot{ bottom:0; right:0; }
+  .alex-mascot__inner{ margin-right:0; flex-direction:column; align-items:flex-end; }
   .alex-mascot__peek{ width:240px; height:324px; overflow:visible; }
   .alex-mascot__char{ width:300px; height:384px; }
   .alex-mascot__bubble{
@@ -1442,7 +1442,9 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
     min-width:160px;
     font-size:.82rem;
     padding:.7rem .85rem;
-    margin-top:12px;
+    margin-top:0;
+    margin-bottom:8px;
+    order:-1;
   }
   .alex-mascot__bubble-cta{ font-size:.7rem; }
   .alex-mascot__close{ width:24px; height:24px; font-size:14px; }
