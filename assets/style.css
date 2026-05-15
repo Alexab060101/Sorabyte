@@ -1348,9 +1348,6 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   pointer-events:none;
   user-select:none;
 }
-@media (min-width: 769px){
-  .alex-mascot__img{ mix-blend-mode:screen; }
-}
 
 @keyframes mascotEnter{
   0%   { transform:translateX(110%); }

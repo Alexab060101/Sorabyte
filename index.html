@@ -690,6 +690,25 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   const bubbleText = document.getElementById('alexBubbleText');
   const closeBtn = document.getElementById('alexMascotClose');
   const video    = document.getElementById('alexMascotVideo');
+
+  // Canvas overlay: mix-blend-mode on canvas works on mobile (video GPU overlay bug avoided)
+  let mRaf;
+  if (video && typeof CanvasRenderingContext2D !== 'undefined') {
+    const mCanvas = document.createElement('canvas');
+    mCanvas.width = 270; mCanvas.height = 362;
+    mCanvas.style.cssText = 'position:absolute;left:0;bottom:0;width:100%;height:auto;mix-blend-mode:screen;pointer-events:none;display:block;';
+    video.style.cssText += ';position:absolute;opacity:0;pointer-events:none;';
+    video.parentNode.appendChild(mCanvas);
+    const mCtx = mCanvas.getContext('2d');
+    function drawMascot() {
+      mCtx.clearRect(0, 0, 270, 362);
+      mCtx.drawImage(video, 0, 0, 270, 362);
+      mRaf = requestAnimationFrame(drawMascot);
+    }
+    video.addEventListener('play', () => { cancelAnimationFrame(mRaf); drawMascot(); });
+    video.addEventListener('pause', () => cancelAnimationFrame(mRaf));
+    video.addEventListener('ended', () => cancelAnimationFrame(mRaf));
+  }
   const pill     = document.getElementById('alexMascotPill');
   const text     = 'Hola 👋 ¿Te ayudo con tu web?';
   const waUrl    = 'https://wa.me/34640973182?text=Hola%20Alex%2C%20vi%20tu%20web%20y%20me%20interesa';
