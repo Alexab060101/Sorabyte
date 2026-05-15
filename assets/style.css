@@ -17,7 +17,7 @@
 
 /* === BASE === */
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; }
+body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; overflow-x: hidden; }
 @media (pointer: fine) { body { cursor: none; } a, button { cursor: none; } }
 
 /* === CUSTOM CURSOR === */
@@ -1437,7 +1437,7 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   .alex-mascot{ bottom:0; right:0; }
   .alex-mascot__inner{ margin-right:0; flex-direction:column; align-items:flex-end; }
   .alex-mascot__peek{ width:280px; height:368px; overflow:visible; }
-  .alex-mascot__char{ width:280px; height:368px; }
+  .alex-mascot__char{ width:350px; height:460px; }
   .alex-mascot__bubble{
     max-width:200px;
     min-width:160px;
