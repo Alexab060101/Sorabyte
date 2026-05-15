@@ -16,8 +16,8 @@
 }
 
 /* === BASE === */
-html { scroll-behavior: smooth; overflow-x: hidden; }
-body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; overflow-x: clip; }
 @media (pointer: fine) { body { cursor: none; } a, button { cursor: none; } }
 
 /* === CUSTOM CURSOR === */
