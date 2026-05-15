@@ -1434,7 +1434,7 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
 
 @media (max-width: 768px){
   .alex-mascot{ bottom:8%; }
-  .alex-mascot__peek{ width:240px; height:324px; }
+  .alex-mascot__peek{ width:240px; height:324px; overflow:visible; }
   .alex-mascot__char{ width:300px; height:384px; }
   .alex-mascot__bubble{
     max-width:200px;
