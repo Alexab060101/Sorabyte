@@ -696,7 +696,7 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   if (video && typeof CanvasRenderingContext2D !== 'undefined') {
     const mCanvas = document.createElement('canvas');
     mCanvas.width = 540; mCanvas.height = 710;
-    mCanvas.style.cssText = 'position:absolute;left:0;bottom:0;pointer-events:none;display:block;';
+    mCanvas.style.cssText = 'position:absolute;left:0;pointer-events:none;display:block;';
     video.style.cssText += ';position:absolute;opacity:0;pointer-events:none;';
     video.parentNode.appendChild(mCanvas);
     function sizeMCanvas() {
@@ -704,8 +704,14 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       if (!ch) return;
       const cW = ch.offsetWidth || 270, cH = ch.offsetHeight || 320;
       const r = 540 / 710;
-      if (cW / cH > r) { mCanvas.style.width = Math.round(cH * r) + 'px'; mCanvas.style.height = cH + 'px'; }
-      else              { mCanvas.style.width = cW + 'px'; mCanvas.style.height = Math.round(cW / r) + 'px'; }
+      if (window.innerWidth <= 768) {
+        mCanvas.style.top = '0'; mCanvas.style.bottom = 'auto';
+        mCanvas.style.width = cW + 'px'; mCanvas.style.height = Math.round(cW / r) + 'px';
+      } else {
+        mCanvas.style.top = 'auto'; mCanvas.style.bottom = '0';
+        if (cW / cH > r) { mCanvas.style.width = Math.round(cH * r) + 'px'; mCanvas.style.height = cH + 'px'; }
+        else              { mCanvas.style.width = cW + 'px'; mCanvas.style.height = Math.round(cW / r) + 'px'; }
+      }
     }
     sizeMCanvas();
     window.addEventListener('resize', sizeMCanvas);
