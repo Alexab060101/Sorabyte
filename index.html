@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Anton&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="assets/style.css?v=30">
+<link rel="stylesheet" href="assets/style.css?v=31">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
@@ -695,7 +695,7 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   let mRaf;
   if (video && typeof CanvasRenderingContext2D !== 'undefined') {
     const mCanvas = document.createElement('canvas');
-    mCanvas.width = 540; mCanvas.height = 710;
+    mCanvas.width = 720; mCanvas.height = 966;
     mCanvas.style.cssText = 'position:absolute;left:0;pointer-events:none;display:block;';
     video.style.cssText += ';position:absolute;opacity:0;pointer-events:none;';
     video.parentNode.appendChild(mCanvas);
@@ -703,7 +703,7 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       const ch = mCanvas.parentElement;
       if (!ch) return;
       const cW = ch.offsetWidth || 270, cH = ch.offsetHeight || 320;
-      const r = 540 / 710;
+      const r = 720 / 966;
       if (window.innerWidth <= 768) {
         mCanvas.style.top = '0'; mCanvas.style.bottom = 'auto';
         mCanvas.style.width = cW + 'px'; mCanvas.style.height = Math.round(cW / r) + 'px';
@@ -717,14 +717,14 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     window.addEventListener('resize', sizeMCanvas);
     const mCtx = mCanvas.getContext('2d', { willReadFrequently: true });
     function drawMascot() {
-      mCtx.clearRect(0, 0, 540, 710);
-      mCtx.drawImage(video, 0, 0, 540, 710, 0, 0, 540, 710);
-      const img = mCtx.getImageData(0, 0, 540, 710);
+      mCtx.clearRect(0, 0, 720, 966);
+      mCtx.drawImage(video, 0, 0, 720, 966, 0, 0, 720, 966);
+      const img = mCtx.getImageData(0, 0, 720, 966);
       const d = img.data;
-      // A partir del segundo 3, umbral 3 (mas conservador para no borrar ropa)
-      const t = video.currentTime > 3 ? 3 : 6;
+      // Chroma key verde: pixel es verde si G domina sobre R y B
       for (let i = 0; i < d.length; i += 4) {
-        if (d[i] < t && d[i+1] < t && d[i+2] < t) d[i+3] = 0;
+        const r = d[i], g = d[i+1], b = d[i+2];
+        if (g > 80 && g > r * 1.25 && g > b * 1.25) d[i+3] = 0;
       }
       mCtx.putImageData(img, 0, 0);
       if (!video.paused && !video.ended) mRaf = requestAnimationFrame(drawMascot);
