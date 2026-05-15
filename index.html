@@ -742,6 +742,7 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     if (triggered) return;
     triggered = true;
     mascot.classList.add('is-visible');
+    if (typeof sizeMCanvas === 'function') sizeMCanvas();
     if (video) video.play().catch(() => {});
     setTimeout(() => {
       let i = 0;
