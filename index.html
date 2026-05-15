@@ -12,9 +12,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Anton&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="assets/style.css?v=36">
+<link rel="stylesheet" href="assets/style.css?v=37">
 
-<!-- Meta Pixel Code -->
+<!-- Meta Pixel + CAPI (dedup via event_id) -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -25,12 +25,41 @@ t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '995422316277042');
-fbq('track', 'PageView');
+
+// Helper que dispara Pixel + CAPI con el mismo event_id (dedup automatico)
+window.sbTrack = function(eventName, customData) {
+  customData = customData || {};
+  var eventId = (window.crypto && crypto.randomUUID)
+    ? crypto.randomUUID()
+    : (Date.now() + '-' + Math.random().toString(36).slice(2));
+  if (window.fbq) fbq('track', eventName, customData, { eventID: eventId });
+  var ck = document.cookie.split('; ');
+  var fbp = (ck.find(function(c){return c.indexOf('_fbp=')===0;}) || '').split('=')[1];
+  var fbc = (ck.find(function(c){return c.indexOf('_fbc=')===0;}) || '').split('=')[1];
+  try {
+    fetch('/api/capi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event_name: eventName,
+        event_id: eventId,
+        event_time: Math.floor(Date.now() / 1000),
+        event_source_url: location.href,
+        custom_data: customData,
+        user_data: { fbp: fbp, fbc: fbc }
+      }),
+      keepalive: true
+    });
+  } catch (e) {}
+};
+
+// PageView inicial via helper (Pixel + CAPI dedupados)
+sbTrack('PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=995422316277042&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
+<!-- End Meta Pixel + CAPI -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
@@ -568,16 +597,16 @@ document.querySelectorAll('.portfolio-card[data-demo]').forEach(card => {
     demoModal.showModal();
     document.body.style.overflow = 'hidden';
     // Meta Pixel: usuario ve una demo del portfolio = interes alto
-    if (window.fbq) fbq('track', 'ViewContent', { content_name: name, content_category: 'demo' });
+    sbTrack('ViewContent', { content_name: name, content_category: 'demo' });
   });
 });
 
-// Meta Pixel: Contact event en cualquier click a WhatsApp o mailto
+// Meta tracking: Contact event en cualquier click a WhatsApp o mailto
 document.addEventListener('click', (e) => {
   const a = e.target.closest('a[href^="https://wa.me/"], a[href^="mailto:"]');
-  if (!a || !window.fbq) return;
+  if (!a) return;
   const channel = a.href.startsWith('mailto:') ? 'email' : 'whatsapp';
-  fbq('track', 'Contact', { content_category: channel });
+  sbTrack('Contact', { content_category: channel });
 });
 
 function closeDemo() {
