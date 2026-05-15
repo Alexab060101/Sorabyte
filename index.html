@@ -691,21 +691,26 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   const closeBtn = document.getElementById('alexMascotClose');
   const video    = document.getElementById('alexMascotVideo');
 
-  // Canvas overlay: mix-blend-mode on canvas works on mobile (video GPU overlay bug avoided)
+  // Canvas overlay: per-pixel alpha keying (black → transparent) works cross-browser including iOS
   let mRaf;
   if (video && typeof CanvasRenderingContext2D !== 'undefined') {
     const mCanvas = document.createElement('canvas');
     mCanvas.width = 270; mCanvas.height = 362;
-    mCanvas.style.cssText = 'position:absolute;left:0;bottom:0;width:100%;height:auto;mix-blend-mode:screen;pointer-events:none;display:block;';
+    mCanvas.style.cssText = 'position:absolute;left:0;bottom:0;width:100%;height:auto;pointer-events:none;display:block;';
     video.style.cssText += ';position:absolute;opacity:0;pointer-events:none;';
     video.parentNode.appendChild(mCanvas);
-    const mCtx = mCanvas.getContext('2d');
+    const mCtx = mCanvas.getContext('2d', { willReadFrequently: true });
     function drawMascot() {
-      mCtx.clearRect(0, 0, 270, 362);
       mCtx.drawImage(video, 0, 0, 270, 362);
-      mRaf = requestAnimationFrame(drawMascot);
+      const img = mCtx.getImageData(0, 0, 270, 362);
+      const d = img.data;
+      for (let i = 0; i < d.length; i += 4) {
+        if (d[i] < 12 && d[i+1] < 12 && d[i+2] < 12) d[i+3] = 0;
+      }
+      mCtx.putImageData(img, 0, 0);
+      if (!video.paused && !video.ended) mRaf = requestAnimationFrame(drawMascot);
     }
-    video.addEventListener('play', () => { cancelAnimationFrame(mRaf); drawMascot(); });
+    video.addEventListener('play', () => { cancelAnimationFrame(mRaf); mRaf = requestAnimationFrame(drawMascot); });
     video.addEventListener('pause', () => cancelAnimationFrame(mRaf));
     video.addEventListener('ended', () => cancelAnimationFrame(mRaf));
   }
