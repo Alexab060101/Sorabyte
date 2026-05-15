@@ -1436,8 +1436,8 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
 @media (max-width: 768px){
   .alex-mascot{ bottom:0; right:20px; }
   .alex-mascot__inner{ margin-right:0; flex-direction:column; align-items:flex-end; }
-  .alex-mascot__peek{ width:210px; height:237px; overflow:visible; }
-  .alex-mascot__char{ width:260px; height:342px; }
+  .alex-mascot__peek{ width:220px; height:290px; overflow:visible; }
+  .alex-mascot__char{ width:220px; height:290px; }
   .alex-mascot__bubble{
     max-width:200px;
     min-width:160px;
