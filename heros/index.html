@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Heros Showcase · Sorabyte</title>
+<meta name="description" content="Catálogo interno de fondos animados para hero de demos 197€. Solo el hero en pantalla anima; el resto se pausa.">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{font-family:'Inter',sans-serif;background:#000;color:#fff;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  h1{font-family:'Manrope',sans-serif}
+
+  /* Top bar */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 28px;
+    background:rgba(8,8,8,0.65);backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    font-family:'Manrope',sans-serif;font-weight:700;letter-spacing:-0.01em;
+  }
+  .topbar .logo{font-size:1.15rem}
+  .topbar .logo span{color:#9F67FF}
+  .topbar .counter{font-size:0.85rem;color:rgba(255,255,255,0.55);font-weight:500;letter-spacing:0.05em}
+
+  /* Side nav */
+  .sidenav{
+    position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:150;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .sidenav button{
+    width:32px;height:32px;border-radius:50%;
+    background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+    color:#fff;font-size:0.7rem;font-weight:700;font-family:'Manrope',sans-serif;
+    cursor:pointer;transition:all .3s ease;
+  }
+  .sidenav button:hover{background:rgba(159,103,255,0.4);border-color:#9F67FF;transform:scale(1.1)}
+  .sidenav button.active{background:#9F67FF;border-color:#9F67FF;color:#fff}
+  @media (max-width:768px){
+    .sidenav{display:none}
+  }
+
+  /* Sections */
+  .hero-section{
+    position:relative;height:100vh;width:100%;
+    overflow:hidden;scroll-snap-align:start;
+    display:grid;place-items:center;
+  }
+
+  .hero-bg{position:absolute;inset:0;z-index:1}
+  .hero-content{
+    position:relative;z-index:2;padding:0 28px;
+    text-align:center;max-width:900px;
+    pointer-events:none;
+  }
+  .hero-content h1{
+    font-size:clamp(2.4rem,7vw,5.5rem);font-weight:800;line-height:1.05;
+    letter-spacing:-0.035em;margin-bottom:1rem;
+  }
+  .hero-content h1 em{font-style:italic;font-weight:400;color:#C9A254}
+  .hero-content p{
+    font-size:clamp(0.95rem,1.6vw,1.15rem);opacity:0.78;
+    letter-spacing:0.02em;line-height:1.5;
+  }
+
+  /* Info panel */
+  .hero-info{
+    position:absolute;left:24px;bottom:24px;z-index:3;
+    background:rgba(0,0,0,0.55);backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.12);border-radius:14px;
+    padding:14px 18px;max-width:340px;
+    font-family:'Inter',sans-serif;
+  }
+  .hero-info .num{
+    font-family:'Manrope',sans-serif;font-weight:800;font-size:0.7rem;
+    letter-spacing:0.22em;color:#9F67FF;margin-bottom:6px;
+  }
+  .hero-info .name{
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:1.1rem;
+    margin-bottom:6px;color:#fff;
+  }
+  .hero-info .meta{
+    font-size:0.78rem;color:rgba(255,255,255,0.65);line-height:1.55;
+  }
+  .hero-info .meta strong{color:#C9A254;font-weight:600}
+
+  /* Specific hero styles ----------------------------- */
+
+  /* 01 Liquid Blobs */
+  .blobs-wrap{position:absolute;inset:0;overflow:hidden;background:#fdfcff}
+  .blob{
+    position:absolute;width:45vmax;height:45vmax;border-radius:50%;
+    filter:blur(90px);opacity:0.72;will-change:transform;
+  }
+  .blob-1{background:#ff6ec4;top:-10%;left:-10%}
+  .blob-2{background:#7873f5;bottom:-15%;right:-10%}
+  .blob-3{background:#4ade80;top:40%;left:35%}
+  .hero-section[data-hero="liquid-blobs"].in-view .blob-1{animation:drift-1 14s ease-in-out infinite alternate}
+  .hero-section[data-hero="liquid-blobs"].in-view .blob-2{animation:drift-2 18s ease-in-out infinite alternate}
+  .hero-section[data-hero="liquid-blobs"].in-view .blob-3{animation:drift-3 22s ease-in-out infinite alternate}
+  @keyframes drift-1{from{transform:translate(0,0) scale(1)}to{transform:translate(20vw,15vh) scale(1.2)}}
+  @keyframes drift-2{from{transform:translate(0,0) scale(1)}to{transform:translate(-15vw,-20vh) scale(1.3)}}
+  @keyframes drift-3{from{transform:translate(0,0) scale(1) rotate(0deg)}to{transform:translate(-10vw,10vh) scale(0.85) rotate(45deg)}}
+  .hero-section[data-hero="liquid-blobs"] .hero-content h1{color:#0f0f1a}
+  .hero-section[data-hero="liquid-blobs"] .hero-content h1 em{
+    background:linear-gradient(120deg,#ff6ec4,#7873f5);-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-section[data-hero="liquid-blobs"] .hero-content p{color:rgba(15,15,26,0.65)}
+  @media (max-width:768px){ .blob{filter:blur(60px)} }
+
+  /* 02 Aurora Conic */
+  @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+  @property --hue{syntax:'<number>';initial-value:0;inherits:false}
+  .aurora-wrap{position:absolute;inset:0;overflow:hidden;background:#0a0a0f;isolation:isolate}
+  .aurora-bg{
+    position:absolute;inset:-50%;
+    background:conic-gradient(
+      from var(--angle),
+      hsl(calc(var(--hue) + 0) 90% 60%),
+      hsl(calc(var(--hue) + 60) 90% 55%),
+      hsl(calc(var(--hue) + 180) 90% 60%),
+      hsl(calc(var(--hue) + 270) 90% 55%),
+      hsl(calc(var(--hue) + 360) 90% 60%)
+    );
+    filter:blur(80px) saturate(1.4);opacity:0.55;
+    will-change:--angle,--hue;
+  }
+  .hero-section[data-hero="aurora-conic"].in-view .aurora-bg{
+    animation:auroraSpin 18s linear infinite, auroraHue 20s ease-in-out infinite;
+  }
+  @keyframes auroraSpin{to{--angle:360deg}}
+  @keyframes auroraHue{0%,100%{--hue:220}50%{--hue:300}}
+  .hero-section[data-hero="aurora-conic"] .hero-content h1 em{
+    background:linear-gradient(110deg,#c084fc,#f0abfc,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+
+  /* 03 Glitter */
+  .glitter-wrap{
+    position:absolute;inset:0;
+    background:linear-gradient(135deg,#f8d7da 0%,#e8b4c8 100%);overflow:hidden;
+  }
+  #tsparticles-glitter{position:absolute;inset:0}
+  .hero-section[data-hero="glitter"] .hero-content h1{color:#3a1f2b}
+  .hero-section[data-hero="glitter"] .hero-content h1 em{color:#C9A254}
+  .hero-section[data-hero="glitter"] .hero-content p{color:rgba(58,31,43,0.72)}
+
+  /* 04 Bokeh */
+  .bokeh-wrap{
+    position:absolute;inset:0;overflow:hidden;
+    background:radial-gradient(ellipse at center,#2d1b3d 0%,#0f0a1e 100%);
+  }
+  #bokeh-canvas{position:absolute;inset:0;filter:blur(2px);opacity:0.85}
+  .hero-section[data-hero="bokeh"] .hero-content h1 em{color:#ffd9a8}
+
+  /* 05 Stripe Mesh */
+  .stripe-wrap{position:absolute;inset:0;overflow:hidden}
+  #gradient-canvas-stripe{
+    width:100%;height:100%;
+    --gradient-color-1:#7c3aed;
+    --gradient-color-2:#9F67FF;
+    --gradient-color-3:#EC4899;
+    --gradient-color-4:#F59E0B;
+  }
+
+  /* 06 Paper Shaders */
+  .paper-wrap{position:absolute;inset:0;overflow:hidden;background:#000}
+
+  /* 07 Vanta Fog */
+  .vanta-fog-wrap{position:absolute;inset:0;background:#FFF5F2}
+  .hero-section[data-hero="vanta-fog"] .hero-content h1{color:#3a2a2a;font-family:'Cormorant Garamond',serif;font-weight:300}
+  .hero-section[data-hero="vanta-fog"] .hero-content h1 em{color:#C9A254;font-weight:400}
+  .hero-section[data-hero="vanta-fog"] .hero-content p{color:rgba(58,42,42,0.7)}
+
+  /* 08 Vanta Waves */
+  .vanta-waves-wrap{position:absolute;inset:0;background:#0A1628}
+  .hero-section[data-hero="vanta-waves"] .hero-content{text-align:left;max-width:800px;margin-left:6vw}
+  .hero-section[data-hero="vanta-waves"] .hero-content h1{
+    font-family:'Playfair Display',serif;color:#F4E4C1;font-weight:400;
+  }
+  .hero-section[data-hero="vanta-waves"] .hero-content h1 em{color:#E0A958;font-style:italic;font-weight:400}
+  .hero-section[data-hero="vanta-waves"] .hero-content p{color:rgba(244,228,193,0.72);letter-spacing:0.18em;text-transform:uppercase;font-size:0.78rem}
+
+  /* 09 Gooey */
+  .gooey-wrap{position:absolute;inset:0;overflow:hidden;background:#0a0a0a}
+  .gooey-canvas{position:absolute;inset:0;filter:url(#goo-filter)}
+  .gooey-blob{position:absolute;border-radius:50%;will-change:transform}
+  .gb-1{width:380px;height:380px;background:#7C3AED;left:50%;top:50%}
+  .gb-2{width:180px;height:180px;background:#EC4899}
+  .gb-3{width:120px;height:120px;background:#C9A254}
+  .hero-section[data-hero="gooey"] .hero-content h1{mix-blend-mode:difference;color:#fff}
+  .hero-section[data-hero="gooey"] .hero-content h1 em{color:#fff;-webkit-text-stroke:1px #fff;-webkit-text-fill-color:transparent;font-style:italic}
+  @media (pointer:coarse){
+    .gb-1{animation:gooey-orbit-1 8s ease-in-out infinite}
+    .gb-2{animation:gooey-orbit-2 6s ease-in-out infinite}
+    .gb-3{animation:gooey-orbit-3 10s ease-in-out infinite}
+  }
+  @keyframes gooey-orbit-1{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-30%,-60%)}}
+  @keyframes gooey-orbit-2{0%,100%{transform:translate(20vw,30vh)}50%{transform:translate(60vw,50vh)}}
+  @keyframes gooey-orbit-3{0%,100%{transform:translate(70vw,20vh)}50%{transform:translate(30vw,70vh)}}
+
+  /* 10 Fluid Simulation */
+  .fluid-wrap{position:absolute;inset:0;background:#0a0a0a;overflow:hidden}
+  #fluid-canvas{position:absolute;inset:0;width:100%;height:100%}
+  .fluid-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+    z-index:5;opacity:0.6;font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;
+    color:#fff;pointer-events:none}
+
+  /* Footer */
+  .end-section{
+    min-height:50vh;display:grid;place-items:center;padding:60px 28px;
+    background:linear-gradient(180deg,#080808 0%,#1a0d2e 100%);scroll-snap-align:start;
+  }
+  .end-section h2{font-family:'Manrope',sans-serif;font-size:clamp(1.4rem,3vw,2.2rem);text-align:center;max-width:680px;line-height:1.3;margin-bottom:1rem}
+  .end-section p{text-align:center;opacity:0.7;max-width:560px}
+  .end-section a.back{
+    margin-top:2rem;display:inline-block;padding:14px 28px;
+    background:#9F67FF;color:#080808;border-radius:999px;font-weight:700;
+    transition:transform .3s ease;
+  }
+  .end-section a.back:hover{transform:translateY(-2px)}
+
+  @media (prefers-reduced-motion: reduce){
+    .blob,.aurora-bg,.gb-1,.gb-2,.gb-3{animation:none !important}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/" class="logo">Heros · <span>S</span>oraByte</a>
+  <span class="counter" id="counter">01 / 10</span>
+</header>
+
+<nav class="sidenav" id="sidenav"></nav>
+
+<!-- ============================================= 01 LIQUID BLOBS -->
+<section class="hero-section" data-hero="liquid-blobs">
+  <div class="hero-bg">
+    <div class="blobs-wrap">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <h1>Tu negocio merece <em>más</em> que una plantilla.</h1>
+    <p>Webs hechas a medida, en menos tiempo del que crees.</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">01 · CSS PURO</div>
+    <div class="name">Liquid Blobs</div>
+    <div class="meta"><strong>Nichos:</strong> belleza, lifestyle, salud, restauración minimal · <strong>Peso:</strong> ~1.2 KB CSS · <strong>JS:</strong> 0</div>
+  </div>
+</section>
+
+<!-- ============================================= 02 AURORA CONIC -->
+<section class="hero-section" data-hero="aurora-conic">
+  <div class="hero-bg">
+    <div class="aurora-wrap">
+      <div class="aurora-bg"></div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <h1>Diseño que <em>respira</em>.</h1>
+    <p>Webs premium para negocios que no quieren parecer plantilla.</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">02 · CSS @PROPERTY</div>
+    <div class="name">Aurora Conic</div>
+    <div class="meta"><strong>Nichos:</strong> SaaS, coaching, tech, premium agency · <strong>Peso:</strong> ~1.5 KB CSS · <strong>JS:</strong> 0</div>
+  </div>
+</section>
+
+<!-- ============================================= 03 GLITTER -->
+<section class="hero-section" data-hero="glitter">
+  <div class="hero-bg">
+    <div class="glitter-wrap">
+      <div id="tsparticles-glitter"></div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <h1>Cada detalle <em>cuenta</em>.</h1>
+    <p>Manicura premium en Mallorca · Reserva online directa.</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">03 · TSPARTICLES</div>
+    <div class="name">Glitter Sparkle</div>
+    <div class="meta"><strong>Nichos:</strong> nail salons, bridal, lash bar, celebración · <strong>Peso:</strong> ~32 KB JS · <strong>FPS móvil:</strong> 55-60</div>
+  </div>
+</section>
+
+<!-- ============================================= 04 BOKEH -->
+<section class="hero-section" data-hero="bokeh">
+  <div class="hero-bg">
+    <div class="bokeh-wrap">
+      <canvas id="bokeh-canvas"></canvas>
+    </div>
+  </div>
+  <div class="hero-content">
+    <h1>Respira. <em>Pausa.</em> Vuelve.</h1>
+    <p>Spa & wellness · Tu refugio en el centro de la ciudad.</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">04 · CANVAS 2D</div>
+    <div class="name">Bokeh Luces Difusas</div>
+    <div class="meta"><strong>Nichos:</strong> spa, wellness, hotel boutique, terapias · <strong>Peso:</strong> 1.5 KB JS puro · <strong>FPS móvil:</strong> 60</div>
+  </div>
+</section>
+
+<!-- ============================================= 05 STRIPE MESH -->
+<section class="hero-section" data-hero="stripe-mesh">
+  <div class="hero-bg">
+    <div class="stripe-wrap">
+      <canvas id="gradient-canvas-stripe" data-transition-in></canvas>
+    </div>
+  </div>
+  <div class="hero-content">
+    <h1>Software bien <em>diseñado</em>.</h1>
+    <p>Producto digital para equipos exigentes.</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">05 · WEBGL · STRIPE</div>
+    <div class="name">Mesh Gradient</div>
+    <div class="meta"><strong>Nichos:</strong> SaaS, fintech, agency, branding corporate · <strong>Peso:</strong> ~19 KB · <strong>Performance:</strong> excelente móvil</div>
+  </div>
+</section>
+
+<!-- ============================================= 06 PAPER SHADERS -->
+<section class="hero-section" data-hero="paper-shaders">
+  <div class="hero-bg">
+    <div class="paper-wrap">
+      <mesh-gradient
+        id="paper-mesh"
+        colors='["#0f172a","#7c3aed","#ec4899","#f59e0b"]'
+        distortion="0.8"
+        swirl="0.1"
+        speed="0"
+        style="position:absolute;inset:0;width:100%;height:100%">
+      </mesh-gradient>
+    </div>
+  </div>
+  <div class="hero-content">
+    <h1>Identidad que <em>fluye</em>.</h1>
+    <p>Branding visual para marcas con personalidad.</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">06 · PAPER SHADERS</div>
+    <div class="name">Liquid Mesh</div>
+    <div class="meta"><strong>Nichos:</strong> branding, agency creativa, e-commerce diferenciado · <strong>Peso:</strong> ~28 KB · <strong>15+ shaders</strong> intercambiables</div>
+  </div>
+</section>
+
+<!-- ============================================= 07 VANTA FOG -->
+<section class="hero-section" data-hero="vanta-fog">
+  <div class="hero-bg">
+    <div class="vanta-fog-wrap" id="vanta-fog-bg"></div>
+  </div>
+  <div class="hero-content">
+    <h1>Tus manos, <em>obra de arte.</em></h1>
+    <p>Manicura premium · Reserva online directa</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">07 · VANTA.JS · FOG</div>
+    <div class="name">Niebla Rosa & Dorada</div>
+    <div class="meta"><strong>Nicho:</strong> nail salon premium · <strong>Paleta:</strong> rosa palo + #C9A254 · <strong>Peso:</strong> 580 KB (THREE.js)</div>
+  </div>
+</section>
+
+<!-- ============================================= 08 VANTA WAVES -->
+<section class="hero-section" data-hero="vanta-waves">
+  <div class="hero-bg">
+    <div class="vanta-waves-wrap" id="vanta-waves-bg"></div>
+  </div>
+  <div class="hero-content">
+    <h1>El ritual del<br><em>caballero moderno.</em></h1>
+    <p>Established 2018 · Palma</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">08 · VANTA.JS · WAVES</div>
+    <div class="name">Olas Navy & Ámbar</div>
+    <div class="meta"><strong>Nichos:</strong> barbería premium, sastrería, whisky bar · <strong>Paleta:</strong> azul oscuro + ámbar · <strong>Peso:</strong> 600 KB</div>
+  </div>
+</section>
+
+<!-- ============================================= 09 GOOEY CURSOR -->
+<section class="hero-section" data-hero="gooey">
+  <div class="hero-bg">
+    <div class="gooey-wrap">
+      <svg width="0" height="0" style="position:absolute">
+        <filter id="goo-filter">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="18"/>
+          <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10"/>
+          <feComposite in="SourceGraphic"/>
+        </filter>
+      </svg>
+      <div class="gooey-canvas">
+        <div class="gooey-blob gb-1"></div>
+        <div class="gooey-blob gb-2"></div>
+        <div class="gooey-blob gb-3"></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <h1>Mueve el <em>cursor.</em></h1>
+    <p>Webs que reaccionan. Marcas que se notan.</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">09 · SVG FILTER + JS</div>
+    <div class="name">Gooey Cursor Follow</div>
+    <div class="meta"><strong>Nichos:</strong> agency, branding, portfolio creativo · <strong>Peso:</strong> 0 KB librerías · <strong>Móvil:</strong> orbital automático</div>
+  </div>
+</section>
+
+<!-- ============================================= 10 FLUID SIMULATION -->
+<section class="hero-section" data-hero="fluid">
+  <div class="hero-bg">
+    <div class="fluid-wrap">
+      <canvas id="fluid-canvas"></canvas>
+    </div>
+  </div>
+  <div class="hero-content">
+    <h1>Web con <em>alma.</em></h1>
+    <p>Interactiva. Memorable. Hecha a mano.</p>
+  </div>
+  <div class="fluid-hint">Mueve el cursor sobre la pantalla</div>
+  <div class="hero-info">
+    <div class="num">10 · WEBGL FLUID</div>
+    <div class="name">Fluid Simulation</div>
+    <div class="meta"><strong>Nichos:</strong> portfolio agency, launch landings, branding maximal · <strong>Peso:</strong> ~25 KB · <strong>Wow:</strong> máximo</div>
+  </div>
+</section>
+
+<!-- ============================================= END -->
+<section class="end-section">
+  <h2>10 fondos. 10 ambientes. Cero plantillas.</h2>
+  <p>Cada demo de 197€ lleva uno de estos. El que mejor case con la personalidad del negocio.</p>
+  <a href="/" class="back">← Volver a Sorabyte</a>
+</section>
+
+<script>
+// ===== Side nav + counter =====
+const sections = document.querySelectorAll('.hero-section');
+const counter = document.getElementById('counter');
+const sidenav = document.getElementById('sidenav');
+
+sections.forEach((sec, idx) => {
+  const btn = document.createElement('button');
+  btn.textContent = String(idx + 1).padStart(2, '0');
+  btn.addEventListener('click', () => sec.scrollIntoView({ behavior: 'smooth' }));
+  btn.dataset.idx = idx;
+  sidenav.appendChild(btn);
+});
+
+const navBtns = sidenav.querySelectorAll('button');
+
+// ===== Intersection: init/pause heroes only when visible =====
+const inits = {};       // map: name -> function init()
+const destroys = {};    // map: name -> function destroy()
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const sec = entry.target;
+    const name = sec.dataset.hero;
+    if (entry.isIntersecting) {
+      sec.classList.add('in-view');
+      if (inits[name] && !sec._initialized) {
+        inits[name](sec);
+        sec._initialized = true;
+      } else if (sec._instance && sec._instance.play) {
+        try { sec._instance.play(); } catch(e) {}
+      }
+      // Update counter + nav
+      const idx = Array.from(sections).indexOf(sec);
+      counter.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(sections.length).padStart(2, '0');
+      navBtns.forEach(b => b.classList.toggle('active', +b.dataset.idx === idx));
+    } else {
+      sec.classList.remove('in-view');
+      if (sec._instance && sec._instance.pause) {
+        try { sec._instance.pause(); } catch(e) {}
+      }
+    }
+  });
+}, { threshold: 0.5 });
+
+sections.forEach(s => io.observe(s));
+
+// ============================================= 03 GLITTER (tsParticles)
+inits['glitter'] = async (sec) => {
+  if (!window.tsParticles) {
+    await loadScript('https://cdn.jsdelivr.net/npm/@tsparticles/slim@3.7.1/tsparticles.slim.bundle.min.js');
+  }
+  const inst = await tsParticles.load({
+    id: 'tsparticles-glitter',
+    options: {
+      fpsLimit: 60,
+      detectRetina: true,
+      background: { color: 'transparent' },
+      particles: {
+        number: { value: 40, density: { enable: true, area: 900 } },
+        color: { value: ['#fff5d6','#ffd700','#ffb6c1','#ffffff'] },
+        shape: { type: 'char', character: [{ value: '✦', font: 'Arial', weight: '400' }] },
+        opacity: { value: { min: 0.3, max: 0.9 }, animation: { enable: true, speed: 1.2, sync: false, startValue: 'random' } },
+        size: { value: { min: 4, max: 10 } },
+        move: {
+          enable: true, speed: { min: 0.3, max: 1.2 }, direction: 'bottom', straight: false,
+          outModes: { default: 'out' }, gravity: { enable: true, acceleration: 0.05 }
+        },
+        rotate: { value: { min: 0, max: 360 }, animation: { enable: true, speed: 4, sync: false } },
+        tilt: { enable: true, value: { min: 0, max: 360 }, animation: { enable: true, speed: 8 } },
+        wobble: { enable: true, distance: 12, speed: 6 }
+      },
+      emitters: { direction: 'bottom', position: { x: 50, y: -10 }, rate: { delay: 0.3, quantity: 2 }, size: { width: 100, height: 0 } }
+    }
+  });
+  sec._instance = inst;
+};
+
+// ============================================= 04 BOKEH (Canvas custom)
+inits['bokeh'] = (sec) => {
+  const c = document.getElementById('bokeh-canvas');
+  const ctx = c.getContext('2d');
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let w, h, orbs, raf;
+  const COLORS = ['#ffd9a8','#ffb88c','#f5e6d3','#e8c5a0','#ffe4b5'];
+  const COUNT = window.innerWidth < 768 ? 22 : 40;
+
+  function resize() {
+    const rect = c.getBoundingClientRect();
+    w = c.width = rect.width * dpr;
+    h = c.height = rect.height * dpr;
+    c.style.width = rect.width + 'px';
+    c.style.height = rect.height + 'px';
+  }
+  function makeOrb() {
+    const r = (Math.random() * 60 + 20) * dpr;
+    return {
+      x: Math.random() * w, y: Math.random() * h, r,
+      vx: (Math.random() - 0.5) * 0.3 * dpr, vy: (Math.random() - 0.5) * 0.3 * dpr,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      alpha: Math.random() * 0.4 + 0.2, pulse: Math.random() * Math.PI * 2
+    };
+  }
+  function tick() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.globalCompositeOperation = 'screen';
+    for (const o of orbs) {
+      o.x += o.vx; o.y += o.vy; o.pulse += 0.01;
+      if (o.x < -o.r) o.x = w + o.r;
+      if (o.x > w + o.r) o.x = -o.r;
+      if (o.y < -o.r) o.y = h + o.r;
+      if (o.y > h + o.r) o.y = -o.r;
+      const a = o.alpha + Math.sin(o.pulse) * 0.1;
+      const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
+      g.addColorStop(0, o.color + Math.floor(a * 255).toString(16).padStart(2, '0'));
+      g.addColorStop(0.5, o.color + '40');
+      g.addColorStop(1, o.color + '00');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2); ctx.fill();
+    }
+    raf = requestAnimationFrame(tick);
+  }
+  resize();
+  orbs = Array.from({ length: COUNT }, makeOrb);
+  window.addEventListener('resize', () => { resize(); orbs = Array.from({ length: COUNT }, makeOrb); });
+  raf = requestAnimationFrame(tick);
+  sec._instance = {
+    pause: () => { if (raf) cancelAnimationFrame(raf); raf = null; },
+    play: () => { if (!raf) raf = requestAnimationFrame(tick); }
+  };
+};
+
+// ============================================= 05 STRIPE MESH (whatamesh)
+inits['stripe-mesh'] = async (sec) => {
+  try {
+    const mod = await import('https://esm.sh/whatamesh@1.0.5');
+    const gradient = new mod.Gradient();
+    gradient.initGradient('#gradient-canvas-stripe');
+    sec._instance = {
+      pause: () => gradient.pause && gradient.pause(),
+      play: () => gradient.play && gradient.play()
+    };
+  } catch(e) { console.warn('Whatamesh failed', e); }
+};
+
+// ============================================= 06 PAPER SHADERS
+inits['paper-shaders'] = async (sec) => {
+  if (!customElements.get('mesh-gradient')) {
+    await import('https://esm.sh/@paper-design/shaders-web@0.0.45');
+  }
+  // re-set speed when in view
+  const el = document.getElementById('paper-mesh');
+  el.setAttribute('speed', '0.3');
+  sec._instance = {
+    pause: () => el.setAttribute('speed', '0'),
+    play: () => el.setAttribute('speed', '0.3')
+  };
+};
+
+// ============================================= 07 VANTA FOG
+inits['vanta-fog'] = async (sec) => {
+  if (!window.THREE) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js');
+  if (!window.VANTA || !window.VANTA.FOG) await loadScript('https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.fog.min.js');
+  const v = window.VANTA.FOG({
+    el: '#vanta-fog-bg',
+    mouseControls: true, touchControls: false, gyroControls: false,
+    minHeight: 200, minWidth: 200,
+    highlightColor: 0xC9A254, midtoneColor: 0xF5D5D0,
+    lowlightColor: 0xE8B5B0, baseColor: 0xFFF5F2,
+    blurFactor: 0.62, speed: 0.8, zoom: 0.8
+  });
+  sec._instance = v;
+};
+
+// ============================================= 08 VANTA WAVES
+inits['vanta-waves'] = async (sec) => {
+  if (!window.THREE) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js');
+  if (!window.VANTA || !window.VANTA.WAVES) await loadScript('https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js');
+  const v = window.VANTA.WAVES({
+    el: '#vanta-waves-bg',
+    mouseControls: true, touchControls: false, gyroControls: false,
+    minHeight: 200, minWidth: 200,
+    color: 0x0A1628, shininess: 45, waveHeight: 18, waveSpeed: 0.55, zoom: 0.92
+  });
+  sec._instance = v;
+};
+
+// ============================================= 09 GOOEY (cursor reactive)
+inits['gooey'] = (sec) => {
+  if (!matchMedia('(pointer:fine)').matches) return; // mobile uses CSS keyframes
+  const blobs = [
+    { el: sec.querySelector('.gb-1'), x: innerWidth/2, y: innerHeight/2, tx: innerWidth/2, ty: innerHeight/2, lerp: 0.12, off: [0,0] },
+    { el: sec.querySelector('.gb-2'), x: 0, y: 0, tx: 0, ty: 0, lerp: 0.08, off: [180,-100] },
+    { el: sec.querySelector('.gb-3'), x: 0, y: 0, tx: 0, ty: 0, lerp: 0.05, off: [-150,120] }
+  ];
+  let raf, active = true;
+  function onMove(e){
+    const r = sec.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    blobs.forEach(b => { b.tx = x + b.off[0]; b.ty = y + b.off[1]; });
+  }
+  function loop(){
+    if (!active) return;
+    blobs.forEach(b => {
+      b.x += (b.tx - b.x) * b.lerp;
+      b.y += (b.ty - b.y) * b.lerp;
+      b.el.style.transform = `translate(${b.x}px, ${b.y}px) translate(-50%,-50%)`;
+    });
+    raf = requestAnimationFrame(loop);
+  }
+  sec.addEventListener('pointermove', onMove);
+  raf = requestAnimationFrame(loop);
+  sec._instance = {
+    pause: () => { active = false; if (raf) cancelAnimationFrame(raf); },
+    play: () => { if (!active) { active = true; raf = requestAnimationFrame(loop); } }
+  };
+};
+
+// ============================================= 10 FLUID
+inits['fluid'] = async (sec) => {
+  try {
+    const mod = await import('https://esm.sh/webgl-fluid-enhanced@0.5.0');
+    const Sim = mod.default || mod.WebGLFluidEnhanced;
+    const sim = new Sim(document.getElementById('fluid-canvas'));
+    sim.config({
+      SIM_RESOLUTION: window.innerWidth < 768 ? 64 : 128,
+      DYE_RESOLUTION: window.innerWidth < 768 ? 512 : 1024,
+      DENSITY_DISSIPATION: 2, VELOCITY_DISSIPATION: 1.5,
+      PRESSURE: 0.8, CURL: 25, SPLAT_RADIUS: 0.25,
+      COLOR_PALETTE: ['#7c3aed','#06b6d4','#ec4899','#C9A254'],
+      HOVER: true, BACK_COLOR: '#0a0a0a', TRANSPARENT: false
+    });
+    sim.start();
+    sec._instance = sim;
+  } catch(e) { console.warn('Fluid failed', e); }
+};
+
+// ===== util =====
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src; s.async = true;
+    s.onload = resolve; s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+</script>
+
+</body>
+</html>
