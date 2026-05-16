@@ -359,10 +359,6 @@
     letter-spacing: -0.025em;
     margin-bottom: 3rem;
   }
-  .project-slot {
-    height: 85vh;
-    position: relative;
-  }
   .project-card {
     position: sticky;
     top: 6rem;
@@ -370,9 +366,11 @@
     border: 2px solid #D7E2EA;
     background: #0C0C0C;
     padding: 1rem;
-    transform-origin: top center;
+    transform-origin: center top;
     will-change: transform;
+    margin-bottom: 70vh;
   }
+  .project-card:last-child { margin-bottom: 0; }
   @media (min-width: 640px) {
     .project-card { top: 7rem; border-radius: 50px; padding: 1.5rem; }
   }
@@ -756,11 +754,8 @@
     const total = projects.length;
     const cards = [];
     projects.forEach((p, i) => {
-      const slot = document.createElement('div');
-      slot.className = 'project-slot';
       const card = document.createElement('article');
       card.className = 'project-card';
-      card.style.top = `calc(6rem + ${i * 28}px)`;
       card.innerHTML = `
         <div class="project-top">
           <div class="project-top-left">
@@ -782,29 +777,29 @@
           </div>
         </div>
       `;
-      slot.appendChild(card);
-      stack.appendChild(slot);
-      cards.push({ slot, card, index: i, targetScale: 1 - (total - 1 - i) * 0.03 });
+      stack.appendChild(card);
+      cards.push(card);
     });
 
     let raf = null;
     function update() {
       const vh = window.innerHeight;
-      cards.forEach(({ slot, card, index, targetScale }) => {
-        const rect = slot.getBoundingClientRect();
-        // progress: 0 when slot enters viewport bottom, 1 when its top reaches sticky top
-        const stickyTop = parseFloat(getComputedStyle(card).top);
-        const startY = vh; // slot top hits bottom of viewport
+      cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        if (!next) { card.style.transform = 'scale(1)'; return; }
+        // next card sube desde abajo: cuando su top = vh la actual está intacta (scale 1),
+        // cuando su top = stickyTop ya la tapó del todo y la actual está al mínimo
+        const nextRect = next.getBoundingClientRect();
+        const stickyTop = parseFloat(getComputedStyle(next).top);
+        const startY = vh;
         const endY = stickyTop;
-        const total = startY - endY;
-        const passed = startY - rect.top;
-        let progress = passed / total;
+        const range = startY - endY;
+        let progress = (startY - nextRect.top) / range;
         progress = Math.max(0, Math.min(1, progress));
-        // scale from 1 to targetScale as later cards stack on top
-        // we scale based on next cards covering, but simple version: scale from 1 -> targetScale across the slot height after sticking
-        const slotProgress = Math.max(0, Math.min(1, (-rect.top + stickyTop) / Math.max(1, rect.height - stickyTop)));
-        const scale = 1 - (1 - targetScale) * slotProgress;
+        // cada card delante se hunde proporcionalmente: 0.08 de scale total
+        const scale = 1 - progress * 0.08;
         card.style.transform = `scale(${scale})`;
+        card.style.opacity = String(1 - progress * 0.15);
       });
       raf = null;
     }
