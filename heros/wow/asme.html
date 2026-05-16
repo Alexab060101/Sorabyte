@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Asme — Built for the curious</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: #000;
+    color: #fff;
+    font-family: system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  button, input { font-family: inherit; }
+  button { background: none; border: none; color: inherit; cursor: pointer; }
+  input { border: none; outline: none; background: none; color: inherit; }
+  ul { list-style: none; }
+  a { color: inherit; text-decoration: none; }
+  svg { display: block; }
+
+  /* ============ LIQUID GLASS ============ */
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.01);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .liquid-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* ============ MAIN ============ */
+  .root {
+    position: relative;
+    min-height: 100vh;
+    background: #000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ============ VIDEO BG ============ */
+  .bg-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translateY(17%);
+    z-index: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .bg-video-fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 50% 70%, hsl(200 40% 30%) 0%, transparent 50%),
+      radial-gradient(ellipse at 30% 90%, hsl(260 35% 25%) 0%, transparent 50%),
+      linear-gradient(180deg, #000 0%, #0a0e1a 60%, #1a1a2e 100%);
+  }
+
+  /* ============ NAVBAR ============ */
+  .nav-wrap {
+    position: relative;
+    z-index: 20;
+    padding: 1.5rem;
+  }
+  .nav-inner {
+    border-radius: 999px;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .logo-text {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
+  .nav-links {
+    display: none;
+    gap: 2rem;
+    align-items: center;
+  }
+  @media (min-width: 768px) { .nav-links { display: flex; } }
+  .nav-links a {
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  .nav-links a:hover { color: #fff; }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .btn-signup {
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  .btn-login {
+    padding: 0.5rem 1.5rem;
+    border-radius: 999px;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  /* ============ HERO CONTENT ============ */
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    transform: translateY(-20%);
+  }
+  .hero-content h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(3rem, 7vw, 5rem);
+    color: #fff;
+    margin-bottom: 2rem;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    white-space: nowrap;
+    font-weight: 400;
+  }
+  @media (min-width: 768px) { .hero-content h1 { font-size: 3.75rem; } }
+  @media (min-width: 1024px) { .hero-content h1 { font-size: 4.5rem; } }
+
+  .hero-form {
+    max-width: 36rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .email-bar {
+    border-radius: 999px;
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .email-bar input {
+    flex: 1;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+  }
+  .email-bar input::placeholder { color: rgba(255, 255, 255, 0.4); }
+  .email-bar input:focus { outline: none; }
+  .submit-btn {
+    background: #fff;
+    border-radius: 50%;
+    padding: 0.75rem;
+    color: #000;
+    display: grid;
+    place-items: center;
+    transition: transform 0.3s, background 0.3s;
+  }
+  .submit-btn:hover { transform: scale(1.05); }
+  .submit-btn:active { transform: scale(0.95); }
+
+  .subtitle {
+    color: #fff;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    padding: 0 1rem;
+  }
+
+  .manifesto-wrap {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  .manifesto-btn {
+    padding: 0.75rem 2rem;
+    border-radius: 999px;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background 0.3s;
+  }
+  .manifesto-btn:hover { background: rgba(255, 255, 255, 0.05); }
+
+  /* ============ SOCIAL FOOTER ============ */
+  .social-footer {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding-bottom: 3rem;
+  }
+  .social-btn {
+    padding: 1rem;
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s, background 0.3s, transform 0.3s;
+    display: grid;
+    place-items: center;
+  }
+  .social-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    transform: scale(1.05);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .bg-video { opacity: 1 !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="root">
+  <!-- Background video -->
+  <div class="bg-video-fallback"></div>
+  <video class="bg-video" id="bg-video" muted loop playsinline preload="auto">
+    <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4" type="video/mp4">
+  </video>
+
+  <!-- Navbar -->
+  <nav class="nav-wrap">
+    <div class="nav-inner liquid-glass">
+      <div class="nav-left">
+        <div class="logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#fff"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span class="logo-text">Asme</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <button class="btn-signup">Sign Up</button>
+        <button class="btn-login liquid-glass">Login</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-content">
+    <h1>Built for the curious</h1>
+    <div class="hero-form">
+      <div class="email-bar liquid-glass">
+        <input type="email" placeholder="Enter your email">
+        <button class="submit-btn" aria-label="Subscribe">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+      <p class="subtitle">Stay updated with the latest news and insights. Subscribe to our newsletter today and never miss out on exciting updates.</p>
+      <div class="manifesto-wrap">
+        <button class="manifesto-btn liquid-glass">Read our manifesto</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social footer -->
+  <footer class="social-footer">
+    <a href="#" class="social-btn liquid-glass" aria-label="Instagram">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="#" class="social-btn liquid-glass" aria-label="Twitter">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="#" class="social-btn liquid-glass" aria-label="Globe">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    </a>
+  </footer>
+</div>
+
+<script>
+  /* ============ SEAMLESS VIDEO FADE LOOP ============
+     Truco que NO sale en prompts genéricos: en lugar de CSS transition que
+     se cancela cuando el vídeo termina y vuelve a empezar (causa flash negro),
+     usamos un sistema rAF-based:
+     - Fade-in 500ms al cargar y al reiniciar loop
+     - Fade-out 500ms cuando faltan 0.55s
+     - fadingOutRef previene re-trigger en cada timeUpdate
+     - cancelAnimationFrame en cada fade nuevo (no competir animaciones)
+     - Fades resumen desde la opacidad actual (no snap)
+  */
+  (function() {
+    const video = document.getElementById('bg-video');
+    if (!video) return;
+
+    let fadeRaf = null;
+    let fadingOut = false;
+    const FADE_MS = 500;
+    const FADE_TRIGGER = 0.55; // segundos antes del fin
+
+    function fade(toOpacity, durationMs) {
+      // Cancelar fade en curso para no competir
+      if (fadeRaf) cancelAnimationFrame(fadeRaf);
+      const fromOpacity = parseFloat(video.style.opacity || '0');
+      const startTime = performance.now();
+      const delta = toOpacity - fromOpacity;
+      function step(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(1, elapsed / durationMs);
+        video.style.opacity = String(fromOpacity + delta * progress);
+        if (progress < 1) {
+          fadeRaf = requestAnimationFrame(step);
+        } else {
+          fadeRaf = null;
+        }
+      }
+      fadeRaf = requestAnimationFrame(step);
+    }
+
+    function startFadeIn() {
+      fadingOut = false;
+      fade(1, FADE_MS);
+    }
+
+    video.addEventListener('loadeddata', () => {
+      startFadeIn();
+      video.play().catch(() => {});
+    });
+
+    video.addEventListener('timeupdate', () => {
+      if (!video.duration || fadingOut) return;
+      const remaining = video.duration - video.currentTime;
+      if (remaining < FADE_TRIGGER) {
+        fadingOut = true;
+        fade(0, FADE_MS);
+      }
+    });
+
+    video.addEventListener('ended', () => {
+      video.style.opacity = '0';
+      setTimeout(() => {
+        video.currentTime = 0;
+        video.play().then(startFadeIn).catch(startFadeIn);
+      }, 100);
+    });
+
+    // Fallback: play on first user interaction si autoplay bloqueado
+    document.addEventListener('click', () => {
+      if (video.paused) video.play().catch(() => {});
+    }, { once: true });
+  })();
+</script>
+
+</body>
+</html>
