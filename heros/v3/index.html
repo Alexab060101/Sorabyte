@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Heros V3 · Awwwards SOTD</title>
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700;800&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Anton&family=Bowlby+One&family=Departure+Mono&family=Spectral:ital,wght@0,300;0,400;1,400&display=swap" rel="stylesheet">
+
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#03030a;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
+
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;background:rgba(8,8,8,0.75);backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    font-family:'Manrope',sans-serif;font-weight:700;
+  }
+  .topbar a{color:#fff;text-decoration:none;font-size:1.05rem}
+  .topbar a span{color:#9F67FF}
+  .topbar .counter{font-size:0.8rem;color:rgba(255,255,255,0.55);font-weight:500}
+
+  .sidenav{
+    position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:150;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .sidenav button{
+    width:34px;height:34px;border-radius:50%;
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);
+    color:#fff;font-size:0.68rem;font-weight:800;font-family:'Manrope',sans-serif;
+    cursor:pointer;transition:all .3s ease;
+  }
+  .sidenav button:hover{background:rgba(159,103,255,0.4);border-color:#9F67FF;transform:scale(1.12)}
+  .sidenav button.active{background:#9F67FF;border-color:#9F67FF}
+  @media (max-width:768px){.sidenav{display:none}}
+
+  .hero-section{position:relative;min-height:100vh;width:100%;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:1}
+  .hero-content{
+    position:relative;z-index:2;padding:0 28px;
+    min-height:100vh;display:grid;place-items:center;text-align:center;
+    pointer-events:none;
+  }
+  .hero-content .inner{max-width:900px}
+  .hero-content h1{
+    font-family:'Manrope',sans-serif;
+    font-size:clamp(2.4rem,7vw,5.5rem);font-weight:800;line-height:1;
+    letter-spacing:-0.04em;margin-bottom:1rem;
+  }
+  .hero-content h1 em{font-style:italic;font-weight:400;color:#C9A254}
+  .hero-content p{
+    font-size:clamp(0.95rem,1.6vw,1.15rem);opacity:0.72;line-height:1.5;
+  }
+
+  .hero-info{
+    position:absolute;left:22px;bottom:22px;z-index:3;
+    background:rgba(0,0,0,0.62);backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.12);border-radius:14px;
+    padding:14px 18px;max-width:360px;
+  }
+  .hero-info .num{
+    font-family:'Manrope',sans-serif;font-weight:800;font-size:0.7rem;
+    letter-spacing:0.22em;color:#9F67FF;margin-bottom:6px;
+  }
+  .hero-info .name{
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:1.05rem;
+    margin-bottom:6px;color:#fff;
+  }
+  .hero-info .meta{font-size:0.76rem;color:rgba(255,255,255,0.65);line-height:1.55}
+  .hero-info .meta strong{color:#C9A254;font-weight:600}
+
+  /* === 01 LUSION POINT-CLOUD === */
+  .h01{background:#05060a}
+  #c01{position:absolute;inset:0;width:100%;height:100%}
+  .hero-section[data-hero="point-cloud"] .hero-content h1{mix-blend-mode:difference}
+
+  /* === 02 LINE-ART SILHOUETTE === */
+  .h02{background:#000}
+  #c02{position:absolute;inset:0}
+  .hero-section[data-hero="line-art"] .hero-content h1{color:#0ff;font-family:'JetBrains Mono',monospace;font-weight:700;text-transform:uppercase;letter-spacing:0}
+
+  /* === 03 EMOJI PHYSICS IN TEXT === */
+  .h03{background:#111;display:grid;place-items:center}
+  .h03 svg{width:90%;max-width:1100px;height:auto}
+  .h03 #phys-target{width:100%;height:100%;background:#111}
+
+  /* === 04 SCROLL-DRIVEN IMAGE REVEAL === */
+  .h04-wrap{position:relative;height:100vh;background:#000;view-timeline-name:--hero4;view-timeline-axis:block;overflow:clip}
+  .h04-frame{
+    position:sticky;top:0;height:100vh;
+    display:grid;place-items:center;overflow:clip;
+    clip-path:inset(8vh 8vw round 24px);
+  }
+  .h04-img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    transform:scale(1.15);
+  }
+  .h04-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.65))}
+  .h04-title{position:relative;color:#fff;font-family:'Manrope',sans-serif;font-size:clamp(2.5rem,8vw,6rem);font-weight:800;letter-spacing:-0.04em;z-index:2;text-align:center}
+  @supports (animation-timeline: view()) {
+    @keyframes img-zoom{from{transform:scale(1.35) translateY(-4%)}to{transform:scale(1) translateY(4%)}}
+    @keyframes frame-open{from{clip-path:inset(20vh 20vw round 48px)}to{clip-path:inset(0 0 round 0)}}
+    @keyframes title-rise{from{opacity:0;transform:translateY(60px)}50%{opacity:1;transform:none}to{opacity:0;transform:translateY(-30px)}}
+    .h04-img{animation:img-zoom linear both;animation-timeline:--hero4;animation-range:cover 0% cover 100%}
+    .h04-frame{animation:frame-open linear both;animation-timeline:--hero4;animation-range:entry 0% cover 40%}
+    .h04-title{animation:title-rise linear both;animation-timeline:--hero4;animation-range:cover 10% cover 90%}
+  }
+
+  /* === 05 HORIZONTAL CSS SCROLL === */
+  .h05-stage{height:400vh;position:relative;background:#f4f1ec}
+  .h05-track{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
+  .h05-strip{display:flex;gap:1.5rem;padding:0 50vw 0 8vw;will-change:transform}
+  .h05-strip figure{flex:0 0 auto;width:min(36vw,440px);height:70vh;position:relative;overflow:hidden;border-radius:2px}
+  .h05-strip img{width:100%;height:100%;object-fit:cover}
+  .h05-strip figcaption{
+    position:absolute;bottom:1rem;left:1rem;background:rgba(244,241,236,0.9);
+    color:#1a1a1a;padding:.4rem .8rem;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;
+  }
+  @supports (animation-timeline: scroll()){
+    @keyframes h05slide{to{transform:translate3d(calc(-100% + 100vw),0,0)}}
+    .h05-strip{animation:h05slide linear both;animation-timeline:scroll();animation-range:0 100%}
+  }
+  .h05-header{
+    position:fixed;top:80px;left:30px;z-index:5;font-size:0.78rem;
+    letter-spacing:0.28em;text-transform:uppercase;color:#1a1a1a;mix-blend-mode:multiply;
+  }
+  @media (max-width:768px){
+    .h05-strip figure{width:75vw;height:60vh}
+  }
+
+  /* === 06 APPLE iPHONE GALLERY SNAP === */
+  .h06{height:100vh;position:relative;background:#000}
+  .h06-track{height:100%;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  .h06-scene{
+    height:100vh;width:100%;position:relative;overflow:hidden;
+    scroll-snap-align:start;scroll-snap-stop:always;
+    display:grid;place-items:center;
+  }
+  .h06-bg{
+    position:absolute;inset:-5%;background-size:cover;background-position:center;
+    transform:translateZ(0);will-change:transform;
+  }
+  .h06-fg{
+    position:relative;z-index:2;text-align:center;padding:0 1rem;
+    will-change:transform,opacity;color:#fff;
+  }
+  .h06-fg h2{font-size:clamp(2.5rem,8vw,6rem);font-weight:700;letter-spacing:-.04em;line-height:.95;font-family:'Manrope',sans-serif}
+  .h06-fg p{margin-top:1rem;font-size:clamp(1rem,1.5vw,1.3rem);opacity:.85;max-width:600px;margin-inline:auto}
+  .h06-scene::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.6));z-index:1;pointer-events:none}
+  .h06-progress{position:absolute;top:50%;right:18px;transform:translateY(-50%);display:flex;flex-direction:column;gap:.5rem;z-index:50}
+  .h06-progress span{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);transition:.4s}
+  .h06-progress span.on{background:#fff;transform:scale(1.4)}
+
+  /* === 07 BRUTALIST WALL === */
+  .h07{background:#0a0a0a;color:#f2f2f2;min-height:100svh;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto 1fr auto;gap:0;padding:24px;font-family:'Archivo Black',Helvetica,sans-serif;position:relative}
+  .h07-nav{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;border-bottom:1px solid #f2f2f2;padding-bottom:12px}
+  .h07-nav ul{display:flex;gap:24px;list-style:none}
+  .h07-wall{grid-column:1/-1;align-self:end;font-size:clamp(80px,22vw,360px);line-height:0.82;letter-spacing:-0.05em;text-transform:uppercase;margin-top:auto;margin-bottom:-0.12em;user-select:none}
+  .h07-wall span{display:block}
+  .h07-wall .offset{padding-left:18vw}
+  .h07-wall .cut{transform:translateY(8vw);color:transparent;-webkit-text-stroke:1px #f2f2f2}
+  .h07-meta{grid-column:1/-1;display:grid;grid-template-columns:repeat(12,1fr);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;border-top:1px solid #f2f2f2;padding-top:12px;margin-top:24px}
+  .h07-meta>*{grid-column:span 3}
+  .h07-meta .right{grid-column:10/-1;text-align:right}
+
+  /* === 08 CRT CYBERPUNK === */
+  .h08{background:radial-gradient(ellipse at 50% 50%, #0a1a14 0%, #040407 70%);min-height:100vh;display:grid;place-items:center;padding:24px;isolation:isolate;position:relative;font-family:'JetBrains Mono',monospace;color:#c8ffd1}
+  .h08::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;background:repeating-linear-gradient(to bottom,rgba(0,255,135,0.06) 0 1px,transparent 1px 3px);mix-blend-mode:overlay}
+  .h08::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:4;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.75) 100%)}
+  .h08-grid{position:absolute;inset:0;z-index:0;opacity:0.18;background-image:linear-gradient(#00ff87 1px,transparent 1px),linear-gradient(90deg,#00ff87 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);animation:h08drift 22s linear infinite}
+  @keyframes h08drift{to{background-position:48px 48px,48px 48px}}
+  .h08-stack{position:relative;z-index:2;text-align:center;max-width:1200px}
+  .h08-tag{font-size:12px;letter-spacing:0.3em;text-transform:uppercase;color:#00ff87;margin-bottom:32px;display:inline-flex;align-items:center;gap:10px}
+  .h08-tag::before,.h08-tag::after{content:"";width:48px;height:1px;background:#00ff87}
+  .h08-blink{animation:h08blink 1.1s steps(2) infinite}
+  @keyframes h08blink{50%{opacity:0}}
+  .h08-title{font-family:'Anton',Impact,sans-serif;font-size:clamp(56px,12vw,200px);line-height:0.88;letter-spacing:0.02em;text-transform:uppercase;color:#e6fff0;text-shadow:-2px 0 0 #ff006e,2px 0 0 #00f0ff;animation:h08flicker 4.2s infinite}
+  @keyframes h08flicker{0%,92%,100%{opacity:1}93%{opacity:0.4}94%{opacity:1}96%{opacity:0.6}97%{opacity:1}}
+  .h08-glow{color:#00ff87;text-shadow:0 0 4px #00ff87,0 0 18px rgba(0,255,135,0.6),0 0 48px rgba(0,255,135,0.35),-2px 0 0 #ff006e,2px 0 0 #00f0ff}
+  .h08-terminal{margin-top:40px;display:inline-block;font-size:13px;text-align:left;border:1px solid #00ff8755;background:#00ff8708;padding:14px 20px}
+  .h08-terminal .prompt{color:#00ff87}
+  .h08-caret{display:inline-block;width:8px;height:14px;background:#00ff87;transform:translateY(2px);margin-left:2px;animation:h08blink 1s steps(2) infinite}
+
+  /* === 09 EXPLODED VIEW === */
+  .h09-wrap{height:400vh;position:relative}
+  .h09{height:100vh;position:sticky;top:0;overflow:hidden;display:grid;place-items:center;perspective:1500px;background:#f5f5f7;color:#1d1d1f}
+  .h09-scene{width:min(60vw,500px);aspect-ratio:1/1;position:relative;transform-style:preserve-3d;will-change:transform}
+  .h09-capa{position:absolute;inset:0;display:grid;place-items:center;will-change:transform;transform-origin:center}
+  .h09-capa div{width:80%;height:80%;display:grid;place-items:center;border-radius:8px;font-family:'Manrope',sans-serif;font-weight:800;font-size:1.3rem;color:#fff;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.15)}
+  .h09-c1 div{background:#e8e8ed;color:#666}
+  .h09-c2 div{background:#d1d1d6;color:#444}
+  .h09-c3 div{background:#a1a1a6;color:#fff}
+  .h09-c4 div{background:#636366;color:#fff}
+  .h09-c5 div{background:#1d1d1f;color:#fff}
+  .h09-intro{position:absolute;top:8%;left:50%;transform:translateX(-50%);text-align:center;max-width:600px;padding:0 24px;z-index:10}
+  .h09-intro h2{font-family:'Manrope',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:700;letter-spacing:-.03em;color:#1d1d1f}
+  .h09-intro p{margin-top:8px;opacity:.6;color:#1d1d1f}
+
+  /* === 10 WEBGL FLUID SCROLL === */
+  .h10-wrap{height:400vh;position:relative;background:#000}
+  .h10{height:100vh;position:sticky;top:0;overflow:hidden}
+  #c10{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .h10-copy{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:2;mix-blend-mode:difference}
+  .h10-copy h2{font-family:'Manrope',sans-serif;font-size:clamp(2.5rem,8vw,7rem);font-weight:800;letter-spacing:-.04em;text-align:center;line-height:.95;max-width:90vw;color:#fff;transition:opacity .4s}
+  .h10-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-size:12px;letter-spacing:0.2em;opacity:0.6;text-transform:uppercase;z-index:3;color:#fff}
+
+  /* End */
+  .end-section{
+    min-height:50vh;display:grid;place-items:center;padding:60px 28px;
+    background:linear-gradient(180deg,#03030a 0%,#1a0d2e 100%);
+  }
+  .end-section h2{font-family:'Manrope',sans-serif;font-size:clamp(1.4rem,3vw,2.2rem);text-align:center;max-width:680px;line-height:1.3;margin-bottom:1rem}
+  .end-section p{text-align:center;opacity:0.7;max-width:560px}
+  .end-section .back{margin-top:2rem;display:inline-block;padding:14px 28px;background:#9F67FF;color:#080808;border-radius:999px;font-weight:700;text-decoration:none}
+
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/heros/"><span>S</span>oraByte · Heros V3</a>
+  <span class="counter" id="counter">01 / 10</span>
+</header>
+<nav class="sidenav" id="sidenav"></nav>
+
+<!-- 01 LUSION POINT-CLOUD -->
+<section class="hero-section h01" data-hero="point-cloud">
+  <div class="hero-bg"><canvas id="c01"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Living <em>matter</em>.</h1>
+    <p>50.000 puntos GPU que reaccionan al cursor con campo magnético.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">01 · POINT-CLOUD</div>
+    <div class="name">Lusion Lab style</div>
+    <div class="meta"><strong>Nichos:</strong> tech/AI/agency creativa · <strong>Stack:</strong> Three.js + custom shader · <strong>Wow:</strong> Awwwards SOTM Mar 2025</div>
+  </div>
+</section>
+
+<!-- 02 LINE-ART SILHOUETTE -->
+<section class="hero-section h02" data-hero="line-art">
+  <div class="hero-bg"><canvas id="c02"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Line / motion</h1>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">02 · CANVAS 2D · LINES</div>
+    <div class="name">Active Theory Line-Art</div>
+    <div class="meta"><strong>Nichos:</strong> automotive, agency tech, deportes · <strong>Stack:</strong> Canvas 2D + simplex noise · <strong>Wow:</strong> silueta sin 3D, viral 2025</div>
+  </div>
+</section>
+
+<!-- 03 EMOJI PHYSICS IN TEXT -->
+<section class="hero-section h03" data-hero="emoji-text">
+  <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet">
+    <defs><clipPath id="phys-clip"><text x="50%" y="60%" text-anchor="middle" font-size="220" font-weight="900" font-family="Manrope, sans-serif">RESN</text></clipPath></defs>
+    <foreignObject width="800" height="300" clip-path="url(#phys-clip)">
+      <div xmlns="http://www.w3.org/1999/xhtml" id="phys-target"></div>
+    </foreignObject>
+  </svg>
+  <div class="hero-info">
+    <div class="num">03 · MATTER.JS · CLIP-PATH</div>
+    <div class="name">Emoji Physics inside Text</div>
+    <div class="meta"><strong>Nichos:</strong> studios creativos, branding playful, label música · <strong>Stack:</strong> Matter.js + SVG clip · <strong>Wow:</strong> Resn signature 2025</div>
+  </div>
+</section>
+
+<!-- 04 SCROLL-DRIVEN IMAGE REVEAL -->
+<section class="hero-section h04" data-hero="image-reveal">
+  <div class="h04-wrap">
+    <div class="h04-frame">
+      <img class="h04-img" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600" alt="">
+      <div class="h04-overlay"></div>
+      <h1 class="h04-title">Diseño que respira</h1>
+    </div>
+  </div>
+  <div class="hero-info">
+    <div class="num">04 · CSS SCROLL-DRIVEN</div>
+    <div class="name">Image Reveal (zoom + clip)</div>
+    <div class="meta"><strong>Nichos:</strong> editorial, portfolio, restaurante premium · <strong>Stack:</strong> view-timeline puro (0 JS) · <strong>Wow:</strong> Baseline 2025 nativo</div>
+  </div>
+</section>
+
+<!-- 05 HORIZONTAL CSS SCROLL -->
+<section class="hero-section h05" data-hero="horizontal">
+  <div class="h05-header">Colección · AW26 / lookbook</div>
+  <div class="h05-stage">
+    <div class="h05-track"><div class="h05-strip" id="h05-strip">
+      <figure><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=900" alt=""><figcaption>01 · Linen</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900" alt=""><figcaption>02 · Wool</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=900" alt=""><figcaption>03 · Cashmere</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900" alt=""><figcaption>04 · Silk</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1485518882345-15568b007407?w=900" alt=""><figcaption>05 · Cotton</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1496217590455-aa63a8350eea?w=900" alt=""><figcaption>06 · Vicuña</figcaption></figure>
+    </div></div>
+  </div>
+  <div class="hero-info">
+    <div class="num">05 · CSS HORIZONTAL SCROLL</div>
+    <div class="name">Editorial Lookbook</div>
+    <div class="meta"><strong>Nichos:</strong> moda, boutique hotel, real estate, restauración premium · <strong>Stack:</strong> CSS scroll-timeline puro · <strong>Wow:</strong> cinta editorial sin scrollbar</div>
+  </div>
+</section>
+
+<!-- 06 APPLE iPHONE GALLERY -->
+<section class="hero-section h06" data-hero="apple-gallery">
+  <div class="h06-track" id="h06-track">
+    <div class="h06-scene" data-bg="https://images.unsplash.com/photo-1518770660439-4636190af475?w=2000">
+      <div class="h06-bg"></div>
+      <div class="h06-fg"><h2>Titanium.</h2><p>Más fuerte. Más ligero. Más absoluto.</p></div>
+    </div>
+    <div class="h06-scene" data-bg="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=2000">
+      <div class="h06-bg"></div>
+      <div class="h06-fg"><h2>Cinema-grade.</h2><p>Grabado en formato cine, frame a frame.</p></div>
+    </div>
+    <div class="h06-scene" data-bg="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=2000">
+      <div class="h06-bg"></div>
+      <div class="h06-fg"><h2>Macro precision.</h2><p>Detalles que el ojo no alcanza.</p></div>
+    </div>
+    <div class="h06-scene" data-bg="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=2000">
+      <div class="h06-bg"></div>
+      <div class="h06-fg"><h2>Night mode.</h2><p>Cuando la luz se rinde, empieza la imagen.</p></div>
+    </div>
+  </div>
+  <nav class="h06-progress" id="h06-prog">
+    <span class="on"></span><span></span><span></span><span></span>
+  </nav>
+  <div class="hero-info">
+    <div class="num">06 · SCROLL-SNAP + PARALLAX</div>
+    <div class="name">Apple iPhone Gallery</div>
+    <div class="meta"><strong>Nichos:</strong> producto físico premium, hotel, real estate · <strong>Stack:</strong> CSS scroll-snap + IO · <strong>Wow:</strong> el patrón Apple 1:1</div>
+  </div>
+</section>
+
+<!-- 07 BRUTALIST -->
+<section class="hero-section h07" data-hero="brutalist">
+  <nav class="h07-nav">
+    <span>STUDIO / 026</span>
+    <ul><li>Work</li><li>Index</li><li>Contact</li></ul>
+  </nav>
+  <h1 class="h07-wall">
+    <span data-text="OBJECT">Object</span>
+    <span class="offset cut" data-text="WITHOUT">Without</span>
+    <span data-text="APOLOGY">Apology</span>
+  </h1>
+  <div class="h07-meta">
+    <span>52.5200° N</span>
+    <span>13.4050° E</span>
+    <span class="right">SS / 26 — VOL.III</span>
+  </div>
+  <div class="hero-info">
+    <div class="num">07 · BRUTALIST</div>
+    <div class="name">Balenciaga / Vetements</div>
+    <div class="meta"><strong>Nichos:</strong> fashion underground, agency creativa, archivo artista · <strong>Stack:</strong> 0 JS · <strong>Wow:</strong> autoridad por silencio</div>
+  </div>
+</section>
+
+<!-- 08 CRT CYBERPUNK -->
+<section class="hero-section h08" data-hero="cyberpunk">
+  <div class="h08-grid"></div>
+  <div class="h08-stack">
+    <div class="h08-tag"><span class="h08-blink">●</span> SYSTEM ONLINE / NODE 0x4F</div>
+    <h1 class="h08-title">Run The <span class="h08-glow">Protocol</span><br>Or Be Run</h1>
+    <div class="h08-terminal">
+      <div><span class="prompt">~/0x $</span> init --mainnet --stealth</div>
+      <div><span class="prompt">~/0x $</span> deploy contract<span class="h08-caret"></span></div>
+    </div>
+  </div>
+  <div class="hero-info">
+    <div class="num">08 · CRT CYBERPUNK</div>
+    <div class="name">Web3 / Dev Tools</div>
+    <div class="meta"><strong>Nichos:</strong> crypto, gaming, AI tools, dev SaaS · <strong>Stack:</strong> CSS puro + jitter JS · <strong>Wow:</strong> estética tribu técnica</div>
+  </div>
+</section>
+
+<!-- 09 EXPLODED VIEW -->
+<section class="hero-section" data-hero="exploded" style="background:#f5f5f7">
+  <div class="h09-wrap">
+    <div class="h09">
+      <div class="h09-intro">
+        <h2>Cinco capas. Una sola pieza.</h2>
+        <p>Cada componente diseñado para trabajar como uno.</p>
+      </div>
+      <div class="h09-scene" id="h09-scene">
+        <div class="h09-capa h09-c1" data-depth="4"><div>CRISTAL</div></div>
+        <div class="h09-capa h09-c2" data-depth="3"><div>DISPLAY</div></div>
+        <div class="h09-capa h09-c3" data-depth="2"><div>CHIP</div></div>
+        <div class="h09-capa h09-c4" data-depth="1"><div>BATERÍA</div></div>
+        <div class="h09-capa h09-c5" data-depth="0"><div>CARCASA</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-info" style="background:rgba(0,0,0,0.75);position:fixed;left:22px;bottom:22px">
+    <div class="num">09 · EXPLODED VIEW</div>
+    <div class="name">Apple Watch storytelling</div>
+    <div class="meta"><strong>Nichos:</strong> producto técnico, fisio (anatomía), restaurante (capas plato), inmobiliaria · <strong>Stack:</strong> GSAP ScrollTrigger · <strong>Wow:</strong> visualiza complejidad</div>
+  </div>
+</section>
+
+<!-- 10 WEBGL FLUID -->
+<section class="hero-section" data-hero="fluid-scroll" style="background:#000">
+  <div class="h10-wrap">
+    <div class="h10">
+      <canvas id="c10"></canvas>
+      <div class="h10-copy">
+        <h2 id="h10-title">Energía<br>en movimiento</h2>
+      </div>
+      <div class="h10-hint">Scroll</div>
+    </div>
+  </div>
+  <div class="hero-info" style="position:fixed;left:22px;bottom:22px">
+    <div class="num">10 · WEBGL FLUID SCROLL-SYNC</div>
+    <div class="name">Active Theory Hyundai</div>
+    <div class="meta"><strong>Nichos:</strong> automotive, brand premium, agency hero, tech launch · <strong>Stack:</strong> WebGL shader + scroll sync · <strong>Wow:</strong> nivel award-winning automotive</div>
+  </div>
+</section>
+
+<section class="end-section">
+  <h2>10 heros V3. Award-winning agency-grade.</h2>
+  <p>Si pides estos en una agency madrileña son entre 3.000 y 8.000€ por hero. Aquí los tienes en archivo único, copiables.</p>
+  <a href="/heros/" class="back">← Ver heros simples</a>
+</section>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://esm.sh/three@0.170.0"
+}}
+</script>
+
+<script type="module">
+const sections = document.querySelectorAll('.hero-section');
+const counter = document.getElementById('counter');
+const sidenav = document.getElementById('sidenav');
+sections.forEach((sec, idx) => {
+  const btn = document.createElement('button');
+  btn.textContent = String(idx + 1).padStart(2, '0');
+  btn.addEventListener('click', () => sec.scrollIntoView({behavior: 'smooth'}));
+  btn.dataset.idx = idx;
+  sidenav.appendChild(btn);
+});
+const navBtns = sidenav.querySelectorAll('button');
+
+const inits = {};
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const sec = entry.target;
+    if (entry.isIntersecting) {
+      const name = sec.dataset.hero;
+      if (inits[name] && !sec._init) { inits[name](sec); sec._init = true; }
+      else if (sec._inst && sec._inst.play) { try { sec._inst.play(); } catch(e) {} }
+      const idx = Array.from(sections).indexOf(sec);
+      counter.textContent = String(idx + 1).padStart(2, '0') + ' / 10';
+      navBtns.forEach(b => b.classList.toggle('active', +b.dataset.idx === idx));
+    } else {
+      if (sec._inst && sec._inst.pause) { try { sec._inst.pause(); } catch(e) {} }
+    }
+  });
+}, {threshold: 0.3});
+sections.forEach(s => io.observe(s));
+
+// ============= 01 POINT-CLOUD =============
+inits['point-cloud'] = async (sec) => {
+  const THREE = await import('three');
+  const canvas = document.getElementById('c01');
+  const r = new THREE.WebGLRenderer({canvas, antialias: true, alpha: false});
+  r.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const resize = () => { const rect = canvas.getBoundingClientRect(); r.setSize(rect.width, rect.height); };
+  resize(); addEventListener('resize', resize);
+  const s = new THREE.Scene();
+  s.background = new THREE.Color(0x05060a);
+  const cam = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  cam.position.z = 3;
+  const updateCam = () => { const rect = canvas.getBoundingClientRect(); cam.aspect = rect.width/rect.height; cam.updateProjectionMatrix(); };
+  updateCam(); addEventListener('resize', updateCam);
+  const N = matchMedia('(max-width:768px)').matches ? 15000 : 50000;
+  const pos = new Float32Array(N*3), home = new Float32Array(N*3);
+  for (let i = 0; i < N; i++) {
+    const x = (Math.random()-.5)*4, y = (Math.random()-.5)*2, z = (Math.random()-.5)*2;
+    pos[i*3] = home[i*3] = x; pos[i*3+1] = home[i*3+1] = y; pos[i*3+2] = home[i*3+2] = z;
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const m = new THREE.PointsMaterial({size: 0.008, color: 0xC084FC});
+  s.add(new THREE.Points(g, m));
+  const mouse = new THREE.Vector3();
+  sec.addEventListener('pointermove', e => {
+    const r = sec.getBoundingClientRect();
+    mouse.x = ((e.clientX - r.left)/r.width - .5) * 4;
+    mouse.y = -((e.clientY - r.top)/r.height - .5) * 2;
+  });
+  let running = true, raf;
+  const tick = () => {
+    if (!running) return;
+    const p = g.attributes.position.array;
+    for (let i = 0; i < N; i++) {
+      const dx = p[i*3] - mouse.x, dy = p[i*3+1] - mouse.y, d = dx*dx + dy*dy + .05;
+      p[i*3] += (home[i*3] - p[i*3])*.05 + dx/d*.002;
+      p[i*3+1] += (home[i*3+1] - p[i*3+1])*.05 + dy/d*.002;
+    }
+    g.attributes.position.needsUpdate = true;
+    r.render(s, cam);
+    raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+  sec._inst = {pause: () => {running = false; if (raf) cancelAnimationFrame(raf);}, play: () => {if (!running) {running = true; raf = requestAnimationFrame(tick);}}};
+};
+
+// ============= 02 LINE-ART SILHOUETTE =============
+inits['line-art'] = async (sec) => {
+  const {createNoise2D} = await import('https://esm.sh/simplex-noise@4');
+  const n = createNoise2D();
+  const cv = document.getElementById('c02');
+  const ctx = cv.getContext('2d');
+  const resize = () => { const r = sec.getBoundingClientRect(); cv.width = r.width; cv.height = r.height; };
+  resize(); addEventListener('resize', resize);
+  const pts = Array.from({length: 200}, (_, i) => {
+    const a = i/200 * Math.PI*2;
+    return {tx: cv.width/2 + Math.cos(a)*Math.min(cv.width, cv.height)*0.25, ty: cv.height/2 + Math.sin(a)*Math.min(cv.width, cv.height)*0.25, x: Math.random()*cv.width, y: Math.random()*cv.height};
+  });
+  let t = 0, running = true, raf;
+  const tick = () => {
+    if (!running) return;
+    ctx.fillStyle = 'rgba(0,0,0,.18)'; ctx.fillRect(0,0,cv.width,cv.height);
+    ctx.strokeStyle = '#0ff'; ctx.lineWidth = 1; t += .005;
+    pts.forEach((p, i) => {
+      const nx = n(i*.1, t)*8, ny = n(i*.1+99, t)*8;
+      p.x += (p.tx+nx-p.x)*.04; p.y += (p.ty+ny-p.y)*.04;
+      const q = pts[(i+1)%pts.length];
+      ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+    });
+    raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+  sec._inst = {pause: () => {running = false; if (raf) cancelAnimationFrame(raf);}, play: () => {if (!running) {running = true; raf = requestAnimationFrame(tick);}}};
+};
+
+// ============= 03 EMOJI PHYSICS =============
+inits['emoji-text'] = async (sec) => {
+  await loadScript('https://cdn.jsdelivr.net/npm/matter-js@0.20.0/build/matter.min.js');
+  const M = window.Matter;
+  const e = M.Engine.create(), w = e.world;
+  const target = document.getElementById('phys-target');
+  const r = M.Render.create({element: target, engine: e, options: {width: 800, height: 300, background: '#111', wireframes: false}});
+  ['🔥','💀','✨','🌀','👁'].forEach((em, i) => {
+    for (let j = 0; j < 6; j++) {
+      const b = M.Bodies.circle(100 + i*120, 50 + j*30, 22, {restitution: .9,
+        render: {sprite: {texture: `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='44' height='44'><text y='34' font-size='34'>${em}</text></svg>`}}});
+      M.Composite.add(w, b);
+    }
+  });
+  M.Composite.add(w, [
+    M.Bodies.rectangle(400, 310, 800, 20, {isStatic: true}),
+    M.Bodies.rectangle(-10, 150, 20, 300, {isStatic: true}),
+    M.Bodies.rectangle(810, 150, 20, 300, {isStatic: true})
+  ]);
+  const mc = M.MouseConstraint.create(e, {mouse: M.Mouse.create(r.canvas)});
+  M.Composite.add(w, mc);
+  M.Render.run(r);
+  const runner = M.Runner.create();
+  M.Runner.run(runner, e);
+  sec._inst = {pause: () => M.Runner.stop(runner), play: () => M.Runner.run(runner, e)};
+};
+
+// ============= 04 IMAGE REVEAL — pure CSS, no init =============
+// ============= 05 HORIZONTAL CSS — pure CSS, no init =============
+
+// ============= 06 APPLE GALLERY =============
+inits['apple-gallery'] = (sec) => {
+  const track = document.getElementById('h06-track');
+  const scenes = track.querySelectorAll('.h06-scene');
+  const dots = document.querySelectorAll('#h06-prog span');
+  scenes.forEach(scene => {
+    const bg = scene.querySelector('.h06-bg');
+    bg.style.backgroundImage = `url(${scene.dataset.bg})`;
+  });
+  let raf = false;
+  const parallax = () => {
+    scenes.forEach(s => {
+      const r = s.getBoundingClientRect();
+      const containerRect = track.getBoundingClientRect();
+      if (r.bottom < containerRect.top || r.top > containerRect.bottom) return;
+      const center = r.top + r.height/2 - containerRect.top;
+      const trackHalf = containerRect.height/2;
+      const offset = (center - trackHalf) / containerRect.height;
+      const bg = s.querySelector('.h06-bg');
+      const fg = s.querySelector('.h06-fg');
+      bg.style.transform = `translate3d(0,${offset*30}px,0) scale(1.08)`;
+      fg.style.transform = `translate3d(0,${offset*-60}px,0)`;
+      fg.style.opacity = String(1 - Math.min(1, Math.abs(offset)*1.4));
+    });
+    raf = false;
+  };
+  track.addEventListener('scroll', () => { if (!raf) { requestAnimationFrame(parallax); raf = true; } }, {passive: true});
+  parallax();
+  const ioInternal = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > .6) {
+        const i = Array.from(scenes).indexOf(e.target);
+        dots.forEach((d, k) => d.classList.toggle('on', k === i));
+      }
+    });
+  }, {root: track, threshold: [.6, .8]});
+  scenes.forEach(s => ioInternal.observe(s));
+  sec._inst = {pause: () => {}, play: () => {}};
+};
+
+// ============= 07 BRUTALIST — minor JS for hover effect =============
+inits['brutalist'] = (sec) => {
+  const spans = sec.querySelectorAll('.h07-wall span');
+  const kick = () => {
+    const s = spans[Math.floor(Math.random()*spans.length)];
+    s.style.transform = `translateX(${(Math.random()*8-4)|0}px)`;
+    setTimeout(() => s.style.transform = '', 80);
+  };
+  const interval = setInterval(kick, 6000 + Math.random()*6000);
+  sec._inst = {pause: () => clearInterval(interval), play: () => {}};
+};
+
+// ============= 08 CYBERPUNK — title jitter =============
+inits['cyberpunk'] = (sec) => {
+  if (matchMedia('(max-width:768px)').matches) { sec._inst = {pause:()=>{},play:()=>{}}; return; }
+  const t = sec.querySelector('.h08-title');
+  let running = true;
+  const jitter = () => {
+    if (!running) return;
+    const x = (Math.random()*4-2).toFixed(1);
+    const y = (Math.random()*2-1).toFixed(1);
+    t.style.transform = `translate(${x}px,${y}px)`;
+    setTimeout(jitter, 90 + Math.random()*180);
+  };
+  jitter();
+  sec._inst = {pause: () => {running = false; t.style.transform = '';}, play: () => {if (!running) {running = true; jitter();}}};
+};
+
+// ============= 09 EXPLODED VIEW =============
+inits['exploded'] = async (sec) => {
+  await loadScript('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js');
+  await loadScript('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js');
+  const gsap = window.gsap;
+  gsap.registerPlugin(window.ScrollTrigger);
+  const wrap = sec.querySelector('.h09-wrap');
+  const capas = wrap.querySelectorAll('.h09-capa');
+  const STEP = matchMedia('(max-width:768px)').matches ? 80 : 130;
+  const tl = gsap.timeline({scrollTrigger: {trigger: wrap, start: 'top top', end: 'bottom bottom', scrub: 1.2}});
+  capas.forEach((capa) => {
+    const depth = parseInt(capa.dataset.depth);
+    tl.to(capa, {y: (depth - 2) * STEP, z: depth * 100, ease: 'power2.inOut'}, 0);
+  });
+  tl.to(wrap.querySelector('.h09-scene'), {rotateY: 25, rotateX: -15, scale: 0.85, ease: 'power2.inOut'}, 0.5);
+  sec._inst = {pause: () => {}, play: () => {}};
+};
+
+// ============= 10 WEBGL FLUID =============
+inits['fluid-scroll'] = async (sec) => {
+  await loadScript('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js');
+  await loadScript('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js');
+  const gsap = window.gsap; gsap.registerPlugin(window.ScrollTrigger);
+  const canvas = document.getElementById('c10');
+  const gl = canvas.getContext('webgl', {antialias: false, alpha: false});
+  if (!gl) return;
+  const vs = `attribute vec2 aPos; varying vec2 vUv; void main(){ vUv = aPos*.5+.5; gl_Position = vec4(aPos,0,1); }`;
+  const fs = `precision highp float; varying vec2 vUv; uniform float uTime, uProgress; uniform vec2 uRes;
+    vec3 permute(vec3 x){return mod(((x*34.0)+1.0)*x,289.0);}
+    float snoise(vec2 v){const vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);
+    vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);
+    vec2 i1=(x0.x>x0.y)?vec2(1,0):vec2(0,1);vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;
+    i=mod(i,289.0);vec3 p=permute(permute(i.y+vec3(0,i1.y,1))+i.x+vec3(0,i1.x,1));
+    vec3 m=max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);m=m*m;m=m*m;
+    vec3 x=2.0*fract(p*C.www)-1.0;vec3 h=abs(x)-0.5;vec3 ox=floor(x+0.5);vec3 a0=x-ox;
+    m*=1.79284291400159-0.85373472095314*(a0*a0+h*h);
+    vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.0*dot(m,g);}
+    vec3 palette(float t){
+      vec3 c1=vec3(1.0,0.0,0.43);vec3 c2=vec3(0.23,0.05,0.64);vec3 c3=vec3(0.0,0.6,1.0);vec3 c4=vec3(0,0,0);
+      if(t<0.33) return mix(c1,c2,t/0.33);
+      if(t<0.66) return mix(c2,c3,(t-0.33)/0.33);
+      return mix(c3,c4,(t-0.66)/0.34);
+    }
+    void main(){
+      vec2 p = (gl_FragCoord.xy - 0.5*uRes)/min(uRes.x,uRes.y);
+      float turb = 1.0 + uProgress*3.0;
+      float speed = 0.15 + uProgress*0.4;
+      float t = uTime*speed;
+      float n = 0.5*snoise(p*1.5*turb + vec2(t,0)) + 0.25*snoise(p*3.0*turb + vec2(0,t*1.3)) + 0.125*snoise(p*6.0*turb + vec2(-t,t));
+      float dist = length(p)*(0.8-uProgress*0.3);
+      n += sin(dist*4.0 - t*2.0)*0.3;
+      float mask = smoothstep(-0.3,0.8,n);
+      vec3 col = palette(mask*0.7 + uProgress*0.3);
+      col *= 1.0 - dist*0.5;
+      gl_FragColor = vec4(col,1.0);
+    }`;
+  const compile = (t, s) => { const sh = gl.createShader(t); gl.shaderSource(sh, s); gl.compileShader(sh); return sh; };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const aPos = gl.getAttribLocation(prog, 'aPos');
+  gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'uTime'), uProgress = gl.getUniformLocation(prog, 'uProgress'), uRes = gl.getUniformLocation(prog, 'uRes');
+  let progress = 0, targetProgress = 0;
+  const resize = () => { const dpr = Math.min(devicePixelRatio, 1.5); const r = canvas.getBoundingClientRect(); canvas.width = r.width*dpr; canvas.height = r.height*dpr; gl.viewport(0,0,canvas.width,canvas.height); gl.uniform2f(uRes, canvas.width, canvas.height); };
+  resize(); addEventListener('resize', resize);
+  const wrap = sec.querySelector('.h10-wrap');
+  window.ScrollTrigger.create({trigger: wrap, start: 'top top', end: 'bottom bottom', onUpdate: self => { targetProgress = self.progress; }});
+  const title = document.getElementById('h10-title');
+  const fases = ['Energía<br>en movimiento', 'Diseñada<br>desde cero', 'Eficiencia<br>sin compromiso', 'El futuro,<br>hoy'];
+  let faseActual = 0;
+  window.ScrollTrigger.create({trigger: wrap, start: 'top top', end: 'bottom bottom', onUpdate: self => {
+    const f = Math.min(3, Math.floor(self.progress * 4));
+    if (f !== faseActual) { faseActual = f; title.style.opacity = '0'; setTimeout(() => { title.innerHTML = fases[f]; title.style.opacity = '1'; }, 200); }
+  }});
+  const start = performance.now();
+  let running = true, raf;
+  const render = () => {
+    if (!running) return;
+    progress += (targetProgress - progress) * 0.08;
+    gl.uniform1f(uTime, (performance.now() - start)/1000);
+    gl.uniform1f(uProgress, progress);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    raf = requestAnimationFrame(render);
+  };
+  raf = requestAnimationFrame(render);
+  sec._inst = {pause: () => {running = false; if (raf) cancelAnimationFrame(raf);}, play: () => {if (!running) {running = true; raf = requestAnimationFrame(render);}}};
+};
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector(`script[src="${src}"]`)) return resolve();
+    const s = document.createElement('script');
+    s.src = src; s.async = true;
+    s.onload = resolve; s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+</script>
+
+</body>
+</html>
