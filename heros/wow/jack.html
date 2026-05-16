@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Jack — 3D Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body, #root, .wrap {
+    background: #0C0C0C;
+    font-family: 'Kanit', sans-serif;
+    color: #fff;
+  }
+  body { overflow-x: clip; }
+  .wrap { overflow-x: clip; }
+  img { display: block; max-width: 100%; }
+  button { font-family: inherit; cursor: pointer; }
+  a { color: inherit; text-decoration: none; }
+
+  .hero-heading {
+    background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* ========== FadeIn ========== */
+  @keyframes fIn {
+    from { opacity: 0; transform: translate3d(var(--fx, 0), var(--fy, 30px), 0); }
+    to   { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  .fade {
+    opacity: 0;
+  }
+  .fade.in {
+    animation: fIn 0.7s cubic-bezier(.25,.1,.25,1) both;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: clip;
+    position: relative;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem 0;
+    gap: 1rem;
+  }
+  @media (min-width: 768px) { .navbar { padding: 2rem 2.5rem 0; } }
+  .navbar a {
+    color: #D7E2EA;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+    transition: opacity 0.2s;
+  }
+  @media (min-width: 768px) { .navbar a { font-size: 1.125rem; } }
+  @media (min-width: 1024px) { .navbar a { font-size: 1.4rem; } }
+  .navbar a:hover { opacity: 0.7; }
+
+  .hero-title-wrap {
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0 1.5rem;
+    margin-top: 1.5rem;
+  }
+  @media (min-width: 640px) { .hero-title-wrap { margin-top: 1rem; } }
+  @media (min-width: 768px) { .hero-title-wrap { margin-top: -1.25rem; padding: 0 2.5rem; } }
+  .hero-title {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    white-space: nowrap;
+    width: 100%;
+    font-size: 14vw;
+  }
+  @media (min-width: 640px) { .hero-title { font-size: 15vw; } }
+  @media (min-width: 768px) { .hero-title { font-size: 16vw; } }
+  @media (min-width: 1024px) { .hero-title { font-size: 17.5vw; } }
+
+  .hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 1.5rem 1.75rem;
+    gap: 1rem;
+  }
+  @media (min-width: 640px) { .hero-bottom { padding-bottom: 2rem; } }
+  @media (min-width: 768px) { .hero-bottom { padding: 0 2.5rem 2.5rem; } }
+  .hero-tag {
+    color: #D7E2EA;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    line-height: 1.375;
+    font-size: clamp(0.75rem, 1.4vw, 1.5rem);
+    max-width: 160px;
+  }
+  @media (min-width: 640px) { .hero-tag { max-width: 220px; } }
+  @media (min-width: 768px) { .hero-tag { max-width: 260px; } }
+
+  .portrait-wrap {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    top: 50%;
+    margin-top: -180px;
+    width: 280px;
+    will-change: transform;
+  }
+  @media (min-width: 640px) {
+    .portrait-wrap { top: auto; bottom: 0; margin-top: 0; width: 360px; }
+  }
+  @media (min-width: 768px) { .portrait-wrap { width: 440px; } }
+  @media (min-width: 1024px) { .portrait-wrap { width: 520px; } }
+  .portrait-inner {
+    will-change: transform;
+    transition: transform 0.6s ease-in-out;
+  }
+  .portrait-inner.active {
+    transition: transform 0.3s ease-out;
+  }
+
+  /* ========== Contact Button ========== */
+  .contact-btn {
+    position: relative;
+    border-radius: 999px;
+    background: linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%);
+    box-shadow:
+      0 4px 4px rgba(181, 1, 167, 0.25),
+      inset 4px 4px 12px #7721B1;
+    outline: 2px solid #fff;
+    outline-offset: -3px;
+    color: #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 0.75rem;
+    transition: transform 0.2s;
+  }
+  @media (min-width: 640px) { .contact-btn { padding: 0.875rem 2.5rem; font-size: 0.875rem; } }
+  @media (min-width: 768px) { .contact-btn { padding: 1rem 3rem; font-size: 1rem; } }
+  .contact-btn:hover { transform: scale(1.02); }
+
+  /* ========== Marquee ========== */
+  .marquee {
+    background: #0C0C0C;
+    padding: 6rem 0 2.5rem;
+    overflow: hidden;
+  }
+  @media (min-width: 640px) { .marquee { padding-top: 8rem; } }
+  @media (min-width: 768px) { .marquee { padding-top: 10rem; } }
+  .marquee-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .marquee-row {
+    display: flex;
+    gap: 0.75rem;
+    will-change: transform;
+  }
+  .marquee-row img {
+    width: 420px;
+    height: 270px;
+    flex-shrink: 0;
+    border-radius: 1rem;
+    object-fit: cover;
+    background: #1a1a1a;
+  }
+
+  /* ========== About ========== */
+  .about {
+    min-height: 100vh;
+    padding: 5rem 1.25rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+  @media (min-width: 640px) { .about { padding: 5rem 2rem; gap: 3.5rem; } }
+  @media (min-width: 768px) { .about { padding: 5rem 2.5rem; gap: 4rem; } }
+
+  .about-deco {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .deco-tl { top: 4%; left: 1%; width: 120px; }
+  .deco-tr { top: 4%; right: 1%; width: 120px; }
+  .deco-bl { bottom: 8%; left: 3%; width: 100px; }
+  .deco-br { bottom: 8%; right: 3%; width: 130px; }
+  @media (min-width: 640px) {
+    .deco-tl, .deco-tr { width: 160px; }
+    .deco-bl { width: 140px; }
+    .deco-br { width: 170px; }
+    .deco-tl { left: 2%; } .deco-tr { right: 2%; }
+    .deco-bl { left: 6%; } .deco-br { right: 6%; }
+  }
+  @media (min-width: 768px) {
+    .deco-tl, .deco-tr { width: 210px; }
+    .deco-bl { width: 180px; }
+    .deco-br { width: 220px; }
+    .deco-tl { left: 4%; } .deco-tr { right: 4%; }
+    .deco-bl { left: 10%; } .deco-br { right: 10%; }
+  }
+
+  .about-heading {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    text-align: center;
+    font-size: clamp(3rem, 12vw, 160px);
+    position: relative;
+    z-index: 2;
+  }
+  .about-paragraph {
+    color: #D7E2EA;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.625;
+    max-width: 560px;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    position: relative;
+    z-index: 2;
+  }
+  .about-paragraph .char {
+    position: relative;
+    display: inline-block;
+  }
+  .about-paragraph .char .placeholder {
+    visibility: hidden;
+  }
+  .about-paragraph .char .anim {
+    position: absolute;
+    inset: 0;
+    opacity: 0.2;
+    transition: opacity 0.15s linear;
+  }
+  .about-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+  }
+  @media (min-width: 640px) { .about-content { gap: 5rem; } }
+  @media (min-width: 768px) { .about-content { gap: 6rem; } }
+
+  /* ========== Services ========== */
+  .services {
+    background: #fff;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding: 5rem 1.25rem;
+    color: #0C0C0C;
+  }
+  @media (min-width: 640px) {
+    .services { border-top-left-radius: 50px; border-top-right-radius: 50px; padding: 6rem 2rem; }
+  }
+  @media (min-width: 768px) {
+    .services { border-top-left-radius: 60px; border-top-right-radius: 60px; padding: 8rem 2.5rem; }
+  }
+  .services-heading {
+    color: #0C0C0C;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: clamp(3rem, 12vw, 160px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin-bottom: 4rem;
+  }
+  @media (min-width: 640px) { .services-heading { margin-bottom: 5rem; } }
+  @media (min-width: 768px) { .services-heading { margin-bottom: 7rem; } }
+  .services-list {
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+  .service-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(12, 12, 12, 0.15);
+  }
+  @media (min-width: 640px) { .service-item { padding: 2.5rem 0; gap: 2rem; } }
+  @media (min-width: 768px) { .service-item { padding: 3rem 0; gap: 3rem; } }
+  .service-item:last-child { border-bottom: 1px solid rgba(12, 12, 12, 0.15); }
+  .service-num {
+    color: #0C0C0C;
+    font-weight: 900;
+    font-size: clamp(3rem, 10vw, 140px);
+    line-height: 0.9;
+    flex-shrink: 0;
+    min-width: 4ch;
+  }
+  .service-body { flex: 1; }
+  .service-name {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(1rem, 2.2vw, 2.1rem);
+    margin-bottom: 0.75rem;
+    line-height: 1.1;
+  }
+  .service-desc {
+    font-weight: 300;
+    line-height: 1.625;
+    max-width: 42rem;
+    font-size: clamp(0.85rem, 1.6vw, 1.25rem);
+    opacity: 0.6;
+  }
+
+  /* ========== Projects (sticky stack) ========== */
+  .projects {
+    background: #0C0C0C;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    margin-top: -2.5rem;
+    position: relative;
+    z-index: 10;
+    padding: 5rem 1.25rem 2rem;
+  }
+  @media (min-width: 640px) {
+    .projects { border-top-left-radius: 50px; border-top-right-radius: 50px; margin-top: -3rem; padding: 5rem 2rem 2rem; }
+  }
+  @media (min-width: 768px) {
+    .projects { border-top-left-radius: 60px; border-top-right-radius: 60px; margin-top: -3.5rem; padding: 5rem 2.5rem 2rem; }
+  }
+  .projects-heading {
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: clamp(3rem, 12vw, 160px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin-bottom: 3rem;
+  }
+  .project-slot {
+    height: 85vh;
+    position: relative;
+  }
+  .project-card {
+    position: sticky;
+    top: 6rem;
+    border-radius: 40px;
+    border: 2px solid #D7E2EA;
+    background: #0C0C0C;
+    padding: 1rem;
+    transform-origin: top center;
+    will-change: transform;
+  }
+  @media (min-width: 640px) {
+    .project-card { top: 7rem; border-radius: 50px; padding: 1.5rem; }
+  }
+  @media (min-width: 768px) {
+    .project-card { top: 8rem; border-radius: 60px; padding: 2rem; }
+  }
+  .project-top {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .project-top {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+  }
+  .project-top-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .project-num {
+    color: #D7E2EA;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 7vw, 100px);
+    line-height: 0.9;
+  }
+  .project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .project-cat {
+    color: #D7E2EA;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  .project-name {
+    color: #D7E2EA;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(1rem, 2.2vw, 1.75rem);
+    line-height: 1.1;
+  }
+  .live-btn {
+    border-radius: 999px;
+    border: 2px solid #D7E2EA;
+    color: #D7E2EA;
+    background: transparent;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.75rem 2rem;
+    font-size: 0.875rem;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+  @media (min-width: 640px) { .live-btn { padding: 0.875rem 2.5rem; font-size: 1rem; } }
+  .live-btn:hover { background: rgba(215, 226, 234, 0.1); }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    gap: 0.75rem;
+  }
+  .project-col1 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .project-col1 img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 32px;
+  }
+  @media (min-width: 768px) { .project-col1 img { border-radius: 50px; } }
+  .project-col1 img:nth-child(1) { height: clamp(130px, 16vw, 230px); }
+  .project-col1 img:nth-child(2) { height: clamp(160px, 22vw, 340px); }
+  .project-col2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 32px;
+  }
+  @media (min-width: 768px) { .project-col2 img { border-radius: 50px; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root">
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <nav class="navbar fade" data-fadein="0" data-fadey="-20">
+      <a href="#about">About</a>
+      <a href="#price">Price</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="hero-title-wrap">
+      <h1 class="hero-title hero-heading fade" data-fadein="150" data-fadey="40">Hi, i&apos;m jack</h1>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-tag fade" data-fadein="350" data-fadey="20">a 3d creator driven by crafting striking and unforgettable projects</p>
+      <button class="contact-btn fade" data-fadein="500" data-fadey="20">Contact Me</button>
+    </div>
+    <div class="portrait-wrap fade" data-fadein="600" data-fadey="30" id="magnet">
+      <div class="portrait-inner" id="magnet-inner">
+        <img src="https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png" alt="Jack portrait" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <section class="marquee" id="marquee">
+    <div class="marquee-rows">
+      <div class="marquee-row" id="row1"></div>
+      <div class="marquee-row" id="row2"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <img class="about-deco deco-tl fade" data-fadein="100" data-fadex="-80" data-fadey="0" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png" alt="">
+    <img class="about-deco deco-tr fade" data-fadein="150" data-fadex="80" data-fadey="0" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png" alt="">
+    <img class="about-deco deco-bl fade" data-fadein="250" data-fadex="-80" data-fadey="0" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png" alt="">
+    <img class="about-deco deco-br fade" data-fadein="300" data-fadex="80" data-fadey="0" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png" alt="">
+
+    <h2 class="about-heading hero-heading fade" data-fadein="0" data-fadey="40">About me</h2>
+    <div class="about-content">
+      <p class="about-paragraph" id="aboutPara">With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let's build something incredible together!</p>
+      <button class="contact-btn">Contact Me</button>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <h2 class="services-heading">Services</h2>
+    <div class="services-list">
+      <div class="service-item fade" data-fadein="0" data-fadey="30">
+        <div class="service-num">01</div>
+        <div class="service-body">
+          <div class="service-name">3D Modeling</div>
+          <p class="service-desc">Creation of detailed objects, characters, or environments tailored to specific client needs, ideal for games, products, and visualizations.</p>
+        </div>
+      </div>
+      <div class="service-item fade" data-fadein="100" data-fadey="30">
+        <div class="service-num">02</div>
+        <div class="service-body">
+          <div class="service-name">Rendering</div>
+          <p class="service-desc">High-quality, photorealistic renders that showcase designs with custom lighting, textures, and materials to bring concepts to life.</p>
+        </div>
+      </div>
+      <div class="service-item fade" data-fadein="200" data-fadey="30">
+        <div class="service-num">03</div>
+        <div class="service-body">
+          <div class="service-name">Motion Design</div>
+          <p class="service-desc">Dynamic animations and motion graphics that add energy and storytelling to brands, products, and digital experiences.</p>
+        </div>
+      </div>
+      <div class="service-item fade" data-fadein="300" data-fadey="30">
+        <div class="service-num">04</div>
+        <div class="service-body">
+          <div class="service-name">Branding</div>
+          <p class="service-desc">Crafting cohesive visual identities, from logos to full brand systems, that communicate a clear and memorable presence.</p>
+        </div>
+      </div>
+      <div class="service-item fade" data-fadein="400" data-fadey="30">
+        <div class="service-num">05</div>
+        <div class="service-body">
+          <div class="service-name">Web Design</div>
+          <p class="service-desc">Designing clean, modern, and conversion-focused websites with attention to layout, typography, and user experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects" id="projects">
+    <h2 class="projects-heading hero-heading">Project</h2>
+    <div id="projectStack"></div>
+  </section>
+
+</div>
+</div>
+
+<script>
+  // ========== FadeIn observer ==========
+  const fadeEls = document.querySelectorAll('.fade');
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target;
+        const delay = +el.dataset.fadein || 0;
+        const fx = el.dataset.fadex ? el.dataset.fadex + 'px' : '0';
+        const fy = (el.dataset.fadey || '30') + 'px';
+        el.style.setProperty('--fx', fx);
+        el.style.setProperty('--fy', fy);
+        el.style.animationDelay = delay + 'ms';
+        el.classList.add('in');
+        fadeObs.unobserve(el);
+      }
+    });
+  }, { rootMargin: '50px', threshold: 0 });
+  fadeEls.forEach(el => fadeObs.observe(el));
+
+  // ========== Magnet ==========
+  (function() {
+    const wrap = document.getElementById('magnet');
+    const inner = document.getElementById('magnet-inner');
+    if (!wrap || !inner) return;
+    const PADDING = 150;
+    const STRENGTH = 3;
+    let active = false;
+    function onMove(e) {
+      const r = wrap.getBoundingClientRect();
+      const cx = r.left + r.width / 2;
+      const cy = r.top + r.height / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const halfW = r.width / 2 + PADDING;
+      const halfH = r.height / 2 + PADDING;
+      if (Math.abs(dx) < halfW && Math.abs(dy) < halfH) {
+        if (!active) { inner.classList.add('active'); active = true; }
+        inner.style.transform = `translate3d(${dx / STRENGTH}px, ${dy / STRENGTH}px, 0)`;
+      } else if (active) {
+        inner.classList.remove('active');
+        inner.style.transform = 'translate3d(0,0,0)';
+        active = false;
+      }
+    }
+    window.addEventListener('mousemove', onMove, { passive: true });
+    window.addEventListener('mouseleave', () => {
+      inner.classList.remove('active');
+      inner.style.transform = 'translate3d(0,0,0)';
+      active = false;
+    });
+  })();
+
+  // ========== Marquee build + scroll-driven ==========
+  (function() {
+    const urls = [
+      'https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif',
+      'https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif',
+      'https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif',
+      'https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif',
+      'https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif',
+      'https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif',
+      'https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif',
+      'https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif',
+      'https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif',
+      'https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif',
+      'https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif',
+      'https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif',
+      'https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif',
+      'https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif',
+      'https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif',
+      'https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif',
+      'https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif',
+      'https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif',
+      'https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif',
+      'https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif',
+      'https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif'
+    ];
+    const r1 = urls.slice(0, 11);
+    const r2 = urls.slice(11);
+    const row1 = document.getElementById('row1');
+    const row2 = document.getElementById('row2');
+    const build = (arr, parent) => {
+      const triple = [...arr, ...arr, ...arr];
+      triple.forEach(u => {
+        const img = document.createElement('img');
+        img.src = u;
+        img.loading = 'lazy';
+        img.alt = '';
+        parent.appendChild(img);
+      });
+    };
+    build(r1, row1);
+    build(r2, row2);
+
+    const section = document.getElementById('marquee');
+    let raf = null;
+    function update() {
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top + window.scrollY;
+      const offset = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
+      const t = offset - 200;
+      row1.style.transform = `translateX(${t}px)`;
+      row2.style.transform = `translateX(${-t}px)`;
+      raf = null;
+    }
+    window.addEventListener('scroll', () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    }, { passive: true });
+    update();
+  })();
+
+  // ========== Character-by-character scroll reveal ==========
+  (function() {
+    const p = document.getElementById('aboutPara');
+    if (!p) return;
+    const text = p.textContent;
+    p.textContent = '';
+    const chars = [];
+    for (let i = 0; i < text.length; i++) {
+      const span = document.createElement('span');
+      span.className = 'char';
+      const ph = document.createElement('span');
+      ph.className = 'placeholder';
+      ph.textContent = text[i];
+      const anim = document.createElement('span');
+      anim.className = 'anim';
+      anim.textContent = text[i];
+      span.appendChild(ph);
+      span.appendChild(anim);
+      p.appendChild(span);
+      chars.push(anim);
+    }
+    let raf = null;
+    function update() {
+      const rect = p.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // scroll progress: 0 when rect.top = vh*0.8, 1 when rect.bottom = vh*0.2
+      const startY = vh * 0.8;
+      const endY = vh * 0.2;
+      const total = startY - endY + rect.height;
+      const progressed = startY - rect.top;
+      let progress = progressed / total;
+      progress = Math.max(0, Math.min(1, progress));
+      const n = chars.length;
+      const point = progress * n;
+      for (let i = 0; i < n; i++) {
+        const d = point - i;
+        const op = Math.max(0.2, Math.min(1, 0.2 + d * 0.8));
+        chars[i].style.opacity = op.toFixed(2);
+      }
+      raf = null;
+    }
+    window.addEventListener('scroll', () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    }, { passive: true });
+    update();
+  })();
+
+  // ========== Sticky stacking projects ==========
+  (function() {
+    const projects = [
+      {
+        num: '01', cat: 'Client', name: 'Nextlevel Studio',
+        c1a: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85',
+        c1b: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8.png&w=1280&q=85',
+        c2:  'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85'
+      },
+      {
+        num: '02', cat: 'Personal', name: 'Aura Brand Identity',
+        c1a: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85',
+        c1b: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1.png&w=1280&q=85',
+        c2:  'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea.png&w=1280&q=85'
+      },
+      {
+        num: '03', cat: 'Client', name: 'Solaris Digital',
+        c1a: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85',
+        c1b: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png&w=1280&q=85',
+        c2:  'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee.png&w=1280&q=85'
+      }
+    ];
+    const stack = document.getElementById('projectStack');
+    const total = projects.length;
+    const cards = [];
+    projects.forEach((p, i) => {
+      const slot = document.createElement('div');
+      slot.className = 'project-slot';
+      const card = document.createElement('article');
+      card.className = 'project-card';
+      card.style.top = `calc(6rem + ${i * 28}px)`;
+      card.innerHTML = `
+        <div class="project-top">
+          <div class="project-top-left">
+            <div class="project-num hero-heading">${p.num}</div>
+            <div class="project-meta">
+              <span class="project-cat">${p.cat}</span>
+              <span class="project-name">${p.name}</span>
+            </div>
+          </div>
+          <button class="live-btn">Live Project</button>
+        </div>
+        <div class="project-grid">
+          <div class="project-col1">
+            <img src="${p.c1a}" alt="${p.name}" loading="lazy">
+            <img src="${p.c1b}" alt="${p.name}" loading="lazy">
+          </div>
+          <div class="project-col2">
+            <img src="${p.c2}" alt="${p.name}" loading="lazy">
+          </div>
+        </div>
+      `;
+      slot.appendChild(card);
+      stack.appendChild(slot);
+      cards.push({ slot, card, index: i, targetScale: 1 - (total - 1 - i) * 0.03 });
+    });
+
+    let raf = null;
+    function update() {
+      const vh = window.innerHeight;
+      cards.forEach(({ slot, card, index, targetScale }) => {
+        const rect = slot.getBoundingClientRect();
+        // progress: 0 when slot enters viewport bottom, 1 when its top reaches sticky top
+        const stickyTop = parseFloat(getComputedStyle(card).top);
+        const startY = vh; // slot top hits bottom of viewport
+        const endY = stickyTop;
+        const total = startY - endY;
+        const passed = startY - rect.top;
+        let progress = passed / total;
+        progress = Math.max(0, Math.min(1, progress));
+        // scale from 1 to targetScale as later cards stack on top
+        // we scale based on next cards covering, but simple version: scale from 1 -> targetScale across the slot height after sticking
+        const slotProgress = Math.max(0, Math.min(1, (-rect.top + stickyTop) / Math.max(1, rect.height - stickyTop)));
+        const scale = 1 - (1 - targetScale) * slotProgress;
+        card.style.transform = `scale(${scale})`;
+      });
+      raf = null;
+    }
+    window.addEventListener('scroll', () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    }, { passive: true });
+    update();
+  })();
+</script>
+
+</body>
+</html>
