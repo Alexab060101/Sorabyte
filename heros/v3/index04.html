@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Heros V3 vol.4 · Belleza Conversión · Sorabyte</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#1a0d14;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(26,13,20,0.75);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.08);font-family:'Manrope',sans-serif;font-weight:700}
+  .topbar a{color:#fff;text-decoration:none;font-size:1.05rem}
+  .topbar a span{color:#E8B4C8}
+  .topbar .counter{font-size:0.8rem;color:rgba(255,255,255,0.55);font-weight:500}
+  .sidenav{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:8px}
+  .sidenav button{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:0.68rem;font-weight:800;font-family:'Manrope',sans-serif;cursor:pointer;transition:all .3s ease}
+  .sidenav button:hover{background:rgba(232,180,200,0.4);border-color:#E8B4C8;transform:scale(1.12)}
+  .sidenav button.active{background:#E8B4C8;border-color:#E8B4C8;color:#1a0d14}
+  @media (max-width:768px){.sidenav{display:none}}
+  .hero-section{position:relative;min-height:100vh;width:100%;overflow:hidden}
+  .hero-info{position:absolute;left:22px;bottom:22px;z-index:30;background:rgba(0,0,0,0.62);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:14px 18px;max-width:360px}
+  .hero-info .num{font-family:'Manrope',sans-serif;font-weight:800;font-size:0.7rem;letter-spacing:0.22em;color:#E8B4C8;margin-bottom:6px}
+  .hero-info .name{font-family:'Manrope',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:6px;color:#fff}
+  .hero-info .meta{font-size:0.76rem;color:rgba(255,255,255,0.65);line-height:1.55}
+  .hero-info .meta strong{color:#C9A254;font-weight:600}
+
+  /* 01 WHATSAPP CHAT MOCKUP */
+  .h01{background:linear-gradient(135deg,#1a0d14 0%,#3a1f2b 100%);color:#fff;min-height:100vh;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;padding:4rem 6vw;gap:4rem}
+  .h01-copy h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;line-height:1.05;margin-bottom:1rem}
+  .h01-copy h1 em{font-style:italic;color:#E8B4C8}
+  .h01-copy p{color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:2rem;max-width:42ch}
+  .h01-cta{display:inline-flex;align-items:center;gap:0.6rem;padding:1rem 2rem;background:#25D366;color:#fff;border-radius:999px;font-weight:700;text-decoration:none;font-size:1rem}
+  .h01-phone{background:#0a0508;border:8px solid #1a0d14;border-radius:36px;padding:1.5rem 1rem 1rem;max-width:380px;width:100%;margin:0 auto;box-shadow:0 30px 80px rgba(0,0,0,0.5)}
+  .h01-phone-head{display:flex;align-items:center;gap:0.8rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.1)}
+  .h01-phone-head .av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#E8B4C8,#D4527A);display:grid;place-items:center;font-weight:700;color:#fff}
+  .h01-phone-head .n{font-size:0.95rem;font-weight:600}
+  .h01-phone-head .s{font-size:0.75rem;color:#25D366}
+  .h01-msgs{padding:1rem 0;display:flex;flex-direction:column;gap:0.6rem}
+  .h01-msg{max-width:75%;padding:0.7rem 1rem;border-radius:14px;font-size:0.9rem;line-height:1.4}
+  .h01-msg.them{background:#262d31;border-bottom-left-radius:4px;align-self:flex-start}
+  .h01-msg.me{background:#005C4B;border-bottom-right-radius:4px;align-self:flex-end}
+  .h01-msg .time{display:block;font-size:0.65rem;opacity:0.6;margin-top:0.3rem;text-align:right}
+  .h01-typing{display:flex;gap:4px;padding:0.8rem 1rem;background:#262d31;border-radius:14px;align-self:flex-start;max-width:50px;border-bottom-left-radius:4px}
+  .h01-typing span{width:8px;height:8px;background:#888;border-radius:50%;animation:h01dot 1.4s infinite both}
+  .h01-typing span:nth-child(2){animation-delay:0.2s}
+  .h01-typing span:nth-child(3){animation-delay:0.4s}
+  @keyframes h01dot{0%,80%,100%{transform:scale(0.5);opacity:0.5}40%{transform:scale(1);opacity:1}}
+  @media (max-width:768px){.h01{grid-template-columns:1fr}}
+
+  /* 02 LIVE AVAILABILITY */
+  .h02{background:#FFF8F4;color:#1a0d14;min-height:100vh;display:grid;place-items:center;padding:4rem 2rem}
+  .h02 .inner{text-align:center;max-width:800px}
+  .h02 .pulse-tag{display:inline-flex;align-items:center;gap:0.6rem;padding:0.5rem 1rem;background:#fff;border:1px solid #E8B4C8;border-radius:999px;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:#D4527A;font-weight:600;margin-bottom:2rem}
+  .h02 .pulse-tag::before{content:'';width:8px;height:8px;border-radius:50%;background:#25D366;animation:h02pulse 1.5s infinite}
+  @keyframes h02pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.4)}}
+  .h02 h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:300;line-height:1.05;margin-bottom:1rem}
+  .h02 h1 em{font-style:italic;color:#D4527A}
+  .h02 p{color:#6b4a55;line-height:1.6;max-width:42ch;margin:0 auto 2.5rem;font-size:1.1rem}
+  .h02 .slots{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+  .h02 .slot{padding:0.8rem 1.4rem;background:#fff;border:1px solid #e5d5d5;border-radius:14px;cursor:pointer;font-size:0.95rem;font-weight:600;color:#1a0d14;transition:all .3s}
+  .h02 .slot:hover{border-color:#D4527A;background:#FCE8E8}
+  .h02 .slot.taken{opacity:0.4;text-decoration:line-through;cursor:not-allowed}
+  .h02 .cta{display:inline-block;padding:1.1rem 2.4rem;background:#1a0d14;color:#fff;border-radius:999px;font-weight:600;text-decoration:none}
+
+  /* 03 MAP HERO */
+  .h03{background:#1a0d14;color:#fff;display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+  .h03-copy{padding:4rem 4vw;display:flex;flex-direction:column;justify-content:center;gap:1.2rem}
+  .h03-copy h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;line-height:1.05}
+  .h03-copy h1 em{font-style:italic;color:#E8B4C8}
+  .h03-copy p{color:rgba(255,255,255,0.7);line-height:1.6}
+  .h03-copy .info-row{display:flex;flex-direction:column;gap:0.5rem;margin-top:1.5rem}
+  .h03-copy .info-row strong{color:#E8B4C8;font-weight:600;font-size:0.85rem;letter-spacing:0.15em;text-transform:uppercase}
+  .h03-copy .info-row span{color:#fff;font-size:1.05rem}
+  .h03-copy .cta{margin-top:1.5rem;display:inline-block;padding:1rem 2rem;background:#E8B4C8;color:#1a0d14;border-radius:999px;font-weight:700;text-decoration:none;align-self:flex-start}
+  .h03-map{background:linear-gradient(135deg,#2d1b2d,#1a0d14);position:relative;display:grid;place-items:center;overflow:hidden}
+  .h03-map::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(232,180,200,0.05) 0 1px,transparent 1px 60px),repeating-linear-gradient(90deg,rgba(232,180,200,0.05) 0 1px,transparent 1px 60px)}
+  .h03-pin{position:relative;z-index:2}
+  .h03-pin .ring{width:80px;height:80px;border-radius:50%;border:2px solid #E8B4C8;animation:h03ring 2s infinite}
+  .h03-pin .ring-2{position:absolute;inset:0;animation-delay:0.7s}
+  .h03-pin .dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;background:#E8B4C8;box-shadow:0 0 30px rgba(232,180,200,0.8)}
+  @keyframes h03ring{0%{transform:scale(0.6);opacity:1}100%{transform:scale(2);opacity:0}}
+  .h03-map .label{position:absolute;top:55%;left:50%;transform:translate(-50%,40px);text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;color:#E8B4C8;font-size:1.2rem;margin-top:1rem;z-index:3}
+  @media (max-width:768px){.h03{grid-template-columns:1fr}.h03-map{aspect-ratio:1}}
+
+  /* 04 IG STORIES HIGHLIGHTS */
+  .h04{background:#FFF8F4;color:#1a0d14;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:5rem 2rem;gap:3rem}
+  .h04 .head{text-align:center;max-width:700px;margin:0 auto}
+  .h04 .head h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4.5rem);font-weight:300;line-height:1.05;margin-bottom:1rem}
+  .h04 .head h1 em{font-style:italic;color:#D4527A}
+  .h04 .head p{color:#6b4a55}
+  .h04-stories{display:flex;gap:1.5rem;overflow-x:auto;padding:1rem;justify-content:center;flex-wrap:wrap}
+  .h04-story{display:flex;flex-direction:column;align-items:center;gap:0.6rem;cursor:pointer}
+  .h04-story .ring{width:84px;height:84px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#FF6E91,#D4527A,#7B2D4F);transition:transform 0.3s}
+  .h04-story:hover .ring{transform:scale(1.08)}
+  .h04-story .inner{width:100%;height:100%;border-radius:50%;background:#fff;padding:3px}
+  .h04-story .img{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;font-weight:500}
+  .h04-story:nth-child(1) .img{background:linear-gradient(135deg,#D4527A,#7B2D4F)}
+  .h04-story:nth-child(2) .img{background:linear-gradient(135deg,#E8B4C8,#A06A88)}
+  .h04-story:nth-child(3) .img{background:linear-gradient(135deg,#C9A254,#8B6F3A)}
+  .h04-story:nth-child(4) .img{background:linear-gradient(135deg,#FF6E91,#7B2D4F)}
+  .h04-story:nth-child(5) .img{background:linear-gradient(135deg,#FFB5A7,#D4527A)}
+  .h04-story:nth-child(6) .img{background:linear-gradient(135deg,#A06A88,#3a1f2b)}
+  .h04-story .lbl{font-size:0.8rem;font-weight:600;color:#1a0d14}
+
+  /* 05 FAQ ACCORDION */
+  .h05{background:#1a0d14;color:#fff;min-height:100vh;padding:5rem 2rem;display:flex;flex-direction:column;align-items:center;gap:3rem}
+  .h05 h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;text-align:center}
+  .h05 h1 em{font-style:italic;color:#E8B4C8}
+  .h05-list{max-width:780px;width:100%;display:flex;flex-direction:column;gap:0.5rem}
+  .h05-item{background:rgba(232,180,200,0.05);border:1px solid rgba(232,180,200,0.15);border-radius:14px;overflow:hidden}
+  .h05-item summary{padding:1.5rem 1.8rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;list-style:none;gap:1rem}
+  .h05-item summary::-webkit-details-marker{display:none}
+  .h05-item summary span{font-family:'Manrope',sans-serif;font-weight:500;font-size:1.05rem;flex:1}
+  .h05-item summary .icon{transition:transform .3s;color:#E8B4C8;font-size:1.4rem}
+  .h05-item[open] summary .icon{transform:rotate(45deg)}
+  .h05-item .body{padding:0 1.8rem 1.5rem;color:rgba(255,255,255,0.7);line-height:1.6}
+
+  /* 06 BEFORE/AFTER CAROUSEL */
+  .h06{background:#FFF8F4;color:#1a0d14;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:5rem 2rem;gap:3rem}
+  .h06 .head{text-align:center;max-width:700px;margin:0 auto}
+  .h06 .head h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4.5rem);font-weight:300;line-height:1.05;margin-bottom:1rem}
+  .h06 .head h1 em{font-style:italic;color:#D4527A}
+  .h06-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto;width:100%}
+  .h06-pair{background:#fff;border-radius:16px;padding:1.2rem;box-shadow:0 20px 50px rgba(58,31,43,0.08)}
+  .h06-pair .imgs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:1rem}
+  .h06-pair .imgs .b,.h06-pair .imgs .a{aspect-ratio:1;border-radius:8px;display:grid;place-items:center;color:#fff;font-family:'Manrope',sans-serif;font-weight:700;letter-spacing:0.1em;font-size:0.8rem}
+  .h06-pair .b{background:linear-gradient(135deg,#888,#444)}
+  .h06-pair .a{background:linear-gradient(135deg,#D4527A,#7B2D4F)}
+  .h06-pair .lbl{font-size:0.85rem;color:#6b4a55}
+  .h06-pair .lbl strong{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;color:#1a0d14;font-size:1.1rem;font-weight:400;margin-bottom:0.3rem}
+
+  /* 07 PROCESS TIMELINE */
+  .h07{background:#FAF5F0;color:#1a0d14;min-height:100vh;padding:5rem 2rem;display:flex;flex-direction:column;justify-content:center}
+  .h07 .head{text-align:center;max-width:700px;margin:0 auto 4rem}
+  .h07 .head h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4.5rem);font-weight:300;line-height:1.05;margin-bottom:1rem}
+  .h07 .head h1 em{font-style:italic;color:#A56A3A}
+  .h07-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;max-width:1100px;margin:0 auto;width:100%;position:relative}
+  .h07-steps::before{content:'';position:absolute;top:30px;left:5%;right:5%;height:1px;background:rgba(165,106,58,0.2);z-index:0}
+  .h07-step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center}
+  .h07-step .num{width:60px;height:60px;border-radius:50%;background:#fff;border:2px solid #A56A3A;display:grid;place-items:center;font-family:'Cormorant Garamond',serif;font-style:italic;color:#A56A3A;font-size:1.5rem;font-weight:500;box-shadow:0 8px 20px rgba(165,106,58,0.15)}
+  .h07-step .t{font-family:'Manrope',sans-serif;font-weight:600;font-size:1.05rem}
+  .h07-step p{color:#6b4a55;font-size:0.9rem;line-height:1.5}
+  .h07-step .time{font-size:0.78rem;color:#A56A3A;letter-spacing:0.1em;text-transform:uppercase;font-weight:600}
+  @media (max-width:768px){.h07-steps{grid-template-columns:1fr;gap:2.5rem}.h07-steps::before{display:none}}
+
+  /* 08 OWNER VIDEO INTRO */
+  .h08{background:#0a0508;color:#fff;display:grid;grid-template-columns:1fr 1fr;min-height:100vh;align-items:stretch}
+  .h08-video{background:linear-gradient(135deg,#3a1f2b,#1a0d14);position:relative;display:grid;place-items:center;overflow:hidden}
+  .h08-video::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(232,180,200,0.2),transparent 60%)}
+  .h08-play{position:relative;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.15);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.3);display:grid;place-items:center;cursor:pointer;transition:all 0.3s}
+  .h08-play:hover{transform:scale(1.1);background:rgba(232,180,200,0.4)}
+  .h08-play::before{content:'';width:0;height:0;border-left:18px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+  .h08-video .duration{position:absolute;bottom:1.5rem;left:1.5rem;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);padding:0.4rem 0.9rem;border-radius:999px;font-size:0.78rem;letter-spacing:0.1em}
+  .h08-copy{padding:4rem 4vw;display:flex;flex-direction:column;justify-content:center;gap:1.2rem}
+  .h08-copy .eb{font-family:'Inter',sans-serif;font-size:0.78rem;letter-spacing:0.3em;text-transform:uppercase;color:#E8B4C8}
+  .h08-copy h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:300;line-height:1.05}
+  .h08-copy h1 em{font-style:italic;color:#E8B4C8}
+  .h08-copy p{color:rgba(255,255,255,0.7);font-size:1.05rem;line-height:1.6;max-width:42ch}
+  @media (max-width:768px){.h08{grid-template-columns:1fr}.h08-video{aspect-ratio:16/9}}
+
+  /* 09 GIFT CARD */
+  .h09{background:linear-gradient(135deg,#FCEEF1 0%,#F5D5DC 100%);color:#1a0d14;min-height:100vh;display:grid;place-items:center;padding:4rem 2rem}
+  .h09 .stage{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;width:100%}
+  .h09 .copy h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:300;line-height:1.05;margin-bottom:1rem}
+  .h09 .copy h1 em{font-style:italic;color:#D4527A}
+  .h09 .copy p{color:#6b4a55;line-height:1.6;margin-bottom:2rem}
+  .h09 .copy .amounts{display:flex;gap:0.6rem;margin-bottom:2rem;flex-wrap:wrap}
+  .h09 .copy .amount{padding:0.7rem 1.2rem;background:#fff;border:1px solid #e5d5d5;border-radius:12px;cursor:pointer;font-weight:600}
+  .h09 .copy .amount.active{background:#1a0d14;color:#fff;border-color:#1a0d14}
+  .h09 .copy .cta{display:inline-block;padding:1.1rem 2.4rem;background:#1a0d14;color:#fff;border-radius:999px;font-weight:600;text-decoration:none}
+  .h09-card{aspect-ratio:1.586;max-width:480px;background:linear-gradient(135deg,#D4527A 0%,#7B2D4F 100%);border-radius:20px;padding:2rem;display:flex;flex-direction:column;justify-content:space-between;color:#fff;box-shadow:0 30px 80px rgba(212,82,122,0.4);position:relative;overflow:hidden;transition:transform 0.5s cubic-bezier(0.2,0.9,0.3,1)}
+  .h09-card:hover{transform:rotate(-2deg) scale(1.02)}
+  .h09-card::before{content:'';position:absolute;top:-50%;right:-30%;width:80%;height:120%;background:radial-gradient(circle,rgba(255,255,255,0.2),transparent 70%)}
+  .h09-card .brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;letter-spacing:0.02em}
+  .h09-card .amount-display{font-family:'Italiana',serif;font-size:clamp(3rem,6vw,5rem);font-weight:400;letter-spacing:-0.02em}
+  .h09-card .code{font-family:'Inter',sans-serif;font-size:0.75rem;letter-spacing:0.2em;opacity:0.7}
+
+  /* 10 PROMO COUNTDOWN */
+  .h10{background:linear-gradient(180deg,#1a0d14 0%,#3a1f2b 50%,#1a0d14 100%);color:#fff;min-height:100vh;display:grid;place-items:center;padding:4rem 2rem;text-align:center}
+  .h10 .inner{max-width:800px}
+  .h10 .badge{display:inline-block;padding:0.5rem 1rem;background:linear-gradient(135deg,#E8B4C8,#D4527A);color:#1a0d14;border-radius:999px;font-weight:700;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:2rem}
+  .h10 h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vw,6rem);font-weight:300;line-height:1.02;margin-bottom:1rem}
+  .h10 h1 em{font-style:italic;color:#E8B4C8}
+  .h10 .lead{color:rgba(255,255,255,0.7);font-size:1.1rem;line-height:1.6;margin-bottom:3rem;max-width:42ch;margin-inline:auto}
+  .h10-counter{display:flex;justify-content:center;gap:1rem;margin-bottom:3rem}
+  .h10-counter .unit{background:rgba(232,180,200,0.1);border:1px solid rgba(232,180,200,0.3);border-radius:14px;padding:1.2rem 0.8rem;min-width:90px}
+  .h10-counter .v{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);color:#E8B4C8;font-weight:400;line-height:1}
+  .h10-counter .l{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;margin-top:0.3rem}
+  .h10 .cta{display:inline-block;padding:1.2rem 2.8rem;background:#E8B4C8;color:#1a0d14;border-radius:999px;font-weight:700;text-decoration:none;font-size:1.05rem;transition:transform 0.3s}
+  .h10 .cta:hover{transform:translateY(-2px)}
+
+  .end-section{min-height:50vh;display:grid;place-items:center;padding:60px 28px;background:linear-gradient(180deg,#1a0d14 0%,#3a1f2b 100%)}
+  .end-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;font-style:italic;text-align:center;max-width:680px;line-height:1.3;margin-bottom:1rem}
+  .end-section p{text-align:center;opacity:0.7;max-width:560px}
+  .end-section .back{margin-top:2rem;display:inline-block;padding:14px 28px;background:#E8B4C8;color:#1a0d14;border-radius:999px;font-weight:700;text-decoration:none}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/heros/v3/"><span>S</span>oraByte · V3 · Belleza Conversión</a>
+  <span class="counter" id="counter">01 / 10</span>
+</header>
+<nav class="sidenav" id="sidenav"></nav>
+
+<!-- 01 WHATSAPP -->
+<section class="hero-section h01" data-hero="whatsapp">
+  <div class="h01-copy">
+    <h1>Reserva por <em>WhatsApp</em>.<br>Sin formularios.</h1>
+    <p>Mándame un audio o un mensaje. Te confirmo plaza en menos de 1h. Lunes a sábado, 9-21h.</p>
+    <a href="#" class="h01-cta">📱 Abrir WhatsApp →</a>
+  </div>
+  <div class="h01-phone">
+    <div class="h01-phone-head">
+      <div class="av">A</div>
+      <div>
+        <div class="n">Ally · Nail Studio</div>
+        <div class="s">● en línea</div>
+      </div>
+    </div>
+    <div class="h01-msgs">
+      <div class="h01-msg me">Hola! Quería reservar una manicura para el sábado <span class="time">17:42</span></div>
+      <div class="h01-msg them">¡Hola! Tengo libre a las 11:30 o 16:00 ✨ <span class="time">17:43</span></div>
+      <div class="h01-msg me">A las 16 me viene perfecto <span class="time">17:43</span></div>
+      <div class="h01-msg them">Anotada 📝 Te paso link de la ubicación y precios <span class="time">17:44</span></div>
+      <div class="h01-typing"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+  <div class="hero-info">
+    <div class="num">01 · WHATSAPP CHAT MOCKUP</div>
+    <div class="name">Reserva sin formulario</div>
+    <div class="meta"><strong>Nichos:</strong> nail salon, fisio, peluquería · <strong>Stack:</strong> CSS chat UI · <strong>Wow:</strong> conversión inmediata, cero fricción</div>
+  </div>
+</section>
+
+<!-- 02 LIVE AVAILABILITY -->
+<section class="hero-section h02" data-hero="availability">
+  <div class="inner">
+    <span class="pulse-tag">● Disponible hoy</span>
+    <h1>Hoy a las <em>17:30</em><br>tienes cita.</h1>
+    <p>Última hora del día: manicura express 30 min, 25€. Confirmación inmediata.</p>
+    <div class="slots">
+      <button class="slot taken">15:00</button>
+      <button class="slot taken">16:00</button>
+      <button class="slot">17:30</button>
+      <button class="slot">19:00</button>
+    </div>
+    <a href="#" class="cta">Reservar 17:30 →</a>
+  </div>
+  <div class="hero-info">
+    <div class="num">02 · LIVE AVAILABILITY</div>
+    <div class="name">Real-time slot widget</div>
+    <div class="meta"><strong>Nichos:</strong> alta rotación, walk-in, last-minute · <strong>Stack:</strong> CSS pulse + slots · <strong>Wow:</strong> urgencia controlada</div>
+  </div>
+</section>
+
+<!-- 03 MAP HERO -->
+<section class="hero-section h03" data-hero="map">
+  <div class="h03-copy">
+    <h1>Te <em>esperamos</em><br>en Palma.</h1>
+    <p>En pleno casco antiguo, a 2 minutos de la Catedral. Aparcamiento Antoni Maura.</p>
+    <div class="info-row">
+      <div><strong>Dirección</strong><span>C/ Sant Feliu 12 · 07012 Palma</span></div>
+      <div><strong>Horario</strong><span>Mar-Sáb · 10:00 - 20:00</span></div>
+      <div><strong>Teléfono</strong><span>+34 640 973 182</span></div>
+    </div>
+    <a href="#" class="cta">Cómo llegar →</a>
+  </div>
+  <div class="h03-map">
+    <div class="h03-pin">
+      <div class="ring"></div>
+      <div class="ring ring-2"></div>
+      <div class="dot"></div>
+    </div>
+    <div class="label">Sant Feliu 12<br>Palma · Mallorca</div>
+  </div>
+  <div class="hero-info">
+    <div class="num">03 · MAP LOCATION HERO</div>
+    <div class="name">Hyper-local discoverability</div>
+    <div class="meta"><strong>Nichos:</strong> negocio físico, premium local · <strong>Stack:</strong> CSS pin pulse · <strong>Wow:</strong> sensación de lugar único</div>
+  </div>
+</section>
+
+<!-- 04 IG STORIES HIGHLIGHTS -->
+<section class="hero-section h04" data-hero="stories">
+  <div class="head">
+    <h1>Lo último <em>del estudio</em>.</h1>
+    <p>Pasa por nuestras historias: nuevas técnicas, looks de novia, behind the scenes.</p>
+  </div>
+  <div class="h04-stories">
+    <div class="h04-story"><div class="ring"><div class="inner"><div class="img">Nuevo</div></div></div><span class="lbl">Mayo 26</span></div>
+    <div class="h04-story"><div class="ring"><div class="inner"><div class="img">Novias</div></div></div><span class="lbl">Bridal</span></div>
+    <div class="h04-story"><div class="ring"><div class="inner"><div class="img">Gel</div></div></div><span class="lbl">Técnicas</span></div>
+    <div class="h04-story"><div class="ring"><div class="inner"><div class="img">Floral</div></div></div><span class="lbl">Spring</span></div>
+    <div class="h04-story"><div class="ring"><div class="inner"><div class="img">Behind</div></div></div><span class="lbl">Studio</span></div>
+    <div class="h04-story"><div class="ring"><div class="inner"><div class="img">Press</div></div></div><span class="lbl">Featured</span></div>
+  </div>
+  <div class="hero-info">
+    <div class="num">04 · IG STORIES STRIP</div>
+    <div class="name">Instagram highlights row</div>
+    <div class="meta"><strong>Nichos:</strong> beauty con feed activo, eventos · <strong>Stack:</strong> CSS Flex · <strong>Wow:</strong> familiar = clic asegurado</div>
+  </div>
+</section>
+
+<!-- 05 FAQ -->
+<section class="hero-section h05" data-hero="faq">
+  <h1>Las preguntas<br><em>que más nos hacen</em>.</h1>
+  <div class="h05-list">
+    <details class="h05-item" open>
+      <summary><span>¿Cuánto dura una manicura semipermanente?</span><span class="icon">＋</span></summary>
+      <div class="body">2 a 3 semanas sin saltarse, dependiendo del crecimiento de la uña y cuidado. Incluye retoque de cutícula gratuito a las 2 semanas.</div>
+    </details>
+    <details class="h05-item">
+      <summary><span>¿Tengo que reservar con antelación?</span><span class="icon">＋</span></summary>
+      <div class="body">Sí. Solemos tener agenda llena con 4-7 días de antelación. Para urgencias o walk-in, mándanos un WhatsApp y vemos disponibilidad.</div>
+    </details>
+    <details class="h05-item">
+      <summary><span>¿Qué pasa si me toca cancelar?</span><span class="icon">＋</span></summary>
+      <div class="body">Sin coste si avisas con 24h. Por respeto a otras clientas, cancelaciones de último momento son 50% del servicio.</div>
+    </details>
+    <details class="h05-item">
+      <summary><span>¿Tenéis bonos o pack mensual?</span><span class="icon">＋</span></summary>
+      <div class="body">Sí. Pack de 4 manicuras al mes -15%, o pack novia (preparación + ceremonia + retoque post-luna de miel) consultar.</div>
+    </details>
+  </div>
+  <div class="hero-info">
+    <div class="num">05 · FAQ ACCORDION</div>
+    <div class="name">Resuelve objeciones inline</div>
+    <div class="meta"><strong>Nichos:</strong> servicios con preguntas frecuentes · <strong>Stack:</strong> &lt;details&gt; nativo · <strong>Wow:</strong> SEO + conversión simultáneo</div>
+  </div>
+</section>
+
+<!-- 06 BEFORE/AFTER MULTI -->
+<section class="hero-section h06" data-hero="ba-multi">
+  <div class="head">
+    <h1>Antes y después <em>reales</em>.</h1>
+    <p>4 casos del último mes. Sin filtros, sin retoque.</p>
+  </div>
+  <div class="h06-grid">
+    <div class="h06-pair"><div class="imgs"><div class="b">ANTES</div><div class="a">DESPUÉS</div></div><div class="lbl"><strong>Manicura artística</strong>90 minutos · 65€</div></div>
+    <div class="h06-pair"><div class="imgs"><div class="b">ANTES</div><div class="a">DESPUÉS</div></div><div class="lbl"><strong>Reconstrucción uña</strong>60 minutos · 45€</div></div>
+    <div class="h06-pair"><div class="imgs"><div class="b">ANTES</div><div class="a">DESPUÉS</div></div><div class="lbl"><strong>Esmaltado novia</strong>75 minutos · 55€</div></div>
+    <div class="h06-pair"><div class="imgs"><div class="b">ANTES</div><div class="a">DESPUÉS</div></div><div class="lbl"><strong>Pedicura spa</strong>60 minutos · 40€</div></div>
+  </div>
+  <div class="hero-info">
+    <div class="num">06 · BEFORE/AFTER GRID</div>
+    <div class="name">Multi-case showcase</div>
+    <div class="meta"><strong>Nichos:</strong> beauty con transformación visible · <strong>Stack:</strong> CSS Grid · <strong>Wow:</strong> resultados real, sin filtros</div>
+  </div>
+</section>
+
+<!-- 07 PROCESS TIMELINE -->
+<section class="hero-section h07" data-hero="process">
+  <div class="head">
+    <h1>Cómo trabajamos<br><em>contigo</em>.</h1>
+  </div>
+  <div class="h07-steps">
+    <div class="h07-step"><div class="num">01</div><div class="t">Reserva</div><p>Eliges día, hora y servicio por WhatsApp o web.</p><div class="time">30 segundos</div></div>
+    <div class="h07-step"><div class="num">02</div><div class="t">Llegada</div><p>Café o té. Charlamos qué buscas hoy.</p><div class="time">5 minutos</div></div>
+    <div class="h07-step"><div class="num">03</div><div class="t">Tratamiento</div><p>Manicura sin prisas, ritual completo.</p><div class="time">45-90 minutos</div></div>
+    <div class="h07-step"><div class="num">04</div><div class="t">Despedida</div><p>Próxima cita agendada en 30 segundos.</p><div class="time">2 minutos</div></div>
+  </div>
+  <div class="hero-info">
+    <div class="num">07 · PROCESS TIMELINE</div>
+    <div class="name">4 pasos editorial</div>
+    <div class="meta"><strong>Nichos:</strong> servicios con ritual, alta cocina · <strong>Stack:</strong> CSS Grid + connector · <strong>Wow:</strong> elimina ansiedad del proceso</div>
+  </div>
+</section>
+
+<!-- 08 OWNER VIDEO INTRO -->
+<section class="hero-section h08" data-hero="video-intro">
+  <div class="h08-video">
+    <div class="h08-play"></div>
+    <span class="duration">1:24</span>
+  </div>
+  <div class="h08-copy">
+    <span class="eb">Conoce el estudio · 1:24</span>
+    <h1>Lo que <em>no se ve</em><br>en las fotos.</h1>
+    <p>Cómo elegimos cada esmalte, por qué usamos pinceles japoneses y qué pasa entre cliente y cliente.</p>
+    <p style="font-style:italic;color:#E8B4C8">— Ally Martínez, fundadora</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">08 · OWNER VIDEO INTRO</div>
+    <div class="name">Founder behind-the-scenes</div>
+    <div class="meta"><strong>Nichos:</strong> beauty con dueña visible y branding fuerte · <strong>Stack:</strong> Video embed + UI · <strong>Wow:</strong> conexión humana</div>
+  </div>
+</section>
+
+<!-- 09 GIFT CARD -->
+<section class="hero-section h09" data-hero="giftcard">
+  <div class="stage">
+    <div class="copy">
+      <h1>Regala<br><em>un ritual</em>.</h1>
+      <p>Tarjetas regalo para Navidad, cumpleaños, ascensos. Sin caducidad. Las usa cuando puede.</p>
+      <div class="amounts">
+        <button class="amount">50€</button>
+        <button class="amount active">100€</button>
+        <button class="amount">150€</button>
+        <button class="amount">250€</button>
+      </div>
+      <a href="#" class="cta">Comprar tarjeta →</a>
+    </div>
+    <div class="h09-card">
+      <div class="brand">nails by Ally</div>
+      <div class="amount-display">100€</div>
+      <div class="code">GIFT · CÓDIGO 4729-AL26</div>
+    </div>
+  </div>
+  <div class="hero-info">
+    <div class="num">09 · GIFT CARD HERO</div>
+    <div class="name">Tarjeta regalo visual</div>
+    <div class="meta"><strong>Nichos:</strong> beauty con regalo estacional · <strong>Stack:</strong> CSS tilt card · <strong>Wow:</strong> revenue extra fácil</div>
+  </div>
+</section>
+
+<!-- 10 PROMO COUNTDOWN -->
+<section class="hero-section h10" data-hero="countdown">
+  <div class="inner">
+    <span class="badge">Solo Mayo · 30% OFF</span>
+    <h1>Pack <em>verano</em>:<br>manicura + pedicura.</h1>
+    <p class="lead">Por tiempo limitado, prepara tus manos y pies para el verano por solo 49€ (antes 70€).</p>
+    <div class="h10-counter">
+      <div class="unit"><div class="v" id="cd-d">12</div><div class="l">Días</div></div>
+      <div class="unit"><div class="v" id="cd-h">07</div><div class="l">Horas</div></div>
+      <div class="unit"><div class="v" id="cd-m">42</div><div class="l">Min</div></div>
+      <div class="unit"><div class="v" id="cd-s">18</div><div class="l">Seg</div></div>
+    </div>
+    <a href="#" class="cta">Reservar pack 49€ →</a>
+  </div>
+  <div class="hero-info">
+    <div class="num">10 · PROMO COUNTDOWN</div>
+    <div class="name">Urgencia + descuento</div>
+    <div class="meta"><strong>Nichos:</strong> beauty con campañas estacionales · <strong>Stack:</strong> setInterval contador · <strong>Wow:</strong> aversión a la pérdida = conversión</div>
+  </div>
+</section>
+
+<section class="end-section">
+  <h2>10 heros · belleza conversión · vol.4</h2>
+  <p>Reservas, prueba social, urgencia, regalo: enfocados en cerrar.</p>
+  <a href="/heros/" class="back">← Catálogo completo</a>
+</section>
+
+<script>
+const sections = document.querySelectorAll('.hero-section');
+const counter = document.getElementById('counter');
+const sidenav = document.getElementById('sidenav');
+sections.forEach((sec, idx) => {
+  const btn = document.createElement('button');
+  btn.textContent = String(idx+1).padStart(2,'0');
+  btn.addEventListener('click', () => sec.scrollIntoView({behavior:'smooth'}));
+  btn.dataset.idx = idx;
+  sidenav.appendChild(btn);
+});
+const navBtns = sidenav.querySelectorAll('button');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = Array.from(sections).indexOf(entry.target);
+      counter.textContent = String(idx+1).padStart(2,'0') + ' / 10';
+      navBtns.forEach(b => b.classList.toggle('active', +b.dataset.idx === idx));
+    }
+  });
+}, {threshold:0.3});
+sections.forEach(s => io.observe(s));
+
+// Countdown
+(() => {
+  const target = new Date();
+  target.setDate(target.getDate() + 12);
+  target.setHours(target.getHours() + 7);
+  function tick() {
+    const diff = target - new Date();
+    if (diff <= 0) return;
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    const el = id => document.getElementById(id);
+    if (el('cd-d')) el('cd-d').textContent = String(d).padStart(2,'0');
+    if (el('cd-h')) el('cd-h').textContent = String(h).padStart(2,'0');
+    if (el('cd-m')) el('cd-m').textContent = String(m).padStart(2,'0');
+    if (el('cd-s')) el('cd-s').textContent = String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+// Gift card amount selector
+document.querySelectorAll('.h09 .amount').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.h09 .amount').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const display = document.querySelector('.h09-card .amount-display');
+    if (display) display.textContent = btn.textContent;
+  });
+});
+</script>
+
+</body>
+</html>

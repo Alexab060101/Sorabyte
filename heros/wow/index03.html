@@ -429,21 +429,21 @@ inits['glitter-const'] = (sec) => {
   sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(draw);}}};
 };
 
-// 03 LIQUID LIPSTICK POUR
-inits['lipstick-pour'] = (sec) => {
+// 03 LIQUID LIPSTICK POUR (anime.js morph)
+inits['lipstick-pour'] = async (sec) => {
+  const animeMod = await import('https://cdn.jsdelivr.net/npm/animejs@4.0.2/+esm');
+  const anime = animeMod.default || animeMod;
   const path = document.getElementById('lipPour');
   const shapes = [
     "M340,80 C360,80 380,100 380,140 L380,300 C380,360 420,400 350,440 C280,400 320,360 320,300 L320,140 C320,100 320,80 340,80 Z",
-    "M340,80 C360,80 400,120 380,160 L420,280 C440,350 380,420 350,440 C320,420 260,350 280,280 L320,160 C300,120 320,80 340,80 Z",
-    "M340,80 C380,90 380,120 360,150 L400,260 C420,330 400,400 350,440 C300,400 280,330 300,260 L340,150 C320,120 320,90 340,80 Z",
+    "M340,80 C400,90 410,140 380,180 L420,280 C460,360 400,440 350,440 C300,440 240,360 280,280 L320,180 C290,140 280,90 340,80 Z",
+    "M340,80 C380,100 400,130 370,170 L410,290 C450,370 390,440 350,440 C310,440 250,370 290,290 L330,170 C300,130 300,100 340,80 Z",
     "M340,80 C360,80 380,100 380,140 L380,300 C380,360 420,400 350,440 C280,400 320,360 320,300 L320,140 C320,100 320,80 340,80 Z"
   ];
   let i = 0;
   const cycle = () => {
     i = (i+1) % shapes.length;
-    path.style.transition = 'd 2.2s cubic-bezier(0.65,0.05,0.36,1)';
-    // SVG path interpolation needs special handling; this is approximate
-    path.setAttribute('d', shapes[i]);
+    anime({targets: path, d: [{value: shapes[i]}], duration: 2200, easing: 'cubicBezier(.65,.05,.36,1)'});
   };
   const interval = setInterval(cycle, 2800);
   sec._inst = {pause:()=>clearInterval(interval),play:()=>{}};

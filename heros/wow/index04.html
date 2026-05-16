@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Heros WOW vol.4 · Belleza Editorial · Sorabyte</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;500;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Italiana&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#0a0508;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(10,5,8,0.75);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.08);font-family:'Manrope',sans-serif;font-weight:700}
+  .topbar a{color:#fff;text-decoration:none;font-size:1.05rem}
+  .topbar a span{color:#E8B4C8}
+  .topbar .counter{font-size:0.8rem;color:rgba(255,255,255,0.55);font-weight:500}
+  .sidenav{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:8px}
+  .sidenav button{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:0.68rem;font-weight:800;font-family:'Manrope',sans-serif;cursor:pointer;transition:all .3s ease}
+  .sidenav button:hover{background:rgba(232,180,200,0.4);border-color:#E8B4C8;transform:scale(1.12)}
+  .sidenav button.active{background:#E8B4C8;border-color:#E8B4C8;color:#0a0508}
+  @media (max-width:768px){.sidenav{display:none}}
+  .hero-section{position:relative;min-height:100vh;width:100%;overflow:hidden}
+  .hero-info{position:absolute;left:22px;bottom:22px;z-index:30;background:rgba(0,0,0,0.62);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:14px 18px;max-width:360px}
+  .hero-info .num{font-family:'Manrope',sans-serif;font-weight:800;font-size:0.7rem;letter-spacing:0.22em;color:#E8B4C8;margin-bottom:6px}
+  .hero-info .name{font-family:'Manrope',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:6px;color:#fff}
+  .hero-info .meta{font-size:0.76rem;color:rgba(255,255,255,0.65);line-height:1.55}
+  .hero-info .meta strong{color:#C9A254;font-weight:600}
+
+  /* ============ 01 MAGAZINE COVER KINETIC ============ */
+  .h01{background:#fdf6ef;color:#1a0d14;min-height:100vh;padding:6vh 5vw;display:grid;grid-template-rows:auto 1fr auto;gap:2rem;position:relative}
+  .h01-top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(26,13,20,0.2);padding-bottom:1rem;font-family:'Inter',sans-serif;font-size:0.78rem;letter-spacing:0.25em;text-transform:uppercase}
+  .h01-top em{font-family:'Cormorant Garamond',serif;font-style:italic;text-transform:none;letter-spacing:0;font-size:1.1rem}
+  .h01-center{display:grid;place-items:center;text-align:center;position:relative}
+  .h01-issue{position:absolute;top:0;font-family:'Italiana',serif;font-size:clamp(14rem,32vw,32rem);font-weight:400;color:rgba(26,13,20,0.06);line-height:0.8;letter-spacing:-0.05em;pointer-events:none;z-index:0}
+  .h01-headline{position:relative;z-index:1;font-family:'Italiana',serif;font-size:clamp(3.5rem,11vw,11rem);line-height:0.92;letter-spacing:-0.02em;font-weight:400}
+  .h01-headline em{font-style:italic;color:#7B2D4F}
+  .h01-headline .small{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.5em;display:block;color:rgba(26,13,20,0.55);font-weight:300}
+  .h01-bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(26,13,20,0.2);padding-top:1rem;font-family:'Inter',sans-serif;font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase}
+  .h01-bottom .right{text-align:right}
+  .h01-bottom strong{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;text-transform:none;letter-spacing:0;font-size:1.4rem;font-weight:400;color:#7B2D4F;margin-top:0.3rem}
+
+  /* ============ 02 PORTRAIT ZOOM PARALLAX ============ */
+  .h02{background:#0a0508;min-height:100vh;position:relative;overflow:hidden}
+  .h02-img{position:absolute;inset:0;background:radial-gradient(ellipse at center,#3a1f2b 0%,#0a0508 70%);transform:scale(1.1);transition:transform 0.3s cubic-bezier(0.2,0.9,0.3,1)}
+  .h02-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,rgba(232,180,200,0.25),transparent 50%)}
+  .h02-img::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.3'/></svg>");mix-blend-mode:overlay;opacity:0.4}
+  .h02-silhouette{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);width:min(45vw,400px);height:min(70vh,580px);border-radius:50% 50% 45% 45% / 60% 60% 40% 40%;background:linear-gradient(180deg,#E8B4C8 0%,#7B2D4F 60%,#3a0d1f 100%);box-shadow:0 80px 200px rgba(232,180,200,0.3);opacity:0.8}
+  .h02-overlay{position:relative;z-index:5;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:6vh 6vw}
+  .h02-top{display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:0.78rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.7)}
+  .h02-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,6rem);font-weight:300;line-height:1;letter-spacing:-0.02em;color:#fff;max-width:14ch}
+  .h02-h em{font-style:italic;color:#E8B4C8}
+
+  /* ============ 03 SERUM DROP GLASS ============ */
+  .h03{background:linear-gradient(180deg,#FCF4F0 0%,#F5DCD0 100%);color:#1a0d14;min-height:100vh;display:grid;place-items:center;padding:4rem 2rem}
+  .h03-stage{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;width:100%}
+  .h03-copy h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.8rem);font-weight:300;line-height:1.02;margin-bottom:1.2rem}
+  .h03-copy h1 em{font-style:italic;color:#A56A3A}
+  .h03-copy p{color:#6b4a55;line-height:1.6;max-width:36ch;font-size:1.05rem}
+  .h03-bottle{position:relative;aspect-ratio:2/3;display:grid;place-items:end center}
+  .h03-bottle svg{width:80%;height:100%}
+  .h03-drop{position:absolute;top:-20px;left:50%;width:24px;height:36px;background:radial-gradient(ellipse at 30% 30%,#FFDED5 0%,#E89BAE 50%,#A56A3A 100%);border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;animation:h03drop 3.2s cubic-bezier(0.5,0,0.5,1) infinite;transform-origin:center bottom;box-shadow:0 4px 12px rgba(165,106,58,0.3)}
+  @keyframes h03drop{0%{top:-30px;opacity:0;transform:translateX(-50%) scaleY(0.7)}10%{opacity:1}60%{top:50%;transform:translateX(-50%) scaleY(1.3)}80%{top:65%;opacity:1;transform:translateX(-50%) scaleY(0.6)}100%{top:65%;opacity:0;transform:translateX(-50%) scaleY(0.4) scaleX(2)}}
+  @media (max-width:768px){.h03-stage{grid-template-columns:1fr}}
+
+  /* ============ 04 CHERRY BLOSSOM PETALS ============ */
+  .h04{background:linear-gradient(180deg,#FFE8EE 0%,#FCC1D2 100%);color:#3a0d1f;min-height:100vh;position:relative;overflow:hidden;display:grid;place-items:center}
+  #c04{position:absolute;inset:0;pointer-events:none;z-index:1}
+  .h04-content{position:relative;z-index:2;text-align:center;padding:0 1.5rem;max-width:700px}
+  .h04-content .eb{display:inline-block;font-family:'Inter',sans-serif;font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:#A8527A;margin-bottom:2rem}
+  .h04-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1.05;margin-bottom:1.2rem}
+  .h04-content h1 em{font-style:italic;color:#7B2D4F}
+  .h04-content p{color:rgba(58,13,31,0.65);line-height:1.6;font-size:1.05rem;max-width:42ch;margin-inline:auto}
+
+  /* ============ 05 MIRROR REFLECTION ============ */
+  .h05{background:#1a0d14;color:#fff;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4rem 2rem;gap:3rem;position:relative;overflow:hidden}
+  .h05-text{font-family:'Italiana',serif;font-size:clamp(3rem,10vw,9rem);line-height:0.95;text-align:center;font-weight:400;letter-spacing:-0.02em;text-shadow:0 0 60px rgba(232,180,200,0.3);position:relative}
+  .h05-text em{font-style:italic;color:#E8B4C8}
+  .h05-mirror{font-family:'Italiana',serif;font-size:clamp(3rem,10vw,9rem);line-height:0.95;text-align:center;font-weight:400;letter-spacing:-0.02em;transform:scaleY(-1);background:linear-gradient(180deg,rgba(255,255,255,0.4) 0%,transparent 70%);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0.5;filter:blur(2px)}
+  .h05-mirror em{font-style:italic}
+  .h05-line{width:60vw;max-width:600px;height:1px;background:linear-gradient(90deg,transparent,#E8B4C8,transparent);position:absolute;top:50%}
+  .h05-sub{position:absolute;bottom:6vh;left:0;right:0;text-align:center;font-family:'Inter',sans-serif;font-size:0.78rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+
+  /* ============ 06 ESSENTIAL OIL SMOKE ============ */
+  .h06{background:linear-gradient(180deg,#2d1a14 0%,#0a0508 100%);color:#fff;min-height:100vh;position:relative;overflow:hidden}
+  #c06{position:absolute;inset:0;z-index:1}
+  .h06-content{position:relative;z-index:2;min-height:100vh;display:grid;place-items:center;text-align:center;padding:0 1.5rem}
+  .h06-content .inner{max-width:700px}
+  .h06-content .eb{display:inline-block;font-family:'Inter',sans-serif;font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:#D4AF37;margin-bottom:2rem}
+  .h06-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1.05;color:#F5DEB3}
+  .h06-content h1 em{font-style:italic;color:#D4AF37}
+  .h06-content p{color:rgba(245,222,179,0.7);line-height:1.6;font-size:1.05rem;max-width:42ch;margin:1.2rem auto 0}
+
+  /* ============ 07 LIGHT BEAM CROSSING ============ */
+  .h07{background:#0a0508;color:#fff;min-height:100vh;position:relative;overflow:hidden;display:grid;place-items:center}
+  .h07-glass{position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,180,200,0.05) 0%,transparent 40%,rgba(212,175,55,0.08) 100%)}
+  .h07-beam{position:absolute;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent 0%,#E8B4C8 30%,#FFD700 50%,#E8B4C8 70%,transparent 100%);filter:blur(3px);animation:h07beam 6s ease-in-out infinite;box-shadow:0 0 40px rgba(232,180,200,0.5)}
+  .h07-beam-2{animation-delay:-2s;background:linear-gradient(180deg,transparent 0%,#FFD700 30%,#fff 50%,#FFD700 70%,transparent 100%);box-shadow:0 0 40px rgba(255,215,0,0.5)}
+  .h07-beam-3{animation-delay:-4s;background:linear-gradient(180deg,transparent 0%,#fff 30%,#E8B4C8 50%,#fff 70%,transparent 100%)}
+  @keyframes h07beam{0%{left:-5%;opacity:0;transform:skewX(-15deg)}10%{opacity:1}90%{opacity:1}100%{left:105%;opacity:0;transform:skewX(-15deg)}}
+  .h07-content{position:relative;z-index:5;text-align:center;padding:0 1.5rem;max-width:800px}
+  .h07-content h1{font-family:'Italiana',serif;font-size:clamp(3rem,8vw,7rem);font-weight:400;line-height:1;letter-spacing:-0.02em}
+  .h07-content h1 em{font-style:italic;background:linear-gradient(135deg,#E8B4C8,#FFD700);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .h07-content p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.3rem;color:rgba(255,255,255,0.7);margin-top:1.5rem}
+
+  /* ============ 08 SOFT FOCUS BOKEH ============ */
+  .h08{background:linear-gradient(135deg,#3a1f2b 0%,#1a0d14 100%);color:#fff;min-height:100vh;position:relative;overflow:hidden;display:grid;place-items:center}
+  #c08{position:absolute;inset:0;filter:blur(1px)}
+  .h08-content{position:relative;z-index:2;text-align:center;padding:0 1.5rem;max-width:700px}
+  .h08-content h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:400;line-height:1.05;letter-spacing:-0.01em}
+  .h08-content h1 em{font-style:italic;color:#E8B4C8}
+  .h08-content p{color:rgba(255,255,255,0.7);line-height:1.6;font-size:1.1rem;margin-top:1.2rem;max-width:42ch;margin-inline:auto}
+
+  /* ============ 09 INK WASH BRUSH STROKE ============ */
+  .h09{background:#FFFAF5;color:#1a0d14;min-height:100vh;position:relative;overflow:hidden;display:grid;place-items:center}
+  .h09-svg{position:absolute;inset:0;width:100%;height:100%}
+  .h09-svg path{stroke-dasharray:2000;stroke-dashoffset:2000;animation:h09draw 6s ease-out infinite}
+  @keyframes h09draw{0%{stroke-dashoffset:2000}50%{stroke-dashoffset:0}100%{stroke-dashoffset:-2000}}
+  .h09-content{position:relative;z-index:2;text-align:center;padding:0 1.5rem;max-width:700px}
+  .h09-content .eb{display:inline-block;font-family:'Inter',sans-serif;font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:#6b4a55;margin-bottom:2rem}
+  .h09-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1.05}
+  .h09-content h1 em{font-style:italic;color:#7B2D4F}
+  .h09-content p{color:#6b4a55;line-height:1.6;font-size:1.05rem;margin-top:1.2rem;max-width:38ch;margin-inline:auto}
+
+  /* ============ 10 PHOTO STORY AUTO-CYCLE ============ */
+  .h10{background:#0a0508;color:#fff;min-height:100vh;position:relative;overflow:hidden}
+  .h10-slide{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity 1.6s ease}
+  .h10-slide.active{opacity:1}
+  .h10-slide .bg{position:absolute;inset:0}
+  .h10-slide .vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,0.7) 100%);z-index:2}
+  .h10-slide.s1 .bg{background:linear-gradient(135deg,#3a1f2b,#1a0d14)}
+  .h10-slide.s2 .bg{background:linear-gradient(135deg,#7B2D4F,#3a0d1f)}
+  .h10-slide.s3 .bg{background:linear-gradient(135deg,#D4527A,#7B2D4F)}
+  .h10-slide.s4 .bg{background:linear-gradient(135deg,#3a2418,#1a0d08)}
+  .h10-content{position:relative;z-index:5;text-align:center;padding:0 1.5rem;max-width:800px}
+  .h10-content h1{font-family:'Italiana',serif;font-size:clamp(2.8rem,8vw,7rem);font-weight:400;line-height:1.05}
+  .h10-content h1 em{font-style:italic;color:#E8B4C8}
+  .h10-content .num{font-family:'Cormorant Garamond',serif;font-style:italic;color:#E8B4C8;font-size:1.4rem;margin-bottom:1rem;display:block}
+  .h10-content p{color:rgba(255,255,255,0.7);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-top:1rem}
+  .h10-dots{position:absolute;bottom:5vh;left:50%;transform:translateX(-50%);display:flex;gap:0.8rem;z-index:10}
+  .h10-dots span{width:24px;height:2px;background:rgba(255,255,255,0.3);transition:background 0.5s}
+  .h10-dots span.active{background:#E8B4C8}
+
+  .end-section{min-height:50vh;display:grid;place-items:center;padding:60px 28px;background:linear-gradient(180deg,#0a0508 0%,#3a1f2b 100%)}
+  .end-section h2{font-family:'Italiana',serif;font-size:clamp(2rem,4vw,3rem);font-weight:400;text-align:center;max-width:680px;line-height:1.2;margin-bottom:1rem}
+  .end-section p{text-align:center;opacity:0.7;max-width:560px}
+  .end-section .back{margin-top:2rem;display:inline-block;padding:14px 28px;background:#E8B4C8;color:#0a0508;border-radius:999px;font-weight:700;text-decoration:none}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/heros/wow/"><span>S</span>oraByte · WOW · Belleza Editorial</a>
+  <span class="counter" id="counter">01 / 10</span>
+</header>
+<nav class="sidenav" id="sidenav"></nav>
+
+<!-- 01 MAGAZINE COVER -->
+<section class="hero-section h01" data-hero="magazine">
+  <div class="h01-top">
+    <span>VOL 14 / Spring 2026</span>
+    <em>nº 142</em>
+    <span>€8.50</span>
+  </div>
+  <div class="h01-center">
+    <div class="h01-issue">14</div>
+    <h1 class="h01-headline">
+      Beauty<br>
+      <em>Editorial</em><br>
+      <span class="small">a study in skin, color & rest</span>
+    </h1>
+  </div>
+  <div class="h01-bottom">
+    <div>Inside:<strong>The new pink</strong></div>
+    <div>Features<strong>Skin first protocol</strong></div>
+    <div class="right">Reportage<strong>Mediterranean glow</strong></div>
+  </div>
+  <div class="hero-info">
+    <div class="num">01 · MAGAZINE COVER</div>
+    <div class="name">Vogue/Cherry Bombe editorial</div>
+    <div class="meta"><strong>Nichos:</strong> beauty editorial, alta cosmética, boutique hotel · <strong>Stack:</strong> CSS Grid + Italiana · <strong>Wow:</strong> portada de revista premium</div>
+  </div>
+</section>
+
+<!-- 02 PORTRAIT ZOOM PARALLAX -->
+<section class="hero-section h02" data-hero="portrait">
+  <div class="h02-img" id="h02-img">
+    <div class="h02-silhouette"></div>
+  </div>
+  <div class="h02-overlay">
+    <div class="h02-top">
+      <span>Mallorca · Studio</span>
+      <span>Capítulo 03</span>
+    </div>
+    <h1 class="h02-h">Cuidado <em>como ritual</em>, no como tarea.</h1>
+    <div class="h02-top">
+      <span>Scroll para más</span>
+      <span>2026</span>
+    </div>
+  </div>
+  <div class="hero-info">
+    <div class="num">02 · PORTRAIT ZOOM</div>
+    <div class="name">Aesop editorial parallax</div>
+    <div class="meta"><strong>Nichos:</strong> spa, alta cosmética, clínica estética · <strong>Stack:</strong> Pointer parallax + grain · <strong>Wow:</strong> contemplativo, no aspiracional</div>
+  </div>
+</section>
+
+<!-- 03 SERUM DROP GLASS -->
+<section class="hero-section h03" data-hero="serum">
+  <div class="h03-stage">
+    <div class="h03-copy">
+      <h1><em>Gota a gota</em>.<br>Piel que recuerda.</h1>
+      <p>Serum botánico con vitamina C estabilizada. Aplicar mañana y noche, 3 gotas en piel limpia.</p>
+    </div>
+    <div class="h03-bottle">
+      <div class="h03-drop"></div>
+      <svg viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bottleGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="rgba(165,106,58,0.15)"/>
+            <stop offset="50%" stop-color="rgba(232,155,174,0.35)"/>
+            <stop offset="100%" stop-color="rgba(165,106,58,0.45)"/>
+          </linearGradient>
+        </defs>
+        <!-- Tapa -->
+        <rect x="80" y="20" width="40" height="40" fill="#3a1f2b" rx="2"/>
+        <!-- Cuello -->
+        <rect x="85" y="55" width="30" height="20" fill="#1a0d14"/>
+        <!-- Cuerpo -->
+        <path d="M50,80 L150,80 L160,140 L160,290 Q160,310 140,310 L60,310 Q40,310 40,290 L40,140 Z" fill="url(#bottleGlass)" stroke="rgba(58,31,43,0.4)" stroke-width="1"/>
+        <!-- Líquido dentro -->
+        <path d="M55,170 L145,170 L155,290 Q155,305 140,305 L60,305 Q45,305 45,290 Z" fill="rgba(212,82,122,0.5)"/>
+        <!-- Highlight -->
+        <ellipse cx="80" cy="180" rx="12" ry="60" fill="rgba(255,255,255,0.3)"/>
+        <!-- Etiqueta -->
+        <text x="100" y="230" text-anchor="middle" fill="#3a1f2b" font-family="Cormorant Garamond" font-style="italic" font-size="14">vitamin C</text>
+        <text x="100" y="248" text-anchor="middle" fill="#3a1f2b" font-family="Inter" font-size="9" letter-spacing="2">SERUM · 30ML</text>
+      </svg>
+    </div>
+  </div>
+  <div class="hero-info">
+    <div class="num">03 · SERUM DROP GLASS</div>
+    <div class="name">Drunk Elephant / The Ordinary</div>
+    <div class="meta"><strong>Nichos:</strong> cosmética, skincare premium, dermo · <strong>Stack:</strong> CSS animation drop · <strong>Wow:</strong> producto en acción real</div>
+  </div>
+</section>
+
+<!-- 04 CHERRY BLOSSOM -->
+<section class="hero-section h04" data-hero="blossom">
+  <canvas id="c04"></canvas>
+  <div class="h04-content">
+    <span class="eb">Primavera · 2026</span>
+    <h1>Despertar<br><em>la piel</em>.</h1>
+    <p>Colección de temporada: tratamientos faciales con sakura, calendula y rosa.</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">04 · CHERRY BLOSSOM</div>
+    <div class="name">Petal fall seasonal</div>
+    <div class="meta"><strong>Nichos:</strong> spa estacional, ritual oriental, beauty seasonal · <strong>Stack:</strong> Canvas pétalos cayendo · <strong>Wow:</strong> calendario natural visual</div>
+  </div>
+</section>
+
+<!-- 05 MIRROR -->
+<section class="hero-section h05" data-hero="mirror">
+  <div class="h05-text">Vístete<br>de <em>luz</em>.</div>
+  <div class="h05-line"></div>
+  <div class="h05-mirror">Vístete<br>de <em>luz</em>.</div>
+  <div class="h05-sub">A study in reflection · Sundays Studio · 2026</div>
+  <div class="hero-info">
+    <div class="num">05 · MIRROR REFLECTION</div>
+    <div class="name">Tipografía espejada Italiana</div>
+    <div class="meta"><strong>Nichos:</strong> peluquería editorial, branding premium · <strong>Stack:</strong> CSS scaleY puro · <strong>Wow:</strong> simétrico hipnótico</div>
+  </div>
+</section>
+
+<!-- 06 ESSENTIAL OIL SMOKE -->
+<section class="hero-section h06" data-hero="smoke">
+  <canvas id="c06"></canvas>
+  <div class="h06-content"><div class="inner">
+    <span class="eb">Aceites esenciales</span>
+    <h1>Aroma que <em>desactiva</em>.</h1>
+    <p>Ritual de aromaterapia con lavanda francesa, sándalo Mysore y pimienta rosa.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">06 · OIL SMOKE</div>
+    <div class="name">Aromaterapia visual</div>
+    <div class="meta"><strong>Nichos:</strong> spa, aromaterapia, terapia alternativa · <strong>Stack:</strong> Canvas humo rising · <strong>Wow:</strong> sensorial sin olfato</div>
+  </div>
+</section>
+
+<!-- 07 LIGHT BEAM -->
+<section class="hero-section h07" data-hero="light-beam">
+  <div class="h07-glass"></div>
+  <div class="h07-beam"></div>
+  <div class="h07-beam h07-beam-2"></div>
+  <div class="h07-beam h07-beam-3"></div>
+  <div class="h07-content">
+    <h1>Luz que <em>esculpe</em>.</h1>
+    <p>Maquillaje editorial. Sesiones para bodas, eventos, sesiones de foto.</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">07 · LIGHT BEAMS</div>
+    <div class="name">Cinema light sweep</div>
+    <div class="meta"><strong>Nichos:</strong> maquillaje editorial, novia, eventos · <strong>Stack:</strong> CSS keyframes 3 layers · <strong>Wow:</strong> ambiente cinematográfico</div>
+  </div>
+</section>
+
+<!-- 08 BOKEH -->
+<section class="hero-section h08" data-hero="bokeh-soft">
+  <canvas id="c08"></canvas>
+  <div class="h08-content">
+    <h1>Dulce, <em>despacio</em>.</h1>
+    <p>Tratamientos faciales para piel sensible. Productos formulados sin alcohol ni perfume.</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">08 · BOKEH SUAVE</div>
+    <div class="name">Soft focus dreamy</div>
+    <div class="meta"><strong>Nichos:</strong> piel sensible, dermo, maternidad · <strong>Stack:</strong> Canvas bokeh rosa · <strong>Wow:</strong> sensación segura, no agresiva</div>
+  </div>
+</section>
+
+<!-- 09 INK BRUSH -->
+<section class="hero-section h09" data-hero="brush-stroke">
+  <svg class="h09-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+    <path d="M200,500 Q400,200 800,450 T1400,400" fill="none" stroke="#7B2D4F" stroke-width="60" stroke-linecap="round" opacity="0.15"/>
+    <path d="M150,600 Q500,300 900,550 T1500,500" fill="none" stroke="#D4527A" stroke-width="40" stroke-linecap="round" opacity="0.12"/>
+    <path d="M250,400 Q600,150 1000,350 T1450,300" fill="none" stroke="#E8B4C8" stroke-width="80" stroke-linecap="round" opacity="0.1"/>
+  </svg>
+  <div class="h09-content">
+    <span class="eb">Studio · Founded 2019</span>
+    <h1>Pinceladas, <em>no patrones</em>.</h1>
+    <p>Maquillaje artístico hecho a mano. Cada cara es un lienzo nuevo, ninguna repetición.</p>
+  </div>
+  <div class="hero-info">
+    <div class="num">09 · INK BRUSH STROKE</div>
+    <div class="name">SVG path drawing</div>
+    <div class="meta"><strong>Nichos:</strong> maquillaje artístico, studio, branding · <strong>Stack:</strong> SVG stroke-dashoffset · <strong>Wow:</strong> trazos pintados a mano</div>
+  </div>
+</section>
+
+<!-- 10 PHOTO STORY -->
+<section class="hero-section h10" data-hero="photo-story">
+  <div class="h10-slide s1 active">
+    <div class="bg"></div>
+    <div class="vignette"></div>
+    <div class="h10-content">
+      <span class="num">01 / 04</span>
+      <h1>El cuidado <em>empieza</em><br>al despertar.</h1>
+      <p>Limpieza suave, hidratación, protector.</p>
+    </div>
+  </div>
+  <div class="h10-slide s2">
+    <div class="bg"></div>
+    <div class="vignette"></div>
+    <div class="h10-content">
+      <span class="num">02 / 04</span>
+      <h1>El color es <em>conversación</em>,<br>no decoración.</h1>
+      <p>Una manicura habla antes que tú.</p>
+    </div>
+  </div>
+  <div class="h10-slide s3">
+    <div class="bg"></div>
+    <div class="vignette"></div>
+    <div class="h10-content">
+      <span class="num">03 / 04</span>
+      <h1>La piel <em>respira</em><br>cuando tú lo haces.</h1>
+      <p>Tratamientos diseñados para tu ritmo.</p>
+    </div>
+  </div>
+  <div class="h10-slide s4">
+    <div class="bg"></div>
+    <div class="vignette"></div>
+    <div class="h10-content">
+      <span class="num">04 / 04</span>
+      <h1>Volver a <em>casa</em>,<br>en tu propia piel.</h1>
+      <p>El final del ritual es el principio del día.</p>
+    </div>
+  </div>
+  <div class="h10-dots" id="h10-dots">
+    <span class="active"></span><span></span><span></span><span></span>
+  </div>
+  <div class="hero-info">
+    <div class="num">10 · PHOTO STORY CYCLE</div>
+    <div class="name">Auto-cycling editorial chapters</div>
+    <div class="meta"><strong>Nichos:</strong> brand storytelling beauty, ritual products · <strong>Stack:</strong> setInterval cross-fade · <strong>Wow:</strong> narrativa de marca en hero</div>
+  </div>
+</section>
+
+<section class="end-section">
+  <h2>10 heros · belleza editorial · vol.4</h2>
+  <p>Elegancia editorial. Para clientes que entienden que menos puede ser más.</p>
+  <a href="/heros/" class="back">← Catálogo</a>
+</section>
+
+<script>
+const sections = document.querySelectorAll('.hero-section');
+const counter = document.getElementById('counter');
+const sidenav = document.getElementById('sidenav');
+sections.forEach((sec, idx) => {
+  const btn = document.createElement('button');
+  btn.textContent = String(idx+1).padStart(2,'0');
+  btn.addEventListener('click', () => sec.scrollIntoView({behavior:'smooth'}));
+  btn.dataset.idx = idx;
+  sidenav.appendChild(btn);
+});
+const navBtns = sidenav.querySelectorAll('button');
+const inits = {};
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const sec = entry.target;
+    if (entry.isIntersecting) {
+      const name = sec.dataset.hero;
+      if (inits[name] && !sec._init) { inits[name](sec); sec._init = true; }
+      else if (sec._inst && sec._inst.play) { try { sec._inst.play(); } catch(e) {} }
+      const idx = Array.from(sections).indexOf(sec);
+      counter.textContent = String(idx+1).padStart(2,'0') + ' / 10';
+      navBtns.forEach(b => b.classList.toggle('active', +b.dataset.idx === idx));
+    } else if (sec._inst && sec._inst.pause) { try { sec._inst.pause(); } catch(e) {} }
+  });
+}, {threshold:0.3});
+sections.forEach(s => io.observe(s));
+
+// 02 Portrait parallax
+inits['portrait'] = (sec) => {
+  const img = document.getElementById('h02-img');
+  sec.addEventListener('pointermove', e => {
+    const r = sec.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width/2) / r.width;
+    const y = (e.clientY - r.top - r.height/2) / r.height;
+    img.style.transform = `scale(1.1) translate(${x*-20}px, ${y*-20}px)`;
+  });
+  sec._inst = {pause:()=>{},play:()=>{}};
+};
+
+// 04 Cherry Blossom Petals
+inits['blossom'] = (sec) => {
+  const canvas = document.getElementById('c04');
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min(devicePixelRatio||1, 2);
+  let W, H, petals = [];
+  function resize() { const r = sec.getBoundingClientRect(); canvas.width = W = r.width*DPR; canvas.height = H = r.height*DPR; }
+  resize(); addEventListener('resize', resize);
+  const N = matchMedia('(max-width:768px)').matches ? 25 : 60;
+  for (let i = 0; i < N; i++) {
+    petals.push({x: Math.random()*W, y: Math.random()*H - H, size: (Math.random()*6+4)*DPR, vy: (Math.random()*0.6+0.3)*DPR, vx: (Math.random()-0.5)*0.4*DPR, sway: Math.random()*Math.PI*2, swaySpeed: 0.01+Math.random()*0.02, rot: Math.random()*Math.PI*2, rotSpeed: (Math.random()-0.5)*0.04, color: ['#FFB5C7','#FF8AB0','#FFC8D6','#E89BAE'][Math.floor(Math.random()*4)]});
+  }
+  let running = true, raf;
+  const draw = () => {
+    if (!running) return;
+    ctx.clearRect(0, 0, W, H);
+    petals.forEach(p => {
+      p.y += p.vy; p.sway += p.swaySpeed; p.rot += p.rotSpeed;
+      p.x += p.vx + Math.sin(p.sway)*0.5*DPR;
+      if (p.y > H + 20) { p.y = -20; p.x = Math.random()*W; }
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = 0.85;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.size, p.size*0.6, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+    });
+    raf = requestAnimationFrame(draw);
+  };
+  raf = requestAnimationFrame(draw);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(draw);}}};
+};
+
+// 06 Essential Oil Smoke
+inits['smoke'] = (sec) => {
+  const canvas = document.getElementById('c06');
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min(devicePixelRatio||1, 2);
+  let W, H, particles = [];
+  function resize() { const r = sec.getBoundingClientRect(); canvas.width = W = r.width*DPR; canvas.height = H = r.height*DPR; }
+  resize(); addEventListener('resize', resize);
+  const N = matchMedia('(max-width:768px)').matches ? 30 : 70;
+  for (let i = 0; i < N; i++) {
+    particles.push({x: W/2 + (Math.random()-0.5)*W*0.4, y: H + Math.random()*H, r: (Math.random()*80+40)*DPR, vy: -(Math.random()*0.4+0.2)*DPR, sway: Math.random()*Math.PI*2, alpha: Math.random()*0.15+0.05});
+  }
+  let running = true, raf;
+  const draw = () => {
+    if (!running) return;
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    particles.forEach(p => {
+      p.y += p.vy; p.sway += 0.005;
+      p.x += Math.sin(p.sway)*0.3*DPR;
+      if (p.y < -p.r) { p.y = H + p.r; p.x = W/2 + (Math.random()-0.5)*W*0.3; }
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      grad.addColorStop(0, `rgba(245,222,179,${p.alpha})`);
+      grad.addColorStop(0.5, `rgba(212,175,55,${p.alpha*0.5})`);
+      grad.addColorStop(1, 'rgba(245,222,179,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+    });
+    raf = requestAnimationFrame(draw);
+  };
+  raf = requestAnimationFrame(draw);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(draw);}}};
+};
+
+// 08 Soft Bokeh
+inits['bokeh-soft'] = (sec) => {
+  const canvas = document.getElementById('c08');
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min(devicePixelRatio||1, 2);
+  let W, H, orbs = [];
+  function resize() { const r = sec.getBoundingClientRect(); canvas.width = W = r.width*DPR; canvas.height = H = r.height*DPR; }
+  resize(); addEventListener('resize', resize);
+  const N = matchMedia('(max-width:768px)').matches ? 20 : 40;
+  for (let i = 0; i < N; i++) {
+    orbs.push({x: Math.random()*W, y: Math.random()*H, r: (Math.random()*100+50)*DPR, vx: (Math.random()-0.5)*0.2*DPR, vy: (Math.random()-0.5)*0.2*DPR, color: ['#E8B4C8','#FFB5A7','#FFD7B5','#E89BAE'][Math.floor(Math.random()*4)], alpha: Math.random()*0.2+0.1});
+  }
+  let running = true, raf;
+  const draw = () => {
+    if (!running) return;
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'screen';
+    orbs.forEach(o => {
+      o.x += o.vx; o.y += o.vy;
+      if (o.x < -o.r) o.x = W + o.r; else if (o.x > W + o.r) o.x = -o.r;
+      if (o.y < -o.r) o.y = H + o.r; else if (o.y > H + o.r) o.y = -o.r;
+      const grad = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
+      const c = o.color;
+      grad.addColorStop(0, c + Math.floor(o.alpha*255).toString(16).padStart(2,'0'));
+      grad.addColorStop(0.5, c + '40');
+      grad.addColorStop(1, c + '00');
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(o.x, o.y, o.r, 0, Math.PI*2); ctx.fill();
+    });
+    raf = requestAnimationFrame(draw);
+  };
+  raf = requestAnimationFrame(draw);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(draw);}}};
+};
+
+// 10 Photo Story Auto Cycle
+inits['photo-story'] = (sec) => {
+  const slides = sec.querySelectorAll('.h10-slide');
+  const dots = sec.querySelectorAll('#h10-dots span');
+  let i = 0;
+  const cycle = () => {
+    slides[i].classList.remove('active');
+    dots[i].classList.remove('active');
+    i = (i+1) % slides.length;
+    slides[i].classList.add('active');
+    dots[i].classList.add('active');
+  };
+  const interval = setInterval(cycle, 4500);
+  sec._inst = {pause:()=>clearInterval(interval),play:()=>{}};
+};
+</script>
+
+</body>
+</html>
