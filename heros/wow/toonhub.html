@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>TOONHUB — 3D Shape</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body, #root { width: 100%; height: 100%; overflow: hidden; }
+  body { font-family: 'Inter', sans-serif; color: #fff; }
+  button { background: none; border: none; color: inherit; font-family: inherit; cursor: pointer; }
+  a { color: inherit; text-decoration: none; }
+
+  .root {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    transition: background-color 650ms cubic-bezier(0.4,0,0.2,1);
+    background: #F4845F;
+  }
+  .stage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Grain */
+  .grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.4;
+    background-size: 200px 200px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* Ghost giant text */
+  .ghost {
+    position: absolute;
+    left: 0; right: 0;
+    top: 18%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+    font-family: 'Anton', sans-serif;
+    font-weight: 900;
+    color: #fff;
+    opacity: 1;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    font-size: clamp(90px, 28vw, 380px);
+  }
+
+  /* Brand */
+  .brand {
+    position: absolute;
+    top: 1.5rem;
+    left: 1rem;
+    z-index: 60;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.9;
+    letter-spacing: 0.18em;
+  }
+  @media (min-width: 640px) { .brand { left: 2rem; } }
+
+  /* Carousel items */
+  .carousel { position: absolute; inset: 0; z-index: 3; }
+  .item {
+    position: absolute;
+    aspect-ratio: 0.6 / 1;
+    will-change: transform, filter, opacity;
+    transition:
+      transform 650ms cubic-bezier(0.4,0,0.2,1),
+      filter 650ms cubic-bezier(0.4,0,0.2,1),
+      opacity 650ms cubic-bezier(0.4,0,0.2,1),
+      left 650ms cubic-bezier(0.4,0,0.2,1),
+      bottom 650ms cubic-bezier(0.4,0,0.2,1),
+      height 650ms cubic-bezier(0.4,0,0.2,1);
+  }
+  .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Bottom-left */
+  .bl {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1rem;
+    z-index: 60;
+    max-width: 320px;
+  }
+  @media (min-width: 640px) { .bl { bottom: 5rem; left: 6rem; } }
+  .bl-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #fff;
+    opacity: 0.95;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  @media (min-width: 640px) {
+    .bl-title { font-size: 22px; margin-bottom: 0.75rem; letter-spacing: 0.1em; }
+  }
+  .bl-desc {
+    display: none;
+    color: #fff;
+    opacity: 0.85;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+  }
+  @media (min-width: 640px) { .bl-desc { display: block; } }
+  .nav-row { display: flex; gap: 0.75rem; }
+  .nav-btn {
+    width: 3rem; height: 3rem;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    color: #fff;
+    background: transparent;
+    display: grid;
+    place-items: center;
+    transition: transform 150ms, background-color 150ms;
+  }
+  @media (min-width: 640px) { .nav-btn { width: 4rem; height: 4rem; } }
+  .nav-btn:hover {
+    transform: scale(1.08);
+    background-color: rgba(255,255,255,0.12);
+  }
+
+  /* Bottom-right */
+  .br {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1rem;
+    z-index: 60;
+  }
+  @media (min-width: 640px) { .br { bottom: 5rem; right: 2.5rem; } }
+  .br a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    color: #fff;
+    opacity: 0.95;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: opacity 200ms;
+    font-size: clamp(20px, 4vw, 56px);
+  }
+  .br a:hover { opacity: 1; }
+  .br svg { width: 1.25rem; height: 1.25rem; }
+  @media (min-width: 640px) { .br svg { width: 2rem; height: 2rem; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .item, .root { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="root" id="rootBg">
+    <div class="stage">
+      <div class="grain"></div>
+      <div class="ghost">3D SHAPE</div>
+      <div class="brand">TOONHUB</div>
+
+      <div class="carousel" id="carousel"></div>
+
+      <div class="bl">
+        <p class="bl-title">TOONHUB FIGURINES</p>
+        <p class="bl-desc">The artwork is stunning, shipped fully prepared. The finish is a vision, the 3D craft is flawless. Many thanks! Wishing you the win. Order now.</p>
+        <div class="nav-row">
+          <button class="nav-btn" id="prevBtn" aria-label="Previous">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          </button>
+          <button class="nav-btn" id="nextBtn" aria-label="Next">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="br">
+        <a href="#">
+          <span>DISCOVER IT</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const IMAGES = [
+    { src: 'https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/1.02464a56.png', bg: '#F4845F', panel: '#F79B7F' },
+    { src: 'https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/2.b977faab.png', bg: '#6BBF7A', panel: '#85CC92' },
+    { src: 'https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/3.4df853b4.png', bg: '#E882B4', panel: '#ED9DC4' },
+    { src: 'https://fifth-gentle-45902158.figma.site/_components/v2/4de492f6d9cf8244ad5293233e5c6f52407d42fc/4.4457fbce.png', bg: '#6EB5FF', panel: '#8DC4FF' },
+  ];
+
+  // Preload
+  IMAGES.forEach(o => { const i = new Image(); i.src = o.src; });
+
+  const carousel = document.getElementById('carousel');
+  const rootBg = document.getElementById('rootBg');
+  let activeIndex = 0;
+  let isAnimating = false;
+  let isMobile = window.innerWidth < 640;
+
+  // Build items
+  const items = IMAGES.map((o, idx) => {
+    const div = document.createElement('div');
+    div.className = 'item';
+    const img = document.createElement('img');
+    img.src = o.src;
+    img.alt = '';
+    img.draggable = false;
+    div.appendChild(img);
+    carousel.appendChild(div);
+    return div;
+  });
+
+  function getRoles() {
+    return {
+      center: activeIndex,
+      left:   (activeIndex + 3) % 4,
+      right:  (activeIndex + 1) % 4,
+      back:   (activeIndex + 2) % 4,
+    };
+  }
+
+  function applyStyles() {
+    const roles = getRoles();
+    rootBg.style.backgroundColor = IMAGES[activeIndex].bg;
+
+    items.forEach((el, i) => {
+      let style;
+      if (i === roles.center) {
+        style = {
+          left: '50%',
+          bottom: isMobile ? '22%' : '0',
+          height: isMobile ? '60%' : '92%',
+          transform: `translateX(-50%) scale(${isMobile ? 1.25 : 1.68})`,
+          filter: 'blur(0px)',
+          opacity: 1,
+          zIndex: 20,
+        };
+      } else if (i === roles.left) {
+        style = {
+          left: isMobile ? '20%' : '30%',
+          bottom: isMobile ? '32%' : '12%',
+          height: isMobile ? '16%' : '28%',
+          transform: 'translateX(-50%) scale(1)',
+          filter: 'blur(2px)',
+          opacity: 0.85,
+          zIndex: 10,
+        };
+      } else if (i === roles.right) {
+        style = {
+          left: isMobile ? '80%' : '70%',
+          bottom: isMobile ? '32%' : '12%',
+          height: isMobile ? '16%' : '28%',
+          transform: 'translateX(-50%) scale(1)',
+          filter: 'blur(2px)',
+          opacity: 0.85,
+          zIndex: 10,
+        };
+      } else { // back
+        style = {
+          left: '50%',
+          bottom: isMobile ? '32%' : '12%',
+          height: isMobile ? '13%' : '22%',
+          transform: 'translateX(-50%) scale(1)',
+          filter: 'blur(4px)',
+          opacity: 1,
+          zIndex: 5,
+        };
+      }
+      Object.assign(el.style, {
+        left: style.left,
+        bottom: style.bottom,
+        height: style.height,
+        transform: style.transform,
+        filter: style.filter,
+        opacity: String(style.opacity),
+        zIndex: String(style.zIndex),
+      });
+    });
+  }
+
+  function navigate(dir) {
+    if (isAnimating) return;
+    isAnimating = true;
+    activeIndex = dir === 'next' ? (activeIndex + 1) % 4 : (activeIndex + 3) % 4;
+    applyStyles();
+    setTimeout(() => { isAnimating = false; }, 650);
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => navigate('prev'));
+  document.getElementById('nextBtn').addEventListener('click', () => navigate('next'));
+
+  window.addEventListener('resize', () => {
+    const nm = window.innerWidth < 640;
+    if (nm !== isMobile) { isMobile = nm; applyStyles(); }
+  });
+
+  // Keyboard
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') navigate('prev');
+    if (e.key === 'ArrowRight') navigate('next');
+  });
+
+  applyStyles();
+</script>
+</body>
+</html>
