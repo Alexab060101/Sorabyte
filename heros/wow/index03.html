@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Heros WOW vol.3 · Belleza · Sorabyte</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#1a0d14;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(26,13,20,0.75);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.08);font-family:'Manrope',sans-serif;font-weight:700}
+  .topbar a{color:#fff;text-decoration:none;font-size:1.05rem}
+  .topbar a span{color:#E8B4C8}
+  .topbar .counter{font-size:0.8rem;color:rgba(255,255,255,0.55);font-weight:500}
+  .sidenav{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:8px}
+  .sidenav button{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:0.68rem;font-weight:800;font-family:'Manrope',sans-serif;cursor:pointer;transition:all .3s ease}
+  .sidenav button:hover{background:rgba(232,180,200,0.4);border-color:#E8B4C8;transform:scale(1.12)}
+  .sidenav button.active{background:#E8B4C8;border-color:#E8B4C8;color:#1a0d14}
+  @media (max-width:768px){.sidenav{display:none}}
+
+  .hero-section{position:relative;min-height:100vh;width:100%;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:1}
+  .hero-content{position:relative;z-index:2;padding:0 28px;min-height:100vh;display:grid;place-items:center;text-align:center;pointer-events:none}
+  .hero-content .inner{max-width:900px}
+  .hero-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,7vw,5.5rem);font-weight:300;line-height:1;letter-spacing:-0.01em;margin-bottom:1rem}
+  .hero-content h1 em{font-style:italic;color:#C9A254}
+  .hero-content p{font-size:clamp(0.95rem,1.6vw,1.15rem);opacity:0.72;line-height:1.5;letter-spacing:0.02em}
+  .hero-info{position:absolute;left:22px;bottom:22px;z-index:3;background:rgba(0,0,0,0.62);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:14px 18px;max-width:360px}
+  .hero-info .num{font-family:'Manrope',sans-serif;font-weight:800;font-size:0.7rem;letter-spacing:0.22em;color:#E8B4C8;margin-bottom:6px}
+  .hero-info .name{font-family:'Manrope',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:6px;color:#fff}
+  .hero-info .meta{font-size:0.76rem;color:rgba(255,255,255,0.65);line-height:1.55}
+  .hero-info .meta strong{color:#C9A254;font-weight:600}
+
+  /* 01 NAIL POLISH DROP */
+  .h01{background:linear-gradient(180deg,#3a1f2b 0%,#1a0d14 100%)}
+  #c01{position:absolute;inset:0;width:100%;height:100%}
+  .hero-section[data-hero="polish-drop"] .hero-content h1 em{color:#FF6E91}
+
+  /* 02 GLITTER CONSTELLATION */
+  .h02{background:radial-gradient(ellipse at 50% 50%,#2d1b2d 0%,#0a0510 100%)}
+  #c02{position:absolute;inset:0;width:100%;height:100%}
+  .hero-section[data-hero="glitter-const"] .hero-content h1 em{color:#FFD700}
+
+  /* 03 LIQUID LIPSTICK POUR */
+  .h03{background:#FCF4F0}
+  .h03 .hero-content h1{color:#3a1f2b}
+  .h03 .hero-content h1 em{color:#D4527A}
+  .h03 .hero-content p{color:rgba(58,31,43,0.65)}
+  .h03-stage{position:absolute;inset:0;display:grid;place-items:center;z-index:1}
+  .h03-svg{width:min(80vw,700px)}
+
+  /* 04 PEARL IRIDESCENCE */
+  .h04{background:linear-gradient(135deg,#1a1424 0%,#3a2440 100%)}
+  #c04{position:absolute;inset:0;width:100%;height:100%}
+  .hero-section[data-hero="pearl"] .hero-content h1{color:#fff;font-weight:400}
+  .hero-section[data-hero="pearl"] .hero-content h1 em{color:#F5D5E3}
+
+  /* 05 MARBLE SWIRL */
+  .h05{background:#FAF5F0}
+  #c05{position:absolute;inset:0;width:100%;height:100%}
+  .h05 .hero-content h1{color:#3a2418}
+  .h05 .hero-content h1 em{color:#A56A3A}
+  .h05 .hero-content p{color:rgba(58,36,24,0.6)}
+
+  /* 06 WATERCOLOR BLOOM */
+  .h06{background:#FFF8F4;overflow:hidden}
+  .h06 svg{position:absolute;inset:0;width:100%;height:100%}
+  .h06 .hero-content h1{color:#3a1f2b;font-weight:400}
+  .h06 .hero-content h1 em{color:#E89BAE}
+  .h06 .hero-content p{color:rgba(58,31,43,0.6)}
+
+  /* 07 DIAMOND REFRACTION */
+  .h07{background:#0a0510}
+  #c07{position:absolute;inset:0;width:100%;height:100%}
+  .hero-section[data-hero="diamond"] .hero-content h1{font-weight:300;mix-blend-mode:difference}
+  .hero-section[data-hero="diamond"] .hero-content h1 em{color:#fff;opacity:0.7}
+
+  /* 08 SILK FABRIC */
+  .h08{background:#FCEEF1;position:relative;overflow:hidden}
+  .h08 .silk-layers{position:absolute;inset:0}
+  .h08 .silk{position:absolute;width:140%;height:60%;left:-20%;border-radius:50%;filter:blur(40px);opacity:0.6;will-change:transform}
+  .h08 .silk-1{top:-20%;background:linear-gradient(135deg,#E8B4C8,#FFD7B5);animation:silk1 18s ease-in-out infinite alternate}
+  .h08 .silk-2{top:35%;background:linear-gradient(135deg,#FFB5A7,#E8B4C8);animation:silk2 22s ease-in-out infinite alternate;animation-delay:-4s}
+  .h08 .silk-3{top:70%;background:linear-gradient(135deg,#F5D5C0,#E8B4C8);animation:silk3 26s ease-in-out infinite alternate;animation-delay:-8s}
+  @keyframes silk1{from{transform:translate(0,0) rotate(0deg)}to{transform:translate(8%,4%) rotate(8deg)}}
+  @keyframes silk2{from{transform:translate(0,0) rotate(0deg)}to{transform:translate(-6%,-3%) rotate(-6deg)}}
+  @keyframes silk3{from{transform:translate(0,0) rotate(0deg)}to{transform:translate(5%,-5%) rotate(5deg)}}
+  .h08 .hero-content h1{color:#3a1f2b;font-weight:300}
+  .h08 .hero-content h1 em{color:#A8527A}
+  .h08 .hero-content p{color:rgba(58,31,43,0.6)}
+
+  /* 09 LIPSTICK SWATCH MORPH */
+  .h09{background:#1a0d14;display:grid;place-items:center}
+  .h09-stage{display:flex;flex-direction:column;align-items:center;gap:3rem;z-index:2;position:relative}
+  .h09-swatch{width:min(60vw,400px);height:120px;border-radius:60px;background:linear-gradient(135deg,#D4527A,#7B2D4F);transition:background 1.2s ease;box-shadow:0 30px 80px rgba(212,82,122,0.5),inset 0 4px 20px rgba(255,255,255,0.2)}
+  .h09 .hero-content{position:relative;min-height:auto;padding:0}
+  .h09 .hero-content h1{font-weight:400}
+  .h09 .hero-content h1 em{color:#D4527A}
+
+  /* 10 CHAMPAGNE BUBBLES */
+  .h10{background:linear-gradient(180deg,#3a2418 0%,#1a0d08 100%)}
+  #c10{position:absolute;inset:0;width:100%;height:100%}
+  .hero-section[data-hero="champagne"] .hero-content h1{color:#F5DEB3;font-family:'Playfair Display',serif;font-weight:400}
+  .hero-section[data-hero="champagne"] .hero-content h1 em{color:#D4AF37}
+  .hero-section[data-hero="champagne"] .hero-content p{color:rgba(245,222,179,0.65)}
+
+  .end-section{min-height:50vh;display:grid;place-items:center;padding:60px 28px;background:linear-gradient(180deg,#1a0d14 0%,#3a1f2b 100%)}
+  .end-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;font-style:italic;text-align:center;max-width:680px;line-height:1.3;margin-bottom:1rem}
+  .end-section p{text-align:center;opacity:0.7;max-width:560px}
+  .end-section .back{margin-top:2rem;display:inline-block;padding:14px 28px;background:#E8B4C8;color:#1a0d14;border-radius:999px;font-weight:700;text-decoration:none}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="/heros/wow/"><span>S</span>oraByte · WOW · Belleza</a>
+  <span class="counter" id="counter">01 / 10</span>
+</header>
+<nav class="sidenav" id="sidenav"></nav>
+
+<!-- 01 NAIL POLISH DROP -->
+<section class="hero-section h01" data-hero="polish-drop">
+  <div class="hero-bg"><canvas id="c01"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Tus uñas, <em>tu firma</em>.</h1>
+    <p>Cada gota cae, cada onda dura tres segundos. Como una manicura bien hecha.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">01 · NAIL POLISH DROP</div>
+    <div class="name">Slow ripple sensorial</div>
+    <div class="meta"><strong>Nichos:</strong> nail salon, manicura premium · <strong>Stack:</strong> Canvas 2D ripple loop · <strong>Wow:</strong> evocación literal del producto</div>
+  </div>
+</section>
+
+<!-- 02 GLITTER CONSTELLATION -->
+<section class="hero-section h02" data-hero="glitter-const">
+  <div class="hero-bg"><canvas id="c02"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Brilla con <em>luz propia</em>.</h1>
+    <p>Constelación de glitter que conecta donde pasa el cursor.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">02 · GLITTER CONSTELLATION</div>
+    <div class="name">Sparkle interactivo</div>
+    <div class="meta"><strong>Nichos:</strong> nails glitter, lash bar, bridal, eventos · <strong>Stack:</strong> Canvas 2D 200 estrellas · <strong>Wow:</strong> sparkle + interacción</div>
+  </div>
+</section>
+
+<!-- 03 LIQUID LIPSTICK POUR -->
+<section class="hero-section h03" data-hero="lipstick-pour">
+  <div class="h03-stage">
+    <svg class="h03-svg" viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lipGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FF7A9C"/>
+          <stop offset="50%" stop-color="#D4527A"/>
+          <stop offset="100%" stop-color="#7B2D4F"/>
+        </linearGradient>
+      </defs>
+      <path id="lipPour" fill="url(#lipGrad)" d="M340,80 C360,80 380,100 380,140 L380,300 C380,360 420,400 350,440 C280,400 320,360 320,300 L320,140 C320,100 320,80 340,80 Z"/>
+    </svg>
+  </div>
+  <div class="hero-content"><div class="inner">
+    <h1>Color que <em>conoce</em><br>tu piel.</h1>
+    <p>El swatch líquido que cambia según tu tono. Probador 3D antes de comprar.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">03 · LIQUID LIPSTICK POUR</div>
+    <div class="name">SVG path morphing</div>
+    <div class="meta"><strong>Nichos:</strong> maquillaje, cosmética, beauty e-commerce · <strong>Stack:</strong> SVG path animado · <strong>Wow:</strong> producto en movimiento líquido</div>
+  </div>
+</section>
+
+<!-- 04 PEARL IRIDESCENCE -->
+<section class="hero-section h04" data-hero="pearl">
+  <div class="hero-bg"><canvas id="c04"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Belleza con <em>capas</em>.</h1>
+    <p>Iridescence Three.js sobre esfera de nácar. Mueve el cursor.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">04 · PEARL IRIDESCENCE</div>
+    <div class="name">Three.js iridescence</div>
+    <div class="meta"><strong>Nichos:</strong> spa premium, joyería, beauty alta gama · <strong>Stack:</strong> Three.js MeshPhysicalMaterial · <strong>Wow:</strong> material de perla real</div>
+  </div>
+</section>
+
+<!-- 05 MARBLE SWIRL -->
+<section class="hero-section h05" data-hero="marble">
+  <div class="hero-bg"><canvas id="c05"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Mármol <em>vivo</em>.</h1>
+    <p>Las vetas se mueven al ritmo de tu cursor.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">05 · MARBLE SWIRL</div>
+    <div class="name">WebGL fluid pink+gold</div>
+    <div class="meta"><strong>Nichos:</strong> salones premium, spa, peluquerías editorial · <strong>Stack:</strong> WebGL shader · <strong>Wow:</strong> espejo del mármol del local</div>
+  </div>
+</section>
+
+<!-- 06 WATERCOLOR BLOOM -->
+<section class="hero-section h06" data-hero="watercolor">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="wc-turb">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="3" seed="5"/>
+      <feDisplacementMap in="SourceGraphic" scale="40"/>
+    </filter>
+  </svg>
+  <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+    <g filter="url(#wc-turb)">
+      <circle id="wc1" cx="400" cy="350" r="200" fill="#E89BAE" opacity="0.5"/>
+      <circle id="wc2" cx="1100" cy="500" r="180" fill="#F5D5C0" opacity="0.6"/>
+      <circle id="wc3" cx="800" cy="200" r="140" fill="#FFB5A7" opacity="0.45"/>
+    </g>
+  </svg>
+  <div class="hero-content"><div class="inner">
+    <h1>Belleza <em>natural</em>.</h1>
+    <p>Acuarela orgánica que respira al ritmo del scroll.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">06 · WATERCOLOR BLOOM</div>
+    <div class="name">SVG turbulence ink</div>
+    <div class="meta"><strong>Nichos:</strong> cosmética natural, spa eco, tratamientos holísticos · <strong>Stack:</strong> SVG filter + animation · <strong>Wow:</strong> tono botánico premium</div>
+  </div>
+</section>
+
+<!-- 07 DIAMOND REFRACTION -->
+<section class="hero-section h07" data-hero="diamond">
+  <div class="hero-bg"><canvas id="c07"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Brillo de <em>diamante</em>.</h1>
+    <p>Prisma WebGL con dispersión RGB. Real, no Photoshop.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">07 · DIAMOND REFRACTION</div>
+    <div class="name">WebGL prism dispersion</div>
+    <div class="meta"><strong>Nichos:</strong> joyería, novia, lash extension premium · <strong>Stack:</strong> Three.js dispersion · <strong>Wow:</strong> material que descompone luz</div>
+  </div>
+</section>
+
+<!-- 08 SILK FABRIC -->
+<section class="hero-section h08" data-hero="silk">
+  <div class="silk-layers">
+    <div class="silk silk-1"></div>
+    <div class="silk silk-2"></div>
+    <div class="silk silk-3"></div>
+  </div>
+  <div class="hero-content"><div class="inner">
+    <h1>Seda al <em>tacto</em>.</h1>
+    <p>Tres capas líquidas en CSS puro. Cero JS.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">08 · SILK FABRIC LAYERS</div>
+    <div class="name">CSS blob drift</div>
+    <div class="meta"><strong>Nichos:</strong> spa, depilación, tratamientos faciales · <strong>Stack:</strong> CSS puro 0 JS · <strong>Wow:</strong> sensación táctil sin imágenes</div>
+  </div>
+</section>
+
+<!-- 09 LIPSTICK SWATCH MORPH -->
+<section class="hero-section h09" data-hero="swatch-morph">
+  <div class="h09-stage">
+    <div class="hero-content" style="pointer-events:none"><div class="inner">
+      <h1>Encuentra <em>tu rojo</em>.</h1>
+      <p>El swatch cambia. Cada 3 segundos, un labio nuevo.</p>
+    </div></div>
+    <div class="h09-swatch" id="swatch"></div>
+  </div>
+  <div class="hero-info">
+    <div class="num">09 · LIPSTICK SWATCH MORPH</div>
+    <div class="name">Color palette cycle</div>
+    <div class="meta"><strong>Nichos:</strong> maquillaje, beauty store, e-commerce cosmética · <strong>Stack:</strong> CSS gradient transition · <strong>Wow:</strong> swatch tipo Sephora pero animado</div>
+  </div>
+</section>
+
+<!-- 10 CHAMPAGNE BUBBLES -->
+<section class="hero-section h10" data-hero="champagne">
+  <div class="hero-bg"><canvas id="c10"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Spa de <em>champagne</em>.</h1>
+    <p>Burbujas doradas subiendo lentas. Sensación de lujo silencioso.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">10 · CHAMPAGNE BUBBLES</div>
+    <div class="name">Canvas bubbles ascending</div>
+    <div class="meta"><strong>Nichos:</strong> spa lujo, hotel boutique, eventos VIP · <strong>Stack:</strong> Canvas 2D 60 burbujas · <strong>Wow:</strong> calma sensorial inmediata</div>
+  </div>
+</section>
+
+<section class="end-section">
+  <h2>10 heros · nicho belleza · vol.3</h2>
+  <p>Diferencia tus 5 demos. Cada uno cuenta una historia distinta del mismo nicho.</p>
+  <a href="/heros/" class="back">← Catálogo completo</a>
+</section>
+
+<script type="module">
+const sections = document.querySelectorAll('.hero-section');
+const counter = document.getElementById('counter');
+const sidenav = document.getElementById('sidenav');
+sections.forEach((sec, idx) => {
+  const btn = document.createElement('button');
+  btn.textContent = String(idx + 1).padStart(2, '0');
+  btn.addEventListener('click', () => sec.scrollIntoView({behavior:'smooth'}));
+  btn.dataset.idx = idx;
+  sidenav.appendChild(btn);
+});
+const navBtns = sidenav.querySelectorAll('button');
+
+const inits = {};
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const sec = entry.target;
+    if (entry.isIntersecting) {
+      const name = sec.dataset.hero;
+      if (inits[name] && !sec._init) { inits[name](sec); sec._init = true; }
+      else if (sec._inst && sec._inst.play) { try { sec._inst.play(); } catch(e) {} }
+      const idx = Array.from(sections).indexOf(sec);
+      counter.textContent = String(idx+1).padStart(2,'0') + ' / 10';
+      navBtns.forEach(b => b.classList.toggle('active', +b.dataset.idx === idx));
+    } else if (sec._inst && sec._inst.pause) { try { sec._inst.pause(); } catch(e) {} }
+  });
+}, {threshold: 0.3});
+sections.forEach(s => io.observe(s));
+
+// 01 NAIL POLISH DROP
+inits['polish-drop'] = (sec) => {
+  const canvas = document.getElementById('c01');
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min(devicePixelRatio||1, 2);
+  let W, H, ripples = [], lastDrop = 0;
+  function resize() { const r = sec.getBoundingClientRect(); canvas.width = W = r.width*DPR; canvas.height = H = r.height*DPR; }
+  resize(); addEventListener('resize', resize);
+  let running = true, raf;
+  const tick = (t) => {
+    if (!running) return;
+    if (t - lastDrop > 1800) {
+      ripples.push({x: W*0.3 + Math.random()*W*0.4, y: H*0.5 + Math.random()*H*0.3, age: 0});
+      lastDrop = t;
+    }
+    ctx.fillStyle = 'rgba(26,13,20,0.08)';
+    ctx.fillRect(0, 0, W, H);
+    for (let i = ripples.length-1; i >= 0; i--) {
+      const r = ripples[i];
+      r.age += 16;
+      if (r.age > 3000) { ripples.splice(i, 1); continue; }
+      const progress = r.age / 3000;
+      const radius = progress * 300 * DPR;
+      const alpha = (1 - progress) * 0.6;
+      // Ondas concéntricas
+      for (let n = 0; n < 3; n++) {
+        const rad = radius - n*40*DPR;
+        if (rad <= 0) continue;
+        ctx.strokeStyle = `rgba(255,110,145,${alpha * (1-n*0.3)})`;
+        ctx.lineWidth = 2 * DPR;
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, rad, 0, Math.PI*2);
+        ctx.stroke();
+      }
+      // Centro líquido
+      const grad = ctx.createRadialGradient(r.x, r.y, 0, r.x, r.y, 30*DPR);
+      grad.addColorStop(0, `rgba(255,110,145,${alpha})`);
+      grad.addColorStop(1, 'rgba(255,110,145,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(r.x, r.y, 30*DPR, 0, Math.PI*2);
+      ctx.fill();
+    }
+    raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(tick);}}};
+};
+
+// 02 GLITTER CONSTELLATION
+inits['glitter-const'] = (sec) => {
+  const canvas = document.getElementById('c02');
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min(devicePixelRatio||1, 2);
+  const N = matchMedia('(max-width:768px)').matches ? 80 : 180;
+  let W, H, stars, mouse = {x:-9999, y:-9999};
+  function resize() {
+    const r = sec.getBoundingClientRect();
+    canvas.width = W = r.width*DPR; canvas.height = H = r.height*DPR;
+    stars = [];
+    for (let i = 0; i < N; i++) {
+      stars.push({x: Math.random()*W, y: Math.random()*H, r: (Math.random()*2+0.5)*DPR, vx: (Math.random()-0.5)*0.15*DPR, vy: (Math.random()-0.5)*0.15*DPR, twinkle: Math.random()*Math.PI*2, color: Math.random()<0.3?[255,215,0]:[255,182,193]});
+    }
+  }
+  resize(); addEventListener('resize', resize);
+  sec.addEventListener('pointermove', e => {
+    const r = sec.getBoundingClientRect();
+    mouse.x = (e.clientX-r.left)*DPR; mouse.y = (e.clientY-r.top)*DPR;
+  });
+  sec.addEventListener('pointerleave', () => { mouse.x = -9999; });
+  let running = true, raf;
+  const draw = () => {
+    if (!running) return;
+    ctx.clearRect(0, 0, W, H);
+    stars.forEach(s => {
+      s.x += s.vx; s.y += s.vy; s.twinkle += 0.04;
+      if (s.x < 0) s.x = W; else if (s.x > W) s.x = 0;
+      if (s.y < 0) s.y = H; else if (s.y > H) s.y = 0;
+      const alpha = 0.5 + Math.sin(s.twinkle)*0.4;
+      const grad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r*5);
+      grad.addColorStop(0, `rgba(${s.color.join(',')},${alpha})`);
+      grad.addColorStop(1, `rgba(${s.color.join(',')},0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r*5, 0, Math.PI*2); ctx.fill();
+    });
+    if (mouse.x > 0) {
+      stars.forEach(s => {
+        const dx = s.x-mouse.x, dy = s.y-mouse.y, d = Math.sqrt(dx*dx+dy*dy);
+        if (d < 250*DPR) {
+          ctx.strokeStyle = `rgba(255,215,0,${(1 - d/(250*DPR))*0.5})`;
+          ctx.lineWidth = 0.5*DPR;
+          ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(s.x, s.y); ctx.stroke();
+        }
+      });
+    }
+    raf = requestAnimationFrame(draw);
+  };
+  raf = requestAnimationFrame(draw);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(draw);}}};
+};
+
+// 03 LIQUID LIPSTICK POUR
+inits['lipstick-pour'] = (sec) => {
+  const path = document.getElementById('lipPour');
+  const shapes = [
+    "M340,80 C360,80 380,100 380,140 L380,300 C380,360 420,400 350,440 C280,400 320,360 320,300 L320,140 C320,100 320,80 340,80 Z",
+    "M340,80 C360,80 400,120 380,160 L420,280 C440,350 380,420 350,440 C320,420 260,350 280,280 L320,160 C300,120 320,80 340,80 Z",
+    "M340,80 C380,90 380,120 360,150 L400,260 C420,330 400,400 350,440 C300,400 280,330 300,260 L340,150 C320,120 320,90 340,80 Z",
+    "M340,80 C360,80 380,100 380,140 L380,300 C380,360 420,400 350,440 C280,400 320,360 320,300 L320,140 C320,100 320,80 340,80 Z"
+  ];
+  let i = 0;
+  const cycle = () => {
+    i = (i+1) % shapes.length;
+    path.style.transition = 'd 2.2s cubic-bezier(0.65,0.05,0.36,1)';
+    // SVG path interpolation needs special handling; this is approximate
+    path.setAttribute('d', shapes[i]);
+  };
+  const interval = setInterval(cycle, 2800);
+  sec._inst = {pause:()=>clearInterval(interval),play:()=>{}};
+};
+
+// 04 PEARL IRIDESCENCE
+inits['pearl'] = async (sec) => {
+  const THREE = await import('https://esm.sh/three@0.170.0');
+  const {RGBELoader} = await import('https://esm.sh/three@0.170.0/examples/jsm/loaders/RGBELoader.js');
+  const canvas = document.getElementById('c04');
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const resize = () => { const r = canvas.getBoundingClientRect(); renderer.setSize(r.width, r.height); };
+  resize(); addEventListener('resize', resize);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  const updateCam = () => { const r = canvas.getBoundingClientRect(); camera.aspect = r.width/r.height; camera.updateProjectionMatrix(); };
+  updateCam(); addEventListener('resize', updateCam);
+  camera.position.z = 3.5;
+  new RGBELoader().setPath('https://threejs.org/examples/textures/equirectangular/').load('royal_esplanade_1k.hdr', tex => { tex.mapping = THREE.EquirectangularReflectionMapping; scene.environment = tex; });
+  const mat = new THREE.MeshPhysicalMaterial({color:0xffffff, metalness:0.3, roughness:0.15, iridescence:1, iridescenceIOR:1.45, iridescenceThicknessRange:[300, 600], clearcoat:1});
+  const pearl = new THREE.Mesh(new THREE.SphereGeometry(1.2, 128, 128), mat);
+  scene.add(pearl);
+  const mouse = {x:0.5, y:0.5, lx:0.5, ly:0.5};
+  sec.addEventListener('pointermove', e => {
+    const r = sec.getBoundingClientRect();
+    mouse.x = (e.clientX-r.left)/r.width; mouse.y = (e.clientY-r.top)/r.height;
+  });
+  let running = true, raf;
+  const loop = () => {
+    if (!running) return;
+    pearl.rotation.y += 0.003;
+    mouse.lx += (mouse.x-mouse.lx)*0.06; mouse.ly += (mouse.y-mouse.ly)*0.06;
+    pearl.rotation.y += (mouse.lx-0.5)*0.01;
+    pearl.rotation.x = (mouse.ly-0.5)*0.4;
+    renderer.render(scene, camera);
+    raf = requestAnimationFrame(loop);
+  };
+  raf = requestAnimationFrame(loop);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(loop);}}};
+};
+
+// 05 MARBLE SWIRL (WebGL shader)
+inits['marble'] = (sec) => {
+  const cvs = document.getElementById('c05');
+  const gl = cvs.getContext('webgl', {antialias:true});
+  if (!gl) return;
+  const DPR = Math.min(devicePixelRatio||1, 1.5);
+  const fs = `precision highp float;
+    uniform vec2 u_res; uniform float u_time; uniform vec2 u_mouse;
+    float hash(vec2 p){ p = fract(p*vec2(123.34,456.21)); p += dot(p,p+45.32); return fract(p.x*p.y); }
+    float noise(vec2 p){ vec2 i=floor(p), f=fract(p); f=f*f*(3.0-2.0*f);
+      return mix(mix(hash(i),hash(i+vec2(1,0)),f.x), mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x), f.y); }
+    float fbm(vec2 p){ float v=0.0,a=0.5; for(int i=0;i<5;i++){ v += a*noise(p); p*=2.0; a*=0.5; } return v; }
+    void main(){
+      vec2 uv = gl_FragCoord.xy/u_res - 0.5;
+      vec2 m = (u_mouse/u_res - 0.5) * 0.3;
+      uv += m;
+      float t = u_time*0.05;
+      vec2 q = vec2(fbm(uv+t), fbm(uv-t+vec2(1.0)));
+      float n = fbm(uv + q*1.5);
+      vec3 base = vec3(0.98, 0.96, 0.93); // crema
+      vec3 veta = vec3(0.65, 0.42, 0.22); // dorado oscuro
+      vec3 rosa = vec3(0.91, 0.71, 0.78); // rosa palo
+      vec3 col = mix(base, veta, smoothstep(0.4, 0.7, n));
+      col = mix(col, rosa, smoothstep(0.5, 0.55, n) * 0.4);
+      gl_FragColor = vec4(col, 1.0);
+    }`;
+  const compile = (t,s) => { const sh = gl.createShader(t); gl.shaderSource(sh,s); gl.compileShader(sh); return sh; };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, 'attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }'));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'p');
+  gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const uRes = gl.getUniformLocation(prog, 'u_res');
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+  let mx, my, tmx, tmy;
+  const initM = () => { const r = sec.getBoundingClientRect(); mx = tmx = r.width/2*DPR; my = tmy = r.height/2*DPR; };
+  initM();
+  sec.addEventListener('pointermove', e => { const r = sec.getBoundingClientRect(); tmx = (e.clientX-r.left)*DPR; tmy = (r.height-(e.clientY-r.top))*DPR; });
+  const resize = () => { const r = cvs.getBoundingClientRect(); cvs.width = r.width*DPR; cvs.height = r.height*DPR; gl.viewport(0,0,cvs.width,cvs.height); };
+  resize(); addEventListener('resize', resize);
+  const t0 = performance.now();
+  let running = true, raf;
+  const loop = () => {
+    if (!running) return;
+    mx += (tmx-mx)*0.04; my += (tmy-my)*0.04;
+    gl.uniform2f(uRes, cvs.width, cvs.height);
+    gl.uniform1f(uTime, (performance.now()-t0)/1000);
+    gl.uniform2f(uMouse, mx, my);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    raf = requestAnimationFrame(loop);
+  };
+  raf = requestAnimationFrame(loop);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(loop);}}};
+};
+
+// 06 WATERCOLOR — CSS+SVG only, animate seed
+inits['watercolor'] = (sec) => {
+  const wc1 = document.getElementById('wc1');
+  const wc2 = document.getElementById('wc2');
+  const wc3 = document.getElementById('wc3');
+  let t = 0, running = true, raf;
+  const tick = () => {
+    if (!running) return;
+    t += 0.005;
+    wc1.setAttribute('cx', 400 + Math.sin(t)*60);
+    wc1.setAttribute('cy', 350 + Math.cos(t*0.7)*40);
+    wc1.setAttribute('r', 180 + Math.sin(t*0.5)*30);
+    wc2.setAttribute('cx', 1100 + Math.cos(t*0.8)*70);
+    wc2.setAttribute('cy', 500 + Math.sin(t)*50);
+    wc2.setAttribute('r', 160 + Math.cos(t*0.6)*25);
+    wc3.setAttribute('cx', 800 + Math.sin(t*1.2)*50);
+    wc3.setAttribute('cy', 200 + Math.cos(t)*30);
+    raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(tick);}}};
+};
+
+// 07 DIAMOND (Three.js glass with dispersion)
+inits['diamond'] = async (sec) => {
+  const THREE = await import('https://esm.sh/three@0.170.0');
+  const canvas = document.getElementById('c07');
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const resize = () => { const r = canvas.getBoundingClientRect(); renderer.setSize(r.width, r.height); };
+  resize(); addEventListener('resize', resize);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  const updateCam = () => { const r = canvas.getBoundingClientRect(); camera.aspect = r.width/r.height; camera.updateProjectionMatrix(); };
+  updateCam(); addEventListener('resize', updateCam);
+  camera.position.z = 4;
+  scene.add(new THREE.PointLight(0xff88dd, 8, 10).translateX(-2).translateY(1).translateZ(2));
+  scene.add(new THREE.PointLight(0x88ddff, 8, 10).translateX(2).translateY(-1).translateZ(2));
+  scene.add(new THREE.AmbientLight(0xffffff, 0.15));
+  const gem = new THREE.Mesh(new THREE.OctahedronGeometry(1.3, 0), new THREE.MeshPhysicalMaterial({
+    transmission:1, thickness:1.8, ior:2.4, roughness:0.0, metalness:0, dispersion:1.2, clearcoat:1, clearcoatRoughness:0
+  }));
+  scene.add(gem);
+  const mouse = {x:0, y:0, lx:0, ly:0};
+  sec.addEventListener('pointermove', e => { const r = sec.getBoundingClientRect(); mouse.x = ((e.clientX-r.left)/r.width-0.5); mouse.y = -((e.clientY-r.top)/r.height-0.5); });
+  let running = true, raf;
+  const loop = (t) => {
+    if (!running) return;
+    mouse.lx += (mouse.x-mouse.lx)*0.05; mouse.ly += (mouse.y-mouse.ly)*0.05;
+    gem.rotation.y = t*0.0005 + mouse.lx;
+    gem.rotation.x = mouse.ly*0.5;
+    renderer.render(scene, camera);
+    raf = requestAnimationFrame(loop);
+  };
+  raf = requestAnimationFrame(loop);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(loop);}}};
+};
+
+// 08 SILK — pure CSS, no init
+
+// 09 LIPSTICK SWATCH MORPH
+inits['swatch-morph'] = (sec) => {
+  const swatch = document.getElementById('swatch');
+  const colors = [
+    'linear-gradient(135deg,#D4527A,#7B2D4F)',
+    'linear-gradient(135deg,#FF6E91,#A83A5C)',
+    'linear-gradient(135deg,#8B2D5A,#4A0E2A)',
+    'linear-gradient(135deg,#E89BAE,#A8527A)',
+    'linear-gradient(135deg,#C9485E,#6B1F38)',
+    'linear-gradient(135deg,#A06A88,#5B3550)'
+  ];
+  let i = 0;
+  const interval = setInterval(() => {
+    i = (i+1) % colors.length;
+    swatch.style.background = colors[i];
+  }, 2400);
+  sec._inst = {pause:()=>clearInterval(interval),play:()=>{}};
+};
+
+// 10 CHAMPAGNE BUBBLES
+inits['champagne'] = (sec) => {
+  const canvas = document.getElementById('c10');
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min(devicePixelRatio||1, 2);
+  let W, H, bubbles = [];
+  function resize() { const r = sec.getBoundingClientRect(); canvas.width = W = r.width*DPR; canvas.height = H = r.height*DPR; }
+  resize(); addEventListener('resize', resize);
+  const N = matchMedia('(max-width:768px)').matches ? 30 : 60;
+  for (let i = 0; i < N; i++) {
+    bubbles.push({
+      x: Math.random()*W, y: H + Math.random()*H, r: (Math.random()*8+3)*DPR,
+      vy: -(Math.random()*0.6+0.3)*DPR, sway: Math.random()*Math.PI*2, swaySpeed: 0.005+Math.random()*0.01
+    });
+  }
+  let running = true, raf;
+  const draw = () => {
+    if (!running) return;
+    ctx.fillStyle = 'rgba(26,13,8,0.05)';
+    ctx.fillRect(0, 0, W, H);
+    bubbles.forEach(b => {
+      b.y += b.vy; b.sway += b.swaySpeed;
+      b.x += Math.sin(b.sway) * 0.3 * DPR;
+      if (b.y < -b.r) { b.y = H + b.r; b.x = Math.random()*W; }
+      // Burbuja dorada
+      const grad = ctx.createRadialGradient(b.x-b.r*0.3, b.y-b.r*0.3, 0, b.x, b.y, b.r);
+      grad.addColorStop(0, 'rgba(255,238,200,0.7)');
+      grad.addColorStop(0.7, 'rgba(212,175,55,0.4)');
+      grad.addColorStop(1, 'rgba(212,175,55,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI*2); ctx.fill();
+      // Highlight
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.beginPath(); ctx.arc(b.x-b.r*0.4, b.y-b.r*0.4, b.r*0.2, 0, Math.PI*2); ctx.fill();
+    });
+    raf = requestAnimationFrame(draw);
+  };
+  raf = requestAnimationFrame(draw);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(draw);}}};
+};
+</script>
+
+</body>
+</html>
