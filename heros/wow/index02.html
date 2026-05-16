@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Heros WOW vol.2 · Sorabyte</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700;800&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=Anton&family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#03030a;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(8,8,8,0.75);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.08);font-family:'Manrope',sans-serif;font-weight:700}
+  .topbar a{color:#fff;text-decoration:none;font-size:1.05rem}
+  .topbar a span{color:#9F67FF}
+  .topbar .counter{font-size:0.8rem;color:rgba(255,255,255,0.55);font-weight:500}
+  .sidenav{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:150;display:flex;flex-direction:column;gap:8px}
+  .sidenav button{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:0.68rem;font-weight:800;font-family:'Manrope',sans-serif;cursor:pointer;transition:all .3s ease}
+  .sidenav button:hover{background:rgba(159,103,255,0.4);border-color:#9F67FF;transform:scale(1.12)}
+  .sidenav button.active{background:#9F67FF;border-color:#9F67FF}
+  @media (max-width:768px){.sidenav{display:none}}
+
+  .hero-section{position:relative;min-height:100vh;width:100%;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:1}
+  .hero-content{position:relative;z-index:2;padding:0 28px;min-height:100vh;display:grid;place-items:center;text-align:center;pointer-events:none}
+  .hero-content .inner{max-width:900px}
+  .hero-content h1{font-family:'Manrope',sans-serif;font-size:clamp(2.4rem,7vw,5.5rem);font-weight:800;line-height:1;letter-spacing:-0.04em;margin-bottom:1rem}
+  .hero-content h1 em{font-style:italic;font-weight:400;color:#C9A254}
+  .hero-content p{font-size:clamp(0.95rem,1.6vw,1.15rem);opacity:0.72;line-height:1.5}
+  .hero-info{position:absolute;left:22px;bottom:22px;z-index:3;background:rgba(0,0,0,0.62);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:14px 18px;max-width:360px}
+  .hero-info .num{font-family:'Manrope',sans-serif;font-weight:800;font-size:0.7rem;letter-spacing:0.22em;color:#9F67FF;margin-bottom:6px}
+  .hero-info .name{font-family:'Manrope',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:6px;color:#fff}
+  .hero-info .meta{font-size:0.76rem;color:rgba(255,255,255,0.65);line-height:1.55}
+  .hero-info .meta strong{color:#C9A254;font-weight:600}
+
+  /* 01 ASCII */
+  .h01{background:#000}
+  #c01{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;filter:contrast(1.15) brightness(1.05)}
+  .hero-section[data-hero="ascii"] .hero-content h1{mix-blend-mode:difference}
+
+  /* 02 Pixelated Bayer */
+  .h02{background:#0a0e07}
+  #c02{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}
+  .hero-section[data-hero="bayer"] .hero-content h1{color:#9bbc0f;text-shadow:4px 4px 0 #0f380f}
+
+  /* 03 VHS CRT */
+  .h03{background:#000;isolation:isolate}
+  .h03::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:5;background:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0 2px,rgba(0,0,0,0.35) 2px 4px);animation:h03flick 0.15s steps(2) infinite}
+  @keyframes h03flick{0%{opacity:1}100%{opacity:0.92}}
+  .h03::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,0.6) 100%),rgba(255,0,60,0.06);mix-blend-mode:multiply}
+  .h03-media-wrap{position:absolute;inset:0;z-index:1}
+  .h03-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.3) contrast(1.1)}
+  .h03-media.r{mix-blend-mode:screen;filter:saturate(0) sepia(1) hue-rotate(-50deg) saturate(8);transform:translateX(3px);z-index:2;opacity:0.5}
+  .h03-media.b{mix-blend-mode:screen;filter:saturate(0) sepia(1) hue-rotate(180deg) saturate(8);transform:translateX(-3px);z-index:2;opacity:0.5}
+  .h03-noise{position:absolute;inset:0;z-index:7;pointer-events:none;opacity:0.15;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+  .hero-section[data-hero="vhs"] .hero-content h1{text-shadow:3px 0 #ff003c,-3px 0 #00e5ff;mix-blend-mode:screen}
+
+  /* 04 Truchet */
+  .h04{background:#f4efe6}
+  #c04{position:absolute;inset:0;width:100%;height:100%}
+  .hero-section[data-hero="truchet"] .hero-content h1{color:#1a1a1a;font-weight:400}
+  .hero-section[data-hero="truchet"] .hero-content h1 em{color:#7a5c3a}
+  .hero-section[data-hero="truchet"] .hero-content p{color:rgba(26,26,26,0.6)}
+
+  /* 05 Fractal */
+  .h05{background:#000}
+  #c05{position:absolute;inset:0;width:100%;height:100%}
+  .hero-section[data-hero="fractal"] .hero-content h1{mix-blend-mode:screen;font-weight:200}
+
+  /* 06 Boids */
+  .h06{background:#0a0a0f}
+  #c06{position:absolute;inset:0;width:100%;height:100%}
+  .hero-section[data-hero="boids"] .hero-content h1{mix-blend-mode:difference;font-weight:300}
+
+  /* 07 Slit-scan */
+  .h07{background:#000}
+  #c07{position:absolute;inset:0;width:100%;height:100%}
+  .h07-video{display:none}
+  .hero-section[data-hero="slit"] .hero-content h1{mix-blend-mode:difference;font-weight:200}
+  .hero-section[data-hero="slit"] .hero-content h1 em{font-style:italic;color:#fff;opacity:0.7}
+
+  /* 08 Letter Morph */
+  .h08{background:#0a0a0a;display:grid;place-items:center}
+  .h08-stage{text-align:center;padding:2rem}
+  .h08-row{display:flex;gap:0.05em;justify-content:center;font-family:'Roboto Flex',sans-serif;font-size:clamp(4rem,14vw,12rem);font-weight:800;letter-spacing:-0.04em;line-height:1}
+  .h08-row .gly{display:inline-block;min-width:0.65em;text-align:center;font-variation-settings:'wght' 800,'wdth' 100,'opsz' 144;background:linear-gradient(180deg,#fff,#999);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:h08breathe 4s ease-in-out infinite}
+  .h08-row .gly:nth-child(1){animation-delay:0s}
+  .h08-row .gly:nth-child(2){animation-delay:0.3s}
+  .h08-row .gly:nth-child(3){animation-delay:0.6s}
+  .h08-row .gly:nth-child(4){animation-delay:0.9s}
+  .h08-row .gly:nth-child(5){animation-delay:1.2s}
+  .h08-row .gly:nth-child(6){animation-delay:1.5s}
+  @keyframes h08breathe{0%,100%{font-variation-settings:'wght' 800,'wdth' 100}50%{font-variation-settings:'wght' 200,'wdth' 151}}
+  .h08-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;opacity:0.5;margin-bottom:2rem}
+
+  /* 09 SVG Liquid Morph */
+  .h09{background:#0a0a0f;display:grid;place-items:center}
+  .h09-stage{position:absolute;inset:0;display:grid;place-items:center;z-index:1}
+  .h09-stage svg{width:min(60vw,520px);height:auto;filter:drop-shadow(0 30px 80px rgba(232,213,183,0.25))}
+  .hero-section[data-hero="liquid-morph"] .hero-content h1{mix-blend-mode:difference;font-weight:300}
+  .hero-section[data-hero="liquid-morph"] .hero-content h1 em{color:#e8d5b7}
+
+  /* 10 Liquid Glass UI */
+  .h10{background:linear-gradient(135deg,#1a1a2e,#16213e);position:relative}
+  .h10::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=2000') center/cover;opacity:0.6;z-index:0}
+  .h10-card{position:relative;z-index:2;width:min(90vw,480px);padding:3rem 2.5rem;border-radius:32px;background:rgba(255,255,255,0.08);backdrop-filter:url(#liquid-glass-filter) blur(8px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,0.18);box-shadow:inset 0 1px 0 rgba(255,255,255,0.4),inset 0 -1px 0 rgba(255,255,255,0.1),0 20px 60px rgba(0,0,0,0.3);color:#fff;text-align:center;transform-style:preserve-3d;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1)}
+  .h10-card::after{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,0.3) 0%,transparent 50%);pointer-events:none;opacity:0.8;mix-blend-mode:overlay}
+  .h10-card h1{font-family:'Manrope',sans-serif;font-size:clamp(2rem,5vw,3rem);font-weight:600;letter-spacing:-0.02em;margin-bottom:1rem;background:linear-gradient(180deg,#fff,#fff8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .h10-card p{font-size:1.05rem;opacity:0.85;margin-bottom:2rem;line-height:1.5}
+
+  .end-section{min-height:50vh;display:grid;place-items:center;padding:60px 28px;background:linear-gradient(180deg,#03030a 0%,#1a0d2e 100%)}
+  .end-section h2{font-family:'Manrope',sans-serif;font-size:clamp(1.4rem,3vw,2.2rem);text-align:center;max-width:680px;line-height:1.3;margin-bottom:1rem}
+  .end-section p{text-align:center;opacity:0.7;max-width:560px}
+  .end-section .back{margin-top:2rem;display:inline-block;padding:14px 28px;background:#9F67FF;color:#080808;border-radius:999px;font-weight:700;text-decoration:none}
+
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="liquid-glass-filter" x="0%" y="0%" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.008 0.012" numOctaves="2" seed="3" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="40" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<header class="topbar">
+  <a href="/heros/wow/"><span>S</span>oraByte · WOW vol.2</a>
+  <span class="counter" id="counter">01 / 10</span>
+</header>
+<nav class="sidenav" id="sidenav"></nav>
+
+<!-- 01 ASCII -->
+<section class="hero-section h01" data-hero="ascii">
+  <img id="ascii-src" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600" crossorigin="anonymous" style="display:none" alt="">
+  <div class="hero-bg"><canvas id="c01"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Signal / <em>Noise</em></h1>
+    <p>Imagen renderizada como caracteres ASCII en tiempo real.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">01 · ASCII REAL-TIME</div>
+    <div class="name">Andreas Gysin / Hyperflow</div>
+    <div class="meta"><strong>Nichos:</strong> tech, música electrónica, dev portfolio · <strong>Stack:</strong> Canvas 2D 0 KB · <strong>Wow:</strong> cerebro tarda 1-2s en reconocer la imagen</div>
+  </div>
+</section>
+
+<!-- 02 Pixelated Bayer -->
+<section class="hero-section h02" data-hero="bayer">
+  <img id="bayer-src" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600" crossorigin="anonymous" style="display:none" alt="">
+  <div class="hero-bg"><canvas id="c02"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Low Res<br><em>High Signal</em></h1>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">02 · BAYER DITHERING</div>
+    <div class="name">Game Boy / PS1 revival</div>
+    <div class="meta"><strong>Nichos:</strong> streetwear, indie games, editorial retro · <strong>Stack:</strong> Canvas 2D dithering algorithm · <strong>Wow:</strong> matemático no Instagram</div>
+  </div>
+</section>
+
+<!-- 03 VHS CRT -->
+<section class="hero-section h03" data-hero="vhs">
+  <div class="h03-media-wrap">
+    <img class="h03-media" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600" alt="">
+    <img class="h03-media r" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600" alt="" aria-hidden="true">
+    <img class="h03-media b" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600" alt="" aria-hidden="true">
+  </div>
+  <div class="h03-noise"></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Static<br><em>Memory</em></h1>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">03 · VHS / CRT</div>
+    <div class="name">Scanlines + RGB shift + tracking</div>
+    <div class="meta"><strong>Nichos:</strong> music labels, eventos rave, fashion experimental · <strong>Stack:</strong> CSS puro + 30 líneas JS · <strong>Wow:</strong> 4 efectos apilados, agresivo</div>
+  </div>
+</section>
+
+<!-- 04 Truchet -->
+<section class="hero-section h04" data-hero="truchet">
+  <div class="hero-bg"><canvas id="c04"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Patrones <em>infinitos</em>.</h1>
+    <p>Mosaico procedural Truchet que muta al cursor.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">04 · WEBGL · TRUCHET TILES</div>
+    <div class="name">Generative Geometry</div>
+    <div class="meta"><strong>Nichos:</strong> arquitectura, editorial, alta cocina, wellness · <strong>Stack:</strong> WebGL shader 1 KB JS · <strong>Wow:</strong> patrón infinito sin repetir</div>
+  </div>
+</section>
+
+<!-- 05 Fractal -->
+<section class="hero-section h05" data-hero="fractal">
+  <div class="hero-bg"><canvas id="c05"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Complejidad sin <em>fondo</em>.</h1>
+    <p>Mandelbrot real-time con zoom infinito.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">05 · WEBGL · MANDELBROT</div>
+    <div class="name">Fractal Explorer</div>
+    <div class="meta"><strong>Nichos:</strong> tech ultra-premium, AI, data-viz, fintech · <strong>Stack:</strong> WebGL shader · <strong>Wow:</strong> matemático profundo</div>
+  </div>
+</section>
+
+<!-- 06 Boids -->
+<section class="hero-section h06" data-hero="boids">
+  <div class="hero-bg"><canvas id="c06"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>Sistemas <em>vivos</em>.</h1>
+    <p>250 partículas con comportamiento de bandada. Mueve el cursor.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">06 · CANVAS · BOIDS</div>
+    <div class="name">Flocking Simulation</div>
+    <div class="meta"><strong>Nichos:</strong> studios creativos, agency, coaching "comunidad" · <strong>Stack:</strong> Canvas 2D + algoritmo Reynolds · <strong>Wow:</strong> movimiento orgánico coordinado</div>
+  </div>
+</section>
+
+<!-- 07 Slit-Scan -->
+<section class="hero-section h07" data-hero="slit">
+  <video class="h07-video" id="h07-video" src="https://cdn.coverr.co/videos/coverr-ocean-waves-1574/1080p.mp4" muted loop playsinline autoplay crossorigin="anonymous"></video>
+  <div class="hero-bg"><canvas id="c07"></canvas></div>
+  <div class="hero-content"><div class="inner">
+    <h1>El tiempo<br><em>doblado</em></h1>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">07 · WEBGL · SLIT-SCAN</div>
+    <div class="name">Time-bending video</div>
+    <div class="meta"><strong>Nichos:</strong> arte, agencia experimental, fashion vanguardia · <strong>Stack:</strong> WebGL2 shader + ringbuffer · <strong>Wow:</strong> cada columna = un instante distinto</div>
+  </div>
+</section>
+
+<!-- 08 Letter Morph -->
+<section class="hero-section h08" data-hero="letter-morph">
+  <div class="h08-stage">
+    <div class="h08-label">Sorabyte / 2026</div>
+    <div class="h08-row" id="h08-row">
+      <span class="gly">S</span><span class="gly">O</span><span class="gly">R</span>
+      <span class="gly">A</span><span class="gly">B</span><span class="gly">Y</span>
+    </div>
+  </div>
+  <div class="hero-info">
+    <div class="num">08 · VIEW TRANSITIONS API</div>
+    <div class="name">Letter Morph Glyph Swap</div>
+    <div class="meta"><strong>Nichos:</strong> branding tech, coaching DACH sobrio, editorial · <strong>Stack:</strong> Variable font + View Transitions API · <strong>Wow:</strong> letras "respiran" + cambian con morph nativo</div>
+  </div>
+</section>
+
+<!-- 09 SVG Liquid Morph -->
+<section class="hero-section h09" data-hero="liquid-morph">
+  <div class="h09-stage">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#e8d5b7"/>
+          <stop offset="50%" stop-color="#c89b6e"/>
+          <stop offset="100%" stop-color="#7c9eb2"/>
+        </linearGradient>
+        <filter id="liquid-goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="6"/>
+          <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"/>
+        </filter>
+      </defs>
+      <g filter="url(#liquid-goo)">
+        <path id="liquid-morph" fill="url(#liquidGrad)" d="M300,80 C440,80 520,180 520,300 C520,420 440,520 300,520 C160,520 80,420 80,300 C80,180 160,80 300,80 Z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-content"><div class="inner">
+    <h1>Conversaciones<br>que se vuelven <em>flujo</em>.</h1>
+    <p>Procesos que respiran al ritmo de tu negocio.</p>
+  </div></div>
+  <div class="hero-info">
+    <div class="num">09 · SVG MORPH</div>
+    <div class="name">Apple Watchface style</div>
+    <div class="meta"><strong>Nichos:</strong> coaching premium, consultoría, Sorabyte, branding · <strong>Stack:</strong> anime.js v4 (~7 KB) · <strong>Wow:</strong> morph entre 8 shapes orgánicas</div>
+  </div>
+</section>
+
+<!-- 10 Liquid Glass -->
+<section class="hero-section h10" data-hero="liquid-glass">
+  <div class="hero-content" style="position:relative;z-index:2">
+    <div class="h10-card" id="h10-card">
+      <h1>Diseñado en luz.</h1>
+      <p>Cristal líquido. Refracción real. iOS 26 style sin librerías.</p>
+    </div>
+  </div>
+  <div class="hero-info">
+    <div class="num">10 · iOS 26 · LIQUID GLASS</div>
+    <div class="name">Refracción SVG real</div>
+    <div class="meta"><strong>Nichos:</strong> premium brand, lujo, tech polished · <strong>Stack:</strong> backdrop-filter + feDisplacementMap · <strong>Wow:</strong> Apple WWDC25 estética antes que nadie</div>
+  </div>
+</section>
+
+<section class="end-section">
+  <h2>10 heros experimentales · vol.2</h2>
+  <p>Estética agresiva, arte tech, generative. Para cliente que busca diferenciarse de verdad.</p>
+  <a href="/heros/wow/" class="back">← Vol.1</a>
+</section>
+
+<script type="module">
+const sections = document.querySelectorAll('.hero-section');
+const counter = document.getElementById('counter');
+const sidenav = document.getElementById('sidenav');
+sections.forEach((sec, idx) => {
+  const btn = document.createElement('button');
+  btn.textContent = String(idx + 1).padStart(2, '0');
+  btn.addEventListener('click', () => sec.scrollIntoView({behavior:'smooth'}));
+  btn.dataset.idx = idx;
+  sidenav.appendChild(btn);
+});
+const navBtns = sidenav.querySelectorAll('button');
+
+const inits = {};
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const sec = entry.target;
+    if (entry.isIntersecting) {
+      const name = sec.dataset.hero;
+      if (inits[name] && !sec._init) { inits[name](sec); sec._init = true; }
+      else if (sec._inst && sec._inst.play) { try { sec._inst.play(); } catch(e) {} }
+      const idx = Array.from(sections).indexOf(sec);
+      counter.textContent = String(idx + 1).padStart(2,'0') + ' / 10';
+      navBtns.forEach(b => b.classList.toggle('active', +b.dataset.idx === idx));
+    } else if (sec._inst && sec._inst.pause) { try { sec._inst.pause(); } catch(e) {} }
+  });
+}, {threshold: 0.3});
+sections.forEach(s => io.observe(s));
+
+// 01 ASCII
+inits['ascii'] = (sec) => {
+  const CHARS = " .:-=+*#%@";
+  const canvas = document.getElementById('c01');
+  const ctx = canvas.getContext('2d', {alpha:false});
+  const img = document.getElementById('ascii-src');
+  const COLS = matchMedia('(max-width:768px)').matches ? 60 : 110;
+  const CHAR_W_RATIO = 0.55;
+  let W, H, ROWS, cellW, cellH, off, octx;
+  function resize() {
+    W = canvas.width = innerWidth * devicePixelRatio;
+    H = canvas.height = innerHeight * devicePixelRatio;
+    cellW = W / COLS; cellH = cellW / CHAR_W_RATIO;
+    ROWS = Math.ceil(H / cellH);
+    off = document.createElement('canvas');
+    off.width = COLS; off.height = ROWS;
+    octx = off.getContext('2d', {willReadFrequently:true});
+    ctx.font = `${cellH * 0.95}px ui-monospace, monospace`;
+    ctx.textBaseline = 'top';
+  }
+  resize(); addEventListener('resize', resize);
+  let t = 0, running = true, raf;
+  const tick = () => {
+    if (!running) return;
+    if (!img.complete || !img.naturalWidth) { raf = requestAnimationFrame(tick); return; }
+    t++;
+    octx.drawImage(img, 0, 0, COLS, ROWS);
+    const data = octx.getImageData(0, 0, COLS, ROWS).data;
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, W, H);
+    for (let y = 0; y < ROWS; y++) {
+      for (let x = 0; x < COLS; x++) {
+        const i = (y * COLS + x) * 4;
+        const lum = (data[i]*0.299 + data[i+1]*0.587 + data[i+2]*0.114) / 255;
+        const ci = Math.min(CHARS.length-1, Math.floor(lum * CHARS.length));
+        const glitch = ((y + t) % 47 === 0) && Math.random() > 0.7;
+        ctx.fillStyle = glitch ? '#ff003c' : (lum > 0.7 ? '#fff' : '#00ff9c');
+        ctx.fillText(CHARS[ci], x * cellW, y * cellH);
+      }
+    }
+    raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(tick);}}};
+};
+
+// 02 Bayer
+inits['bayer'] = (sec) => {
+  const canvas = document.getElementById('c02');
+  const ctx = canvas.getContext('2d');
+  const img = document.getElementById('bayer-src');
+  const BAYER = [[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]].map(r=>r.map(v=>v/16));
+  const PIXEL = matchMedia('(max-width:768px)').matches ? 4 : 3;
+  const PALETTE = [[15,56,15],[48,98,48],[139,172,15],[155,188,15]];
+  function nearest(r,g,b) {
+    let best=0, bestD=Infinity;
+    for (let i = 0; i < PALETTE.length; i++) {
+      const [pr,pg,pb] = PALETTE[i];
+      const d = (r-pr)**2 + (g-pg)**2 + (b-pb)**2;
+      if (d < bestD) { bestD = d; best = i; }
+    }
+    return PALETTE[best];
+  }
+  function render() {
+    if (!img.complete || !img.naturalWidth) return;
+    const w = innerWidth, h = innerHeight;
+    canvas.width = w; canvas.height = h;
+    const lowW = Math.floor(w/PIXEL), lowH = Math.floor(h/PIXEL);
+    const off = document.createElement('canvas');
+    off.width = lowW; off.height = lowH;
+    const octx = off.getContext('2d');
+    const ir = img.naturalWidth / img.naturalHeight, cr = lowW / lowH;
+    let dw, dh, dx, dy;
+    if (ir > cr) { dh = lowH; dw = lowH*ir; dx = (lowW-dw)/2; dy = 0; }
+    else { dw = lowW; dh = lowW/ir; dx = 0; dy = (lowH-dh)/2; }
+    octx.drawImage(img, dx, dy, dw, dh);
+    const imgData = octx.getImageData(0, 0, lowW, lowH);
+    const d = imgData.data;
+    for (let y = 0; y < lowH; y++) {
+      for (let x = 0; x < lowW; x++) {
+        const i = (y * lowW + x) * 4;
+        const threshold = BAYER[y%4][x%4] - 0.5;
+        const bias = threshold * 60;
+        const r = Math.max(0,Math.min(255, d[i]+bias));
+        const g = Math.max(0,Math.min(255, d[i+1]+bias));
+        const b = Math.max(0,Math.min(255, d[i+2]+bias));
+        const [nr,ng,nb] = nearest(r,g,b);
+        d[i] = nr; d[i+1] = ng; d[i+2] = nb;
+      }
+    }
+    octx.putImageData(imgData, 0, 0);
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(off, 0, 0, w, h);
+  }
+  addEventListener('resize', render);
+  img.addEventListener('load', render);
+  if (img.complete) render();
+  sec._inst = {pause:()=>{},play:()=>{}};
+};
+
+// 03 VHS — just CSS, no init needed beyond mounting
+inits['vhs'] = (sec) => {
+  sec._inst = {pause:()=>{},play:()=>{}};
+};
+
+// 04 Truchet
+inits['truchet'] = (sec) => {
+  const cvs = document.getElementById('c04');
+  const gl = cvs.getContext('webgl', {antialias:true});
+  if (!gl) return;
+  const DPR = Math.min(devicePixelRatio||1, 2);
+  const vs = `attribute vec2 p; void main(){ gl_Position = vec4(p,0.0,1.0); }`;
+  const fs = `precision highp float;
+    uniform vec2 u_res; uniform float u_time; uniform vec2 u_mouse;
+    float hash(vec2 p){ p = fract(p*vec2(123.34,456.21)); p += dot(p,p+45.32); return fract(p.x*p.y); }
+    float truchetArc(vec2 uv, float r){
+      float d1 = abs(length(uv - vec2(0.0,0.0)) - 0.5);
+      float d2 = abs(length(uv - vec2(1.0,1.0)) - 0.5);
+      return min(d1,d2) - r;
+    }
+    void main(){
+      vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/min(u_res.x,u_res.y);
+      vec2 mouseOff = (u_mouse - 0.5*u_res)/min(u_res.x,u_res.y) * 0.3;
+      uv += mouseOff;
+      uv += vec2(u_time*0.04, u_time*0.025);
+      float scale = 8.0;
+      vec2 gv = uv*scale;
+      vec2 id = floor(gv);
+      vec2 f = fract(gv);
+      float h = hash(id);
+      if (h > 0.5) f.x = 1.0 - f.x;
+      float w = 0.08 + 0.02*sin(u_time*0.5 + id.x + id.y);
+      float d = truchetArc(f, w);
+      float line = smoothstep(0.02, 0.0, d);
+      vec3 bg = vec3(0.957,0.937,0.902);
+      vec3 ink = vec3(0.102,0.102,0.102);
+      vec3 col = mix(bg, ink, line);
+      col *= 1.0 - length(uv)*0.25;
+      gl_FragColor = vec4(col, 1.0);
+    }`;
+  const compile = (t,s) => { const sh = gl.createShader(t); gl.shaderSource(sh,s); gl.compileShader(sh); return sh; };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'p');
+  gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const uRes = gl.getUniformLocation(prog, 'u_res');
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+  let mx = innerWidth/2*DPR, my = innerHeight/2*DPR, tmx = mx, tmy = my;
+  sec.addEventListener('pointermove', e => {
+    const r = sec.getBoundingClientRect();
+    tmx = (e.clientX - r.left) * DPR;
+    tmy = (r.height - (e.clientY - r.top)) * DPR;
+  });
+  const resize = () => {
+    const r = cvs.getBoundingClientRect();
+    cvs.width = r.width * DPR; cvs.height = r.height * DPR;
+    gl.viewport(0, 0, cvs.width, cvs.height);
+  };
+  resize(); addEventListener('resize', resize);
+  const t0 = performance.now();
+  let running = true, raf;
+  const loop = () => {
+    if (!running) return;
+    mx += (tmx-mx)*0.06; my += (tmy-my)*0.06;
+    gl.uniform2f(uRes, cvs.width, cvs.height);
+    gl.uniform1f(uTime, (performance.now()-t0)/1000);
+    gl.uniform2f(uMouse, mx, my);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    raf = requestAnimationFrame(loop);
+  };
+  raf = requestAnimationFrame(loop);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(loop);}}};
+};
+
+// 05 Fractal
+inits['fractal'] = (sec) => {
+  const cvs = document.getElementById('c05');
+  const gl = cvs.getContext('webgl', {antialias:false});
+  if (!gl) return;
+  const DPR = Math.min(devicePixelRatio||1, 1.5);
+  const isMobile = matchMedia('(max-width:768px)').matches;
+  const vs = `attribute vec2 p; void main(){ gl_Position = vec4(p,0.,1.); }`;
+  const fs = `precision highp float;
+    uniform vec2 u_res; uniform float u_time; uniform vec2 u_mouse; uniform int u_maxIter;
+    float mandel(vec2 c, out float trap){
+      vec2 z = vec2(0.0); trap = 1e10;
+      for(int i=0;i<256;i++){
+        if(i>=u_maxIter) break;
+        z = vec2(z.x*z.x - z.y*z.y, 2.0*z.x*z.y) + c;
+        trap = min(trap, dot(z,z));
+        if(dot(z,z) > 256.0){ float sl = float(i) - log2(log2(dot(z,z))) + 4.0; return sl; }
+      }
+      return -1.0;
+    }
+    vec3 palette(float t){
+      vec3 a = vec3(0.5), b = vec3(0.5), c = vec3(1.0), d = vec3(0.0,0.33,0.67);
+      return a + b*cos(6.28318*(c*t+d));
+    }
+    void main(){
+      vec2 uv = (gl_FragCoord.xy - 0.5*u_res)/min(u_res.x,u_res.y);
+      float t = mod(u_time, 30.0);
+      float zoom = exp(-t*0.15)*2.5 + 0.4;
+      vec2 center = vec2(-0.743643887, 0.131825904);
+      vec2 c = center + uv*zoom;
+      vec2 m = (u_mouse/u_res - 0.5);
+      c += m * zoom * 0.15;
+      float trap;
+      float it = mandel(c, trap);
+      vec3 col;
+      if(it < 0.0){ col = palette(trap*0.5)*0.15; }
+      else { float n = it/float(u_maxIter); col = palette(sqrt(n) + u_time*0.02); col *= 1.0 - pow(1.0-n, 4.0); }
+      col *= 1.0 - length(uv)*0.2;
+      gl_FragColor = vec4(col, 1.0);
+    }`;
+  const compile = (t,s)=>{const sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);return sh;};
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(prog, 'p');
+  gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const uRes = gl.getUniformLocation(prog, 'u_res');
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uM = gl.getUniformLocation(prog, 'u_mouse');
+  const uIt = gl.getUniformLocation(prog, 'u_maxIter');
+  let mx, my, tmx, tmy;
+  const initMouse = () => {
+    const r = sec.getBoundingClientRect();
+    mx = tmx = r.width/2 * DPR;
+    my = tmy = r.height/2 * DPR;
+  };
+  initMouse();
+  sec.addEventListener('pointermove', e => {
+    const r = sec.getBoundingClientRect();
+    tmx = (e.clientX - r.left) * DPR;
+    tmy = (r.height - (e.clientY - r.top)) * DPR;
+  });
+  const resize = () => {
+    const r = cvs.getBoundingClientRect();
+    cvs.width = r.width*DPR; cvs.height = r.height*DPR;
+    gl.viewport(0, 0, cvs.width, cvs.height);
+  };
+  resize(); addEventListener('resize', resize);
+  const t0 = performance.now();
+  let running = true, raf;
+  const loop = () => {
+    if (!running) return;
+    mx += (tmx-mx)*0.05; my += (tmy-my)*0.05;
+    gl.uniform2f(uRes, cvs.width, cvs.height);
+    gl.uniform1f(uTime, (performance.now()-t0)/1000);
+    gl.uniform2f(uM, mx, my);
+    gl.uniform1i(uIt, isMobile ? 96 : 180);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    raf = requestAnimationFrame(loop);
+  };
+  raf = requestAnimationFrame(loop);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(loop);}}};
+};
+
+// 06 Boids
+inits['boids'] = (sec) => {
+  const cvs = document.getElementById('c06');
+  const ctx = cvs.getContext('2d', {alpha:false});
+  const DPR = Math.min(devicePixelRatio||1, 2);
+  const isMobile = matchMedia('(max-width:768px)').matches;
+  const N = isMobile ? 80 : 250;
+  let W, H;
+  const resize = () => {
+    const r = cvs.getBoundingClientRect();
+    W = cvs.width = r.width * DPR; H = cvs.height = r.height * DPR;
+  };
+  resize(); addEventListener('resize', resize);
+  const CFG = {perception:60*DPR, sepDist:24*DPR, maxSpeed:2.2*DPR, maxForce:0.05*DPR, wAlign:1.0, wCohes:0.9, wSepar:1.4, wMouse:0.8, mouseRadius:140*DPR, trail:0.12};
+  const mouse = {x:-9999, y:-9999, active:false};
+  sec.addEventListener('pointermove', e => {
+    const r = sec.getBoundingClientRect();
+    mouse.x = (e.clientX - r.left) * DPR;
+    mouse.y = (e.clientY - r.top) * DPR;
+    mouse.active = true;
+  });
+  sec.addEventListener('pointerleave', () => mouse.active = false);
+  class Boid {
+    constructor(){
+      this.x = Math.random()*W; this.y = Math.random()*H;
+      const a = Math.random()*Math.PI*2;
+      this.vx = Math.cos(a)*CFG.maxSpeed; this.vy = Math.sin(a)*CFG.maxSpeed;
+      this.ax = 0; this.ay = 0;
+    }
+    flock(boids){
+      let alignX=0,alignY=0,cohX=0,cohY=0,sepX=0,sepY=0,nA=0,nC=0,nS=0;
+      for (const b of boids){
+        if (b === this) continue;
+        const dx = b.x - this.x, dy = b.y - this.y, d2 = dx*dx + dy*dy;
+        if (d2 < CFG.perception*CFG.perception){
+          alignX += b.vx; alignY += b.vy; nA++;
+          cohX += b.x; cohY += b.y; nC++;
+          if (d2 < CFG.sepDist*CFG.sepDist && d2 > 0){ const d = Math.sqrt(d2); sepX -= dx/d; sepY -= dy/d; nS++; }
+        }
+      }
+      const steer = (vx,vy,n,w) => {
+        if (!n) return [0,0];
+        vx/=n; vy/=n;
+        const m = Math.hypot(vx,vy) || 1;
+        vx = vx/m*CFG.maxSpeed - this.vx; vy = vy/m*CFG.maxSpeed - this.vy;
+        const sm = Math.hypot(vx,vy);
+        if (sm > CFG.maxForce){ vx = vx/sm*CFG.maxForce; vy = vy/sm*CFG.maxForce; }
+        return [vx*w, vy*w];
+      };
+      const [aX,aY] = steer(alignX,alignY,nA,CFG.wAlign);
+      const [cX,cY] = nC ? steer(cohX/nC-this.x, cohY/nC-this.y, 1, CFG.wCohes) : [0,0];
+      const [sX,sY] = steer(sepX,sepY,nS,CFG.wSepar);
+      this.ax += aX+cX+sX; this.ay += aY+cY+sY;
+      if (mouse.active){
+        const mdx = this.x-mouse.x, mdy = this.y-mouse.y, md2 = mdx*mdx+mdy*mdy;
+        if (md2 < CFG.mouseRadius*CFG.mouseRadius && md2 > 0){
+          const md = Math.sqrt(md2);
+          const f = (1 - md/CFG.mouseRadius) * CFG.wMouse * CFG.maxForce * 4;
+          this.ax += mdx/md*f; this.ay += mdy/md*f;
+        }
+      }
+    }
+    update(){
+      this.vx += this.ax; this.vy += this.ay;
+      const s = Math.hypot(this.vx, this.vy);
+      if (s > CFG.maxSpeed){ this.vx = this.vx/s*CFG.maxSpeed; this.vy = this.vy/s*CFG.maxSpeed; }
+      this.x += this.vx; this.y += this.vy;
+      this.ax = this.ay = 0;
+      if (this.x < 0) this.x += W; else if (this.x > W) this.x -= W;
+      if (this.y < 0) this.y += H; else if (this.y > H) this.y -= H;
+    }
+    draw(){
+      const a = Math.atan2(this.vy, this.vx);
+      ctx.save();
+      ctx.translate(this.x, this.y); ctx.rotate(a);
+      ctx.fillStyle = 'hsl(265, 100%, 75%)';
+      ctx.beginPath();
+      ctx.moveTo(6*DPR, 0); ctx.lineTo(-4*DPR, 3*DPR); ctx.lineTo(-4*DPR, -3*DPR);
+      ctx.closePath(); ctx.fill();
+      ctx.restore();
+    }
+  }
+  const flock = Array.from({length:N}, () => new Boid());
+  let running = true, raf;
+  const loop = () => {
+    if (!running) return;
+    ctx.fillStyle = `rgba(10,10,15,${CFG.trail})`;
+    ctx.fillRect(0, 0, W, H);
+    for (const b of flock) b.flock(flock);
+    for (const b of flock) { b.update(); b.draw(); }
+    raf = requestAnimationFrame(loop);
+  };
+  raf = requestAnimationFrame(loop);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);},play:()=>{if(!running){running=true;raf=requestAnimationFrame(loop);}}};
+};
+
+// 07 Slit-scan
+inits['slit'] = (sec) => {
+  const cvs = document.getElementById('c07');
+  const gl = cvs.getContext('webgl2', {antialias:false, premultipliedAlpha:false});
+  if (!gl) return;
+  const video = document.getElementById('h07-video');
+  video.play().catch(() => {});
+  const BUFFER_FRAMES = 60;
+  const FRAME_W = 320, FRAME_H = 180;
+  const vs = `#version 300 es
+    in vec2 a_pos; out vec2 v_uv;
+    void main(){ v_uv = a_pos*0.5+0.5; gl_Position = vec4(a_pos,0.0,1.0); }`;
+  const fs = `#version 300 es
+    precision highp float;
+    in vec2 v_uv; out vec4 outColor;
+    uniform sampler2D u_buffer; uniform float u_writeIndex; uniform float u_count;
+    void main(){
+      float frameOffset = (1.0 - v_uv.x) * (u_count - 1.0);
+      float frameIdx = mod(u_writeIndex - frameOffset + u_count, u_count);
+      float row = floor(frameIdx);
+      vec2 atlasUv = vec2(v_uv.x, (row + v_uv.y) / u_count);
+      outColor = texture(u_buffer, atlasUv);
+    }`;
+  const compile = (t,s) => { const sh = gl.createShader(t); gl.shaderSource(sh,s); gl.compileShader(sh); return sh; };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+  const aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+  const atlas = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, atlas);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, FRAME_W, FRAME_H*BUFFER_FRAMES, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  const tmp = document.createElement('canvas');
+  tmp.width = FRAME_W; tmp.height = FRAME_H;
+  const tctx = tmp.getContext('2d');
+  const uBuffer = gl.getUniformLocation(prog, 'u_buffer');
+  const uWrite = gl.getUniformLocation(prog, 'u_writeIndex');
+  const uCount = gl.getUniformLocation(prog, 'u_count');
+  gl.uniform1i(uBuffer, 0); gl.uniform1f(uCount, BUFFER_FRAMES);
+  let writeIdx = 0;
+  const resize = () => {
+    const r = cvs.getBoundingClientRect();
+    cvs.width = r.width * devicePixelRatio; cvs.height = r.height * devicePixelRatio;
+    gl.viewport(0, 0, cvs.width, cvs.height);
+  };
+  resize(); addEventListener('resize', resize);
+  let running = true, raf;
+  const loop = () => {
+    if (!running) return;
+    if (video.readyState >= 2) {
+      tctx.drawImage(video, 0, 0, FRAME_W, FRAME_H);
+      gl.bindTexture(gl.TEXTURE_2D, atlas);
+      gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, writeIdx*FRAME_H, gl.RGBA, gl.UNSIGNED_BYTE, tmp);
+      gl.uniform1f(uWrite, writeIdx);
+      writeIdx = (writeIdx + 1) % BUFFER_FRAMES;
+    }
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    raf = requestAnimationFrame(loop);
+  };
+  raf = requestAnimationFrame(loop);
+  sec._inst = {pause:()=>{running=false;if(raf)cancelAnimationFrame(raf);video.pause();},play:()=>{if(!running){running=true;video.play().catch(()=>{});raf=requestAnimationFrame(loop);}}};
+};
+
+// 08 Letter Morph
+inits['letter-morph'] = (sec) => {
+  const row = document.getElementById('h08-row');
+  const cycles = [['S','O','R','A','B','Y'],['T','E','C','N','I','A'],['D','I','S','E','Ñ','O'],['C','O','D','I','G','O'],['F','U','T','U','R','O']];
+  let idx = 0;
+  function morphTo(letters) {
+    const update = () => { [...row.children].forEach((el,i) => el.textContent = letters[i]); };
+    if (document.startViewTransition) document.startViewTransition(update);
+    else update();
+  }
+  const interval = setInterval(() => { idx = (idx+1) % cycles.length; morphTo(cycles[idx]); }, 2200);
+  sec._inst = {pause:()=>clearInterval(interval),play:()=>{}};
+};
+
+// 09 SVG Liquid Morph
+inits['liquid-morph'] = async (sec) => {
+  const animeMod = await import('https://cdn.jsdelivr.net/npm/animejs@4.0.2/+esm');
+  const anime = animeMod.default || animeMod;
+  const shapes = [
+    "M300,80 C440,80 520,180 520,300 C520,420 440,520 300,520 C160,520 80,420 80,300 C80,180 160,80 300,80 Z",
+    "M300,60 C460,100 540,220 500,340 C460,460 340,540 220,500 C100,460 60,340 100,220 C140,100 240,40 300,60 Z",
+    "M260,100 C420,60 540,160 540,300 C540,440 420,540 280,500 C140,460 60,360 80,220 C100,140 180,120 260,100 Z",
+    "M300,120 C440,80 540,200 520,340 C500,480 380,540 260,520 C140,500 60,400 80,260 C100,160 200,140 300,120 Z",
+    "M320,80 C460,120 540,240 520,380 C500,500 380,540 240,500 C120,460 60,340 100,220 C140,120 240,60 320,80 Z",
+    "M300,100 C420,80 520,200 520,300 C520,420 440,500 320,520 C200,540 80,440 80,320 C80,200 180,120 300,100 Z",
+    "M280,60 C440,80 540,200 520,340 C500,480 360,540 240,520 C120,500 80,380 100,260 C120,140 200,40 280,60 Z"
+  ];
+  let i = 0;
+  const path = document.getElementById('liquid-morph');
+  function nextMorph(){
+    i = (i + 1) % shapes.length;
+    anime({targets:path, d:[{value:shapes[i]}], duration:2200, easing:'cubicBezier(.65,.05,.36,1)'});
+  }
+  const interval = setInterval(nextMorph, 2800);
+  anime({targets:'.h09-stage svg', rotate:'1turn', duration:60000, easing:'linear', loop:true});
+  sec._inst = {pause:()=>clearInterval(interval),play:()=>{}};
+};
+
+// 10 Liquid Glass
+inits['liquid-glass'] = (sec) => {
+  const card = document.getElementById('h10-card');
+  let raf;
+  card.addEventListener('pointermove', e => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 100;
+      const y = ((e.clientY - r.top) / r.height) * 100;
+      card.style.setProperty('--mx', x+'%');
+      card.style.setProperty('--my', y+'%');
+      const tiltX = (y - 50) * -0.15;
+      const tiltY = (x - 50) * 0.15;
+      card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    });
+  });
+  card.addEventListener('pointerleave', () => {
+    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+    card.style.setProperty('--mx', '50%');
+    card.style.setProperty('--my', '0%');
+  });
+  sec._inst = {pause:()=>{},play:()=>{}};
+};
+</script>
+
+</body>
+</html>
