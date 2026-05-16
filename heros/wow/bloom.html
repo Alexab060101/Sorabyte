@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Bloom — AI Plant & Floral Design</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root {
+    --radius: 1rem;
+    --bg: hsl(0 0% 5%);
+    --fg-100: hsl(0 0% 100%);
+    --fg-80: hsla(0, 0%, 100%, 0.8);
+    --fg-60: hsla(0, 0%, 100%, 0.6);
+    --fg-50: hsla(0, 0%, 100%, 0.5);
+    --fg-30: hsla(0, 0%, 100%, 0.3);
+    --fg-15: hsla(0, 0%, 100%, 0.15);
+    --fg-10: hsla(0, 0%, 100%, 0.1);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--fg-100); font-family: 'Poppins', system-ui, sans-serif; min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  img, svg { display: block; }
+  button { background: none; border: none; color: inherit; cursor: pointer; font-family: inherit; }
+  a { color: inherit; text-decoration: none; }
+  i, em, .italic { font-family: 'Source Serif 4', 'Cormorant Garamond', serif; font-style: italic; }
+
+  /* ============ VIDEO BACKGROUND ============ */
+  .bg-video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .bg-video-fallback {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 30% 40%, hsl(150 30% 25%) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 60%, hsl(280 30% 25%) 0%, transparent 50%),
+      linear-gradient(135deg, hsl(180 25% 12%), hsl(280 20% 8%));
+  }
+
+  /* ============ LIQUID GLASS CORE ============ */
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.01);
+    background-blend-mode: luminosity;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .liquid-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%, transparent 40%, transparent 60%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .liquid-glass-strong {
+    background: rgba(255, 255, 255, 0.01);
+    background-blend-mode: luminosity;
+    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(50px);
+    border: none;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255,255,255,0.15);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .liquid-glass-strong::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 20%, transparent 40%, transparent 60%, rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.5) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  @supports not (backdrop-filter: blur(4px)) {
+    .liquid-glass, .liquid-glass-strong { background: rgba(255,255,255,0.08); }
+  }
+  .scale-hover { transition: transform 0.3s cubic-bezier(0.2,0.9,0.3,1); }
+  .scale-hover:hover { transform: scale(1.05); }
+  .scale-hover:active { transform: scale(0.95); }
+
+  /* ============ LAYOUT ============ */
+  .root {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    min-height: 100vh;
+  }
+  .panel-left { width: 100%; position: relative; }
+  .panel-right { display: none; }
+  @media (min-width: 1024px) {
+    .panel-left { width: 52%; }
+    .panel-right { display: flex; width: 48%; flex-direction: column; padding: 1.5rem; gap: 1rem; }
+  }
+
+  /* ============ LEFT PANEL ============ */
+  .left-glass {
+    position: absolute;
+    inset: 1rem;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  @media (min-width: 1024px) { .left-glass { inset: 1.5rem; } }
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--fg-100);
+    display: grid;
+    place-items: center;
+    color: hsl(150 30% 20%);
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  .logo-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+  }
+  .menu-pill {
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--fg-100);
+  }
+
+  .hero-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    gap: 2rem;
+  }
+  .hero-logo-big {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 2.4rem;
+    font-weight: 500;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.3);
+  }
+  .hero-h1 {
+    font-size: clamp(2.8rem, 6.5vw, 4.8rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.05em;
+    color: var(--fg-100);
+    max-width: 16ch;
+  }
+  .hero-h1 em {
+    color: var(--fg-80);
+    font-style: italic;
+    font-family: 'Source Serif 4', serif;
+    font-weight: 400;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.65rem 0.65rem 1.5rem;
+    border-radius: 999px;
+    color: var(--fg-100);
+    font-size: 0.95rem;
+  }
+  .cta-circle {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: grid;
+    place-items: center;
+  }
+  .pills {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .pill {
+    padding: 0.45rem 0.95rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    color: var(--fg-80);
+  }
+
+  .quote-section {
+    padding: 1.5rem 2rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .quote-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--fg-50);
+    margin-bottom: 0.75rem;
+  }
+  .quote {
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: var(--fg-100);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+  .quote em {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    color: var(--fg-80);
+  }
+  .quote-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--fg-60);
+  }
+  .quote-author::before,
+  .quote-author::after {
+    content: "";
+    height: 1px;
+    width: 60px;
+    background: rgba(255,255,255,0.25);
+  }
+
+  /* ============ RIGHT PANEL ============ */
+  .right-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .social-pill {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 1rem 0.55rem 1.25rem;
+    border-radius: 999px;
+    gap: 0.5rem;
+  }
+  .social-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .social-icons a {
+    color: var(--fg-100);
+    transition: color 0.25s;
+    display: grid;
+    place-items: center;
+  }
+  .social-icons a:hover { color: var(--fg-80); }
+  .arrow-btn {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: grid;
+    place-items: center;
+  }
+  .icon-button {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+  }
+
+  .community-card {
+    width: 14rem;
+    padding: 1rem 1.25rem;
+    border-radius: 1.25rem;
+    align-self: flex-end;
+  }
+  .community-card h4 {
+    font-size: 0.92rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+  .community-card p {
+    font-size: 0.72rem;
+    color: var(--fg-60);
+    line-height: 1.45;
+  }
+
+  .features-wrap {
+    margin-top: auto;
+    border-radius: 2.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .feature-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    min-height: 140px;
+  }
+  .feature-card .icn {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: grid;
+    place-items: center;
+  }
+  .feature-card h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .feature-card p {
+    font-size: 0.72rem;
+    color: var(--fg-60);
+    line-height: 1.45;
+    margin-top: auto;
+  }
+  .feature-bottom {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 1.25rem;
+  }
+  .feature-thumb {
+    width: 96px;
+    height: 64px;
+    border-radius: 0.75rem;
+    flex-shrink: 0;
+    background: radial-gradient(ellipse at 50% 40%, hsl(0 0% 95%) 0%, hsl(0 0% 60%) 60%, hsl(0 0% 30%) 100%);
+    display: grid;
+    place-items: center;
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    font-size: 2rem;
+    color: hsl(0 0% 20%);
+    font-weight: 500;
+  }
+  .feature-bottom .body { flex: 1; }
+  .feature-bottom h4 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+  }
+  .feature-bottom p {
+    font-size: 0.72rem;
+    color: var(--fg-60);
+    line-height: 1.4;
+  }
+  .plus-btn {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: var(--fg-100);
+    font-size: 1.4rem;
+    font-weight: 300;
+  }
+
+  /* ============ ICON SIZING ============ */
+  .icn-sm { width: 14px; height: 14px; }
+  .icn-md { width: 16px; height: 16px; }
+  .icn-lg { width: 20px; height: 20px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background video -->
+<div class="bg-video-fallback"></div>
+<video class="bg-video" autoplay muted loop playsinline preload="auto" poster="">
+  <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260315_073750_51473149-4350-4920-ae24-c8214286f323.mp4" type="video/mp4">
+</video>
+
+<div class="root">
+
+  <!-- ============ LEFT PANEL ============ -->
+  <section class="panel-left">
+    <div class="left-glass liquid-glass-strong">
+
+      <!-- Nav -->
+      <nav class="nav-row">
+        <div class="logo">
+          <div class="logo-mark">b</div>
+          <span class="logo-text">bloom</span>
+        </div>
+        <button class="menu-pill liquid-glass scale-hover">
+          <svg class="icn-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <span>Menu</span>
+        </button>
+      </nav>
+
+      <!-- Hero center -->
+      <div class="hero-center">
+        <div class="hero-logo-big">b</div>
+        <h1 class="hero-h1">Innovating the<br><em>spirit of bloom AI</em></h1>
+        <button class="cta liquid-glass-strong scale-hover">
+          <span>Explore Now</span>
+          <span class="cta-circle">
+            <svg class="icn-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </span>
+        </button>
+        <div class="pills">
+          <span class="pill liquid-glass">Artistic Gallery</span>
+          <span class="pill liquid-glass">AI Generation</span>
+          <span class="pill liquid-glass">3D Structures</span>
+        </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="quote-section">
+        <div class="quote-label">VISIONARY DESIGN</div>
+        <p class="quote">"We imagined a realm <em>with no ending</em>."</p>
+        <div class="quote-author"><span>MARCUS AURELIO</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ RIGHT PANEL ============ -->
+  <aside class="panel-right">
+
+    <!-- Top bar -->
+    <div class="right-topbar">
+      <div class="social-pill liquid-glass">
+        <div class="social-icons">
+          <a href="#" aria-label="Twitter"><svg class="icn-md" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg class="icn-md" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg class="icn-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+        <button class="arrow-btn">
+          <svg class="icn-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+      <button class="icon-button liquid-glass scale-hover" aria-label="Account">
+        <svg class="icn-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M5 5l2 2M3 12h3M5 19l2-2M12 21v-3M19 19l-2-2M21 12h-3M19 5l-2 2"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+
+    <!-- Community card -->
+    <div class="community-card liquid-glass">
+      <h4>Enter our ecosystem</h4>
+      <p>Connect with 12.4k designers shaping the next chapter of generative botanics.</p>
+    </div>
+
+    <!-- Features bottom -->
+    <div class="features-wrap liquid-glass">
+      <div class="feature-row">
+        <div class="feature-card liquid-glass">
+          <div class="icn">
+            <svg class="icn-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4V2"/><path d="M15 16v-2"/><path d="M8 9h2"/><path d="M20 9h2"/><path d="M17.8 11.8 19 13"/><path d="M15 9h.01"/><path d="M17.8 6.2 19 5"/><path d="M3 21l9-9"/><path d="M12.2 6.2 11 5"/></svg>
+          </div>
+          <h4>Processing</h4>
+          <p>Real-time generative passes, optimized for botanical morphology.</p>
+        </div>
+        <div class="feature-card liquid-glass">
+          <div class="icn">
+            <svg class="icn-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+          </div>
+          <h4>Growth Archive</h4>
+          <p>Track every iteration, branch, and bloom through the seasons.</p>
+        </div>
+      </div>
+      <div class="feature-bottom liquid-glass">
+        <div class="feature-thumb">f</div>
+        <div class="body">
+          <h4>Advanced Plant Sculpting</h4>
+          <p>Model petals, leaves and stems with full physical accuracy.</p>
+        </div>
+        <button class="plus-btn liquid-glass scale-hover" aria-label="Open">+</button>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+</body>
+</html>
