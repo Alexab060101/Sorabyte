@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>RIVR — Fluid Asset Streams</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+<style>
+  @font-face {
+    font-family: "Helvetica Regular";
+    src: url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.woff2") format("woff2"),
+         url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.woff") format("woff");
+    font-display: swap;
+  }
+
+  :root {
+    --bg: #f0f0f0;
+    --navy-90: rgba(30, 50, 90, 0.9);
+    --navy-80: rgba(30, 50, 90, 0.8);
+    --navy-60: rgba(30, 50, 90, 0.6);
+    --navy-10: rgba(30, 50, 90, 0.1);
+    --navy-05: rgba(30, 50, 90, 0.05);
+    --text-gray: #5E6470;
+    --text-dark: rgb(45, 45, 45);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    background: var(--bg);
+    font-family: "Helvetica Regular", ui-sans-serif, system-ui, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    color: var(--text-dark);
+  }
+  button { background: none; border: none; color: inherit; cursor: pointer; font-family: inherit; }
+  ul { list-style: none; }
+  img, svg, video { display: block; }
+
+  /* ============ MAIN ============ */
+  main {
+    min-height: 100vh;
+    background: var(--bg);
+  }
+
+  /* ============ HERO WRAPPER ============ */
+  .hero-wrap {
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    background: var(--bg);
+  }
+  @media (min-width: 768px) { .hero-wrap { padding: 1.25rem; } }
+
+  .hero {
+    position: relative;
+    width: 100%;
+    max-width: 1536px;
+    height: 100%;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  @media (min-width: 768px) { .hero { border-radius: 3rem; } }
+
+  /* ============ VIDEO BG ============ */
+  .bg-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 65% center;
+    z-index: 0;
+  }
+  @media (min-width: 1024px) { .bg-video { object-position: center; } }
+  .bg-video-fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 30% 40%, hsl(220 60% 55%) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 60%, hsl(200 70% 65%) 0%, transparent 50%),
+      linear-gradient(135deg, hsl(210 50% 75%), hsl(220 40% 60%));
+  }
+
+  /* ============ CONTENT LAYER ============ */
+  .content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ============ NAVBAR ============ */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+  }
+  @media (min-width: 768px) { nav { padding: 1.5rem 2.5rem; } }
+
+  .nav-spacer { flex: 1; display: none; }
+  @media (min-width: 768px) { .nav-spacer { display: block; } }
+
+  .nav-menu {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+    color: var(--text-dark);
+    font-weight: 400;
+    font-size: 0.875rem;
+  }
+  @media (min-width: 768px) { .nav-menu { display: flex; } }
+
+  .nav-menu li {
+    cursor: pointer;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .nav-menu li:hover { opacity: 0.7; }
+  .nav-menu li svg {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.3s;
+  }
+  .nav-menu li:hover svg { transform: translateX(2px); }
+
+  .nav-mobile-logo {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    color: var(--navy-90);
+  }
+  @media (min-width: 768px) { .nav-mobile-logo { display: none; } }
+
+  .nav-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .btn-demo {
+    display: inline-flex;
+    align-items: center;
+    background: var(--navy-80);
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.375rem 1rem 0.375rem 0.5rem;
+    gap: 0.5rem;
+    transition: background 0.3s, transform 0.2s;
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+  .btn-demo:hover { background: rgba(30, 50, 90, 1); transform: scale(1.02); }
+  .btn-demo:active { transform: scale(0.98); }
+  @media (min-width: 768px) {
+    .btn-demo {
+      padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+    }
+  }
+  .btn-demo .icn-wrap {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+  }
+  @media (min-width: 768px) { .btn-demo .icn-wrap { padding: 0.375rem; } }
+
+  /* ============ TEXT CONTAINER ============ */
+  .text-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.5rem 0;
+    text-align: center;
+    max-width: 56rem;
+  }
+
+  /* ============ HERO BADGE ============ */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 0.75rem;
+    width: fit-content;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease-out 0s forwards;
+  }
+  .hero-badge svg {
+    width: 1rem;
+    height: 1rem;
+    color: var(--navy-80);
+  }
+  .hero-badge span {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--navy-90);
+  }
+
+  /* ============ HERO H1 + P ============ */
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 400;
+    color: var(--text-gray);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    opacity: 0;
+    transform: scale(0.98);
+    animation: fadeScale 0.8s ease-out 0.2s forwards;
+  }
+  @media (min-width: 640px) { h1 { font-size: 3rem; } }
+  @media (min-width: 768px) { h1 { font-size: 3.75rem; } }
+  @media (min-width: 1024px) { h1 { font-size: 80px; } }
+
+  .lead {
+    font-size: 0.875rem;
+    color: var(--text-gray);
+    opacity: 0.8;
+    line-height: 1.625;
+    max-width: 36rem;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out 0.4s forwards;
+  }
+  @media (min-width: 640px) { .lead { font-size: 1rem; } }
+  @media (min-width: 768px) { .lead { font-size: 1.125rem; } }
+
+  /* ============ BOTTOM LEFT CARD ============ */
+  .bl-card {
+    position: absolute;
+    bottom: 7rem;
+    right: 1rem;
+    padding: 0.75rem;
+    border-radius: 1.2rem;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 140px;
+    width: fit-content;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideRight 0.8s ease-out 0.2s forwards;
+  }
+  @media (min-width: 768px) {
+    .bl-card {
+      left: 1.5rem;
+      right: auto;
+      bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: 1.5rem;
+      min-width: 150px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .bl-card {
+      left: 2.5rem;
+      bottom: 2.5rem;
+      padding: 1.25rem;
+      border-radius: 2.2rem;
+      min-width: 180px;
+      gap: 0.75rem;
+    }
+  }
+
+  .bl-num {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--navy-90);
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+  @media (min-width: 768px) { .bl-num { font-size: 1.875rem; } }
+
+  .bl-label {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--navy-60);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  @media (min-width: 768px) { .bl-label { font-size: 12px; } }
+
+  .btn-discord {
+    display: inline-flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 999px;
+    padding: 0.375rem 1.25rem 0.375rem 0.375rem;
+    gap: 0.5rem;
+    transition: background 0.3s, transform 0.2s;
+    align-self: flex-start;
+  }
+  .btn-discord:hover { background: rgba(255, 255, 255, 0.9); transform: scale(1.02); }
+  .btn-discord:active { transform: scale(0.98); }
+  .btn-discord .icn-wrap {
+    background: var(--navy-10);
+    padding: 0.25rem;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+  }
+  .btn-discord .icn-wrap svg { width: 1rem; height: 1rem; color: var(--navy-90); }
+  .btn-discord span { font-size: 14px; font-weight: 400; color: var(--navy-90); }
+
+  /* ============ BOTTOM RIGHT CUT-OUT ============ */
+  .br-cut {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0.75rem 0.75rem 0.75rem 2rem;
+    padding-top: 1.25rem;
+    background: var(--bg);
+    border-top-left-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease-out 0.4s forwards;
+  }
+  @media (min-width: 640px) {
+    .br-cut { padding: 1rem 1rem 1rem 2.5rem; padding-top: 1.5rem; border-top-left-radius: 2rem; gap: 1rem; }
+  }
+  @media (min-width: 768px) {
+    .br-cut { padding: 1.5rem 1.5rem 1.5rem 3.5rem; padding-top: 2rem; border-top-left-radius: 3.5rem; gap: 1.5rem; }
+  }
+
+  /* THE FAUX CUTOUT MASKS — disruptive technique */
+  .br-cut-mask-top {
+    position: absolute;
+    top: -1.5rem;
+    right: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    pointer-events: none;
+  }
+  .br-cut-mask-left {
+    position: absolute;
+    bottom: 0;
+    left: -1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    pointer-events: none;
+  }
+  @media (min-width: 640px) {
+    .br-cut-mask-top { top: -2rem; width: 2rem; height: 2rem; }
+    .br-cut-mask-left { left: -2rem; width: 2rem; height: 2rem; }
+  }
+  @media (min-width: 768px) {
+    .br-cut-mask-top { top: -3.5rem; width: 3.5rem; height: 3.5rem; }
+    .br-cut-mask-left { left: -3.5rem; width: 3.5rem; height: 3.5rem; }
+  }
+
+  .br-circle-icon {
+    background: var(--navy-05);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--navy-10);
+    flex-shrink: 0;
+  }
+  @media (min-width: 768px) { .br-circle-icon { width: 3.5rem; height: 3.5rem; } }
+  .br-circle-icon svg { width: 1.1rem; height: 1.1rem; color: var(--navy-80); }
+  @media (min-width: 768px) { .br-circle-icon svg { width: 1.4rem; height: 1.4rem; } }
+
+  .br-info { display: flex; flex-direction: column; gap: 0.15rem; }
+  .br-info .title {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(30, 50, 90, 0.95);
+  }
+  @media (min-width: 768px) { .br-info .title { font-size: 20px; } }
+
+  .br-info .link {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--navy-60);
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  .br-info .link:hover { color: var(--navy-80); }
+  .br-info .link span { font-size: 12px; font-weight: 400; }
+  @media (min-width: 768px) { .br-info .link span { font-size: 15px; } }
+  .br-info .link svg { width: 0.875rem; height: 0.875rem; }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 0.8; } }
+  @keyframes fadeScale {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes slideRight {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <div class="hero-wrap">
+    <section class="hero">
+
+      <!-- Video background -->
+      <div class="bg-video-fallback"></div>
+      <video class="bg-video" autoplay muted loop playsinline preload="auto">
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260428_193507_4286c423-2fd9-4efd-92bd-91a939453fc1.mp4" type="video/mp4">
+      </video>
+
+      <div class="content">
+
+        <!-- NAVBAR -->
+        <nav>
+          <div class="nav-spacer"></div>
+          <ul class="nav-menu">
+            <li>Ecosystem</li>
+            <li>Economics
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </li>
+            <li>Developers</li>
+            <li>Governance
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </li>
+          </ul>
+          <div class="nav-mobile-logo"><span>RIVR</span></div>
+          <div class="nav-right">
+            <button class="btn-demo">
+              <span class="icn-wrap">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </span>
+              <span>Book Demo</span>
+            </button>
+          </div>
+        </nav>
+
+        <!-- TEXT CONTAINER -->
+        <div class="text-container">
+          <div class="hero-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"/></svg>
+            <span>Fluid Staking</span>
+          </div>
+          <h1>Fluid Asset Streams</h1>
+          <p class="lead">Access Smart Vaults, stake RIVR, NFTs, transform rigid holdings into liquid cash instantly.</p>
+        </div>
+
+        <!-- BOTTOM LEFT CARD -->
+        <div class="bl-card">
+          <div>
+            <div class="bl-num">5.2K</div>
+            <div class="bl-label">Active Yielders</div>
+          </div>
+          <button class="btn-discord">
+            <span class="icn-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </span>
+            <span>Join Discord</span>
+          </button>
+        </div>
+
+        <!-- BOTTOM RIGHT FAUX CUTOUT -->
+        <div class="br-cut">
+          <!-- Faux cutout corner masks (the disruptive technique) -->
+          <div class="br-cut-mask-top">
+            <svg width="100%" height="100%" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M56 56V0C56 30.9279 30.9279 56 0 56H56Z" fill="#f0f0f0"/>
+            </svg>
+          </div>
+          <div class="br-cut-mask-left">
+            <svg width="100%" height="100%" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M56 56H0C30.9279 56 56 30.9279 56 0V56Z" fill="#f0f0f0"/>
+            </svg>
+          </div>
+
+          <div class="br-circle-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+          </div>
+          <div class="br-info">
+            <div class="title">Documentation</div>
+            <div class="link">
+              <span>Library</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</main>
+
+</body>
+</html>
