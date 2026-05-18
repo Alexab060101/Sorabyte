@@ -174,12 +174,12 @@
     </div>
     <div class="card">
       <div class="preview" style="min-height:280px;padding:32px">
-        <div style="width:200px;height:200px;border-radius:50%;overflow:hidden;background:#7C3AED;display:flex;align-items:flex-end;justify-content:center">
-          <img src="../assets/alex.png" alt="Alex" style="width:100%;height:auto;display:block">
+        <div style="width:200px;height:200px;border-radius:50%;overflow:hidden;background:#7C3AED;display:flex;align-items:center;justify-content:center">
+          <img src="../assets/alex.png" alt="Alex" style="width:160%;height:auto;display:block;margin-top:8%">
         </div>
       </div>
       <div class="meta">
-        <div><div class="label">Avatar personal circular</div><div class="sub">Preview · para LinkedIn, WhatsApp personal</div></div>
+        <div><div class="label">Avatar personal circular</div><div class="sub">1080 × 1080 · cara centrada</div></div>
         <button class="dl" data-render="avatar-circ" data-bg="#7C3AED" data-size="1080">PNG ↓</button>
       </div>
     </div>
@@ -187,7 +187,43 @@
 </section>
 
 <section>
-  <h2>Mascota (vídeo)</h2>
+  <h2>Mascota (foto estática)</h2>
+  <p class="note">PNG con fondo transparente. Para Meta Ads creative, Instagram Stories sticker, banners, fotos de perfil con personaje.</p>
+  <div class="grid" style="margin-top:16px">
+    <div class="card">
+      <div class="preview" style="min-height:280px;padding:0;background:#0A0A0A">
+        <img src="../ads/assets/mascot-full.png" alt="Mascot" style="width:auto;max-height:260px;display:block">
+      </div>
+      <div class="meta">
+        <div><div class="label">Mascota completa</div><div class="sub">PNG transparente · cuerpo entero</div></div>
+        <a class="dl" href="../ads/assets/mascot-full.png" download="sorabyte-mascot-full.png">PNG ↓</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="preview" style="min-height:280px;padding:0;background:#0A0A0A">
+        <img src="../ads/assets/mascot-peek.png" alt="Mascot peek" style="width:auto;max-height:260px;display:block">
+      </div>
+      <div class="meta">
+        <div><div class="label">Mascota peek</div><div class="sub">PNG transparente · medio cuerpo</div></div>
+        <a class="dl" href="../ads/assets/mascot-peek.png" download="sorabyte-mascot-peek.png">PNG ↓</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="preview" style="min-height:280px;padding:32px">
+        <div style="width:200px;height:200px;border-radius:50%;overflow:hidden;background:#7C3AED;display:flex;align-items:center;justify-content:center">
+          <img src="../ads/assets/mascot-full.png" alt="Mascot avatar" style="width:140%;height:auto;display:block;margin-top:5%">
+        </div>
+      </div>
+      <div class="meta">
+        <div><div class="label">Avatar mascota circular</div><div class="sub">1080 × 1080 · para Instagram Stories</div></div>
+        <button class="dl" data-render="avatar-mascot" data-bg="#7C3AED" data-size="1080" data-src="../ads/assets/mascot-full.png">PNG ↓</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Mascota (vídeo animado)</h2>
   <p class="note">El personaje que saluda en la web. Vídeo con chroma key verde (se elimina por software). Útil para reels, ads animados, embed en otras webs.</p>
   <div class="grid" style="margin-top:16px">
     <div class="card">
@@ -247,7 +283,7 @@ async function loadSvgAsImage(){
   });
 }
 
-async function exportPNG({type, bg, size, filename}){
+async function exportPNG({type, bg, size, filename, src}){
   await document.fonts.ready;
   const logoImg = await loadSvgAsImage();
   const canvas = document.createElement('canvas');
@@ -291,7 +327,6 @@ async function exportPNG({type, bg, size, filename}){
   }
   else if(type === 'avatar-circ'){
     canvas.width = size; canvas.height = size;
-    ctx.fillStyle = '#0A0A0A'; ctx.fillRect(0,0,size,size);
     ctx.save();
     ctx.beginPath(); ctx.arc(size/2, size/2, size/2, 0, Math.PI*2); ctx.clip();
     ctx.fillStyle = bg; ctx.fillRect(0,0,size,size);
@@ -299,8 +334,24 @@ async function exportPNG({type, bg, size, filename}){
     photo.crossOrigin = 'anonymous';
     await new Promise((res,rej)=>{ photo.onload=res; photo.onerror=rej; photo.src='../assets/alex.png'; });
     const ar = photo.naturalWidth / photo.naturalHeight;
-    const targetW = size * 0.95, targetH = targetW / ar;
-    ctx.drawImage(photo, (size-targetW)/2, size-targetH, targetW, targetH);
+    const targetW = size * 1.6;
+    const targetH = targetW / ar;
+    ctx.drawImage(photo, (size-targetW)/2, size*0.08, targetW, targetH);
+    ctx.restore();
+  }
+  else if(type === 'avatar-mascot'){
+    const photoSrc = src || '../ads/assets/mascot-full.png';
+    canvas.width = size; canvas.height = size;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(size/2, size/2, size/2, 0, Math.PI*2); ctx.clip();
+    ctx.fillStyle = bg; ctx.fillRect(0,0,size,size);
+    const photo = new Image();
+    photo.crossOrigin = 'anonymous';
+    await new Promise((res,rej)=>{ photo.onload=res; photo.onerror=rej; photo.src=photoSrc; });
+    const ar = photo.naturalWidth / photo.naturalHeight;
+    const targetW = size * 1.4;
+    const targetH = targetW / ar;
+    ctx.drawImage(photo, (size-targetW)/2, size*0.05, targetW, targetH);
     ctx.restore();
   }
   else if(type === 'wm'){
@@ -345,16 +396,17 @@ function drawWordmarkCentered(ctx, x, y, fontSize, bg){
   drawWordmark(ctx, x - w/2, y, fontSize, bg);
 }
 
-document.querySelectorAll('.dl').forEach(btn=>{
+document.querySelectorAll('button.dl').forEach(btn=>{
   btn.addEventListener('click', async ()=>{
     const type = btn.dataset.render;
     const bg = btn.dataset.bg;
     const size = parseInt(btn.dataset.size, 10);
+    const src = btn.dataset.src;
     btn.textContent = 'Generando...';
     btn.disabled = true;
     try{
       await exportPNG({
-        type, bg, size,
+        type, bg, size, src,
         filename: `sorabyte-${type}-${bg.replace('#','')}-${size}.png`
       });
     }catch(e){ alert('Error: '+e.message); }
