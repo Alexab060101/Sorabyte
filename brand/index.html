@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Sorabyte · Brand Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=2">
+<style>
+  :root{
+    --violet:#7C3AED;
+    --violet-lt:#9F67FF;
+    --bg:#0A0A0A;
+    --bg-card:#111;
+    --line:#1f1f1f;
+    --text:#F8F8F8;
+    --muted:rgba(248,248,248,.55);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font:14px/1.5 'Inter',system-ui;min-height:100vh;padding:48px 5vw}
+  h1{font-family:'Manrope',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.02em;margin-bottom:8px}
+  .lead{color:var(--muted);max-width:640px;margin-bottom:48px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+  .card{background:var(--bg-card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .preview{background:var(--bg);display:flex;align-items:center;justify-content:center;min-height:220px;padding:24px;position:relative}
+  .preview.light{background:#fff;color:#0A0A0A}
+  .preview.violet{background:var(--violet)}
+  .meta{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line)}
+  .label{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .sub{font-size:11px;color:var(--muted);margin-top:2px}
+  .dl{background:var(--violet);color:#fff;border:0;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+  .dl:hover{background:var(--violet-lt)}
+  /* Lockups (rendered with real Manrope) */
+  .lockup-h{display:flex;align-items:center;gap:14px}
+  .lockup-h img{display:block;width:64px;height:auto}
+  .lockup-h .wm{font-family:'Manrope',sans-serif;font-weight:800;font-size:42px;letter-spacing:-.025em;line-height:1}
+  .lockup-h .s{color:var(--violet-lt)}
+  .lockup-v{display:flex;flex-direction:column;align-items:center;gap:14px}
+  .lockup-v img{display:block;width:120px;height:auto}
+  .lockup-v .wm{font-family:'Manrope',sans-serif;font-weight:800;font-size:36px;letter-spacing:-.025em;line-height:1}
+  .lockup-v .s{color:var(--violet-lt)}
+  .iso img{display:block;width:160px;height:auto}
+  /* Theme overrides */
+  .preview.light .lockup-h .wm,
+  .preview.light .lockup-v .wm{color:#0A0A0A}
+  .preview.light .lockup-h .s,
+  .preview.light .lockup-v .s{color:var(--violet)}
+  .preview.violet .lockup-h .wm,
+  .preview.violet .lockup-v .wm{color:#fff}
+  .preview.violet .lockup-h .s,
+  .preview.violet .lockup-v .s{color:#fff}
+  .preview.violet .iso img,
+  .preview.light .iso-mono img{filter:none}
+  section{margin-bottom:48px}
+  h2{font-family:'Manrope',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:16px;color:var(--violet-lt)}
+  .note{color:var(--muted);font-size:13px;margin-top:8px}
+  a.back{position:fixed;top:20px;left:20px;color:var(--muted);text-decoration:none;font-size:13px}
+  a.back:hover{color:var(--text)}
+</style>
+</head>
+<body>
+<a href="../" class="back">← sorabyte.com</a>
+<h1>Brand Kit</h1>
+<p class="lead">Logos, lockups y exportes a PNG listos para usar en redes sociales, firma de email, ads y avatares. Pulsa <strong>"Descargar PNG"</strong> en cada tarjeta.</p>
+
+<section>
+  <h2>Isotipo (solo el símbolo)</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="preview" id="prev-iso-color"><div class="iso"><img src="../assets/logo-sb.svg" alt=""></div></div>
+      <div class="meta">
+        <div><div class="label">Isotipo · color</div><div class="sub">1024 × 1049 px · sobre transparente</div></div>
+        <button class="dl" data-render="iso" data-bg="transparent" data-size="1024">PNG ↓</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="preview violet" id="prev-iso-violet"><div class="iso"><img src="../assets/logo-sb.svg" alt=""></div></div>
+      <div class="meta">
+        <div><div class="label">Isotipo · sobre violeta</div><div class="sub">1024 × 1024 px</div></div>
+        <button class="dl" data-render="iso" data-bg="#7C3AED" data-size="1024">PNG ↓</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Lockup horizontal (logo + wordmark)</h2>
+  <p class="note">Para: firma de email, encabezados, footers de PDF, watermarks.</p>
+  <div class="grid" style="margin-top:16px">
+    <div class="card">
+      <div class="preview">
+        <div class="lockup-h"><img src="../assets/logo-sb.svg" alt=""><span class="wm"><span class="s">S</span>ora<span class="s">B</span>yte</span></div>
+      </div>
+      <div class="meta">
+        <div><div class="label">Horizontal · sobre oscuro</div><div class="sub">1200 × 300 px</div></div>
+        <button class="dl" data-render="lh" data-bg="#0A0A0A" data-size="1200">PNG ↓</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="preview light">
+        <div class="lockup-h"><img src="../assets/logo-sb.svg" alt=""><span class="wm"><span class="s">S</span>ora<span class="s">B</span>yte</span></div>
+      </div>
+      <div class="meta">
+        <div><div class="label">Horizontal · sobre claro</div><div class="sub">1200 × 300 px</div></div>
+        <button class="dl" data-render="lh" data-bg="#FFFFFF" data-size="1200">PNG ↓</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Lockup vertical / cuadrado (avatar)</h2>
+  <p class="note">Para: foto de perfil Instagram, WhatsApp Business, LinkedIn, Twitter/X. Resolución 1080 × 1080 (estándar Instagram).</p>
+  <div class="grid" style="margin-top:16px">
+    <div class="card">
+      <div class="preview" style="min-height:280px">
+        <div class="lockup-v"><img src="../assets/logo-sb.svg" alt=""><span class="wm"><span class="s">S</span>ora<span class="s">B</span>yte</span></div>
+      </div>
+      <div class="meta">
+        <div><div class="label">Avatar oscuro</div><div class="sub">1080 × 1080 px · Instagram, WhatsApp</div></div>
+        <button class="dl" data-render="lv" data-bg="#0A0A0A" data-size="1080">PNG ↓</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="preview violet" style="min-height:280px">
+        <div class="lockup-v"><img src="../assets/logo-sb.svg" alt=""><span class="wm"><span class="s">S</span>ora<span class="s">B</span>yte</span></div>
+      </div>
+      <div class="meta">
+        <div><div class="label">Avatar violeta</div><div class="sub">1080 × 1080 px</div></div>
+        <button class="dl" data-render="lv" data-bg="#7C3AED" data-size="1080">PNG ↓</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Wordmark solo (sin símbolo)</h2>
+  <p class="note">Cuando ya hay otro elemento dominante y solo necesitas el nombre.</p>
+  <div class="grid" style="margin-top:16px">
+    <div class="card">
+      <div class="preview">
+        <span class="wm" style="font-family:'Manrope';font-weight:800;font-size:52px;letter-spacing:-.025em"><span style="color:var(--violet-lt)">S</span>ora<span style="color:var(--violet-lt)">B</span>yte</span>
+      </div>
+      <div class="meta">
+        <div><div class="label">Wordmark · oscuro</div><div class="sub">1400 × 300 px</div></div>
+        <button class="dl" data-render="wm" data-bg="#0A0A0A" data-size="1400">PNG ↓</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="preview light">
+        <span class="wm" style="font-family:'Manrope';font-weight:800;font-size:52px;letter-spacing:-.025em;color:#0A0A0A"><span style="color:var(--violet)">S</span>ora<span style="color:var(--violet)">B</span>yte</span>
+      </div>
+      <div class="meta">
+        <div><div class="label">Wordmark · claro</div><div class="sub">1400 × 300 px</div></div>
+        <button class="dl" data-render="wm" data-bg="#FFFFFF" data-size="1400">PNG ↓</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Paleta de marca</h2>
+  <div class="grid">
+    <div class="card"><div class="preview" style="background:#7C3AED;min-height:140px"></div><div class="meta"><div><div class="label">Violeta brand</div><div class="sub">#7C3AED · RGB 124, 58, 237</div></div></div></div>
+    <div class="card"><div class="preview" style="background:#9F67FF;min-height:140px"></div><div class="meta"><div><div class="label">Violeta claro (acento)</div><div class="sub">#9F67FF</div></div></div></div>
+    <div class="card"><div class="preview" style="background:#0A0A0A;min-height:140px"></div><div class="meta"><div><div class="label">Negro fondo</div><div class="sub">#0A0A0A</div></div></div></div>
+    <div class="card"><div class="preview" style="background:#F8F8F8;min-height:140px"></div><div class="meta"><div><div class="label">Blanco texto</div><div class="sub">#F8F8F8</div></div></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Tipografía</h2>
+  <div class="card" style="padding:32px">
+    <div style="font-family:'Manrope';font-weight:800;font-size:48px;letter-spacing:-.025em;margin-bottom:8px">Manrope 800</div>
+    <div style="color:var(--muted);font-size:13px;margin-bottom:24px">Para títulos, hero, wordmark.</div>
+    <div style="font-family:'Inter';font-weight:400;font-size:18px;line-height:1.6;margin-bottom:8px">Inter Regular es el cuerpo del texto. Legible, técnico, sin distracciones.</div>
+    <div style="color:var(--muted);font-size:13px">Para cuerpo, descripciones, microcopy.</div>
+  </div>
+</section>
+
+<script>
+const SVG_LOGO_URL = '../assets/logo-sb.svg';
+
+async function loadSvgAsImage(){
+  const res = await fetch(SVG_LOGO_URL);
+  const svgText = await res.text();
+  const blob = new Blob([svgText], {type:'image/svg+xml'});
+  const url = URL.createObjectURL(blob);
+  return new Promise((resolve, reject)=>{
+    const img = new Image();
+    img.onload = ()=>{ URL.revokeObjectURL(url); resolve(img); };
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+async function exportPNG({type, bg, size, filename}){
+  await document.fonts.ready;
+  const logoImg = await loadSvgAsImage();
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  if(type === 'iso'){
+    canvas.width = size;
+    canvas.height = Math.round(size * (1049/1024));
+    if(bg !== 'transparent'){ ctx.fillStyle = bg; ctx.fillRect(0,0,canvas.width,canvas.height); }
+    ctx.drawImage(logoImg, 0, 0, canvas.width, canvas.height);
+  }
+  else if(type === 'lh'){
+    canvas.width = size; canvas.height = Math.round(size/4);
+    ctx.fillStyle = bg; ctx.fillRect(0,0,canvas.width,canvas.height);
+    const logoH = canvas.height * 0.7;
+    const logoW = logoH * (1024/1049);
+    const padX = canvas.height * 0.4;
+    const gap = canvas.height * 0.12;
+    ctx.drawImage(logoImg, padX, (canvas.height-logoH)/2, logoW, logoH);
+    const fontSize = canvas.height * 0.42;
+    ctx.font = `800 ${fontSize}px Manrope, sans-serif`;
+    ctx.textBaseline = 'middle';
+    const textX = padX + logoW + gap;
+    const cy = canvas.height/2;
+    drawWordmark(ctx, textX, cy, fontSize, bg);
+  }
+  else if(type === 'lv'){
+    canvas.width = size; canvas.height = size;
+    ctx.fillStyle = bg; ctx.fillRect(0,0,canvas.width,canvas.height);
+    const logoW = size * 0.42;
+    const logoH = logoW * (1049/1024);
+    const cx = size/2;
+    const totalH = logoH + size*0.06 + size*0.13;
+    const startY = (size - totalH)/2;
+    ctx.drawImage(logoImg, cx - logoW/2, startY, logoW, logoH);
+    const fontSize = size * 0.13;
+    ctx.font = `800 ${fontSize}px Manrope, sans-serif`;
+    ctx.textBaseline = 'top';
+    const textY = startY + logoH + size*0.06;
+    drawWordmarkCentered(ctx, cx, textY, fontSize, bg);
+  }
+  else if(type === 'wm'){
+    canvas.width = size; canvas.height = Math.round(size/4.6);
+    ctx.fillStyle = bg; ctx.fillRect(0,0,canvas.width,canvas.height);
+    const fontSize = canvas.height * 0.55;
+    ctx.font = `800 ${fontSize}px Manrope, sans-serif`;
+    ctx.textBaseline = 'middle';
+    drawWordmarkCentered(ctx, canvas.width/2, canvas.height/2, fontSize, bg);
+  }
+
+  canvas.toBlob(blob=>{
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+  }, 'image/png');
+}
+
+function getColors(bg){
+  if(bg === '#FFFFFF') return { rest: '#0A0A0A', accent: '#7C3AED' };
+  if(bg === '#7C3AED') return { rest: '#FFFFFF', accent: '#FFFFFF' };
+  return { rest: '#F8F8F8', accent: '#9F67FF' };
+}
+
+function drawWordmark(ctx, x, y, fontSize, bg){
+  const c = getColors(bg);
+  const ls = -fontSize * 0.025;
+  ctx.letterSpacing = `${ls}px`;
+  const parts = [['S', c.accent], ['ora', c.rest], ['B', c.accent], ['yte', c.rest]];
+  let cx = x;
+  for(const [t, col] of parts){
+    ctx.fillStyle = col;
+    ctx.fillText(t, cx, y);
+    cx += ctx.measureText(t).width + ls;
+  }
+}
+
+function drawWordmarkCentered(ctx, x, y, fontSize, bg){
+  ctx.letterSpacing = `${-fontSize*0.025}px`;
+  const w = ctx.measureText('SoraByte').width;
+  drawWordmark(ctx, x - w/2, y, fontSize, bg);
+}
+
+document.querySelectorAll('.dl').forEach(btn=>{
+  btn.addEventListener('click', async ()=>{
+    const type = btn.dataset.render;
+    const bg = btn.dataset.bg;
+    const size = parseInt(btn.dataset.size, 10);
+    btn.textContent = 'Generando...';
+    btn.disabled = true;
+    try{
+      await exportPNG({
+        type, bg, size,
+        filename: `sorabyte-${type}-${bg.replace('#','')}-${size}.png`
+      });
+    }catch(e){ alert('Error: '+e.message); }
+    btn.textContent = 'PNG ↓';
+    btn.disabled = false;
+  });
+});
+</script>
+</body>
+</html>
