@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorabyte · Creatividad Meta Ads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #1a1a1a; display: flex; justify-content: center; }
+
+  /* ── Anuncio 1080x1350 (4:5 Meta feed) ── */
+  .ad {
+    width: 1080px; height: 1350px;
+    background: #080808;
+    position: relative; overflow: hidden;
+    font-family: 'Inter', sans-serif; color: #F8F8F8;
+  }
+  .ad::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1.4px, transparent 1.4px);
+    background-size: 58px 58px;
+    -webkit-mask-image: radial-gradient(ellipse 110% 90% at 45% 32%, #000 18%, transparent 92%);
+    mask-image: radial-gradient(ellipse 110% 90% at 45% 32%, #000 18%, transparent 92%);
+  }
+  .glow { position: absolute; border-radius: 50%; filter: blur(150px); z-index: 0; pointer-events: none; }
+  .glow-violet { background: rgba(124,58,237,0.55); width: 700px; height: 700px; bottom: -180px; left: -140px; }
+  .glow-gold   { background: rgba(201,162,84,0.30); width: 500px; height: 500px; top: -140px; right: -120px; }
+
+  /* logo */
+  .brand {
+    position: absolute; top: 66px; left: 84px; z-index: 9;
+    font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 32px; letter-spacing: -0.01em;
+  }
+  .brand .s { color: #9F67FF; }
+
+  /* headline */
+  .headline { position: absolute; top: 148px; left: 84px; width: 600px; z-index: 9; }
+  .headline .pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 20px; font-weight: 600; color: rgba(248,248,248,0.85);
+    border: 1px solid rgba(255,255,255,0.16); padding: 11px 21px; border-radius: 100px;
+    margin-bottom: 26px;
+  }
+  .headline .pill::before { content: ''; width: 9px; height: 9px; background: #9F67FF; border-radius: 50%; }
+  .headline h1 {
+    font-family: 'Manrope', sans-serif; font-weight: 800;
+    font-size: 84px; line-height: 1.0; letter-spacing: -0.03em;
+  }
+  .headline h1 .v { color: #9F67FF; }
+  .headline p {
+    font-size: 26px; color: rgba(248,248,248,0.62); font-weight: 500;
+    line-height: 1.45; margin-top: 22px;
+  }
+  .headline .proof {
+    display: flex; align-items: center; gap: 10px; margin-top: 26px;
+    font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 19px; color: #C9A254;
+  }
+  .headline .proof::before {
+    content: ''; width: 26px; height: 2px; background: #C9A254; display: block;
+  }
+
+  /* ── retrato de Alex ── */
+  .portrait {
+    position: absolute; z-index: 7;
+    width: 424px; height: 562px;
+    left: -42px; bottom: 70px;
+    transform: rotate(-6deg);
+    border-radius: 26px; overflow: hidden;
+    box-shadow: 0 55px 110px rgba(0,0,0,0.82), 0 0 0 1.5px rgba(255,255,255,0.1);
+  }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
+  .portrait .tag {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 64px 26px 22px;
+    background: linear-gradient(180deg, transparent, rgba(8,8,8,0.94));
+    font-family: 'Manrope', sans-serif;
+  }
+  .portrait .tag .name { font-size: 29px; font-weight: 800; }
+  .portrait .tag .role { font-size: 16px; color: #9F67FF; font-weight: 700; letter-spacing: 0.12em; margin-top: 3px; }
+
+  /* ── mockup teléfono ── */
+  .phone {
+    position: absolute; z-index: 5;
+    background: #141414; padding: 9px;
+    border-radius: 36px;
+    box-shadow: 0 50px 100px rgba(0,0,0,0.8), 0 0 0 1.5px rgba(255,255,255,0.08);
+  }
+  .phone img { display: block; width: 100%; border-radius: 28px; }
+  .phone::after {
+    content: ''; position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+    width: 64px; height: 19px; background: #000; border-radius: 14px; z-index: 2;
+  }
+  .ph-nails { width: 290px; right: 70px;  top: 250px; transform: rotate(7deg);  z-index: 8; }
+  .ph-sora  { width: 290px; right: 280px; top: 502px; transform: rotate(-5deg); z-index: 6; }
+  .ph-zrl   { width: 290px; right: 86px;  top: 744px; transform: rotate(8deg);  z-index: 5; }
+</style>
+</head>
+<body>
+
+<div class="ad">
+  <div class="glow glow-violet"></div>
+  <div class="glow glow-gold"></div>
+
+  <div class="brand"><span class="s">S</span>ora<span class="s">B</span>yte</div>
+
+  <div class="headline">
+    <span class="pill">Diseño web premium</span>
+    <h1>Esto es lo que <span class="v">construyo.</span></h1>
+    <p>Webs hechas a mano, una a una. Mira ejemplos reales antes de pagar nada.</p>
+    <div class="proof">Sin plantillas. Sin IA.</div>
+  </div>
+
+  <!-- webs terminadas -->
+  <div class="phone ph-nails"><img src="shots/nails-mobile.png" alt=""></div>
+  <div class="phone ph-sora"><img src="shots/sorabyte-mobile.png" alt=""></div>
+  <div class="phone ph-zrl"><img src="shots/zrl-mobile.png" alt=""></div>
+
+  <!-- retrato -->
+  <div class="portrait">
+    <img src="assets/alex.png" alt="Alex">
+    <div class="tag">
+      <div class="name">Alex</div>
+      <div class="role">SORABYTE · DISEÑO WEB</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
