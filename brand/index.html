@@ -160,6 +160,58 @@
 </section>
 
 <section>
+  <h2>Foto del fundador (avatar personal)</h2>
+  <p class="note">Para: "Sobre mí" de webs, LinkedIn personal, firmas de email, perfil de Meta Business, fotos de equipo.</p>
+  <div class="grid" style="margin-top:16px">
+    <div class="card">
+      <div class="preview" style="min-height:280px;padding:0">
+        <img src="../assets/alex.png" alt="Alex" style="width:100%;height:auto;display:block;max-height:320px;object-fit:contain;background:#0A0A0A">
+      </div>
+      <div class="meta">
+        <div><div class="label">Foto Alex · original</div><div class="sub">PNG con transparencia · descarga directa</div></div>
+        <a class="dl" href="../assets/alex.png" download="sorabyte-alex.png">PNG ↓</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="preview" style="min-height:280px;padding:32px">
+        <div style="width:200px;height:200px;border-radius:50%;overflow:hidden;background:#7C3AED;display:flex;align-items:flex-end;justify-content:center">
+          <img src="../assets/alex.png" alt="Alex" style="width:100%;height:auto;display:block">
+        </div>
+      </div>
+      <div class="meta">
+        <div><div class="label">Avatar personal circular</div><div class="sub">Preview · para LinkedIn, WhatsApp personal</div></div>
+        <button class="dl" data-render="avatar-circ" data-bg="#7C3AED" data-size="1080">PNG ↓</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Mascota (vídeo)</h2>
+  <p class="note">El personaje que saluda en la web. Vídeo con chroma key verde (se elimina por software). Útil para reels, ads animados, embed en otras webs.</p>
+  <div class="grid" style="margin-top:16px">
+    <div class="card">
+      <div class="preview" style="min-height:280px;padding:0;background:#0A0A0A">
+        <video src="../assets/alex-mascot.mp4" muted autoplay loop playsinline style="width:auto;max-height:260px;display:block"></video>
+      </div>
+      <div class="meta">
+        <div><div class="label">Mascota · MP4 (chroma key verde)</div><div class="sub">Descarga directa para editar en CapCut / Premiere</div></div>
+        <a class="dl" href="../assets/alex-mascot.mp4" download="sorabyte-mascot.mp4">MP4 ↓</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="preview" style="min-height:280px;padding:0;background:#0A0A0A">
+        <video src="../assets/alex-mascot.webm" muted autoplay loop playsinline style="width:auto;max-height:260px;display:block"></video>
+      </div>
+      <div class="meta">
+        <div><div class="label">Mascota · WebM (más ligero)</div><div class="sub">Para web · alpha real, no chroma key</div></div>
+        <a class="dl" href="../assets/alex-mascot.webm" download="sorabyte-mascot.webm">WebM ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
   <h2>Paleta de marca</h2>
   <div class="grid">
     <div class="card"><div class="preview" style="background:#7C3AED;min-height:140px"></div><div class="meta"><div><div class="label">Violeta brand</div><div class="sub">#7C3AED · RGB 124, 58, 237</div></div></div></div>
@@ -236,6 +288,20 @@ async function exportPNG({type, bg, size, filename}){
     ctx.textBaseline = 'top';
     const textY = startY + logoH + size*0.06;
     drawWordmarkCentered(ctx, cx, textY, fontSize, bg);
+  }
+  else if(type === 'avatar-circ'){
+    canvas.width = size; canvas.height = size;
+    ctx.fillStyle = '#0A0A0A'; ctx.fillRect(0,0,size,size);
+    ctx.save();
+    ctx.beginPath(); ctx.arc(size/2, size/2, size/2, 0, Math.PI*2); ctx.clip();
+    ctx.fillStyle = bg; ctx.fillRect(0,0,size,size);
+    const photo = new Image();
+    photo.crossOrigin = 'anonymous';
+    await new Promise((res,rej)=>{ photo.onload=res; photo.onerror=rej; photo.src='../assets/alex.png'; });
+    const ar = photo.naturalWidth / photo.naturalHeight;
+    const targetW = size * 0.95, targetH = targetW / ar;
+    ctx.drawImage(photo, (size-targetW)/2, size-targetH, targetW, targetH);
+    ctx.restore();
   }
   else if(type === 'wm'){
     canvas.width = size; canvas.height = Math.round(size/4.6);
