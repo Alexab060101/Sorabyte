@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Contratos y recibos · Sorabyte</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0A0A0A;color:#F8F8F8;font:14px/1.5 'Inter',system-ui;min-height:100vh;padding:48px 5vw}
+  h1{font-family:'Manrope';font-weight:800;font-size:2rem;letter-spacing:-.02em;margin-bottom:8px}
+  .lead{color:rgba(248,248,248,.6);max-width:640px;margin-bottom:40px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
+  .card{background:#111;border:1px solid #1f1f1f;border-radius:12px;padding:24px;display:flex;flex-direction:column}
+  h2{font-family:'Manrope';font-weight:700;font-size:1.2rem;color:#9F67FF;margin-bottom:8px}
+  .desc{color:rgba(248,248,248,.65);font-size:13px;margin-bottom:20px;flex-grow:1}
+  .actions{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{background:#7C3AED;color:#fff;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+  .btn:hover{background:#9F67FF}
+  .btn.ghost{background:transparent;border:1px solid #333}
+  .warn{margin-top:32px;padding:18px 22px;background:#1a1410;border:1px solid #3a2a18;border-radius:10px;font-size:13px;color:rgba(248,220,180,.85);line-height:1.65}
+  .warn strong{color:#f7b500}
+  a.back{position:fixed;top:20px;left:20px;color:rgba(248,248,248,.55);text-decoration:none;font-size:13px}
+  a.back:hover{color:#fff}
+</style>
+</head>
+<body>
+<a href="../../" class="back">← sorabyte.com</a>
+
+<h1>Contratos y recibos</h1>
+<p class="lead">Plantillas listas para imprimir o exportar a PDF. Abre en el navegador, rellena los campos en pantalla o a mano, y guarda como PDF con <strong>Ctrl+P → Guardar como PDF</strong>.</p>
+
+<div class="grid">
+  <div class="card">
+    <h2>Contrato de prestación de servicios</h2>
+    <p class="desc">Contrato completo con cláusulas de pago a plazos, propiedad intelectual, confidencialidad, RGPD y resolución de conflictos. Vale para clientes particulares, autónomos y empresas (marcar casilla correspondiente).</p>
+    <div class="actions">
+      <a class="btn" href="contrato-servicios.html" target="_blank">Abrir</a>
+      <a class="btn ghost" href="contrato-servicios.html" download>Descargar HTML</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Recibo de servicios (4 cuotas mensuales)</h2>
+    <p class="desc">Recibo profesional para servicio puntual de 397€ con desglose en 4 cuotas mensuales de 99,25€. Incluye IBAN y nota legal. No es factura fiscal, válido para particulares.</p>
+    <div class="actions">
+      <a class="btn" href="recibo-servicios.html" target="_blank">Abrir</a>
+      <a class="btn ghost" href="recibo-servicios.html" download>Descargar HTML</a>
+    </div>
+  </div>
+</div>
+
+<div class="warn">
+  <strong>⚠ Antes de enviar al cliente, decide:</strong><br><br>
+  • Si tu cliente es <strong>particular (B2C)</strong>: el recibo basta. Es tu prueba de operación y la suya. Sin IVA, sin IRPF, ingresos esporádicos declarados en tu renta de 2027.<br><br>
+  • Si tu cliente es <strong>autónomo o empresa</strong> y va a meter este gasto en su contabilidad: necesita <strong>factura formal</strong> con tu NIF como autónomo. Opciones:<br>
+  &nbsp;&nbsp;&nbsp;1. Darte de alta como autónomo (tarifa plana 80€/mes el primer año).<br>
+  &nbsp;&nbsp;&nbsp;2. Usar cooperativa de facturación (Smart Ibérica, Factoo) que factura por ti.<br><br>
+  • <strong>Plan B práctico</strong>: explícale al cliente que es un recibo de servicios esporádicos. Si insiste en factura formal, ahí decides cuál de las dos rutas.
+</div>
+
+</body>
+</html>
