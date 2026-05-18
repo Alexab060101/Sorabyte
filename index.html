@@ -753,8 +753,8 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   if (video && typeof CanvasRenderingContext2D !== 'undefined') {
     const mCanvas = document.createElement('canvas');
     mCanvas.width = 720; mCanvas.height = 916;
-    mCanvas.style.css?v=39Text = 'position:absolute;left:0;pointer-events:none;display:block;';
-    video.style.css?v=39Text += ';position:absolute;opacity:0;pointer-events:none;';
+    mCanvas.style.cssText = 'position:absolute;left:0;pointer-events:none;display:block;';
+    video.style.cssText += ';position:absolute;opacity:0;pointer-events:none;';
     video.parentNode.appendChild(mCanvas);
     function sizeMCanvas() {
       const ch = mCanvas.parentElement;
