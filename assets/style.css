@@ -59,7 +59,10 @@ header.scrolled {
   border-color: var(--border);
 }
 .logo { display: flex; align-items: center; gap: 0; }
-.logo-mark { width: 34px; height: 34px; display: block; flex-shrink: 0; margin-right: 6px; }
+.logo-mark { width: 44px; height: 44px; display: block; flex-shrink: 0; margin-right: 8px; }
+@media (max-width: 768px) {
+  .logo-mark { width: 34px; height: 34px; margin-right: 6px; }
+}
 .logo-s    { font-family: 'Manrope', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--purple-lt); }
 .logo-rest { font-family: 'Manrope', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--white); }
 nav { display: flex; align-items: center; gap: 36px; }
