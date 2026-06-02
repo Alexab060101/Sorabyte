@@ -453,12 +453,11 @@ src="https://www.facebook.com/tr?id=995422316277042&ev=PageView&noscript=1"
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-// Hero Vanta Globe — carga diferida: solo desktop, tras el render, y si no se pide menos movimiento.
-// En movil/reduced-motion no se descarga Three.js ni Vanta (queda el fondo CSS de respaldo en .vanta-hero).
+// Hero Vanta Globe — carga diferida (movil + desktop), tras el render, salvo prefers-reduced-motion.
+// En reduced-motion no se descarga Three.js ni Vanta (queda el fondo CSS de respaldo en .vanta-hero).
 (function loadVantaWhenIdle(){
-  var isDesktop = window.matchMedia('(min-width: 769px)').matches;
-  var reduced   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!isDesktop || reduced) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
   function loadScript(src, cb){
     var s = document.createElement('script');
     s.src = src; s.async = true; s.onload = cb; s.onerror = function(){};
