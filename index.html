@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
-<link rel="stylesheet" href="assets/style.css?v=42">
+<link rel="stylesheet" href="assets/style.css?v=43">
 
 <!-- Meta Pixel + CAPI (dedup via event_id) -->
 <script>
@@ -725,14 +725,14 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       <span class="alex-chat__time">ahora</span>
     </div>
     <div class="alex-chat__msg alex-chat__msg--in">
-      Cuéntame qué necesitas (web, Meta Ads, automatización) y te respondo en menos de 1h por WhatsApp.
+      Cuéntame qué necesitas (web, marketing, automatización) y te ayudo aquí mismo.
       <span class="alex-chat__time">ahora</span>
     </div>
   </div>
   <form class="alex-chat__form" id="alexChatForm">
     <input type="text" class="alex-chat__input" id="alexChatInput"
       placeholder="Escribe tu mensaje…" autocomplete="off" maxlength="500">
-    <button type="submit" class="alex-chat__send" aria-label="Enviar por WhatsApp">
+    <button type="submit" class="alex-chat__send" aria-label="Enviar mensaje">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" aria-hidden="true">
         <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
       </svg>
@@ -884,11 +884,60 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   pill.addEventListener('click', () => toggleChat());
   chatClose.addEventListener('click', () => toggleChat(false));
 
-  chatForm.addEventListener('submit', (e) => {
+  // ── Chatbot real con la API de Claude (api/chat.js) ──
+  const chatBody = document.getElementById('alexChatBody');
+  // El bot ya saludo con los 2 mensajes iniciales; arrancamos el historial con eso.
+  const history = [{ role: 'assistant', content: 'Hola, soy el asistente de Sorabyte. Cuentame que necesitas y te ayudo.' }];
+  let chatBusy = false;
+
+  const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  const linkify = (s) => esc(s).replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+
+  function addMsg(text, dir) {
+    const el = document.createElement('div');
+    el.className = 'alex-chat__msg alex-chat__msg--' + dir;
+    el.innerHTML = linkify(text) + '<span class="alex-chat__time">ahora</span>';
+    chatBody.appendChild(el);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    return el;
+  }
+  function showTyping() {
+    const el = document.createElement('div');
+    el.className = 'alex-chat__msg alex-chat__msg--in alex-chat__msg--typing';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    chatBody.appendChild(el);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    return el;
+  }
+
+  chatForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const text = chatInput.value.trim();
-    const msg = text || 'Hola Alex, vi tu web y me interesa';
-    window.open('https://wa.me/34640973182?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    if (!text || chatBusy) return;
+    chatBusy = true;
+    chatInput.value = '';
+    addMsg(text, 'out');
+    history.push({ role: 'user', content: text });
+    sbTrack('Contact', { content_category: 'chat' });
+    const typing = showTyping();
+    try {
+      const r = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history }),
+      });
+      const j = await r.json();
+      typing.remove();
+      const reply = (j && j.reply) || 'Ahora mismo no puedo responder. Escribeme por WhatsApp: https://wa.me/34640973182';
+      addMsg(reply, 'in');
+      history.push({ role: 'assistant', content: reply });
+    } catch {
+      typing.remove();
+      addMsg('Se ha cortado la conexion. Escribeme por WhatsApp: https://wa.me/34640973182', 'in');
+    } finally {
+      chatBusy = false;
+      chatInput.focus();
+    }
   });
 
   document.addEventListener('keydown', (e) => {
