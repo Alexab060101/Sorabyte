@@ -854,10 +854,10 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     video.addEventListener('ended', () => setTimeout(leaveMascot, 100));
   }
 
-  // Click muñeco/bubble → WhatsApp
-  const openWa = () => window.open(waUrl, '_blank', 'noopener');
-  inner.addEventListener('click', openWa);
-  inner.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openWa(); } });
+  // Click muñeco/bocadillo → abre el chatbot (no WhatsApp)
+  const openChatFromMascot = () => toggleChat(true);
+  inner.addEventListener('click', openChatFromMascot);
+  inner.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openChatFromMascot(); } });
 
   // Close → bubble fade primero, luego muneco
   closeBtn.addEventListener('click', (e) => {
