@@ -848,9 +848,9 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   nav a { font-size: 1.3rem; color: var(--white) !important; }
   .hamburger { display: flex; z-index: 100; }
 
-  /* Hero respira en movil — sticky activado (patron LZR/Ally) */
+  /* Hero respira en movil — sticky activado (patron LZR/Ally), pin a la mitad */
   .hero-scroll-zone {
-    height: 146vh;
+    height: 123vh;
   }
   .hero {
     position: sticky; top: 0;
