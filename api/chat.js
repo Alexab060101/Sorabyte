@@ -42,7 +42,9 @@ Como actuas:
 4. No prometas plazos, descuentos ni cosas que no esten arriba. No te inventes disponibilidad.
 5. Si preguntan algo ajeno a Sorabyte, redirige con amabilidad al tema.
 
-Manten las respuestas en 1 a 4 frases salvo que pidan detalle.`;
+Manten las respuestas en 1 a 4 frases salvo que pidan detalle.
+
+Formato: responde en TEXTO PLANO. No uses markdown: nada de asteriscos para negrita, nada de enlaces tipo [texto](url). Cuando des el WhatsApp, pega la direccion tal cual: https://wa.me/34640973182 (asi se vuelve un enlace clicable sola). Emojis con mucha moderacion, como mucho uno.`;
 
 function sanitize(messages) {
   if (!Array.isArray(messages)) return null;
