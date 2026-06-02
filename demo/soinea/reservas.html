@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1E1A16">
+<meta name="color-scheme" content="light">
+<title>Prendre rendez-vous · Andrea Agudelo · Fribourg</title>
+<meta name="description" content="Réservez votre soin avec Andrea Agudelo : podologie, épilation laser et massages dans le canton de Fribourg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.pexels.com" crossorigin>
+<link rel="preload" href="./assets/soinea-mark.svg" as="image" type="image/svg+xml" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500..700&family=Inter:wght@300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css?v=20260530">
+<link rel="icon" type="image/svg+xml" href="./assets/soinea-mark.svg">
+<style>
+.bk{max-width:980px;margin:0 auto;padding:140px 5vw 80px;min-height:72vh}
+.bk-head{text-align:center;margin-bottom:34px}
+.bk-head .eyebrow{justify-content:center}
+.bk-head h1{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.02em;
+  font-size:clamp(2.1rem,5.2vw,3.4rem);line-height:1.05;margin:14px 0 10px}
+.bk-head h1 em{color:var(--clay);font-style:normal}
+.bk-head p{color:var(--grey);max-width:460px;margin:0 auto}
+.bk-note{text-align:center;font-size:0.84rem;color:var(--grey);margin-top:28px}
+@media(max-width:680px){.bk{padding:118px 5vw 60px}}
+</style>
+<script>document.documentElement.className+=" js"</script>
+</head>
+<body>
+
+<header class="head-bar scrolled" id="header">
+  <a href="./index.html" class="logo">
+    <span class="mark svg-mark"><img src="./assets/soinea-mark.svg" alt="Soinea"></span>
+    <span><span class="n">soinea</span><span class="t">Soins · Fribourg</span></span>
+  </a>
+  <div class="nav-right">
+    <a href="./reservas.html" class="nav-cta-mini">Rendez-vous</a>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menu">
+  <div class="menu-top">
+    <div class="ml">soinea</div>
+    <button class="menu-close" id="menuClose" aria-label="Fermer le menu">✕</button>
+  </div>
+  <div>
+    <div class="menu-eyebrow">Nos soins</div>
+    <nav class="menu-links">
+      <a href="./podologie.html">Podologie</a>
+      <a href="./laser.html">Épilation laser</a>
+      <a href="./massages.html">Massages thérapeutiques</a>
+      <a href="./contact.html">Contact</a>
+    </nav>
+  </div>
+  <div class="menu-foot">
+    <span>© 2026 Andrea Agudelo · Canton de Fribourg</span>
+    <span>Conçu par <a href="https://sorabyte.com">Sorabyte</a></span>
+  </div>
+</div>
+
+<main class="bk">
+  <div class="bk-head">
+    <div class="eyebrow">Rendez-vous</div>
+    <h1>Réservez en <em>quelques clics</em>.</h1>
+    <p>Choisissez la spécialité : la prestation exacte, le jour et l'heure se choisissent en pop-up, sans formulaire interminable.</p>
+  </div>
+
+  <div class="book-grid" id="bookGrid"></div>
+
+  <p class="bk-note">Sans paiement en ligne · Confirmation par Andrea sous 24 heures.</p>
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="flogo"><span class="mark svg-mark"><img src="./assets/soinea-mark.svg" alt="Soinea"></span><span class="n">soinea</span></div>
+      <p>Cabinet de soins du corps dans le canton de Fribourg.</p>
+    </div>
+    <div>
+      <h5>Soins</h5>
+      <a href="./podologie.html">Podologie</a>
+      <a href="./laser.html">Épilation laser</a>
+      <a href="./massages.html">Massages</a>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <a href="./contact.html">Nos deux lieux</a>
+      <a href="mailto:andrea.isabel.agudelo@gmail.com">Email</a>
+      <a href="tel:+41774893918">Téléphone · +41 77 489 39 18</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Andrea Agudelo · Canton de Fribourg</span>
+    <span>Conçu par <em>Sorabyte</em> · sorabyte.com</span>
+  </div>
+</footer>
+
+<script src="./motion.js?v=20260530" defer></script>
+</body>
+</html>

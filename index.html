@@ -10,9 +10,9 @@
 <link rel="alternate" hreflang="x-default" href="https://sorabyte.es/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Anton&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
-<link rel="stylesheet" href="assets/style.css?v=39">
+<link rel="stylesheet" href="assets/style.css?v=41">
 
 <!-- Meta Pixel + CAPI (dedup via event_id) -->
 <script>
@@ -61,9 +61,8 @@ src="https://www.facebook.com/tr?id=995422316277042&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel + CAPI -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollTrigger.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js" defer></script>
+<!-- three.js + vanta.globe se cargan bajo demanda (solo desktop, tras el render) desde el script del hero -->
+
 </head>
 <body>
 
@@ -109,13 +108,17 @@ src="https://www.facebook.com/tr?id=995422316277042&ev=PageView&noscript=1"
         <span class="sub-line">Sin permanencias.</span>
       </p>
       <div class="hero-actions reveal-hero">
-        <a href="#contacto" class="btn-primary">Reserva tu plaza →</a>
+        <a href="https://wa.me/34640973182?text=Hola%20Alex%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20Sorabyte" target="_blank" rel="noopener" class="btn-primary">Reserva tu plaza →</a>
         <a href="#portfolio" class="btn-ghost">Ver lo que ya he hecho</a>
       </div>
     </div>
     <div class="hero-photo-wrap reveal-hero">
       <div class="hero-photo-inner">
-        <img src="assets/alex.png" alt="Alex" class="hero-photo-layer hero-photo-img active" id="heroImg">
+        <picture>
+          <source srcset="assets/alex-hero.avif" type="image/avif">
+          <source srcset="assets/alex-hero.webp" type="image/webp">
+          <img src="assets/alex-hero.webp" alt="Alex" class="hero-photo-layer hero-photo-img active" id="heroImg" width="720" height="1275" fetchpriority="high">
+        </picture>
         <video class="hero-photo-layer hero-photo-vid" id="heroVid"
                src="assets/alex-video.mp4" muted playsinline preload="auto"></video>
       </div>
@@ -212,7 +215,7 @@ src="https://www.facebook.com/tr?id=995422316277042&ev=PageView&noscript=1"
   <div class="portfolio-h-header">
     <span class="eyebrow">Casos reales</span>
     <h2 class="section-h">Webs que ya<br><em>traen clientes.</em></h2>
-    <p class="portfolio-h-hint"><span>← desliza →</span></p>
+    <p class="portfolio-h-hint"><span>↓ baja para verlas ↓</span></p>
   </div>
   <div class="portfolio-track-wrap">
     <div class="portfolio-track">
@@ -259,25 +262,24 @@ src="https://www.facebook.com/tr?id=995422316277042&ev=PageView&noscript=1"
         </div>
       </div>
 
-      <!-- Joe Kallon -->
-      <div class="portfolio-card" data-demo="joe" data-name="Joe Kallon">
+      <!-- Soinea -->
+      <div class="portfolio-card" data-demo="soinea" data-name="Soinea">
         <div class="portfolio-browser">
           <div class="browser-dots"><span></span><span></span><span></span></div>
-          <div class="portfolio-mock portfolio-mock--logo" style="background:#0E0E0E;">
-            <span class="mock-joe">JOE<br>KALLON</span>
-            <span class="mock-joe-sub">Personal Trainer · Köln</span>
+          <div class="portfolio-mock portfolio-mock--logo" style="background:#F4EEE2;">
+            <img src="demo/soinea/assets/soinea-logo.svg" alt="Soinea" loading="lazy" class="mock-logo mock-logo--soinea">
           </div>
         </div>
         <div class="portfolio-info">
-          <span class="portfolio-tag">Web · Personal Trainer Köln</span>
-          <h4>Joe Kallon</h4>
-          <p>Landing visual con video hero para personal trainer en Köln. Tipografía Anton, blanco/negro, max impact.</p>
-          <blockquote class="portfolio-quote">
+          <span class="portfolio-tag">Web · Clínica de salud · Suiza</span>
+          <h4>Soinea</h4>
+          <p>Web en francés para un cabinet de soins en Friburgo. Reservas por popups y estética calmada de clínica premium.</p>
+          <blockquote class="portfolio-quote portfolio-quote--pending">
             <span class="quote-mark">"</span>
-            Me encanta lo visual que se ve.
-            <cite>- Joe Kallon, Personal Trainer Köln</cite>
+            <span class="quote-pending">Testimonio en camino</span>
+            <cite>- Andrea, Soinea · Fribourg</cite>
           </blockquote>
-          <a href="#" class="portfolio-link" data-demo="joe" data-name="Joe Kallon">Ver demo →</a>
+          <a href="#" class="portfolio-link" data-demo="soinea" data-name="Soinea">Ver demo →</a>
         </div>
       </div>
 
@@ -451,14 +453,33 @@ src="https://www.facebook.com/tr?id=995422316277042&ev=PageView&noscript=1"
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-// Hero Vanta Globe
-VANTA.GLOBE({
-  el: '#vanta-hero', mouseControls: true, touchControls: true,
-  backgroundColor: 0x080808, color: 0x7C3AED,
-  color2: 0x3b0080, size: 1.1, speed: 1.2
-});
-
-gsap.registerPlugin(ScrollTrigger);
+// Hero Vanta Globe — carga diferida: solo desktop, tras el render, y si no se pide menos movimiento.
+// En movil/reduced-motion no se descarga Three.js ni Vanta (queda el fondo CSS de respaldo en .vanta-hero).
+(function loadVantaWhenIdle(){
+  var isDesktop = window.matchMedia('(min-width: 769px)').matches;
+  var reduced   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!isDesktop || reduced) return;
+  function loadScript(src, cb){
+    var s = document.createElement('script');
+    s.src = src; s.async = true; s.onload = cb; s.onerror = function(){};
+    document.head.appendChild(s);
+  }
+  function boot(){
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js', function(){
+      loadScript('https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.globe.min.js', function(){
+        if (window.VANTA && window.VANTA.GLOBE) {
+          VANTA.GLOBE({
+            el: '#vanta-hero', mouseControls: true, touchControls: true,
+            backgroundColor: 0x080808, color: 0x7C3AED,
+            color2: 0x3b0080, size: 1.1, speed: 1.2
+          });
+        }
+      });
+    });
+  }
+  if ('requestIdleCallback' in window) requestIdleCallback(boot, { timeout: 2500 });
+  else setTimeout(boot, 1200);
+})();
 
 // Hero reveal — fromTo explicito porque CSS tiene opacity:0 baseline
 gsap.fromTo('.reveal-hero',
@@ -523,28 +544,7 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Portfolio horizontal pin scroll (solo desktop)
-if (window.matchMedia('(min-width: 769px)').matches) {
-  const track = document.querySelector('.portfolio-track');
-  const section = document.querySelector('.portfolio-h');
-  if (track && section) {
-    const getDist = () => Math.max(track.scrollWidth - window.innerWidth + 80, 0);
-    if (getDist() > 0) {
-      gsap.to(track, {
-        x: () => -getDist() + 'px',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: () => '+=' + getDist(),
-          scrub: 0.8,
-          pin: true,
-          invalidateOnRefresh: true
-        }
-      });
-    }
-  }
-}
+// Portfolio: tarjetas apiladas estilo Jack (sticky CSS puro, sin JS)
 
 // Counters
 document.querySelectorAll('.stat-n[data-count]').forEach(el => {

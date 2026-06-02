@@ -94,7 +94,12 @@ nav a:hover { color: var(--white); }
   isolation: isolate;
 }
 .hero-bg { position: absolute; inset: 0; }
-.vanta-hero { position: absolute; inset: 0; z-index: 0; }
+.vanta-hero {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(60% 70% at 78% 30%, rgba(124,58,237,0.28) 0%, transparent 60%),
+    radial-gradient(55% 60% at 14% 78%, rgba(59,0,128,0.30) 0%, transparent 60%);
+}
 .hero-grid-overlay {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
@@ -102,61 +107,8 @@ nav a:hover { color: var(--white); }
   mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
 }
 
-/* Aurora layer (removed — replaced by Vanta) */
-.aurora-layer {
-  position: absolute; inset: -50%; width: 200%; height: 200%;
-  background:
-    radial-gradient(ellipse 55% 55% at 20% 45%, rgba(124,58,237,0.75) 0%, transparent 60%),
-    radial-gradient(ellipse 45% 65% at 78% 25%, rgba(236,72,153,0.55) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 55% 85%, rgba(201,162,84,0.45) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 50% at 8% 75%,  rgba(59,130,246,0.45) 0%, transparent 60%);
-  filter: blur(55px);
-  animation: auroraDrift 8s ease-in-out infinite alternate;
-}
-@keyframes auroraDrift {
-  0%   { transform: translate(0,0) rotate(0deg) scale(1); }
-  100% { transform: translate(-8%,4%) rotate(4deg) scale(1.06); }
-}
-
-/* Morphing blob near photo */
-.morph-blob {
-  position: absolute; width: 560px; height: 560px;
-  background: linear-gradient(135deg, rgba(124,58,237,0.55), rgba(236,72,153,0.35));
-  filter: blur(90px); pointer-events: none;
-  right: -80px; top: 50%; transform: translateY(-50%);
-  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  animation: blobMorph 9s ease-in-out infinite alternate;
-}
-@keyframes blobMorph {
-  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  25%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-  50%  { border-radius: 50% 60% 30% 60% / 30% 40% 60% 50%; }
-  75%  { border-radius: 60% 40% 60% 40% / 40% 50% 60% 30%; }
-  100% { border-radius: 40% 60% 40% 60% / 60% 40% 50% 60%; }
-}
-
-/* Sweeping light beams */
-.light-beam {
-  position: absolute; top: -10%; width: 3px; height: 120%;
-  background: linear-gradient(to bottom, transparent 0%, rgba(159,103,255,0.6) 40%, rgba(201,162,84,0.4) 60%, transparent 100%);
-  filter: blur(6px); pointer-events: none;
-  animation: beamSweep 8s ease-in-out infinite;
-}
-.beam-2 { animation: beamSweep 8s ease-in-out infinite; animation-delay: -4s; opacity: 0.6; }
-@keyframes beamSweep {
-  0%   { left: -5%; opacity: 0; }
-  8%   { opacity: 1; }
-  92%  { opacity: 1; }
-  100% { left: 105%; opacity: 0; }
-}
-
-/* Dot grid */
-.hero-grid {
-  position: absolute; inset: 0; pointer-events: none;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
-  background-size: 40px 40px;
-  mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
-}
+/* Capas decorativas legacy retiradas (aurora, morph-blob, light-beam, dot-grid):
+   el fondo del hero es ahora Vanta en desktop + respaldo CSS en .vanta-hero */
 .noise {
   position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -582,7 +534,7 @@ nav a:hover { color: var(--white); }
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: 100px 0 80px;
-  overflow: hidden;
+  overflow: visible;
 }
 .portfolio-h-header {
   text-align: center;
@@ -602,27 +554,34 @@ nav a:hover { color: var(--white); }
   animation: hintPulse 2.4s ease-in-out infinite;
 }
 @keyframes hintPulse {
-  0%, 100% { transform: translateX(0); opacity: 0.5; }
-  50%      { transform: translateX(6px); opacity: 1; }
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%      { transform: translateY(6px); opacity: 1; }
 }
 .portfolio-track-wrap { position: relative; width: 100%; }
 .portfolio-track {
-  display: flex;
-  gap: 24px;
-  padding: 10px 6vw 30px;
-  will-change: transform;
+  display: block;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 10px 24px 0;
 }
+/* tarjetas apiladas estilo Jack: cada una se fija y la siguiente la cubre */
 .portfolio-card {
-  flex: 0 0 460px;
-  background: var(--bg-card); border: 1px solid var(--border);
+  position: sticky;
+  width: 100%;
+  margin: 0 auto 64px;
+  background: #0F0F11; border: 1px solid var(--border-lt);
   border-radius: 20px; overflow: hidden;
-  transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+  box-shadow: 0 -18px 50px -26px rgba(0,0,0,0.75);
+  transition: border-color 0.35s, box-shadow 0.35s;
   cursor: pointer;
 }
+.portfolio-card:nth-child(1) { top: 98px;  z-index: 1; }
+.portfolio-card:nth-child(2) { top: 114px; z-index: 2; }
+.portfolio-card:nth-child(3) { top: 130px; z-index: 3; }
+.portfolio-card:last-child { margin-bottom: 0; }
 .portfolio-card:hover {
   border-color: rgba(124,58,237,0.5);
-  transform: translateY(-8px);
-  box-shadow: 0 30px 60px -20px rgba(124,58,237,0.3);
+  box-shadow: 0 34px 64px -22px rgba(124,58,237,0.34);
 }
 .portfolio-card[data-demo] .portfolio-link {
   pointer-events: none;
@@ -673,6 +632,7 @@ nav a:hover { color: var(--white); }
 }
 .mock-logo--zrl  { max-width: 70%; max-height: 75%; }
 .mock-logo--nails { max-width: 75%; max-height: 90%; mix-blend-mode: multiply; }
+.mock-logo--soinea { max-width: 52%; max-height: 72%; }
 .portfolio-card:hover .mock-logo { transform: scale(1.05); }
 
 .mock-joe {
@@ -979,23 +939,19 @@ footer { padding: 28px 6vw; border-top: 1px solid var(--border); }
   .faq-content { padding: 0 20px 18px; }
   .services-grid { grid-template-columns: 1fr; }
 
-  /* Portfolio = swipe carousel en movil */
+  /* Portfolio = tarjetas apiladas en movil */
   .portfolio-h { padding: 70px 0 60px; }
   .portfolio-h-header { margin-bottom: 32px; padding: 0 24px; }
   .portfolio-h-hint { display: none; }
   .portfolio-track {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 4px 24px 20px;
-    gap: 14px;
+    padding: 4px 16px 0;
   }
-  .portfolio-track::-webkit-scrollbar { display: none; }
   .portfolio-card {
-    flex: 0 0 88%;
-    scroll-snap-align: center;
+    margin-bottom: 36px;
   }
+  .portfolio-card:nth-child(1) { top: 78px; }
+  .portfolio-card:nth-child(2) { top: 90px; }
+  .portfolio-card:nth-child(3) { top: 102px; }
   .portfolio-mock { height: 180px; }
   .proceso-steps { flex-direction: column; gap: 12px; }
   .paso {
