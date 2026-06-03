@@ -888,6 +888,8 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   const chatBody = document.getElementById('alexChatBody');
   // El bot ya saludo con los 2 mensajes iniciales; arrancamos el historial con eso.
   const history = [{ role: 'assistant', content: 'Hola, soy el asistente de Sorabyte. Cuentame que necesitas y te ayudo.' }];
+  // id de conversacion (para que el CRM no duplique leads). 1 por sesion de chat.
+  const convId = 'web-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
   let chatBusy = false;
 
   const esc = (s) => s.replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
@@ -924,7 +926,7 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       const r = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: history }),
+        body: JSON.stringify({ messages: history, convId: convId }),
       });
       const j = await r.json();
       typing.remove();

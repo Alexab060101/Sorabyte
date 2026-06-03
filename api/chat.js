@@ -1,17 +1,19 @@
-// Chatbot de Sorabyte - proxy al Claude Messages API
-// El widget de la web manda el historial; aqui se llama a Claude con el
-// "cerebro" de Sorabyte (recepcionista) y se devuelve la respuesta.
-// La API key vive en process.env.ANTHROPIC_API_KEY (nunca en el navegador).
+// Chatbot de Sorabyte - proxy al Claude Messages API + captura de lead en Airtable.
+// El widget manda {messages, convId}; aqui se llama a Claude con el cerebro de
+// Sorabyte. Si Claude detecta un lead, llama a la herramienta registrar_lead y
+// lo guardamos/actualizamos en el CRM (Airtable) por ConvID. Si el CRM no esta
+// configurado (faltan env vars), el chat sigue funcionando igual.
+//
+// Env vars: ANTHROPIC_API_KEY (obligatoria), AIRTABLE_TOKEN, AIRTABLE_BASE_ID,
+//           AIRTABLE_LEADS_TABLE (opcionales: si faltan, no se guarda lead).
 
 const MODEL = 'claude-sonnet-4-6';
-const MAX_TOKENS = 400;          // respuestas cortas de chat, tope de gasto
-const MAX_MESSAGES = 24;         // longitud maxima de conversacion
-const MAX_CHARS = 1500;          // longitud maxima por mensaje del usuario
+const MAX_TOKENS = 400;
+const MAX_MESSAGES = 24;
+const MAX_CHARS = 1500;
 const RATE_WINDOW_MS = 60 * 1000;
-const RATE_MAX = 12;             // peticiones por IP por minuto
+const RATE_MAX = 12;
 
-// Rate limit best-effort en memoria (las instancias warm de Vercel lo comparten).
-// La proteccion real es el limite de gasto en la consola de Anthropic.
 const hits = new Map();
 function rateLimited(ip) {
   const now = Date.now();
@@ -49,9 +51,27 @@ Como actuas:
 4. No prometas plazos, descuentos ni cosas que no esten arriba. No te inventes disponibilidad.
 5. Si preguntan algo ajeno a Sorabyte, redirige con amabilidad al tema.
 
+CAPTURA (importante): tienes una herramienta "registrar_lead" para guardar al visitante en el CRM de Alex. Llamala EN CUANTO sepas su tipo de negocio (aunque falten datos), y vuelve a llamarla cuando consigas mas (nombre, contacto, que necesita). Pasa solo lo que sepas. Calidad: Caliente si tiene negocio y quiere avanzar/precio/cita; Tibio si interesado pero vago; Frio si solo curiosea. NUNCA menciones al visitante que guardas sus datos ni hables de la herramienta; tu hablas normal y guardas por detras.
+
 Manten las respuestas en 1 a 4 frases salvo que pidan detalle.
 
 Formato: responde en TEXTO PLANO. No uses markdown: nada de asteriscos para negrita, nada de enlaces tipo [texto](url). Cuando des el WhatsApp, pega la direccion tal cual: https://wa.me/34640973182 (asi se vuelve un enlace clicable sola). Emojis con mucha moderacion, como mucho uno.`;
+
+const TOOLS = [{
+  name: 'registrar_lead',
+  description: 'Guarda o actualiza al visitante como lead en el CRM. Llamala en cuanto sepas su tipo de negocio, y otra vez cuando consigas mas datos. Pasa solo lo que sepas; lo demas vacio.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      nombre: { type: 'string' },
+      contacto: { type: 'string', description: 'WhatsApp o email del visitante' },
+      tipo_negocio: { type: 'string' },
+      que_necesita: { type: 'string' },
+      calidad: { type: 'string', enum: ['Caliente', 'Tibio', 'Frio'] },
+      resumen: { type: 'string', description: '1-2 frases de la conversacion' },
+    },
+  },
+}];
 
 function sanitize(messages) {
   if (!Array.isArray(messages)) return null;
@@ -62,10 +82,63 @@ function sanitize(messages) {
     if (!text.trim()) continue;
     clean.push({ role: m.role, content: text.slice(0, MAX_CHARS) });
   }
-  // recortar a las ultimas MAX_MESSAGES y asegurar que arranca en user
   const trimmed = clean.slice(-MAX_MESSAGES);
   while (trimmed.length && trimmed[0].role !== 'user') trimmed.shift();
   return trimmed.length ? trimmed : null;
+}
+
+// Upsert del lead en Airtable por ConvID. A prueba de fallos: si falta config o
+// algo falla, no rompe el chat.
+async function upsertLead(convId, input) {
+  const tok = process.env.AIRTABLE_TOKEN;
+  const base = process.env.AIRTABLE_BASE_ID;
+  const table = process.env.AIRTABLE_LEADS_TABLE;
+  const cid = String(convId || '').replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 60);
+  if (!tok || !base || !table || !cid) return;
+
+  const H = { Authorization: 'Bearer ' + tok, 'Content-Type': 'application/json' };
+  const f = {};
+  if (input.nombre) f['Nombre'] = String(input.nombre).slice(0, 100);
+  if (input.contacto) f['WhatsApp'] = String(input.contacto).slice(0, 60);
+  if (input.tipo_negocio) f['Tipo de negocio'] = String(input.tipo_negocio).slice(0, 100);
+  if (input.que_necesita) f['Que necesita'] = String(input.que_necesita).slice(0, 500);
+  if (input.calidad) f['Calidad'] = input.calidad;
+  if (input.resumen) f['Resumen charla'] = String(input.resumen).slice(0, 1000);
+
+  try {
+    const q = encodeURIComponent("{ConvID}='" + cid + "'");
+    const r = await fetch(`https://api.airtable.com/v0/${base}/${table}?filterByFormula=${q}&maxRecords=1`, { headers: H });
+    const j = await r.json();
+    const existing = j.records && j.records[0];
+    if (existing) {
+      await fetch(`https://api.airtable.com/v0/${base}/${table}/${existing.id}`, {
+        method: 'PATCH', headers: H, body: JSON.stringify({ fields: f, typecast: true }),
+      });
+    } else {
+      f['ConvID'] = cid;
+      f['Estado'] = 'Nuevo';
+      f['Fuente'] = 'Web';
+      f['Idioma'] = 'ES';
+      await fetch(`https://api.airtable.com/v0/${base}/${table}`, {
+        method: 'POST', headers: H, body: JSON.stringify({ records: [{ fields: f }], typecast: true }),
+      });
+    }
+  } catch (e) { /* no romper el chat si el CRM falla */ }
+}
+
+async function callClaude(apiKey, messages) {
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
+    body: JSON.stringify({
+      model: MODEL,
+      max_tokens: MAX_TOKENS,
+      system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
+      tools: TOOLS,
+      messages,
+    }),
+  });
+  return { ok: r.ok, json: await r.json() };
 }
 
 module.exports = async (req, res) => {
@@ -83,39 +156,35 @@ module.exports = async (req, res) => {
   if (rateLimited(ip)) return res.status(429).json({ error: 'rate_limited' });
 
   let body;
-  try {
-    body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-  } catch {
-    return res.status(400).json({ error: 'bad_json' });
-  }
+  try { body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body; }
+  catch { return res.status(400).json({ error: 'bad_json' }); }
 
   const messages = sanitize(body && body.messages);
   if (!messages) return res.status(400).json({ error: 'no_messages' });
-
-  const payload = {
-    model: MODEL,
-    max_tokens: MAX_TOKENS,
-    // cache_control en el system: si supera el minimo cacheable, Claude lo reusa
-    // entre peticiones y abarata el coste. Si no, no pasa nada.
-    system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
-    messages,
-  };
+  const convId = body && body.convId;
 
   try {
-    const r = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify(payload),
-    });
-    const j = await r.json();
-    if (!r.ok) return res.status(502).json({ error: 'claude_error', details: j.error || j });
+    let { ok, json } = await callClaude(apiKey, messages);
+    if (!ok) return res.status(502).json({ error: 'claude_error', details: json.error || json });
 
-    const reply = Array.isArray(j.content)
-      ? j.content.filter((b) => b.type === 'text').map((b) => b.text).join('').trim()
+    // Bucle de herramienta: si Claude llama a registrar_lead, lo guardamos y seguimos.
+    let guard = 0;
+    while (json.stop_reason === 'tool_use' && guard < 3) {
+      const toolUses = (json.content || []).filter((b) => b.type === 'tool_use');
+      messages.push({ role: 'assistant', content: json.content });
+      const results = [];
+      for (const t of toolUses) {
+        if (t.name === 'registrar_lead') await upsertLead(convId, t.input || {});
+        results.push({ type: 'tool_result', tool_use_id: t.id, content: 'ok' });
+      }
+      messages.push({ role: 'user', content: results });
+      ({ ok, json } = await callClaude(apiKey, messages));
+      if (!ok) return res.status(502).json({ error: 'claude_error', details: json.error || json });
+      guard++;
+    }
+
+    const reply = Array.isArray(json.content)
+      ? json.content.filter((b) => b.type === 'text').map((b) => b.text).join('').trim()
       : '';
 
     return res.status(200).json({ reply: reply || 'Perdona, no te he entendido. Puedes escribir a Alex por WhatsApp: https://wa.me/34640973182' });
