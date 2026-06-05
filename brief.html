@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brief · Sorabyte</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F4EEE2; --navy:#0D1B3E; --line:#d9cfbf; --muted:#6b6356; --ok:#2faa6a; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--navy);line-height:1.5;padding:0 0 60px}
+  header{padding:30px 20px 18px;text-align:center}
+  header .brand{font-family:'Manrope',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.02em}
+  header h1{font-family:'Manrope',sans-serif;font-weight:700;font-size:1.5rem;margin-top:14px}
+  header p{color:var(--muted);max-width:560px;margin:8px auto 0;font-size:.95rem}
+  form{max-width:620px;margin:10px auto 0;padding:0 18px}
+  .sec{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+  .sec h2{font-family:'Manrope',sans-serif;font-weight:700;font-size:1.02rem;margin-bottom:4px}
+  .sec .hint{color:var(--muted);font-size:.82rem;margin-bottom:12px}
+  label{display:block;font-size:.86rem;font-weight:500;margin:12px 0 5px}
+  label:first-of-type{margin-top:0}
+  input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-family:inherit;font-size:.95rem;color:var(--navy);background:#fff}
+  input:focus,textarea:focus{outline:none;border-color:var(--navy)}
+  textarea{resize:vertical;min-height:64px}
+  .req{color:#c0392b}
+  .photos{border:2px dashed var(--line);border-radius:12px;padding:18px;text-align:center;cursor:pointer;background:#fff}
+  .photos:hover{border-color:var(--navy)}
+  .photos input{display:none}
+  .photos .ph-txt{color:var(--muted);font-size:.9rem}
+  #thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  #thumbs img{width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+  .submit{width:100%;background:var(--navy);color:var(--cream);border:none;border-radius:12px;padding:16px;font-family:'Manrope',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;margin-top:6px}
+  .submit:disabled{opacity:.6;cursor:default}
+  .done{display:none;text-align:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:40px 20px;max-width:620px;margin:20px auto;color:var(--navy)}
+  .done h2{font-family:'Manrope',sans-serif;font-size:1.4rem;margin-bottom:8px}
+  .done .check{font-size:2.4rem;color:var(--ok)}
+  .err{color:#c0392b;text-align:center;font-size:.88rem;margin-top:10px;display:none}
+  footer{text-align:center;color:var(--muted);font-size:.78rem;margin-top:24px}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Sorabyte</div>
+  <h1>Cuéntame de tu negocio</h1>
+  <p>Rellena lo que puedas (cuanto más, mejor queda tu web). Te lleva 5-10 minutos y así no tengo que ir pidiéndote cosas. Lo marcado con <span class="req">*</span> es lo importante.</p>
+</header>
+
+<form id="brief">
+  <div class="sec">
+    <h2>1 · Tu negocio</h2>
+    <label>Nombre del negocio <span class="req">*</span></label>
+    <input name="Negocio" required>
+    <label>¿A qué os dedicáis? (1-2 frases)</label>
+    <textarea name="Que hacen"></textarea>
+    <label>Ciudad/zona e idiomas de la web</label>
+    <input name="Zona e idiomas" placeholder="Ej: Palma · español (y alemán?)">
+  </div>
+
+  <div class="sec">
+    <h2>2 · Contacto</h2>
+    <div class="hint">Lo que quieras que aparezca en la web.</div>
+    <label>Teléfono / WhatsApp</label>
+    <input name="_tel">
+    <label>Email</label>
+    <input name="_email" type="email">
+    <label>Dirección</label>
+    <input name="_dir">
+    <label>Horario</label>
+    <input name="_horario">
+    <label>Instagram / Facebook</label>
+    <input name="_redes">
+    <label>¿Tenéis ficha de Google Maps? (pega el enlace si sí)</label>
+    <input name="_maps">
+  </div>
+
+  <div class="sec">
+    <h2>3 · Qué quieres conseguir <span class="req">*</span></h2>
+    <div class="hint">Lo más importante: ¿para qué quieres la web?</div>
+    <label>¿Qué quieres que haga quien entra? (que os llame, reserve, os encuentre, vea vuestro trabajo...)</label>
+    <textarea name="Objetivo web"></textarea>
+  </div>
+
+  <div class="sec">
+    <h2>4 · Servicios</h2>
+    <label>Lista de servicios (con precio si quieres mostrarlo)</label>
+    <textarea name="Servicios"></textarea>
+    <label>El que más vendéis / el más importante</label>
+    <input name="Servicio top">
+  </div>
+
+  <div class="sec">
+    <h2>5 · Sobre vosotros</h2>
+    <label>¿Cuántos años lleváis? ¿Qué os hace diferentes? ¿Por qué os eligen?</label>
+    <textarea name="Sobre vosotros"></textarea>
+  </div>
+
+  <div class="sec">
+    <h2>6 · Reservas / citas</h2>
+    <label>¿Cómo quieres que la gente reserve? (WhatsApp, llamada, formulario, sistema de citas...)</label>
+    <input name="Reservas">
+  </div>
+
+  <div class="sec">
+    <h2>7 · Estilo</h2>
+    <label>Webs que te gustan (pega 1-3 enlaces)</label>
+    <textarea name="_webs"></textarea>
+    <label>Tono que buscas (elegante, cercano, moderno, lujo, minimal...)</label>
+    <input name="_tono">
+    <label>¿Tenéis logo y colores de marca? ¿Cuáles?</label>
+    <input name="Logo y colores">
+  </div>
+
+  <div class="sec">
+    <h2>8 · Fotos</h2>
+    <div class="hint">Del local, equipo, trabajos/resultados, productos. Se suben comprimidas automáticamente.</div>
+    <label class="photos">
+      <input type="file" id="fotos" accept="image/*" multiple>
+      <div class="ph-txt">📷 Toca para subir fotos (hasta 10)</div>
+    </label>
+    <div id="thumbs"></div>
+  </div>
+
+  <div class="sec">
+    <h2>9 · Textos y reseñas</h2>
+    <label>¿Tenéis los textos o los redacto yo?</label>
+    <input name="_textos">
+    <label>Reseñas/testimonios de clientes (pega algunos)</label>
+    <textarea name="_resenas"></textarea>
+  </div>
+
+  <div class="sec">
+    <h2>10 · Dominio y legal</h2>
+    <label>¿Tenéis dominio? ¿Y correo con el dominio?</label>
+    <input name="Dominio">
+    <label>Datos para aviso legal (nombre fiscal, NIF, dirección)</label>
+    <textarea name="Datos legales"></textarea>
+  </div>
+
+  <div class="sec">
+    <h2>11 · Extras</h2>
+    <label>¿Te interesa algo más? (recepcionista con IA, tienda online, blog, multi-idioma, reservas online)</label>
+    <textarea name="Extras"></textarea>
+    <label>Plazos o cualquier cosa que quieras añadir</label>
+    <textarea name="Notas"></textarea>
+  </div>
+
+  <button type="submit" class="submit" id="send">Enviar brief</button>
+  <div class="err" id="err">Algo falló al enviar. Reintenta o escríbeme por WhatsApp.</div>
+  <footer>Sorabyte · sorabyte.es</footer>
+</form>
+
+<div class="done" id="done">
+  <div class="check">✓</div>
+  <h2>¡Recibido, gracias!</h2>
+  <p>Me pongo con tu web. Te escribo en breve.</p>
+  <footer>Sorabyte · sorabyte.es</footer>
+</div>
+
+<script>
+const fotosInput = document.getElementById('fotos');
+const thumbs = document.getElementById('thumbs');
+let photos = []; // {filename, contentType, data}
+
+function compress(file){
+  return new Promise(res=>{
+    const img=new Image(); const url=URL.createObjectURL(file);
+    img.onload=()=>{
+      const max=1280; let {width:w,height:h}=img;
+      if(w>max||h>max){ const s=max/Math.max(w,h); w=Math.round(w*s); h=Math.round(h*s); }
+      const c=document.createElement('canvas'); c.width=w; c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      const dataUrl=c.toDataURL('image/jpeg',0.72);
+      URL.revokeObjectURL(url);
+      res({ filename:(file.name||'foto').replace(/\.[^.]+$/,'')+'.jpg', contentType:'image/jpeg', data:dataUrl.split(',')[1], thumb:dataUrl });
+    };
+    img.onerror=()=>res(null);
+    img.src=url;
+  });
+}
+fotosInput.addEventListener('change', async (e)=>{
+  for(const f of e.target.files){
+    if(photos.length>=10) break;
+    const p=await compress(f); if(!p) continue;
+    photos.push(p);
+    const im=document.createElement('img'); im.src=p.thumb; thumbs.appendChild(im);
+  }
+  fotosInput.value='';
+});
+
+document.getElementById('brief').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const btn=document.getElementById('send'); const err=document.getElementById('err');
+  err.style.display='none'; btn.disabled=true; btn.textContent='Enviando...';
+  const f=e.target;
+  const fields={};
+  // campos directos
+  ['Negocio','Que hacen','Zona e idiomas','Objetivo web','Servicios','Servicio top','Sobre vosotros','Reservas','Logo y colores','Dominio','Datos legales','Extras','Notas'].forEach(k=>{
+    const v=f.elements[k]?.value?.trim(); if(v) fields[k]=v;
+  });
+  // contacto agrupado
+  const c=[]; const g=(n,l)=>{ const v=f.elements[n]?.value?.trim(); if(v) c.push(l+': '+v); };
+  g('_tel','Tel/WhatsApp'); g('_email','Email'); g('_dir','Dirección'); g('_horario','Horario'); g('_redes','Redes'); g('_maps','Google Maps');
+  if(c.length) fields['Contacto']=c.join('\n');
+  // estilo agrupado
+  const est=[]; const gv=(n,l)=>{ const v=f.elements[n]?.value?.trim(); if(v) est.push(l+': '+v); };
+  gv('_webs','Webs que gustan'); gv('_tono','Tono');
+  if(est.length) fields['Estilo']=est.join('\n');
+  // textos/resenas agrupado
+  const tr=[]; const gt=(n,l)=>{ const v=f.elements[n]?.value?.trim(); if(v) tr.push(l+': '+v); };
+  gt('_textos','Textos'); gt('_resenas','Reseñas');
+  if(tr.length) fields['Textos y resenas']=tr.join('\n');
+
+  try{
+    const r=await fetch('/api/brief',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ fields, photos: photos.map(p=>({filename:p.filename,contentType:p.contentType,data:p.data})) })});
+    if(!r.ok) throw new Error('bad');
+    document.getElementById('brief').style.display='none';
+    document.getElementById('done').style.display='block';
+    window.scrollTo(0,0);
+  }catch(_){
+    err.style.display='block'; btn.disabled=false; btn.textContent='Enviar brief';
+  }
+});
+</script>
+</body>
+</html>
